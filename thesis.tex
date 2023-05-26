@@ -198,7 +198,7 @@ Thanks also to the fantastic members of my research group, Luca, Maeve and Manu,
 
 To those wonderful members of the department outside of the research group: Wilfred, Mitchell, Campbell, Melo, Miren and Owain. \\
 
-%Thanks also to Philip for the brief time we spent together; it was a high point of my PhD years.\\
+Thanks also to Philip for the lovely, if brief, time we spent together; it was a high point of my PhD years.\\
 
 I love all of you dearly; the positive impact you have had on my life is immeasurable. 
 }
@@ -282,6 +282,7 @@ Indeed, asymptotic freedom alone is enough to perform complete calculations in s
 \end{equation}
 That is, instead of working with a basis of hadronic states for our outgoing state space, the fact that we are summing over all possible hadronic final states allows us to replace this basis with a basis of free quark and gluon states (taking $\ket{Y} = \ket{q}, \ket{g}, \ket{qg}$, etc.). At the level of cross-sections, we explicitly have:
 \begin{equation}
+\label{eq:e+e-_completeness}
 \sigma(e^+ e^- \rightarrow \text{any hadrons}) = \sum_{\substack{X\text{, a hadronic} \\ \text{state}}} \sigma(e^+ e^- \rightarrow X) = \sum_{\substack{Y\text{, a free quark} \\ \text{and gluon state}}} \sigma(e^+ e^- \rightarrow Y).
 \end{equation}
 Asymptotic freedom now permits us to apply perturbation theory to the cross-sections on the right hand side, provided that we work at sufficiently high energies.
@@ -317,7 +318,7 @@ In the rest of this chapter we will focus exclusively on the second tool, namely
 
 As alluded to in the introduction to this chapter, factorisation theorems provide us a way of separating a given process into a perturbative, process-dependent part, and a non-perturbative, universal part. To introduce the ideas, we shall focus on the important special case of \textit{deep inelastic scattering} (DIS); towards the end of this section, we shall freely generalise.
 
-We begin by introducing \textit{structure functions} for DIS, which are the experimentally reported observables for the process. Predictions for the DIS structure functions can be written as the contraction of two tensors: the \textit{leptonic} tensor, which is perturbatively calculable, and the \textit{hadronic} tensor, which is not. We proceed to parametrise the hadronic tensor in terms of Feynman's phenomenological \textit{parton model} \cite{Feynman:1969wa}, hence introducing the central objects of study in this thesis, namely parton distributions. Next, we discuss how the parton model is improved and extended when next-to-leading order QCD effects are included. Finally, we conclude with some general remarks about techniques that have been used to \textit{prove} factorisation theorems to all orders. \\
+We begin by introducing \textit{structure functions} for DIS, which are the experimentally reported observables for the process. Predictions for the DIS structure functions can be written as the contraction of two tensors: the \textit{leptonic} tensor, which is perturbatively calculable, and the \textit{hadronic} tensor, which is not. We proceed to parametrise the hadronic tensor in terms of Feynman's phenomenological \textit{parton model} \cite{Feynman:1969wa}, hence introducing the central objects of study in this thesis, namely parton distributions. We proceed to perform a detailed calculation of the hadronic tensor in the parton model at both leading order in QCD, and at next-to-leading order in QCD; this allows us to introduce the key definition of the $\overline{\text{MS}}$ PDFs (modified minimal subtraction PDFs) which shall be the core objects of study in this thesis. Finally, we conclude with some general remarks about techniques that have been used to \textit{prove} factorisation theorems to all orders. \\
 
 \noindent \textbf{Structure functions for DIS.} Consider a lepton $\ell$ impacting on a hadron $H$, producing some detected lepton $\ell'$ (which may or may not be of the same species as the initial lepton $\ell$) and any hadronic state $X$, which we do not detect (see Figure~\ref{fig:dis}). 
 
@@ -333,7 +334,7 @@ We begin by introducing \textit{structure functions} for DIS, which are the expe
 d\sigma &= \frac{1}{4 \sqrt{(p_{\ell} \cdot p_H)^2 - M_{\ell}^2 M_H^2}} \frac{d^{d-1}\vec{p}_{\ell'}}{(2\pi)^{d-1} 2E_{\ell'}} \sum_{X} \left(\prod_{i=1}^{n_X} \frac{d^{d-1} \vec{p}_{(i,X)}}{(2\pi)^{d-1} 2E_{(i,X)}}\right) \notag \\[1.5ex]
 & \qquad\qquad \cdot (2\pi)^d \delta^d\left(p_\ell + p_H - p_{\ell'} - \sum_{i=1}^{n_X} p_{(i,X)}\right) \overline{\left| \mathcal{M}(\ell H \rightarrow \ell' X) \right|^2},
 \end{align}
-where the pair $(i,X)$ denotes the $i$th particle in the hadronic state $X$ (with $i$ in the range $i \in \{1,...,n_X\}$, for a total of $n_X$ particles in the state $X$), the four-vector $p_{P} = (E_{P}, \vec{p}_{P})$ is the four-momentum of the particle $P$, and $\mathcal{M}(\ell H \rightarrow \ell' X)$ is the amplitude for the process. The sum over $X$ indicates a sum over all possible hadronic states which can be produced in the collision, reflecting our desire to be blind towards the hadronic products. The bar over the modulus-squared amplitude denotes the spin-sum average; in particular, we assume that all initial states are unpolarised. The notation $M_{P}$ means the rest mass of the state $P$.
+where the pair $(i,X)$ denotes the $i$th particle in the hadronic state $X$ (with $i$ in the range $i \in \{1,...,n_X\}$, for a total of $n_X$ particles in the state $X$), the four-vector $p_{P} = (E_{P}, \vec{p}_{P})$ is the four-momentum of the particle $P$, and $\mathcal{M}(\ell H \rightarrow \ell' X)$ is the amplitude for the process. The sum over $X$ indicates a sum over all possible hadronic states which can be produced in the collision, reflecting our desire to be blind towards the hadronic products. The bar over the modulus-squared amplitude denotes the spin/colour-sum/average; more precisely, we average over the possible spin/colour states of the initial states, and sum over the spin/colour states of the final states (note that for hadronic states $H,X$ the colour sum/average is trivial because hadronic states are colourless). The notation $M_{P}$ means the rest mass of the state $P$.
 
 \begin{figure}[H]
 \centering
@@ -351,9 +352,9 @@ J_{\mu} = \sum_{q} e_q \bar{q} \gamma_{\mu} q,
 \end{equation}
 where $e_q$ is the charge on a quark of flavour $q$, in units of the electron charge. Taking the spin-sum average of the modulus-squared amplitude, we obtain:
 \begin{equation}
-\overline{|\mathcal{M}(\ell H \rightarrow \ell'X)|^2} = \frac{e^4}{2q^4} \textrm{Tr}\left( \gamma^{\mu} \slashed{p}_{\ell} \gamma^{\nu} \slashed{p}_{\ell'} \right) \sum_{\text{spins}}\braket{H | J_{\nu}^{\dagger} | X}\braket{X | J_{\mu} | H},
+\overline{|\mathcal{M}(\ell H \rightarrow \ell'X)|^2} = \frac{e^4}{2q^4} \textrm{Tr}\left( \gamma^{\mu} \slashed{p}_{\ell} \gamma^{\nu} \slashed{p}_{\ell'} \right) \overline{\braket{H | J_{\nu}^{\dagger} | X}\braket{X | J_{\mu} | H}},
 \end{equation}
-where the sum over spins means a sum over the $\ket{X}$ spin states, and an average over the $\ket{H}$ spin states. At this point, it is convenient to introduce two tensors in terms of which the differential cross-section can be parametrised. We define the \textit{leptonic tensor} via:
+where the bar over the amplitude denotes the spin/colour-sum/average. At this point, it is convenient to introduce two tensors in terms of which the differential cross-section can be parametrised. We define the \textit{leptonic tensor} via:
 \begin{equation}
 \label{eq:leptonic_tensor}
 L^{\mu\nu} = e^4 \textrm{Tr}\left(  \gamma^{\mu} \slashed{p}_{\ell} \gamma^{\nu} \slashed{p}_{\ell'} \right) = 4e^4 \left( p_{\ell}^{\mu} p_{\ell'}^{\nu} + p_{\ell}^{\nu} p_{\ell'}^{\mu} - \eta^{\mu\nu} p_{\ell} \cdot p_{\ell'} \right),
@@ -361,9 +362,9 @@ L^{\mu\nu} = e^4 \textrm{Tr}\left(  \gamma^{\mu} \slashed{p}_{\ell} \gamma^{\nu}
 where the second form is obtained through basic gamma matrix identities, and the \textit{hadronic tensor} via:
 \begin{align}
 \label{eq:hadronic_tensor}
-H_{\mu\nu} &= \frac{1}{4\pi} \sum_{X, \text{ spins}} \left(\prod_{i=1}^{n_X} \frac{d^{d-1} \vec{p}_{(i,X)}}{(2\pi)^{d-1} 2E_{(i,X)}}\right) \cdot (2\pi)^d \delta^d\left(p_\ell + p_H - p_{\ell'} - \sum_{i=1}^{n_X} p_{(i,X)}\right)  \braket{H | J_{\nu}^{\dagger} | X}\braket{X | J_{\mu} | H},
+H_{\mu\nu} &= \frac{1}{4\pi} \sum_{X} \left(\prod_{i=1}^{n_X} \frac{d^{d-1} \vec{p}_{(i,X)}}{(2\pi)^{d-1} 2E_{(i,X)}}\right) \cdot (2\pi)^d \delta^d\left(p_\ell + p_H - p_{\ell'} - \sum_{i=1}^{n_X} p_{(i,X)}\right)  \overline{\braket{H | J_{\nu}^{\dagger} | X}\braket{X | J_{\mu} | H}}.
 \end{align}
-where again the sum over spins means a sum over the $\ket{X}$ spin states, and an average over the $\ket{H}$ spin states. The differential cross-section may then be expressed in the simplified form:
+The differential cross-section may then be expressed in the simplified form:
 \begin{equation}
 \label{eq:almost_final_dis}
 d\sigma = \frac{1}{4\sqrt{(p_{\ell} \cdot p_H)^2 - M_{\ell}^2 M_H^2}} \cdot \frac{1}{q^4} \frac{d^{d-1}\vec{p}_{\ell'}}{(2\pi)^{d-2} 2E_{\ell'}} L^{\mu\nu} H_{\mu\nu}.
@@ -439,34 +440,34 @@ This is the final form for the (photon-mediated) DIS differential cross-section,
 It was originally argued in \cite{Feynman:1969wa} that at ultra-relativistic energies (namely in the \textit{deep inelastic limit} $Q^2 \rightarrow \infty$, where the energy transferred from the electron to the proton through the virtual photon approaches infinity), relativistic time-dilation results in the interactions in the proton happening over a characteristic scale $O(1/Q)$. In particular, this implies that at the moment of collision, the impacting electron will interact with only a \textit{single} constituent of the proton. This suggests adopting the following phenomenological model, called the \textit{parton model}, for the hadronic tensor:
 \begin{align}
 \label{eq:parton_model_hadronic_tensor}
-H_{\mu\nu} &= \frac{1}{4\pi} \sum_{q} \int\limits_{0}^{1} \frac{d\xi}{\xi} \sum_{X, \text{ spins}} \left(\prod_{i=1}^{n_X} \frac{d^{d-1} \vec{p}_{(i,X)}}{(2\pi)^{d-1} 2E_{(i,X)}}\right) \cdot (2\pi)^d \delta^d\left(p_\ell + \xi p_H - p_{\ell'} - \sum_{i=1}^{n_X} p_{(i,X)}\right)\notag \\
-&\qquad\qquad \cdot \braket{q(\xi p_H) | J_{\nu}^{\dagger} | X}\braket{X | J_{\mu} | q(\xi p_H) } f_q(\xi),
+H_{\mu\nu} &= \frac{1}{4\pi} \sum_{q} \int\limits_{0}^{1} \frac{d\xi}{\xi} \sum_{X} \left(\prod_{i=1}^{n_X} \frac{d^{d-1} \vec{p}_{(i,X)}}{(2\pi)^{d-1} 2E_{(i,X)}}\right) \cdot (2\pi)^d \delta^d\left(p_\ell + \xi p_H - p_{\ell'} - \sum_{i=1}^{n_X} p_{(i,X)}\right)\notag \\
+&\qquad\qquad \cdot \overline{\braket{q(\xi p_H) | J_{\nu}^{\dagger} | X}\braket{X | J_{\mu} | q(\xi p_H) }} f_q(\xi),
 \end{align}
-Here, we have replaced the hadronic state $\ket{H}$ with a state $\ket{q(\xi p_H)}$; this denotes a state comprising a free constituent $q$ of the proton,\footnote{Note we also denote the virtuality of the mediating photon by $q$; this should cause no confusion as they enter in different ways.} carrying a fraction $\xi$ of the momentum of the proton $H$. We sum over all possible constituents $q$, and we weight the contributions by some unknown probability distributions $f_q(\xi)$; these distributions represent the probability of the proton ejecting a constituent $q$ to interact with the electron, carrying a momentum fraction $\xi$. Naturally, we also integrate over all possible momentum fractions. Again, the sum over spins denotes an average over the spins of the states $\ket{q(\xi p_H)}$, and a sum over the spins of the states $\ket{X}$.
+Here, we have replaced the hadronic state $\ket{H}$ with a state $\ket{q(\xi p_H)}$; this denotes a state comprising a free constituent $q$ of the proton,\footnote{Note we also denote the virtuality of the mediating photon by $q$; this should cause no confusion as they enter in different ways.} carrying a fraction $\xi$ of the momentum of the proton $H$. We sum over all possible constituents $q$, and we weight the contributions by some unknown, non-perturbative probability distributions $f_q(\xi)$; these distributions represent the probability of the proton ejecting a constituent $q$ to interact with the electron, carrying a momentum fraction $\xi$. Naturally, we also integrate over all possible momentum fractions. The bar over the amplitude product denotes the spin/colour-sum/average, as usual.
 
-With this assumption on the form of the hadronic tensor, we may calculate the hadronic tensor at lowest order in QCD perturbation theory. In this case, we may take $\ket{X}$ to be a single quark state $\ket{X} = \ket{q(p_X)}$; then, the hadronic tensor reduces to:
+With this assumption on the form of the hadronic tensor, we may calculate the hadronic tensor at lowest order in QCD perturbation theory. In this case, we may take $\ket{X}$ to be a single quark state $\ket{X} = \ket{q(p_X)}$;\footnote{Recall that $X$ was initially defined to be a hadronic state; however, since we are summing over all hadronic states by completeness we may choose to use a basis of quarks and gluons rather than a basis of hadrons, similar to the discussion given around Eqs.~\eqref{eq:completeness} and \eqref{eq:e+e-_completeness}.} then, the hadronic tensor reduces to:
 \begin{align}
-H_{\mu\nu} &= \frac{1}{2} \sum_{q} \sum_{\text{spins}}\int\limits_{0}^{1} \frac{d\xi}{\xi} \int\frac{d^{d-1} \vec{p}_X}{ 2E_{X}} \delta^d\left(p_\ell + \xi p_H - p_{\ell'} - p_X\right)  \braket{q(\xi p_H) | J_{\nu}^{\dagger} | q(p_X)}\braket{q(p_X) | J_{\mu} | q(\xi p_H) } f_q(\xi).
+H_{\mu\nu}^{\text{LO}} &= \frac{1}{2} \sum_{q} \int\limits_{0}^{1} \frac{d\xi}{\xi} \int\frac{d^{d-1} \vec{p}_X}{ 2E_{X}} \delta^d\left(p_\ell + \xi p_H - p_{\ell'} - p_X\right)  \overline{\braket{q(\xi p_H) | J_{\nu}^{\dagger} | q(p_X)}\braket{q(p_X) | J_{\mu} | q(\xi p_H) }} f_q(\xi).
 \end{align}
-The phase space integral can be manipulated via:
+Note that in this case, the colour sum/average of the amplitude product is trivial, since the quark does not change colour during the interaction. The phase space integral can be manipulated via:
 \begin{equation}
 \int\frac{d^{d-1} \vec{p}_X}{ 2E_{X}} \delta^d\left(p_\ell + \xi p_H - p_{\ell'} - p_X\right) = \int d^d p_X \delta(p_X^2) \delta^d\left( p_{\ell} + \xi p_H - p_{\ell'} - p_X \right),
 \end{equation}
 which results in:
 \begin{align}
-H_{\mu\nu} &= \frac{1}{2} \sum_{q} \sum_{\text{spins}}\int\limits_{0}^{1} \frac{d\xi}{\xi}\ \delta((q + \xi p_H)^2) \cdot \ \braket{q(\xi p_H) | J_{\nu}^{\dagger} | q(q + \xi p_H)}\braket{q(q + \xi p_H) | J_{\mu} | q(\xi p_H) } f_q(\xi).
+H_{\mu\nu}^{\text{LO}} &= \frac{1}{2} \sum_{q}\int\limits_{0}^{1} \frac{d\xi}{\xi}\ \delta((q + \xi p_H)^2) \cdot \ \overline{\braket{q(\xi p_H) | J_{\nu}^{\dagger} | q(q + \xi p_H)}\braket{q(q + \xi p_H) | J_{\mu} | q(\xi p_H) }} f_q(\xi).
 \end{align}
 In the deep inelastic limit $Q^2 \rightarrow \infty$, we have that $(q + \xi p_H)^2 = q^2 + 2 \xi q \cdot p_H + p_H^2 \approx q^2 + 2 \xi q \cdot p_H$, and hence the delta function condition can be rewritten as:
 \begin{equation}
 \delta(q^2 + 2 \xi q \cdot p_H) = \frac{\delta(x - \xi)}{2 q \cdot p_H},
 \end{equation}
-where $x$ is the Bjorken-$x$ we introduced earlier in the text. It follows that the hadronic tensor may be expressed in the parton model as:
+where $x$ is the Bjorken-$x$ we introduced earlier in the text; this reveals that, at leading order in QCD perturbation theory, the interpretation of the Bjorken-$x$ is the momentum fraction carried by the quark state ejected by the hadron which participates in the interaction with the photon. It follows that the hadronic tensor may be expressed in the parton model as:
 \begin{align}
-H_{\mu\nu} &= \frac{1}{4 x q \cdot p_H} \sum_{q} \sum_{\text{spins}} \braket{q(x p_H) | J_{\nu}^{\dagger} | q(q + x p_H)}\braket{q(q + x p_H) | J_{\mu} | q(x p_H) } f_q(x).
+H_{\mu\nu}^{\text{LO}} &= \frac{1}{4 x q \cdot p_H} \sum_{q} \overline{\braket{q(x p_H) | J_{\nu}^{\dagger} | q(q + x p_H)}\braket{q(q + x p_H) | J_{\mu} | q(x p_H) }} f_q(x).
 \end{align}
 We can now straightforwardly compute the matrix elements to yield:
 \begin{align}
-&\sum_{\text{spins}} \braket{q(x p_H) | J_{\nu}^{\dagger} | q(q + x p_H)}\braket{q(q + x p_H) | J_{\mu} | q(x p_H) } \notag\\
+&\overline{\braket{q(x p_H) | J_{\nu}^{\dagger} | q(q + x p_H)}\braket{q(q + x p_H) | J_{\mu} | q(x p_H) }} \notag\\
 &\qquad= \frac{1}{2} e_q^2 \textrm{Tr}(x \slashed{p}_H \gamma_{\nu} (\slashed{q} + x \slashed{p}_H) \gamma_{\mu}) \\[1.5ex]
 &\qquad = 2x e_q^2 \left( p_{H\nu} (q + x p_H)_{\mu} + p_{H\mu} (q + x p_H)_{\nu} - \eta_{\mu\nu} p_H \cdot (q + x p_H) \right),\notag
 \end{align}
@@ -479,37 +480,38 @@ F_1(x,Q^2) &=\left( -\frac{1}{2} \eta^{\mu\nu} + \frac{2x^2}{Q^2} p_H^{\mu} p_H^
 \label{eq:hadronic_to_structure2}
 F_2(x,Q^2) &= \left( - x \eta^{\mu\nu} + \frac{12x^3}{Q^2} p_H^{\mu} p_H^{\nu} \right) H_{\mu\nu}(p_H, q).
 \end{align}
-Applying the projectors, Eq.~\eqref{eq:hadronic_to_structure1} and Eq.~\eqref{eq:hadronic_to_structure2}, we obtain the following formulae for the structure functions:
+Applying the projectors, Eq.~\eqref{eq:hadronic_to_structure1} and Eq.~\eqref{eq:hadronic_to_structure2}, we obtain the following formulae for the structure functions (to leading order in QCD):
 \begin{framed}
 \begin{align}
-F_1(x,Q^2) &= \frac{1}{2}\sum_{q} e_q^2 f_q(x), \\[1.5ex]
-F_2(x,Q^2) &= x \sum_{q} e_q^2 f_q(x).
+F_1^{\text{LO}}(x,Q^2) &= \frac{1}{2}\sum_{q} e_q^2 f_q(x), \\[1.5ex]
+F_2^{\text{LO}}(x,Q^2) &= x \sum_{q} e_q^2 f_q(x).
 \end{align}
 \end{framed}
 Note the following important features of our final structure function formulae in the parton model:
 \begin{enumerate}[label = (\arabic*)]
-\item We have the relation $F_2 = 2x F_1$. This identity is called the \textit{Callan-Gross relation}, and provides evidence that the primary constituents of the proton have spin-$\frac{1}{2}$; if we assume different spins for the constituents of the proton, and attempt to perform the calculations presented in this section, we obtain different relations between $F_1, F_2$ which are not observed experimentally (indeed one obtains $F_1 = 0$ for scalar quarks, for example - see the discussion below Eq.~(4.18) in \cite{Ellis:1996mzs}).
+\item We have the relation $F_2^{\text{LO}} = 2x F_1^{\text{LO}}$. This identity is called the \textit{Callan-Gross relation}, and provides evidence that the primary constituents of the proton have spin-$\frac{1}{2}$; if we assume different spins for the constituents of the proton, and attempt to perform the calculations presented in this section, we obtain different relations between $F_1^{\text{LO}}, F_2^{\text{LO}}$ which are not observed experimentally (indeed one obtains $F_1^{\text{LO}}$ for scalar quarks, for example - see the discussion below Eq.~(4.18) in \cite{Ellis:1996mzs}).
 \item The structure functions are independent of $Q^2$; this is called \textit{Bjorken scaling}, and is experimentally observed when $Q^2 \rightarrow \infty$ (see for example Fig. 6 of Ref.~\cite{Martin:1994kn}). However, Bjorken scaling is not \textit{perfect}; deviations from this phenomena are due to QCD corrections to the parton model, which we shall now discuss.
 \end{enumerate}
 
 \paragraph{The QCD-improved parton model.} We can extend the parton model by including next-to-leading order QCD corrections. The diagrams which contribute to the next-to-leading order QCD corrections can be classified into two categories:
 \begin{enumerate}[label = (\roman*)]
-\item \textbf{Real and virtual gluon emission.} In this case, a gluon is emitted from either the (shown in Fig.~\ref{fig:}). 
-\item \textbf{Gluon-boson fusion.} 
+\item \textbf{Real and virtual gluon emission.} In this case, a gluon is emitted from either the (shown in Fig.~\ref{fig:}). We take the final state to be $\ket{X} = \ket{q(p_q) g(p_g)}$, comprising a quark of four-momentum $p_q$ and a gluon of four-momentum $p_g$.
+\item \textbf{Gluon-boson fusion.} In this case, a gluon is ejected from the proton, splitting into two quarks; one of the quarks is radiated, whilst the other participates in an interaction with the photon (see Fig.~\ref{fig:}). We will not give the details of this calculation for brevity, merely stating the results at the end of the discussion.
 \end{enumerate}
 We begin by computing the contribution to the hadronic tensor from (i), real and virtual gluon emission. Throughout we work in $d$ dimensions, so that we may employ dimensional regularisation when subsequently regulating the theory (we shall find that there are divergences in the calculation). The amplitudes for the diagrams in Fig.~\ref{fig:} are, respectively:
 \begin{align}
-\mathcal{M}_{\mu}^i &= -i g_S \mu^{\epsilon} e_q \bar{u}(p_{X,q}) \gamma_{\mu} \frac{1}{x \slashed{p}_H - \slashed{p}_{X,g}} \slashed{\epsilon}(p_{X,g}) t^A u(xp_H)  \\[1.5ex]
-i\mathcal{M}_{\mu}^f &= ,
+\mathcal{M}_{\mu}^i &= -i g_S \mu^{\epsilon} e_q \bar{u}(p_{q}) \gamma_{\mu} \frac{1}{\xi \slashed{p}_H - \slashed{p}_{g}},\slashed{\epsilon}(p_{g}) t^A u(\xi p_H)  \\[1.5ex]
+\mathcal{M}_{\mu}^f &= -i g_S \mu^{\epsilon} e_q \bar{u}(p_q) \slashed{\epsilon}(p_g) \frac{1}{\slashed{p}_q + \slashed{p}_g} \gamma_{\mu} t^A u(\xi p_H),
 \end{align}
-where $g_S\mu^{\epsilon}$ is the coupling constant of QCD in $d$ dimensions; this is the $d$-dimensional version of the coupling $g_S$ appearing in Eq.~\eqref{eq:qcd_derivative}, but now includes an additional factor of $\mu^{\epsilon}$ where $\mu$ is an arbitrary mass scale and $\epsilon = \frac{4 - d}{2}$. 
+where $g_S\mu^{\epsilon}$ is the coupling constant of QCD in $d$ dimensions; this is the $d$-dimensional version of the coupling $g_S$ appearing in Eq.~\eqref{eq:qcd_derivative}, but now includes an additional factor of $\mu^{\epsilon}$ where $\mu$ is an arbitrary mass scale and $\epsilon = \frac{4 - d}{2}$. The polarisation of the gluon is given by $\epsilon_{\mu}(p_g)$. The factor of $t^A$ denotes the relevant colour matrix from the Lie algebra $\mathfrak{su}_{\mathbb{C}}(3)$; technically this implies that $\mathcal{M}_{\mu}^i$ should also carry an $SU(3)$-index $A$ corresponding to the colour state of the emitted gluon, but we will suppress this given that we will shortly sum/average over colours. The labels $i,f$ on the respective amplitudes denote a gluon emitted from the \textit{i}nitial quark and the \textit{f}inal quark.
 
 In this case, the contribution to the hadronic tensor is given by:
 \begin{align}
 \label{eq:hadronic_nlo_real}
-H_{\mu\nu}^{\text{NLO,\text{real}}} &= \frac{1}{4\pi} \sum_{q} \int\limits_{0}^{1} \frac{d\xi}{\xi} f_q(\xi) \int \frac{d^{d-1} \vec{p}_{q}}{(2\pi)^{d-1} 2E_{q}}  \frac{d^{d-1} \vec{p}_{g}}{(2\pi)^{d-1} 2E_{g}} \cdot (2\pi)^d \delta^d\left(q + \xi p_H - p_q - p_g\right) \cdot \sum_{r,s=i,f} \overline{\mathcal{M}_{\mu}^r \mathcal{M}_{\nu}^{s\dagger}} ,
+H_{\mu\nu}^{\text{NLO, real}} &= \frac{1}{4\pi} \sum_{q} \int\limits_{0}^{1} \frac{d\xi}{\xi} f_q(\xi) \int \frac{d^{d-1} \vec{p}_{q}}{(2\pi)^{d-1} 2E_{q}}  \frac{d^{d-1} \vec{p}_{g}}{(2\pi)^{d-1} 2E_{g}} \notag\\[1.5ex]
+&\qquad\qquad\cdot (2\pi)^d \delta^d\left(q + \xi p_H - p_q - p_g\right) \cdot \sum_{r,s=i,f} \overline{\mathcal{M}_{\mu}^r \mathcal{M}_{\nu}^{s\dagger}} ,
 \end{align}
-where the bar on the sum of the squared amplitudes denotes the spin-colour-sum average (in particular averaging over the initial quark colours and spins). This expression can be evaluated in two steps: first, we will manipulate the phase space into a more amenable form, and then second, we shall compute the spin-sum averages of the amplitude products.
+where, as usual, the bar on the amplitude product denotes the spin/colour-sum/average. This expression can be evaluated in two steps: first, we will manipulate the phase space into a more amenable form, and then second, we shall compute the spin/colour-sum/averages of the amplitude products.
 
 We begin by noting that:
 \begin{align}
@@ -580,20 +582,128 @@ Using the delta function to absorb the $\xi$ integral in the hadronic tensor, we
 
 \begin{align}
 \label{eq:hadronic_nlo_real_phase_space}
-H_{\mu\nu}^{\text{NLO,\text{real}}} &= \frac{1}{4\pi} \sum_{q}\frac{1}{2(2\pi)^{2 - 2\epsilon}} \frac{\pi^{1-\epsilon}}{2\Gamma(1-\epsilon)} Q^{-2\epsilon} \int  du dv\ f_q\left( \frac{x}{u} \right) \frac{(1-u)^{-\epsilon}}{u^{1-\epsilon}} v^{-\epsilon} (1-v)^{-\epsilon} \sum_{r,s=i,f} \overline{\mathcal{M}_{\mu}^r \mathcal{M}_{\nu}^{s\dagger}} \\[1.5ex]
+H_{\mu\nu}^{\text{NLO, real}} &= \frac{1}{4\pi} \sum_{q}\frac{1}{2(2\pi)^{2 - 2\epsilon}} \frac{\pi^{1-\epsilon}}{2\Gamma(1-\epsilon)} Q^{-2\epsilon} \int  du dv\ f_q\left( \frac{x}{u} \right) \frac{(1-u)^{-\epsilon}}{u^{1-\epsilon}} v^{-\epsilon} (1-v)^{-\epsilon} \sum_{r,s=i,f} \overline{\mathcal{M}_{\mu}^r \mathcal{M}_{\nu}^{s\dagger}} \\[1.5ex]
 &= \frac{1}{32 \pi ^2 \Gamma(1 - \epsilon)} \left( \frac{4\pi}{Q^2} \right)^{\epsilon} \sum_{q} \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u} \right) \frac{u^{\epsilon}}{(1-u)^{\epsilon}} \int\limits_{0}^{1} dv\ v^{-\epsilon} (1-v)^{-\epsilon} \sum_{r,s=i,f} \overline{\mathcal{M}_{\mu}^r \mathcal{M}_{\nu}^{s\dagger}}.
+\label{eq:hadronic_nlo_real_phase_space_2}
 \end{align}
 The integration ranges can be obtained by considering the allowed regions of $u,v$ arising from their definitions in Eq.~\eqref{eq:soft_and_collinear_definitions}.\\
 
-\noindent It remains to compute the spin-colour sum-average of the quantities quadratic in the amplitudes, $\mathcal{M}_{\mu}^r \mathcal{M}_{\nu}^{s\dagger}$.
+\noindent It remains to compute the spin/colour-sum/averages of the quantities quadratic in the amplitudes, $\overline{\mathcal{M}_{\mu}^r \mathcal{M}_{\nu}^{s\dagger}}$. Here, we shall only compute $\overline{\mathcal{M}_{\mu}^i \mathcal{M}_{\nu}^{i\dagger}}$ to demonstrate the details of such a calculation; the others can be obtained by similar means. We begin by observing that:
+\begin{equation}
+\label{eq:nlo_amplitude_squared}
+\overline{\mathcal{M}_{\mu}^i \mathcal{M}_{\nu}^{i\dagger}} = \frac{e_q^2 g_S^2 \mu^{2\epsilon} C_F}{2(\xi p_H - p_g)^4} g^{\alpha\beta}_{\perp}(k_g) \textrm{Tr}\left( \slashed{p}_q \gamma_{\mu} (\xi \slashed{p}_H - \slashed{p}_g) \gamma_{\alpha} \xi \slashed{p}_H \gamma_{\beta} (\xi \slashed{p}_H - \slashed{p}_g) \gamma_{\nu} \right).
+\end{equation}
+The trace arises from the usual method of taking spin-sum/averages of spinors. The factor of $C_F = 4/3$ arises from the colour-sum/averages; in particular, it is the quadratic Casimir of $\mathfrak{su}_{\mathbb{C}}(3)$, obeying:
+\begin{equation}
+\sum_{A} (t^A)^2 = C_F I.
+\end{equation}
+Finally, the factor of $g^{\alpha\beta}_{\perp}(k_g)$ arises from the spin-sum/average of the radiated gluon; it is given by:
+\begin{equation}
+g^{\alpha\beta}_{\perp}(k_g) := \sum_{\text{polarisations}} \epsilon^{\alpha}(k_g) \epsilon^{\beta*}(k_g).
+\end{equation} 
+The sum depends on which polarisations are allowed in the final state. To simplify things as much as possible, we shall assume that \textit{all} polarisations are allowed, including unphysical ones. This requires us to also consider the introduction of ghost fields; however, fortunately at this order in QCD there are no diagrams which include the ghosts. Therefore, we can happily conclude that:
+\begin{equation}
+g^{\alpha\beta}_{\perp}(k_g) = \sum_{\text{polarisations}} \epsilon^{\alpha}(k_g) \epsilon^{\beta*}(k_g) = \eta^{\alpha\beta},
+\end{equation}
+the standard result when all polarisations are considered. This allows us to reduce Eq.~\eqref{eq:nlo_amplitude_squared} to the simplified form:
+\begin{align}
+\overline{\mathcal{M}_{\mu}^i \mathcal{M}_{\nu}^{i\dagger}} &= \frac{e_q^2 g_S^2 \mu^{2\epsilon} C_F}{8(\xi p_H \cdot k_g)^2} \textrm{Tr}\left( \slashed{p}_q \gamma_{\mu} (\xi \slashed{p}_H - \slashed{p}_g) \gamma_{\alpha} \xi \slashed{p}_H \gamma^{\alpha} (\xi \slashed{p}_H - \slashed{p}_g) \gamma_{\nu} \right)\notag\\[1.5ex]
+&= \frac{2 (1-\epsilon) e_q^2 g_S^2 \mu^{2\epsilon} C_F}{\xi p_H \cdot p_g}  \left( \eta_{\mu\nu} p_g \cdot p_q - (p_g)_{\mu} (p_q)_{\nu} - (p_g)_{\nu} (p_q)_{\mu}\right),
+\end{align}
+where the trace can be evaluated by standard Dirac algebra methods.\footnote{Note that in the case where a $Z$-boson or a $W$-boson mediates deep inelastic scattering, rather than a photon, these traces additionally contain $\gamma^5$ matrices. The definition of $\gamma^5$ in $d = 4 - 2\epsilon$ dimensions is rather subtle, and a lot more care is required in these calculations. A detailed discussion can be found in \cite{Collins:1984xc}.} The factor of $1-\epsilon$ arises from a contraction of the form $\eta^{\alpha\beta} \eta_{\alpha\beta} = d = 4 - 2\epsilon$, recalling that we are working in $d = 4-2\epsilon$ dimensions.
 
-\newpage
-Virtual gluon emission can be computed similarly from first principles, but can also be incorporated by an intuitive physical argument. \\
+Evaluating the other spin/colour-sum/averages of the quantities quadratic in the amplitudes, it can be shown that we have the following projections:
+\begin{align}
+-\eta^{\mu\nu} \sum_{r,s=i,f} \overline{\mathcal{M}_{\mu}^r \mathcal{M}_{\nu}^{s\dagger}} &= 4 e_q^2 g_S^2 \mu^{2\epsilon} C_F (1-\epsilon) \left[ (1-\epsilon) \left( \frac{p_g \cdot p_q}{p_g \cdot \xi p_H} + \frac{p_g \cdot \xi p_H}{p_g \cdot p_q}\right) + \frac{Q^2 (\xi p_H \cdot p_q)}{(p_g \cdot \xi p_H) (p_g \cdot p_q)} + 2\epsilon\right],\\[1.5ex]
+p_H^{\mu} p_H^{\nu} \sum_{r,s=i,f} \overline{\mathcal{M}_{\mu}^r \mathcal{M}_{\nu}^{s\dagger}} &= \frac{4 e_q^2 g_S^2 \mu^{2\epsilon} C_F (1-\epsilon)}{\xi^2} (p_q \cdot \xi p_H).
+\end{align}
+These projections can be rewritten conveniently in terms of the `softness' and `collinearity' variables $u,v$ we introduced in Eq.~\eqref{eq:soft_and_collinear_definitions}:
+\begin{align}
+-\eta^{\mu\nu} \sum_{r,s=i,f} \overline{\mathcal{M}_{\mu}^r \mathcal{M}_{\nu}^{s\dagger}} &= 4 e_q^2 g_S^2 \mu^{2\epsilon} C_F (1-\epsilon) \left[ (1-\epsilon) \left( \frac{1-u}{v} + \frac{v}{1-u}\right) + \frac{2u(1-v)}{v(1-u)} + 2\epsilon\right],\\[1.5ex]
+p_H^{\mu} p_H^{\nu} \sum_{r,s=i,f} \overline{\mathcal{M}_{\mu}^r \mathcal{M}_{\nu}^{s\dagger}} &= \frac{2 e_q^2 g_S^2 \mu^{2\epsilon} C_F (1-\epsilon) Q^2 (1-v) u}{x^2}.
+\end{align}
+Inserting these formulae into the appropriate projections of Eq.~\eqref{eq:hadronic_nlo_real_phase_space_2}, we obtain:
+\begin{align}
+\label{eq:real_transverse_unsimplified}
+-\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, real}} &= \frac{\alpha_S C_F  (1-\epsilon)}{2\pi \Gamma(1 - \epsilon)} \left( \frac{4\pi \mu^2}{Q^2} \right)^{\epsilon} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u} \right) \frac{u^{\epsilon}}{(1-u)^{\epsilon}} \notag\\[1.5ex]
+& \qquad\qquad \cdot \int\limits_{0}^{1} dv\ v^{-\epsilon} (1-v)^{-\epsilon}  \left[ (1-\epsilon) \left( \frac{1-u}{v} + \frac{v}{1-u}\right) + \frac{2u(1-v)}{v(1-u)} + 2\epsilon\right],\\[1.5ex]
+p^{\mu}_H p^{\nu}_H H_{\mu\nu}^{\text{NLO, real}} &=\frac{\alpha_S Q^2 C_F (1-\epsilon)}{4\pi x^2 \Gamma(1 - \epsilon)} \left( \frac{4\pi \mu^2}{Q^2} \right)^{\epsilon} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u} \right) \frac{u^{1 + \epsilon}}{(1-u)^{\epsilon}} \int\limits_{0}^{1} dv\ v^{-\epsilon} (1-v)^{1-\epsilon},
+\end{align}
+where $\alpha_S = g_S^2 / 4\pi$ is the strong coupling. We wish to determine the behaviour of these expressions as $\epsilon \rightarrow 0$, i.e. as we restore $d=4$ dimensions. We note that the projection $p^{\mu}_H p^{\nu}_HH_{\mu\nu}^{\text{NLO, real}}$ remains finite in this limit, giving the result:
+\begin{equation}
+p^{\mu}_H p^{\nu}_H H_{\mu\nu}^{\text{NLO, real}} =\frac{\alpha_S Q^2 C_F}{8\pi x^2} \sum_{q} e_q^2 \int\limits_{x}^{1} du f_q\left( \frac{x}{u} \right).
+\end{equation}
+On the other hand, the projection $-\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, real}}$ is singular as $\epsilon \rightarrow 0$, and requires a more careful treatment. To begin with, we note that we can evaluate the collinear $v$ integral using the identity:\footnote{Technically this result holds only when $\Re(p), \Re(q) > 0$, but we can always pretend that $\epsilon$ is an appropriate range before using analytic continuation to justify whichever final result we get.}
+\begin{equation}
+\int\limits_{0}^{1} dv\ v^{p-1} (1-v)^{q-1} = \frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}.
+\end{equation} 
+Applying this result repeatedly, we can simplify Eq.~\eqref{eq:real_transverse_unsimplified} to:
+\begin{align}
+&-\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, real}} = \frac{\alpha_S C_F  (1-\epsilon)}{2\pi \Gamma(1 - \epsilon)} \left( \frac{4\pi \mu^2}{Q^2} \right)^{\epsilon} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u} \right) \frac{u^{\epsilon}}{(1-u)^{\epsilon}} \notag\\[1.5ex]
+& \ \cdot \left[ (1-\epsilon) \left(  \frac{(1-u)\Gamma(-\epsilon)\Gamma(1-\epsilon)}{\Gamma(1 - 2\epsilon)} +  \frac{\Gamma(2 - \epsilon) \Gamma(1-\epsilon)}{(1-u)\Gamma(3 - 2\epsilon)} \right) + \frac{2u}{1-u} \frac{\Gamma(-\epsilon)\Gamma(2-\epsilon)}{\Gamma(2 - 2\epsilon)} + 2\epsilon \frac{\Gamma(1-\epsilon)^2}{\Gamma(2-2\epsilon)} \right],
+\end{align}
+which by repeated application of the functional equation of the gamma function, $\Gamma(x+1) = x\Gamma(x)$, may be reduced to the more convenient form:
+\begin{align}
+-\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, real}} &= \frac{\alpha_S C_F  (1-\epsilon) \Gamma(1-\epsilon)}{2\pi \Gamma(1 - 2\epsilon)} \left( \frac{4\pi \mu^2}{Q^2} \right)^{\epsilon} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u} \right) \frac{u^{\epsilon}}{(1-u)^{\epsilon+1}} \notag\\[1.5ex]
+&\qquad \cdot \left[ \left( -\frac{1}{\epsilon} + 1\right)(1-u)^2 +  \frac{1-\epsilon}{2(1-2\epsilon)} - \frac{2u(1-\epsilon)}{\epsilon(1-2\epsilon)} + \frac{2\epsilon}{1 - 2\epsilon} \right].
+\label{eq:collinear_singularity}
+\end{align}
+We must now Laurent expand this formula in small $\epsilon$. The key result we shall require is:
+\begin{equation}
+\label{eq:plus_identity}
+\frac{u^{\epsilon}}{(1-u)^{\epsilon+1}} = -\frac{1}{\epsilon} \delta(1-u) + \left( \frac{1}{1-u} \right)_+ - \epsilon \left( \frac{\log(1-u)}{1-u} \right)_+ + \epsilon \frac{\log(u)}{1-u} + O(\epsilon^2).
+\end{equation}
+which holds only in a distributional sense.\footnote{That is, when integrated against a smooth function from $u=0$ to $u=1$.} A proof of this identity is given in App.~\ref{app:plus_prescription}. Here, the $+$ symbol denotes the \textit{plus distribution}, defined by:
+\begin{equation}
+\int\limits_{0}^{1} F(u)_+ G(u)\ du = \int\limits_{0}^{1} F(u)(G(u) - G(1))\ du.
+\end{equation}
+Combining the identity Eq.~\eqref{eq:plus_identity} with the standard Laurent expansions of the rational function expression in the large square brackets, as $\epsilon \rightarrow 0$ we see that the projection $-\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, real}}$ behaves as:
+\begin{align}
+&-\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, real}} = \frac{\alpha_S C_F  (1-\epsilon)}{2\pi \Gamma(1 - \epsilon)} \left( \frac{4\pi \mu^2}{Q^2} \right)^{\epsilon} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u} \right) \bigg[ \left( \frac{2}{\epsilon^2} + \frac{3}{2\epsilon} + \frac{7}{2} \right) \delta(1-u) \notag\\[1.5ex]
+&\qquad- \frac{1}{\epsilon} \frac{1 + u^2}{(1-u)_+} + 3 - u - \frac{3}{2(1-u)_+} + (1+u^2) \left( \frac{\log(1-u)}{1-u} \right)_+ - \frac{1+u^2}{1-u} \log(u) + O(\epsilon)\bigg].
+\end{align}
+We see that there is a double pole as $\epsilon \rightarrow 0$; the origin of this can be traced back to the soft singularity as $u\rightarrow 1$ (this is made manifest in Eq.~\eqref{eq:plus_identity}), combined with the collinear singularity as $v \rightarrow 0$ (this is made manifest in Eq.~\eqref{eq:collinear_singularity}, since after we have performed the $v$ integration, we obtain a $1/\epsilon$ term).\\
 
-Gluon-boson fusion proceeds similarly and, for brevity, we omit the details of the calculation in this thesis. The final answer for the structure functions at next-to-leading order in QCD is given by:
+\noindent We must sum the real gluon emissions with the virtual gluon emissions, which enter at the same order in QCD, and multiply the same quark distributions $f_q(\xi)$ in the parton model for the hadronic tensor. The calculation of these diagrams is equally long and arduous,\footnote{Though it is possible to use some physical arguments to reduce the workload, see e.g. the discussion around Eq.~(4.70) of Ref.~\cite{Ellis:1996mzs}.} so we shall merely state the complete results here. We find that in the limit as $\epsilon \rightarrow 0$, we obtain the contribution:
+\begin{align}
+\label{eq:virtual_transverse_unsimplified}
+-\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, virtual}} &= -\frac{\alpha_S C_F  (1-\epsilon)}{2\pi \Gamma(1 - \epsilon)} \left( \frac{4\pi \mu^2}{Q^2} \right)^{\epsilon} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u} \right) \delta(1-u) \notag\\[1.5ex]
+& \qquad\qquad\qquad\qquad\qquad \cdot \left( \frac{2}{\epsilon^2} + \frac{3}{\epsilon} + 8 + \frac{\pi^2}{3} + O(\epsilon)\right)
+\end{align}
+with $p^{\mu}_H p^{\nu}_H H_{\mu\nu}^{\text{NLO, virtual}}$ vanishing as $\epsilon \rightarrow 0$.\\
+
+\noindent The calculation of the second class of diagrams, namely the gluon-initiated gluon-boson fusion diagrams (ii), proceeds similarly and, for brevity, we omit the details of the calculation in this thesis. We obtain the following projections in this case, in the limit as $\epsilon \rightarrow 0$:
+\begin{align}
+\label{eq:gluon_transverse_unsimplified}
+-\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, gluon}} &= ...  \\[1.5ex]
+\label{eq:gluon_longitudinal_unsimplified}
+p^{\mu}_H p^{\nu}_H H_{\mu\nu}^{\text{NLO, gluon}} &= ...,
+\end{align}
+Putting everything together then, the full projections of the hadronic tensor including both leading order and next-to-leading order terms in QCD are given by:
+\begin{framed}
+\begin{align}
+\label{eq:full_nlo_transverse_unsimplified}
+&-\eta^{\mu\nu} H_{\mu\nu}^{\text{LO+NLO}} = \frac{\alpha_S C_F  (1-\epsilon)}{2\pi \Gamma(1 - \epsilon)} \left( \frac{4\pi \mu^2}{Q^2} \right)^{\epsilon} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u} \right) \bigg[ \left( -\frac{3}{2\epsilon} - \frac{9}{2}  - \frac{\pi^2}{3} \right) \delta(1-u) \notag\\[1.5ex]
+&\qquad- \frac{1}{\epsilon} \frac{1 + u^2}{(1-u)_+} + 3 - u - \frac{3}{2(1-u)_+} + (1+u^2) \left( \frac{\log(1-u)}{1-u} \right)_+ - \frac{1+u^2}{1-u} \log(u) + O(\epsilon)\bigg].\\[1.5ex]
+\label{eq:full_nlo_longitudinal_unsimplified}
+&p^{\mu}_H p^{\nu}_H H_{\mu\nu}^{\text{LO+NLO}} = \frac{\alpha_S Q^2 C_F}{8\pi x^2} \sum_{q} e_q^2 \int\limits_{x}^{1} du f_q\left( \frac{x}{u} \right),
+\end{align}
+\end{framed}
+
+\noindent Rather disturbingly, we have discovered that in the limit $\epsilon \rightarrow 0$, the hadronic tensor in the parton model at next-to-leading order in QCD is \textit{still singular}, corresponding to a collinear divergence from the real gluon emission that has not been cancelled with the divergence arising from the virtual gluon emission. It is at this point that the distributions $f_{q}(\xi)$ begin their starring role.
+
+We initially introduced $f_q(\xi)$ as the distribution 
+
+\paragraph{Definition of the $\overline{\text{MS}}$ PDFs.} Let us make the definition:
+\begin{framed}
+\begin{equation}
+f_q^{\overline{\text{MS}}}(x, \mu_F^2) := f_q(x) - \frac{\alpha_S}{2\pi} \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u}\right) \left[ P_{qq}^{(0)}(u) \left( \frac{1}{\epsilon} - \log\left( \frac{\mu^2}{\mu_F^2}\right) - \gamma + \log(4\pi) \right) \right]
+\end{equation}
+\end{framed}
+\noindent It now appears that the distributions $f_q^{\overline{\text{MS}}}$ are singular in the limit as $\epsilon \rightarrow 0$. \textit{However}, we do not expect this to be the case, as in standard renormalisation theory.
 
 
-\paragraph{Proofs of factorisation.} Despite the intuitive picture that the parton model and its QCD improvement provide, we have not in any sense \textit{proved} that our factorisation theorem is valid; we have merely suggested a phenomenological model... Our proof will make use Wilson's \textit{operator production expansion} (OPE) [], and will mostly follow Schwartz []. However, it should be noted that the application of the OPE in the proof of DIS factorisation is rather limited in scope, and for more general processes slightly more sophisticated techniques are required; the relevant methods are those of the Collins-Soper-Sterman ... [], and the use of \textit{soft-collinear effective theory} (SCET) [], but these are beyond the scope of this text.
+\paragraph{A note on proofs of factorisation.} Despite the intuitive picture that the parton model and its QCD improvement provide, we have not in any sense \textit{proved} that our factorisation theorem is valid; we have merely suggested a phenomenological model... Our proof will make use Wilson's \textit{operator production expansion} (OPE) [], and will mostly follow Schwartz []. However, it should be noted that the application of the OPE in the proof of DIS factorisation is rather limited in scope, and for more general processes slightly more sophisticated techniques are required; the relevant methods are those of the Collins-Soper-Sterman ... [], and the use of \textit{soft-collinear effective theory} (SCET) [], but these are beyond the scope of this text.
 
 
 
@@ -2938,8 +3048,13 @@ Throughout this thesis, particularly in Chapters ... and ..., the Monte-Carlo re
 
 \appendix
 
-\chapter{Extra Information}
-Some more text ...
+\chapter{Proofs of plus prescription identities}
+\label{app:plus_prescription}
+In this Appendix, we give a proof of the identity given in Eq.~\eqref{eq:plus_identity}:
+\begin{equation}
+\label{eq:plus_identity_2}
+\frac{u^{\epsilon}}{(1-u)^{\epsilon+1}} = -\frac{1}{\epsilon} \delta(1-u) + \left( \frac{1}{1-u} \right)_+ - \epsilon \left( \frac{\log(1-u)}{1-u} \right)_+ + \epsilon \frac{\log(u)}{1-u} + O(\epsilon^2).
+\end{equation}
 
 
 
