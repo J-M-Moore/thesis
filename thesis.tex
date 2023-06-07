@@ -182,23 +182,33 @@
 %% Acknowledgements:
 %%
 \acknowledgements{%
- A special thanks also goes out to my excellent PhD supervisor, Maria Ubiali. Not only is she an extremely accomplished researcher, with outstanding, creative ideas for novel work, she is also an absolute pleasure to work with. Her dedication to her students and postdocs is unmatched. Thank you for giving me the opportunity to work with you in such an amazing group. \\
+ A special thanks also goes out to my excellent PhD supervisor, Maria. Not only is she an extremely accomplished researcher, with outstanding, creative ideas for novel work, she is also an absolute pleasure to work with. Her dedication to her students and postdocs is unmatched. Thank you for giving me the opportunity to work with you in such an amazing group. 
 
-I am forever indebted to my parents, Estelle and Garry, grandparents, Catherine and Michael, and siblings, Catherine and Oliver.\\
+I am forever indebted to my parents, Estelle and Garry, grandparents, Catherine and Michael, and siblings, Catherine and Oliver.
 
-Thanks go out to Alastair Toft for all of his love and support; I am extremely glad to still have you as a friend. \\
+Thanks go out to Alastair for all of his love and support; I am extremely glad to still have you as a friend. 
 
-My longstanding friends Yanbo and Sam have provided an excellent distraction from work during my PhD; I look forward to future spontaneous trips to ..., or further `death marches'. \\
+My longstanding friends Yanbo and Sam have provided an excellent distraction from work during my PhD; I look forward to future spontaneous trips to ..., or further `death marches'. 
 
-To my amazing friends from Downing, Evie, Mick, Stephen and Luke, I would like to thank you for all our time spent together (I know that the only reason you suffer my company is because I am the one with a copy of Agricola, but I'm willing to overlook this). \\
+To my amazing friends from Downing, Evie, Mick, Stephen and Luke, I would like to thank you for all our time spent together (I know that the only reason you suffer my company is because I am the one with a copy of Agricola, but I'm willing to overlook this). To Beth and Dan, whose hospitality and company is always extremely appreciated.
 
-Thank you to Shayan, Cameron and Zahari for all the help you gave me during the start of my PhD.\\
+Thank you to Shayan, Cameron and Zahari for all the help you gave me during the start of my PhD.
 
-Thanks also to the fantastic members of my research group, Luca, Maeve and Manu, who have become firm friends beyond the world of physics. \\
+Thanks also to the fantastic members of my research group, Luca, Maeve and Manu, who have become firm friends beyond the world of physics. 
 
-To those wonderful members of the department outside of the research group: Wilfred, Mitchell, Campbell, Melo, Miren and Owain. \\
+To the quantum information theorists: Wilfred, Mitchell and Campbell.
 
-Thanks also to Philip for the lovely, if brief, time we spent together; it was a high point of my PhD years.\\
+To my PhD cousin Hannah: you are an incredible, inspiring physicist. 
+
+To Ben Allanach and Matt Wingate: it was a pleasure teaching your respective Symmetries courses, thank you for the opportunity to do so. A particular thanks to Ben for letting me give a substitute lecture one time, it was a lot of fun!
+
+To those wonderful members of the department outside of the research group: Melo, Miren and Owain. 
+
+To Manda, the HEP group secretary, who is always a pleasure to talk to.
+
+Thanks also to Philip for the lovely, if brief, time we spent together; it was a high point of my PhD years.
+
+Thanks to Will and Elena for your company, it's always a pleasure seeing you both. And Elena, thank you for the beautiful chocolate birthday cake you made me for my 26th birthday; it was such a wonderfully kind gesture, it made me so happy.\\
 
 I love all of you dearly; the positive impact you have had on my life is immeasurable. 
 }
@@ -248,7 +258,7 @@ where $G_{\mu\nu}^a = \partial_{\mu} A^a_{\nu} - \partial_{\nu} A^a_{\mu} + g_S 
 \label{eq:qcd_derivative}
 D_{\mu} = I\partial_{\mu} - i g_S A_{\mu}^a T^a,
 \end{equation}
-with $I$ the identity matrix and $T^a$ the generators of the Lie algebra $\mathfrak{su}_{\mathbb{C}}(3)$, and $m_q$ is the mass of the quark species $q$. We define the \textit{strong coupling} $\alpha_S$ in terms of the coupling constant $g_S$ appearing in the Lagrangian density~(\ref{eq:qcdlagrangian}) via:
+with $I$ the identity matrix and $T^a$ the generators of the Lie algebra $\mathfrak{su}_{\mathbb{C}}(3)$, and $m_q$ the mass of the quark species $q$. We define the \textit{strong coupling} $\alpha_S$ in terms of the coupling constant $g_S$ appearing in the Lagrangian density~(\ref{eq:qcdlagrangian}) via:
 \begin{equation}
 \alpha_S := \frac{g_S^2}{4\pi},
 \end{equation}
@@ -292,6 +302,7 @@ Asymptotic freedom now permits us to apply perturbation theory to the cross-sect
 In more detail (but still sketching a schematic picture for now), the perturbatively calculable, process-dependent part is called the \textit{hard cross-section} or \textit{partonic cross-section} and is often written as $\hat{\sigma}$. There are several non-perturbative, universal pieces: one for each of the identified hadrons involved in the process. For identified hadrons in the initial state, these non-perturbative objects are called \textit{parton distribution functions} (PDFs), often written as $f$, whilst for hadrons in the final state, these non-perturbative objects are called \textit{fragmentation functions}, often written as $D$. Overall, factorisation theorems tell us that for a process with incoming hadrons $h_1, ..., h_n$ and outgoing hadrons $H_1,..., H_m$, the cross-section can be decomposed into a convolution of the form:
 
 \begin{equation}
+\label{eq:generic_factorisation_theorem}
 \sigma = \hat{\sigma} \otimes f_{h_1} \otimes ... \otimes f_{h_n} \otimes D_{H_1} \otimes ... \otimes D_{H_m}.
 \end{equation}
 
@@ -500,7 +511,7 @@ Note the following important features of our final structure function formulae i
 \end{enumerate}
 We begin by computing the contribution to the hadronic tensor from (i), real and virtual gluon emission. Throughout we work in $d$ dimensions, so that we may employ dimensional regularisation when subsequently regulating the theory (we shall find that there are divergences in the calculation). The amplitudes for the diagrams in Fig.~\ref{fig:} are, respectively:
 \begin{align}
-\mathcal{M}_{\mu}^i &= -i g_S \mu^{\epsilon} e_q \bar{u}(p_{q}) \gamma_{\mu} \frac{1}{\xi \slashed{p}_H - \slashed{p}_{g}},\slashed{\epsilon}(p_{g}) t^A u(\xi p_H)  \\[1.5ex]
+\mathcal{M}_{\mu}^i &= -i g_S \mu^{\epsilon} e_q \bar{u}(p_{q}) \gamma_{\mu} \frac{1}{\xi \slashed{p}_H - \slashed{p}_{g}}\slashed{\epsilon}(p_{g}) t^A u(\xi p_H)  \\[1.5ex]
 \mathcal{M}_{\mu}^f &= -i g_S \mu^{\epsilon} e_q \bar{u}(p_q) \slashed{\epsilon}(p_g) \frac{1}{\slashed{p}_q + \slashed{p}_g} \gamma_{\mu} t^A u(\xi p_H),
 \end{align}
 where $g_S\mu^{\epsilon}$ is the coupling constant of QCD in $d$ dimensions; this is the $d$-dimensional version of the coupling $g_S$ appearing in Eq.~\eqref{eq:qcd_derivative}, but now includes an additional factor of $\mu^{\epsilon}$ where $\mu$ is an arbitrary mass scale and $\epsilon = \frac{4 - d}{2}$. The polarisation of the gluon is given by $\epsilon_{\mu}(p_g)$. The factor of $t^A$ denotes the relevant colour matrix from the Lie algebra $\mathfrak{su}_{\mathbb{C}}(3)$; technically this implies that $\mathcal{M}_{\mu}^i$ should also carry an $SU(3)$-index $A$ corresponding to the colour state of the emitted gluon, but we will suppress this given that we will shortly sum/average over colours. The labels $i,f$ on the respective amplitudes denote a gluon emitted from the \textit{i}nitial quark and the \textit{f}inal quark.
@@ -659,7 +670,7 @@ which holds only in a distributional sense.\footnote{That is, when integrated ag
 \end{equation}
 Combining the identity Eq.~\eqref{eq:plus_identity} with the standard Laurent expansions of the rational function expression in the large square brackets, as $\epsilon \rightarrow 0$ we see that the projection $-\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, real}}$ behaves as:
 \begin{align}
-&-\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, real}} = \frac{\alpha_S C_F  (1-\epsilon)}{2\pi \Gamma(1 - \epsilon)} \left( \frac{4\pi \mu^2}{Q^2} \right)^{\epsilon} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u} \right) \bigg[ \left( \frac{2}{\epsilon^2} + \frac{3}{2\epsilon} + \frac{7}{2} \right) \delta(1-u) \notag\\[1.5ex]
+&-\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, real}} = \frac{\alpha_S C_F  (1-\epsilon) \Gamma(1-\epsilon)}{2\pi \Gamma(1 - 2\epsilon)} \left( \frac{4\pi \mu^2}{Q^2} \right)^{\epsilon} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u} \right) \bigg[ \left( \frac{2}{\epsilon^2} + \frac{3}{2\epsilon} + \frac{7}{2} \right) \delta(1-u) \notag\\[1.5ex]
 &\qquad- \frac{1}{\epsilon} \frac{1 + u^2}{(1-u)_+} + 3 - u - \frac{3}{2(1-u)_+} + (1+u^2) \left( \frac{\log(1-u)}{1-u} \right)_+ - \frac{1+u^2}{1-u} \log(u) + O(\epsilon)\bigg].
 \end{align}
 We see that there is a double pole as $\epsilon \rightarrow 0$; the origin of this can be traced back to the soft singularity as $u\rightarrow 1$ (this is made manifest in Eq.~\eqref{eq:plus_identity}), combined with the collinear singularity as $v \rightarrow 0$ (this is made manifest in Eq.~\eqref{eq:collinear_singularity}, since after we have performed the $v$ integration, we obtain a $1/\epsilon$ term).\\
@@ -667,40 +678,104 @@ We see that there is a double pole as $\epsilon \rightarrow 0$; the origin of th
 \noindent We must sum the real gluon emissions with the virtual gluon emissions, which enter at the same order in QCD, and multiply the same quark distributions $f_q(\xi)$ in the parton model for the hadronic tensor. The calculation of these diagrams is equally long and arduous,\footnote{Though it is possible to use some physical arguments to reduce the workload, see e.g. the discussion around Eq.~(4.70) of Ref.~\cite{Ellis:1996mzs}.} so we shall merely state the complete results here. We find that in the limit as $\epsilon \rightarrow 0$, we obtain the contribution:
 \begin{align}
 \label{eq:virtual_transverse_unsimplified}
--\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, virtual}} &= -\frac{\alpha_S C_F  (1-\epsilon)}{2\pi \Gamma(1 - \epsilon)} \left( \frac{4\pi \mu^2}{Q^2} \right)^{\epsilon} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u} \right) \delta(1-u) \notag\\[1.5ex]
+-\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, virtual}} &= -\frac{\alpha_S C_F  (1-\epsilon) \Gamma(1-\epsilon)}{2\pi \Gamma(1 - 2\epsilon)} \left( \frac{4\pi \mu^2}{Q^2} \right)^{\epsilon} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u} \right) \delta(1-u) \notag\\[1.5ex]
 & \qquad\qquad\qquad\qquad\qquad \cdot \left( \frac{2}{\epsilon^2} + \frac{3}{\epsilon} + 8 + \frac{\pi^2}{3} + O(\epsilon)\right)
 \end{align}
-with $p^{\mu}_H p^{\nu}_H H_{\mu\nu}^{\text{NLO, virtual}}$ vanishing as $\epsilon \rightarrow 0$.\\
+with $p^{\mu}_H p^{\nu}_H H_{\mu\nu}^{\text{NLO, virtual}}$ vanishing as $\epsilon \rightarrow 0$. We note that the double pole, the $O(\epsilon^{-2})$ term, is cancelled exactly between the real and virtual corrections.\\
 
-\noindent The calculation of the second class of diagrams, namely the gluon-initiated gluon-boson fusion diagrams (ii), proceeds similarly and, for brevity, we omit the details of the calculation in this thesis. We obtain the following projections in this case, in the limit as $\epsilon \rightarrow 0$:
-\begin{align}
-\label{eq:gluon_transverse_unsimplified}
--\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, gluon}} &= ...  \\[1.5ex]
-\label{eq:gluon_longitudinal_unsimplified}
-p^{\mu}_H p^{\nu}_H H_{\mu\nu}^{\text{NLO, gluon}} &= ...,
-\end{align}
-Putting everything together then, the full projections of the hadronic tensor including both leading order and next-to-leading order terms in QCD are given by:
+%\noindent The calculation of the second class of diagrams, namely the gluon-initiated gluon-boson fusion diagrams (ii), proceeds similarly and, for brevity, we omit the details of the calculation in this thesis. We obtain the following projections in this case, in the limit as $\epsilon \rightarrow 0$:
+%\begin{align}
+%-\eta^{\mu\nu} H_{\mu\nu}^{\text{NLO, gluon}} &= \frac{\alpha_S T_R (1-\epsilon) \Gamma(1-\epsilon)}{\pi \Gamma(1-2\epsilon)} \left( \frac{4 \pi \mu^2}{Q^2} \right)^{\epsilon} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} f_g\left( \frac{x}{u} \right) \notag   \\[1.5ex]
+%\label{eq:gluon_transverse_unsimplified}
+%&\quad \cdot \left[ -\frac{1}{\epsilon} (1 + u - u^2) - (1 + u - u^2) \log\left( \frac{u}{1-u} \right) + O(\epsilon) \right],\\[1.5ex]
+% \label{eq:gluon_longitudinal_unsimplified}
+%p^{\mu}_H p^{\nu}_H H_{\mu\nu}^{\text{NLO, gluon}} &= \frac{\alpha_S Q^2 T_R}{2x^2 \pi}  \sum_{q} e_q^2 \int\limits_{x}^{1} du\  f_g\left( \frac{x}{u} \right) (1-u) ,
+%\end{align}
+%where $T_R = 1/2$ is the Casimir of $\mathfrak{su}_{\mathbb{C}}(3)$ in the adjoint representation. Again, the projection $p^{\mu}_H p^{\nu}_H H_{\mu\nu}^{\text{NLO, gluon}}$ is finite in the limit as $\epsilon \rightarrow 0$.\\
+
+\noindent Putting everything together then, we obtain the following complete formulae for the projections of the quark-initiated part of the hadronic tensor at next-to-leading order in QCD perturbation theory:
 \begin{framed}
 \begin{align}
 \label{eq:full_nlo_transverse_unsimplified}
-&-\eta^{\mu\nu} H_{\mu\nu}^{\text{LO+NLO}} = \frac{\alpha_S C_F  (1-\epsilon)}{2\pi \Gamma(1 - \epsilon)} \left( \frac{4\pi \mu^2}{Q^2} \right)^{\epsilon} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u} \right) \bigg[ \left( -\frac{3}{2\epsilon} - \frac{9}{2}  - \frac{\pi^2}{3} \right) \delta(1-u) \notag\\[1.5ex]
-&\qquad- \frac{1}{\epsilon} \frac{1 + u^2}{(1-u)_+} + 3 - u - \frac{3}{2(1-u)_+} + (1+u^2) \left( \frac{\log(1-u)}{1-u} \right)_+ - \frac{1+u^2}{1-u} \log(u) + O(\epsilon)\bigg].\\[1.5ex]
-\label{eq:full_nlo_longitudinal_unsimplified}
-&p^{\mu}_H p^{\nu}_H H_{\mu\nu}^{\text{LO+NLO}} = \frac{\alpha_S Q^2 C_F}{8\pi x^2} \sum_{q} e_q^2 \int\limits_{x}^{1} du f_q\left( \frac{x}{u} \right),
+&-\eta^{\mu\nu} H_{\mu\nu}^{\text{quark, LO+NLO}} = \sum_{q} e_q^2 f_q(x) + \frac{\alpha_S C_F (1-\epsilon) \Gamma(1-\epsilon)}{2\pi \Gamma(1-2\epsilon)} \left( \frac{4\pi \mu^2}{Q^2} \right)^{\epsilon} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} \notag \\[1.5ex]
+&\qquad\qquad\qquad\qquad\quad \cdot f_q\left( \frac{x}{u} \right)\bigg[ \left( -\frac{3}{2\epsilon} - \frac{\pi^2}{3} - \frac{9}{2} \right) \delta(1-u) - \frac{1}{\epsilon} \frac{1 + u^2}{(1-u)_+} + 3 - u \notag \\[1.5ex]
+&\qquad\qquad\qquad\qquad\quad - \frac{3}{2(1-u)_+} + (1+u^2) \left( \frac{\log(1-u)}{1-u} \right)_+ - \frac{1+u^2}{1-u} \log(u) \bigg], \\[1.5ex]
+&p_H^{\mu} p_H^{\nu} H_{\mu\nu}^{\text{quark, LO+NLO}} = \frac{\alpha_S C_F Q^2}{8\pi x^2}  \sum_{q} e_q^2 \int\limits_{x}^{1} du\ f_q\left( \frac{x}{u} \right).
 \end{align}
 \end{framed}
+\noindent Rather disturbingly, we have discovered that in the limit $\epsilon \rightarrow 0$, the hadronic tensor in the parton model at next-to-leading order in QCD appears to be \textit{singular}, corresponding to a collinear divergence from the real gluon emission that has not been cancelled with the divergence arising from the virtual gluon emission. It is at this point that the distributions $f_{q}(\xi)$ begin their starring role. 
 
-\noindent Rather disturbingly, we have discovered that in the limit $\epsilon \rightarrow 0$, the hadronic tensor in the parton model at next-to-leading order in QCD is \textit{still singular}, corresponding to a collinear divergence from the real gluon emission that has not been cancelled with the divergence arising from the virtual gluon emission. It is at this point that the distributions $f_{q}(\xi)$ begin their starring role.
+We initially introduced $f_q(\xi)$ as a probability distribution, representing the probability of a quark of momentum fraction $\xi$ being ejected from the proton and participating in the interaction with the photon. However, just as in the process of ultraviolet renormalisation, we can instead drop this interpretation beyond the leading order,\footnote{Just as the `bare mass' in a QFT Lagrangian no longer has the interpretation of mass beyond tree level.} and instead view these distributions as `bare theory parameters', subsequently renormalising them to absorb the leftover collinear divergences. In particular, this can be effected by allowing the `bare distributions' $f_q(\xi)$ to have an $\epsilon$ dependence, $f_q(\xi) \equiv f_q(\xi,\epsilon)$. If the bare distribution $f_q(\xi,\epsilon)$ is divergent as $\epsilon \rightarrow 0$, then it is no longer necessary that the hadronic tensor projection in Eq.~\eqref{eq:full_nlo_transverse_unsimplified} is singular as $\epsilon \rightarrow 0$, since the divergences may now cancel one another. 
 
-We initially introduced $f_q(\xi)$ as the distribution 
-
-\paragraph{Definition of the $\overline{\text{MS}}$ PDFs.} Let us make the definition:
+\paragraph{Definition of the $\overline{\text{MS}}$ quark PDFs.} Hence, with a view to redefining the `bare distributions' $f_q(x,\epsilon)$ to absorb all divergences, let us make the definition:
 \begin{framed}
 \begin{equation}
-f_q^{\overline{\text{MS}}}(x, \mu_F^2) := f_q(x) - \frac{\alpha_S}{2\pi} \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u}\right) \left[ P_{qq}^{(0)}(u) \left( \frac{1}{\epsilon} - \log\left( \frac{\mu^2}{\mu_F^2}\right) - \gamma + \log(4\pi) \right) \right]
+\label{eq:pdf_definition}
+f_q^{\overline{\text{MS}}}(x, \mu_F^2) := f_q(x,\epsilon) - \frac{\alpha_S}{2\pi} \int\limits_{x}^{1} \frac{du}{u} f_q\left( \frac{x}{u},\epsilon\right) P_{qq}(u) \left( \frac{1}{\epsilon} - \log\left( \frac{\mu_F^2}{\mu^2} \right) - \gamma + \log(4\pi) \right),
 \end{equation}
 \end{framed}
-\noindent It now appears that the distributions $f_q^{\overline{\text{MS}}}$ are singular in the limit as $\epsilon \rightarrow 0$. \textit{However}, we do not expect this to be the case, as in standard renormalisation theory.
+\noindent where $\gamma$ is the Euler-Mascheroni constant,\footnote{Which appears in the Taylor expansion $\Gamma(1+x) = 1 - \gamma x + O(x^2)$ about $x=0$.} and $P_{qq}(u)$ is called the \textit{quark-quark splitting function} defined by:
+\begin{equation}
+P_{qq}(u) := C_F \left[ \frac{3}{2} \delta(1-u) + \frac{1+u^2}{(1-u)+} \right].
+\end{equation} 
+\noindent The new object we have defined here is called the \textit{modified minimal subtraction NLO quark parton distribution function} (which we shall henceforth refer to simply as an NLO \textit{parton distribution function} (NLO PDF), or even just PDF when the order is implied; no other subtraction scheme will be considered in this thesis). It is a renormalised version of the `bare PDF' $f_q(x,\epsilon)$. The term `modified minimal subtraction' refers to this redefinition purely absorbing the collinear divergence, i.e. the pole term of order $O(1/\epsilon)$, plus the universal terms $-\gamma$, $\log(4\pi)$, which come from the expansion of the gamma function and the power law $(4\pi Q^2/\mu^2)^{\epsilon}$.
+
+This redefinition allows us to rewrite the projection $-\eta^{\mu\nu} H_{\mu\nu}^{\text{quark, LO+NLO}}$ as:
+\begin{align}
+&-\eta^{\mu\nu} H_{\mu\nu}^{\text{quark, LO+NLO}} = \sum_{q} e_q^2 f_{q}^{\overline{\text{MS}}}(x, \mu_F^2) + \frac{\alpha_S C_F }{2\pi} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u}\ f_q^{\overline{\text{MS}}}\left( \frac{x}{u},\mu_F^2 \right) \cdot \bigg[ \frac{P_{qq}(u)}{C_F} \log\left( \frac{Q^2}{\mu_F^2} \right)\notag\\[1.5ex]
+\label{eq:final_hadronic_transverse}
+&  - \left(  \frac{\pi^2}{3} + \frac{9}{2} \right) \delta(1-u) + 3 - u - \frac{3}{2(1-u)_+} + (1+u^2) \left( \frac{\log(1-u)}{1-u} \right)_+ - \frac{1+u^2}{1-u} \log(u) \bigg] + O(\alpha_S^2), 
+\end{align}
+\noindent which is now finite in the limit as $\epsilon \rightarrow 0$. The parameter $\mu_F^2$ in the parton distributions is referred to as the \textit{factorisation scale}, and controls the finite part which is absorbed by the redefinition along with the singular part, which is of course arbitrary. However, it is customary to take $\mu_F^2 = Q^2$ to cancel any large logarithmic contribution coming from the first term in the NLO contribution of Eq.~\eqref{eq:final_hadronic_transverse}.
+
+We also note that the parton distributions $f_q^{\overline{\text{MS}}}(x,\mu_F^2)$ are themselves now finite in the limit as $\epsilon \rightarrow 0$; since the projection $-\eta^{\mu\nu} H_{\mu\nu}^{\text{quark, LO+NLO}}$ is physical and hence finite, and all the functions that the PDF multiplies on the right hand side of Eq.~\eqref{eq:final_hadronic_transverse} are now finite, it follows that $f_q^{\overline{\text{MS}}}(x,\mu_F^2)$ must be finite too. This implies a cancellation between the divergent behaviour of the bare PDF $f_q(x,\epsilon)$ as $\epsilon \rightarrow 0$ and the collinear pole $1/\epsilon$ as $\epsilon \rightarrow 0$ (at least at this order in perturbation theory in $\alpha_S$).
+
+\noindent Combining with the gluon-initiated diagrams (ii), and allowing for a slightly more involved redefinition of $f_q, f_g$ which now involves quark-gluon mixing, we obtain final expressions for the hadronic tensor at next-to-leading order in QCD perturbation theory. When the structure functions are finally projected out using Eq.~\eqref{eq:hadronic_to_structure1} and Eq.~\eqref{eq:hadronic_to_structure2}, we obtain the final results:
+\begin{align}
+F_2^{\text{LO+NLO}} &= x \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u}\ f^{\overline{\text{MS}}}_q\left(\frac{x}{u},\mu_F^2\right)   \bigg( \delta(1-u) + \frac{\alpha_S}{2\pi} P_{qq}(u) \log\left( \frac{Q^2}{\mu_F^2} \right) \notag\\[1.5ex]
+&\qquad\qquad\qquad + \frac{\alpha_S C_F}{2\pi} \left[ \frac{1+u^2}{1-u} \left( \frac{\log(1-u)}{u} - \frac{3}{4} \right) + \frac{5u + 9}{4}\right]_+\bigg) \notag \\[1.5ex]
+&\quad + x \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u}\ f^{\overline{\text{MS}}}_g\left( \frac{x}{u}, \mu_F^2\right) \frac{\alpha_S}{2\pi} \bigg( P_{qg}(u) \log\left( \frac{Q^2}{\mu_F^2}\right) \notag \\[1.5ex]
+&\qquad\qquad\qquad + T_R \left[ (u^2 + (1-u)^2) \log\left( \frac{1-u}{u} \right) - 1 + 8u(1-u)\right] \bigg),\\[1.5ex]
+F_1^{\text{LO+NLO}} &= \frac{1}{2x} F_2^{\text{LO+NLO}} - \frac{\alpha_S}{2\pi} \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u} \left( C_F f_q^{\overline{\text{MS}}}\left( \frac{x}{u} \right) u + 4T_R f_g^{\overline{\text{MS}}} u(1-u) \right).
+\end{align}
+where the splitting function $P_{qg}(u)$ is defined by:
+\begin{equation}
+P_{qg}(u) := T_R ( u^2 + (1-u)^2 ),
+\end{equation}
+with $T_R=1/2$ a Casimir of a further $\mathfrak{su}_\mathbb{C}(3)$ representation, and where for compactness we have applied the distributional identity:
+\begin{align}
+&-\left( \frac{\pi^2}{3} + \frac{9}{2} \right) \delta(1-u) + 3 + 2u - \frac{3}{2(1-u)_+} + (1+u^2) \left( \frac{\log(1-u)}{1-u} \right)_+ - \frac{1+u^2}{1-u} \log(u)\notag \\[2ex]
+&\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad \equiv \left[ \frac{1+u^2}{1-u} \left( \frac{\log(1-u)}{u} - \frac{3}{4} \right) + \frac{5u + 9}{4}\right]_+,
+\end{align}
+which is proved in App.~\ref{app:plus_prescription}. We can further simplify notation by introducing the \textit{Mellin convolution}:
+\begin{equation}
+(f \otimes g)(x) := \int\limits_{x}^{1} \frac{du}{u} f(u) g\left( \frac{x}{u} \right) = \int\limits_{x}^{1} \frac{du}{u} f\left( \frac{x}{u} \right) g(u),
+\end{equation}
+in terms of which the final next-to-leading order structure function formulae can be written as:
+\begin{framed}
+\begin{align}
+\label{eq:structure_function_factorisation_2}
+F_2^{\text{LO+NLO}} &=\sum_{q} \hat{F}_2^{q,\text{LO+NLO}} \otimes f_q^{\overline{\text{MS}}} + \hat{F}_2^{g,\text{LO+NLO}} \otimes f_g^{\overline{\text{MS}}} \\[1.5ex]
+\label{eq:structure_function_factorisation_1}
+F_1^{\text{LO+NLO}} &= \frac{1}{2x} F_2^{\text{LO+NLO}} - \frac{\alpha_S}{2\pi} \sum_{q} e_q^2 \left( C_F f_q^{\overline{\text{MS}}} \otimes u + 4T_R f_g^{\overline{\text{MS}}} \otimes u(1-u) \right),
+\end{align}
+where we have the `partonic' structure function expressions:
+\begin{align}
+\hat{F}_2^{q,\text{LO+NLO}} &= xe_q^2 \bigg( \delta(1-u) + \frac{\alpha_S}{2\pi} P_{qq}(u) \log\left( \frac{Q^2}{\mu_F^2} \right)\notag \\[1.5ex]
+&\qquad + \frac{\alpha_S C_F}{2\pi} \left[ \frac{1+u^2}{1-u} \left( \frac{\log(1-u)}{u} - \frac{3}{4} \right) + \frac{5u + 9}{4}\right]_+\bigg), \\[1.5ex]
+\hat{F}_2^{g,\text{LO+NLO}} &= \frac{x\alpha_S}{2\pi} \bigg( P_{qg}(u) \log\left( \frac{Q^2}{\mu_F^2}\right) \notag \\[1.5ex]
+&\qquad + T_R \left[ (u^2 + (1-u)^2) \log\left( \frac{1-u}{u} \right) - 1 + 8u(1-u)\right] \bigg).
+\end{align}
+\end{framed}
+\noindent In particular, Eq.~\eqref{eq:structure_function_factorisation_2} and Eq.~\eqref{eq:structure_function_factorisation_1} are of the `factorisation theorem' form described in Eq.~\eqref{eq:generic_factorisation_theorem}, where in this case we have a single PDF and no fragmentation functions. Whilst we have not rigorously \textit{proved} factorisation (some notes on various ways in which this can be achieved are given at the end of this section), the work we have done in constructing Eqs.~\eqref{eq:structure_function_factorisation_2} and \eqref{eq:structure_function_factorisation_1} lends credence to the idea that factorisation is true.
+
+\paragraph{Universality of PDFs.} Before concluding this section with a discussion of how factorisation theorems can be rigorously \textit{proved}, we make an important remark regarding the \textit{universality} of the PDFs constructed in this section. 
+
+Whilst the NLO $\overline{\text{MS}}$ PDFs we defined in this section were introduced in a study of DIS, their definition actually applies in a wide variety of processes where hadrons are present in the initial state. Indeed, we can see this from the definition Eq.~\eqref{eq:pdf_definition}, since the only part that relied on any amplitude calculation was the \textit{splitting function} $P_{qq}(u)$. Following the calculations performed in this section closely, it is possible to trace the origin of the splitting function to ... ; indeed, it arises as the most collinearly divergent part of the amplitude. Mathematically, it can be given the following definition:
+\begin{equation}
+P_{qq}(u) := ,
+\end{equation}
+and can be constructed independently of DIS. Higher order etc, citation, ...
 
 
 \paragraph{A note on proofs of factorisation.} Despite the intuitive picture that the parton model and its QCD improvement provide, we have not in any sense \textit{proved} that our factorisation theorem is valid; we have merely suggested a phenomenological model... Our proof will make use Wilson's \textit{operator production expansion} (OPE) [], and will mostly follow Schwartz []. However, it should be noted that the application of the OPE in the proof of DIS factorisation is rather limited in scope, and for more general processes slightly more sophisticated techniques are required; the relevant methods are those of the Collins-Soper-Sterman ... [], and the use of \textit{soft-collinear effective theory} (SCET) [], but these are beyond the scope of this text.
@@ -711,15 +786,34 @@ f_q^{\overline{\text{MS}}}(x, \mu_F^2) := f_q(x) - \frac{\alpha_S}{2\pi} \int\li
 \newpage
 \section{Properties of parton distribution functions}
 \label{sec:pdfproperties}
-Having defined PDFs (at least at NLO in QCD), it will be useful to report some of their more salient properties; in this section, we describe two key features of the PDFs which shall be used throughout this thesis. First, we construct the \textit{evolution equations} for parton distributions in the $\overline{\text{MS}}$ scheme; these evolution equations give a perturbative description of the dependence of the the PDFs on the factorisation scale. Second, we prove the \textit{valence} and \textit{momentum} sum rules for PDFs. Finally, we comment on two important features of the PDFs: their \textit{positivity}, and their large-$x$ and small-$x$ \textit{scaling} behaviour.
+Having defined PDFs (at least at NLO in QCD), it will be useful to report some of their salient properties; in this section, we describe some key features of the PDFs which shall be used throughout this thesis. First, we construct the \textit{evolution equations} for parton distributions in the $\overline{\text{MS}}$ scheme; these evolution equations give a perturbative description of the dependence of the the PDFs on the factorisation scale. Second, we state the \textit{valence} and \textit{momentum} sum rules for PDFs. Finally, we comment on two important features of the PDFs: their \textit{positivity}, and their large-$x$ and small-$x$ \textit{scaling} behaviour.
 
-\paragraph{Evolution equations.} Consider taking the $\mu_F^2$ derivative of the NLO structure function expression in Eq.~() above.
+\paragraph{Evolution equations.} Consider taking the logarithmic $\mu_F^2$ derivative of Eq.~\eqref{eq:pdf_definition} above. We find that:
+\begin{align}
+\mu_F^2 \frac{\partial}{\partial \mu_F^2} f_q^{\overline{\text{MS}}}(x,\mu_F^2)& = \frac{\alpha_S}{2\pi} \int\limits_{x}^{1} \frac{du}{u} P_{qq}(u) f_q^{\overline{\text{MS}}}\left( \frac{x}{u}, \mu_F^2\right) + O(\alpha_S^2) \notag \\[1.5ex]
+\label{eq:basic_dglap}
+&= \frac{\alpha_S}{2\pi} (P_{qq} \otimes f_q^{\overline{\text{MS}}})(x, \mu_F^2) + O(\alpha_S^2).
+\end{align}
+In particular, we see that the quark parton distribution functions obey an integro-differential equation in their second argument; this equation is called the \textit{Dokshitzer-Gribov-Lipatov-Altarelli-Parisi} (DGLAP) equation, and is the analogue of a Callan-Symanzik equation from standard ultraviolet renormalisation. Of course, Eq.~\eqref{eq:basic_dglap} ignores the gluon distribution; if we make the redefinition in Eq.~\eqref{eq:pdf_definition} also including the gluon-initiated diagrams, we must allow for quark-gluon mixing, which leads to the more complete set of DGLAP equations:
+\begin{align}
+\mu_F^2 \frac{\partial}{\partial \mu_F^2} \begin{pmatrix} f_q^{\overline{\text{MS}}}(x,\mu_F^2) \\ f_g^{\overline{\text{MS}}}(x,\mu_F^2) \end{pmatrix} &= \frac{\alpha_S}{2\pi} \int\limits_{x}^{1} \frac{du}{u} \begin{pmatrix} P_{qq}(u) & P_{qg}(u) \\ P_{gq}(u) & P_{gg}(u) \end{pmatrix}  \begin{pmatrix} f_q^{\overline{\text{MS}}}\left( x/u, \mu_F^2\right) \\ f_g^{\overline{\text{MS}}}\left(x/u, \mu_F^2\right) \end{pmatrix} + O(\alpha_S^2),\\[1.5ex]
+&= \frac{\alpha_S}{2\pi} \begin{pmatrix} P_{qq} & P_{qg} \\ P_{gq} & P_{gg} \end{pmatrix}  \otimes \begin{pmatrix} f_q^{\overline{\text{MS}}} \\ f_g^{\overline{\text{MS}}} \end{pmatrix} \left(x , \mu_F^2\right) + O(\alpha_S^2),
+\end{align}
+where the relevant additional splitting functions are given by:
+\begin{align}
+P_{gq}(u) &:= C_F \left( \frac{1 + (1-u)^2}{u} \right),\\[1.5ex]
+P_{gg}(u) &:= 2 C_A \left( \frac{u}{(1-u)_+} + \frac{1-u}{u} + u(1-u) \right) + \delta(1-u) \frac{(11C_A - 24 T_R)}{6},
+\end{align}
+with $C_A = 3$ the Casimir of a further representation of $\mathfrak{su}_\mathbb{C}(3)$. As described above, these splitting functions can be determined in a process-independent way; this will be particularly useful in Chapter~\ref{chap:darkphoton}.
 
-It is useful to note that the splitting functions which feature in these evolution equations can be determined in a process-independent way; this will be particularly useful in Chapter~\ref{chap:darkphoton}.
+It is also important to note that the equations we have presented above are accurate to next-to-leading order in QCD perturbation theory. Using higher order QCD splitting functions, and indeed extending into QED perturbation theory too, we obtain more precise versions of PDF evolution with factorisation scale. The state-of-the-art involves...
 
-These evolution equations can be solved numerically. Software able to do this includes APFEL [] and EKO []; the former is used throughout the thesis with occasional modification.
+These evolution equations can be solved numerically. Software able to do this includes APFEL (\textbf{A} \textbf{P}D\textbf{F} \textbf{E}volution \textbf{L}ibrary) [] and EKO (\textbf{E}volution \textbf{K}ernel \textbf{O}perators) []; the former is used throughout the thesis with occasional modification. In both cases, a rotation of PDF flavours is made to simplify the matrix of splitting functions, decoupling some of the evolution equations from one another; more details are presented in [].
 
-\paragraph{Sum rules.}
+\paragraph{Sum rules.} The interpretation of PDFs in terms of... implies that they should obey certain \textit{sum rules}. In particular, for a proton, the PDFs must necessarily obey the \textit{valence sum rules}:
+\begin{equation}
+\int\limits_{0}^{1} dx\ \left( f_u(x,\mu_F^2) - f_{\bar{u}}(x,\mu_F^2) \right) = 2, \qquad \int\limits_{0}^{1} dx\ \left( f_d(x,\mu_F^2) - f_{\bar{d}}(x,\mu_F^2) \right) = 1.
+\end{equation} 
 
 \paragraph{Positivity.} When we introduced PDFs in Sect.~\ref{sec:factorisation} in the context of the parton model, they were motivated as number densities. However, we saw that the inclusion of NLO QCD effects removes the interpretation of parton distributions as number densities; in particular, the requirement that PDFs... 
 
@@ -738,7 +832,7 @@ for all $x \in [0,1], Q^2 \in [0,\infty)$.
 \section{Fitting parton distribution functions}
 \label{sec:pdffitting}
 
-Above, we introduced parton distributions to parametrise the non-perturbative structure of hadrons. Their very definition implies that they cannot be obtained by perturbative methods, which essentially leaves open two options for their determination: (i) lattice methods; (ii) fits to experimental data. In this text, we focus exclusively on the latter choice, which we shall describe in detail in this section.
+Above, we introduced parton distributions to parametrise the non-perturbative structure of hadrons. Their very definition implies that they cannot be obtained by perturbative methods, which essentially leaves open two options for their determination: (i) lattice methods (see e.g. [] for some progress in this direction); (ii) fits to experimental data. In this text, we focus exclusively on the latter choice, which we shall describe in detail in this section.
 
 We begin by describing possible functional forms which can be used to model the PDFs. The parameters in these functional forms are obtained by fits to a given dataset by the minimisation of a loss function, namely the $\chi^2$-statistic (in the $t_0$ prescription, with a positivity penalty term), which we subsequently motivate and define. Next, we describe a method for minimisation of the loss function, namely \textit{stochastic gradient descent}. Finally, we describe a standard method of error analysis in PDF fits, namely the \textit{Monte Carlo replica method}, which allows for the propagation of experimental uncertainties onto the PDFs. 
 
@@ -816,17 +910,20 @@ Before proceeding, it is worth noting that despite the very intuitive nature of 
 \label{sec:globalfits}
 
 So far, we have focussed exclusively on fitting the finite set of parameters which describe initial-scale PDFs, once we have assumed a fixed functional form. However, PDFs are not the only quantities which enter theory predictions for collider experiments. For example, we saw in Section~\ref{sec:factorisation} that the DIS structure function $F_2$ is described at next-to-leading-order in QCD as:
-\begin{equation}
-F_2(x,Q^2) = ...
-\end{equation}
-In particular, it carries a dependence on \textit{both} the PDFs \textit{and} the strong coupling $\alpha_S$. If we were to use data on the structure function $F_2$ to extract the PDFs only, we would necessarily fix $\alpha_S(m_Z^2)$ to a particular choice. Thus our PDF set would be a PDF set produced \textit{under the assumption} that the strong coupling takes a given, fixed value at the mass of the $Z$. If we were to use this PDF set to make predictions for some new process, for consistency we would need to take the \textit{same} value for $\alpha_S(m_Z^2)$ in the corresponding hard cross-section for the process.
+\begin{align}
+F_2^{\text{LO+NLO}} &= x \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u}\ f^{\overline{\text{MS}}}_q\left(\frac{x}{u},\mu_F^2\right)   \bigg( \delta(1-u) + \frac{\alpha_S}{2\pi} P_{qq}(u) \log\left( \frac{Q^2}{\mu_F^2} \right) \notag\\[1.5ex]
+&\qquad\qquad\qquad + \frac{\alpha_S C_F}{2\pi} \left[ \frac{1+u^2}{1-u} \left( \frac{\log(1-u)}{u} - \frac{3}{4} \right) + \frac{5u + 9}{4}\right]_+\bigg) \notag \\[1.5ex]
+&\quad + x \sum_{q} e_q^2 \int\limits_{x}^{1} \frac{du}{u}\ f^{\overline{\text{MS}}}_g\left( \frac{x}{u}, \mu_F^2\right) \frac{\alpha_S}{2\pi} \bigg( P_{qg}(u) \log\left( \frac{Q^2}{\mu_F^2}\right) \notag \\[1.5ex]
+&\qquad\qquad\qquad + T_R \left[ (u^2 + (1-u)^2) \log\left( \frac{1-u}{u} \right) - 1 + 8u(1-u)\right] \bigg).
+\end{align}
+In particular, it carries a dependence on \textit{both} the PDFs \textit{and} the strong coupling $\alpha_S$. If we were to use data on the structure function $F_2$ to extract the PDFs only, we would necessarily fix $\alpha_S$\footnote{More precisely, the value of $\alpha_S$ at some choice of renormalisation scale, for example $\alpha_S(m_Z^2)$, i.e. the value of $\alpha_S$ at the mass of the $Z$-boson squared.} to a particular choice. Thus our PDF set would be a PDF set produced \textit{under the assumption} that the strong coupling takes a given, fixed value. If we were to use this PDF set to make predictions for some new process, for consistency we would need to take the \textit{same} value for $\alpha_S$ in the corresponding hard cross-section for the process.
 
-This can become problematic when we wish to \textit{fit} the strong coupling. For suppose that we wish to extract the value of $\alpha_S(m_Z^2)$ from some new experimental process, which involves initial-state hadrons. If we make predictions for this fit using PDFs that have been produced under the assumption $\alpha_S(m_Z^2) = \alpha_0$, for some fixed value $\alpha_0$, then we risk introducing a bias towards this value in the subsequent determination of $\alpha_S(m_Z^2)$ from the new data. This is described in significantly more detail in Ref.~\cite{Forte:2020pyp}. \\
+This can become problematic when we wish to \textit{fit} the strong coupling. For suppose that we wish to extract the value of $\alpha_S$ from some new experimental process, which involves initial-state hadrons. If we make predictions for this fit using PDFs that have been produced under the assumption $\alpha_S = \alpha_0$, for some fixed value $\alpha_0$, then we risk introducing a bias towards this value in the subsequent determination of $\alpha_S$ from the new data. This is described in significantly more detail in Ref.~\cite{Forte:2020pyp}. \\
 
-\noindent The above argument applies equally well to \textit{any} theory parameters, not just $\alpha_S(m_Z^2)$; in this thesis, we shall be particularly concerned with theory parameters drawn from \textit{beyond the Standard Model theories} (namely \textit{dark matter models} and the \textit{Standard Model Effective Field Theory}). PDFs are usually fitted under the assumption that the SM is true, which implicitly assumes... Therefore, before we make collider predictions, we must ask ourselves:
+\noindent The above argument applies equally well to \textit{any} theory parameters, not just the strong coupling. In this thesis, we shall be particularly concerned with theory parameters drawn from \textit{beyond the Standard Model theories} (namely \textit{dark matter models} and the \textit{Standard Model Effective Field Theory}). In particular, PDFs are usually fitted under the assumption that the SM is true, which implicitly assumes the additional parameters in any beyond the Standard Model theory are all zero; therefore, before we make collider predictions, we should ask ourselves:
 \begin{itemize}
-\item What is the error committed 
-\item ... 
+\item How do the PDFs change between a fit assuming the Standard Model, and a fit where the PDFs are determined simultaneously with the parameters of a beyond the Standard Model theory?
+\item How do the bounds on the parameters of a beyond the Standard Model theory change between a fit using SM PDFs, compared with a simultaneous fit of the parameters alongside PDFs?
 \end{itemize}
 
 It will be the objective of the first part of this text, \textit{Parton distributions in beyond the Standard Model theories}, to answer these questions in three benchmark scenarios. In Chapter~\ref{chap:darkphoton}, we introduce dark matter models, and describe a toy study of the simultaneous extraction of PDFs together with the mass and coupling of a light, leptophobic \textit{dark photon}. In Chapter~\ref{chap:smeftdy}, we describe the simultaneous extraction of PDFs together with two couplings drawn from the Standard Model Effective Field Theory (SMEFT), using high-energy Drell-Yan data. In Chapter~\ref{chap:top}, we perform a much more comprehensive joint extraction of PDFs together with all of the SMEFT operators which contribute to processes involving top quarks, using all available LHC Run II top quark data.
@@ -842,7 +939,7 @@ In the second part of this text, \textit{Future considerations for fitting parto
 \chapter{Parton distributions in a dark matter model}
 \label{chap:darkphoton}
 
-\epigraph{.}{\textit{\\ ... \\ ...}}
+\epigraph{Stars, everywhere. So many stars that I could not for the life me understand how the sky could contain them all yet be so black.}{\textit{\\ from Blindsight, \\ by Peter Watts}}
 
 In Section~\ref{sec:globalfits}, it was argued that when performing a fit of parameters in a BSM theory using data which involves initial-state hadrons, one should consider the impact of simultaneously extracting both PDFs and the parameters of the BSM model. In this chapter, we discuss how this issue might be handled in the context of a toy dark matter model, where the New Physics is \textit{light} and \textit{weakly-coupled}.
 
