@@ -106,6 +106,8 @@
 \newlength{\thickarrayrulewidth}
 \setlength{\thickarrayrulewidth}{3\arrayrulewidth}
 
+\newcommand{\JM}[1]{{\bf\color{cyan}JM: #1}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Thesis meta-information
 %%
@@ -1336,6 +1338,7 @@ P_{qB}^{(0,0,1)}(x) &= \frac{1}{9} P_{q\gamma}^{(0,1,0)}(x) = \frac{x^2 + (1-x)^
 %$\log(Q^2/m_B^2)$ for $Q>m_B$. 
 
 \subsection{PDF sets with dark photons}
+\label{sec:pdf_sets_with_dark_photons}
 
 We have implemented the modified DGLAP equations described in~Sec. \ref{subsec:dglap} in the
 public APFEL PDF evolution code~\cite{Bertone:2013vaa}, which is an accurate and flexible that can be used to perform PDF evolution up to NNLO
@@ -1621,7 +1624,7 @@ The strongest are from CMS $B+$ISR searches
 Fig.~\ref{fig:limits}. 
 
 \subsection{Effects of the dark photon on parton luminosities}
-In Sec.~\ref{sec:dglap}, we showed that the presence of a dark photon modifies
+In Sec.~\ref{subsec:dglap}, we showed that the presence of a dark photon modifies
 all other flavours of PDFs via the mixing associated with the
 DGLAP evolution equations, with a modification that is proportional to
 $\alpha_B$ and the logarithm of $m_B$. 
@@ -1644,7 +1647,7 @@ y)\qquad \tau=\frac{M_X^2}{S},
 \end{equation}
 where $S$ is the squared centre-of-mass energy of the hadronic collision, $M_X$ is the invariant mass
 of the partonic final state, $y$ is the rapidity of the partonic final state, and 
-$f_i(x,Q)$ is the PDF of the $i^{\rm th}$ parton evaluated at the
+$f_i(x,Q)$ is the PDF of the $i$th parton evaluated at the
 scale $Q$. Different choices for $Q$ can be adopted in order to improve predictions
 of a particular process and/or distribution.
 At the level of pure luminosities, without the convolution with
@@ -1765,6 +1768,7 @@ forward in the following section.
 
 \subsection{Constraints from precise measurements
   of high-energy Drell-Yan tails}
+  \label{subsec:dark_constraints}
 
 Given that the $q\bar{q}$ channel is the most affected by the presence of a non-zero dark photon parton density, in this
 study we focus on precise measurements of the high-mass Drell-Yan
@@ -1797,7 +1801,7 @@ for the $m_{\ell\ell}$ distributions at the HL-LHC both in the muon and electron
 are displayed in Fig.~\ref{fig:data-theory} with the highest energy bins reaching $m_{\ell\ell}\simeq 4 $ TeV.
 In total, we have two invariant mass distributions of 12 bins each, one in the electron and one in the muon channels.
 
-Concerning uncertainties, in ~\cite{greljo_parton_2021} this data is produced by assuming that the HL-LHC phase will
+Concerning uncertainties, in Ref.~\cite{greljo_parton_2021} this data is produced by assuming that the HL-LHC phase will
 operate with a total integrated luminosity of $\mathcal{L} = 6\ \text{ab}^{-1}$
 (from the combination of ATLAS and CMS, which provide ${\cal L}=3 \,{\rm ab}^{-1}$ each),
 and also assuming a five-fold reduction in systematic uncertainty
@@ -1924,7 +1928,7 @@ the component of the theory covariance matrix associated with the
 scale uncertainty of the NNLO computation is subdominant. 
 Of course, it would be unrealistic to assume that the PDF uncertainty will not decrease as compared to the
   uncertainty of the {\tt NNPDF3.1luxQED} baseline, given that we already know
-  that in the updated {\tt NNPDF4.0} set~\cite{Ball:2021leu} the uncertainty of the large-$x$
+  that in the updated {\tt NNPDF4.0} set~\cite{NNPDF:2021njg} the uncertainty of the large-$x$
   quarks and antiquarks has already decreased by a sizeable amount
   thanks to the inclusion of precise LHC data. We thus decide to use
   the projected PDF uncertainties determined in~\cite{Khalek:2018}; in particular, we use Scenario 1 of ~\cite{Khalek:2018} (the conservative scenario) when we
@@ -1986,16 +1990,1132 @@ We have made several approximations in this chapter which should be lifted in fu
 \chapter{Parton distributions in the SMEFT from high-energy Drell-Yan tails}
 \label{chap:smeftdy}
 
-In Chapter~\ref{chap:darkphoton}, we... 
+In Chapter~\ref{chap:darkphoton}, we focussed on simultaneous extraction of PDFs and BSM parameters in the case of a dark photon model, where the only BSM particle was \textit{light}. Whilst this model was motivated by the desire to provide a possible dark matter candidate, it is only one of plethora of models which we could have investigated. This suggests the need for a more general framework in which to search for BSM physics.
 
+In the case of \textit{heavy} New Physics, this can be facilitated through the language of \textit{effective field theories} (EFTs). In this chapter, we shall introduce the idea of treating the Standard Model within the effective field theory approach, in Section~\ref{sec:eft_intro}. We shall subsequently present a study wherein we simultaneously extract PDFs and two couplings drawn from the Standard Model EFT, using both DIS and DY data; we shall find that the interplay between PDFs and the Standard Model EFT is mild with the current data, but when we move to using projected HL-LHC data (just as in Section~\ref{subsec:dark_constraints}), the interplay becomes significant. This study motivates a more comprehensive extraction of PDFs alongside Standard Model EFT couplings in the top sector, which we present in Chapter~\ref{chap:top}.
 
 \section{The Standard Model as an effective field theory}
+\label{sec:eft_intro}
+The language of \textit{effective field theory} (EFT) provides a model-independent way of probing deviations from... . 
 
-Effective field theories background; in particular, bases etc. The Warsaw basis.
+We begin with a general discussion of the basic principles of EFTs, in particular \textit{integrating out}... 
+
+\subsection{Effective field theories}
+\label{subsec:eft_background}
+
+Top-down and bottom-up EFTs. Renormalisability of EFTs order-by-order in perturbation theory.
+
+\subsection{EFT bases}
+\label{subsec:eft_bases}
+Integration by parts, equations of motion.
+
+\subsection{The SMEFT}
+\label{subsec:the_smeft}
+The framework of bottom-up EFTs can naturally be applied to the Standard Model itself, producing an EFT known as the \textit{Standard Model Effective Field Theory} (SMEFT). The Lagrangian of the SMEFT:
+
+The Warsaw basis. Some discussion of the types of operators that arise.
 
 We are now in a position where we can classify all dimension five operators in the SMEFT. 
 
-\section{}
+\section{Introduction}
+\label{sec:introduction}
+
+The Large Hadron Collider (LHC) at CERN is currently leading the exploration of the high-energy frontier.
+%
+Thanks to a wealth of precision experimental measurements, combined
+with the staggering progress in precise theoretical calculations and simulations,
+the Standard Model (SM) of particle physics is being stress-tested at high energies to
+an unprecedented level.
+%
+The hunt for deviations from the SM predictions, which could signal the long-sought evidence
+for beyond-the-SM (BSM) dynamics, is being pursued at the LHC with two
+complementary strategies.
+%
+On the one hand, by means of direct searches for new particles that might be light enough to be
+produced on shell.
+%
+On the other hand,  with indirect searches aiming to identify a consistent pattern of
+deviations in the properties of known particles, such as their coupling strengths, which would be induced by
+new particles and interactions  whose characteristic energy scale lies above
+the direct reach of the LHC.
+
+In the case of direct searches,
+the target is  identifying
+an abrupt deviation from the SM, for example in terms of a resonance peak on top of a
+smoothly falling background, or with a
+systematic mismatch in the number of measured events as compared to the SM
+expectations for non-resonant searches.
+%
+Indirect searches instead often aim at pinning down subtle distortions with respect
+to the SM predictions, such as a few-percent variation in the value of some production
+cross sections or decay rates, induced by yet-unknown particles and interactions.
+%
+A powerful framework to identify, parametrise, and correlate
+in a model-independent manner the possible deviations
+from the SM predictions that arise
+in such indirect searches
+is provided by the effective field theory (EFT) framework, such
+as the Standard Model EFT (SMEFT) (e.g.~\cite{Weinberg:1979sa,Buchmuller:1985jz,Georgi:1994qn,Giudice:2007fh,Grzadkowski:2010es,Alonso:2013hga,Jenkins:2013wua,Jenkins:2013zja,Henning:2014wua,Brivio:2017vri,Wells:2015uba,Englert:2019zmt,Fuentes-Martin:2020udw,Cohen:2020qvb})
+or the Higgs EFT (HEFT) (e.g.~\cite{Feruglio:1992wf,Grinstein:2007iv,Contino:2010mh,Alonso:2012px,Alonso:2014wta,Buchalla:2015qju,Alonso:2015fsp,Cohen:2020xca}).
+
+It is a common misconception that indirect BSM investigations based on EFTs
+are relevant only for low-energy phenomena, while instead direct searches dominate the sensitivity
+for high-$p_T$ observables.
+%
+On the contrary: accurate measurements of observables at high energies offer one of the most promising avenues towards a discovery of BSM physics at the LHC.
+%
+While the collider has now (almost) reached the design energy, its integrated luminosity continues to grow
+steadily, thus greatly facilitating dedicated studies of the
+(currently statistics-limited) high-energy tails of distributions.
+%
+With this motivation, several  high-$p_T$  LHC cross sections have been studied as indirect probes of new
+physics in the EFT framework, from the (di)lepton distributions
+in neutral- and charged-current Drell-Yan (DY) distributions~\cite{Cirigliano:2012ab, deBlas:2013qqa, Gonzalez-Alonso:2016etj, Faroughy:2016osc, Greljo:2017vvb, Cirigliano:2018dyk, Greljo:2018tzh,Bansal:2018eha,Angelescu:2020uug, Farina:2016rws, Alioli:2017nzr, Raj:2016aky, Schmaltz:2018nls, Brooijmans:2020yij,Ricci:2020xre,Fuentes-Martin:2020lea,Alioli:2017ces,Alioli:2017jdo,Alioli:2018ljm,Alioli:2020kez,Panico:2021vav,Sirunyan:2021khd,ATLAS:2021pvh,Marzocca:2020ueu,Afik:2019htr,Alves:2018krf} (the
+main subject of this work) to inclusive jets and dijets~\cite{Krauss:2016ely,Alte:2017pme,Hirschi:2018etq,Goldouzian:2020wdq}, top quark pair
+distributions~\cite{Buckley:2015lku,Englert:2016aei,Hartland:2019bjb,Brivio:2019ius,Durieux:2018tev,vanBeek:2019evb,Bissmann:2020mfi,Bruggisser:2021duo,Ellis:2020unq}, gauge boson pair
+production~\cite{Falkowski:2015jaa,Falkowski:2016cxu,Baglio:2017bfe,Baglio:2020ibv,Ellis:2020unq,Panico:2017frx,Ethier:2021ydt}, and vector boson scattering~\cite{Ethier:2021ydt,Grojean:2018dqj,Gomez-Ambrosio:2018pnl,Dedes:2020xmo}, among several others.
+
+Furthermore, many higher-dimensional EFT operators induce deviations from the SM which grow
+with the energy of the partonic collision, enhancing the BSM sensitivity
+of these high-energy tails.
+%
+For instance, in the Drell-Yan process,  the na\"{\i}ve  scaling of the $\psi \psi \to \psi \psi$ scattering
+amplitude in an underlying EFT description leads to
+$\mathcal{A} \propto E^2 / \Lambda^2$,  where $E$ is the energy of the process and $\Lambda$ is the new physics scale.
+%
+Thus, rather generically, a less precise measurement of a high-mass tail can compete with a low-energy precision measurement due to this energy enhancement, which can be traced back to the preservation of unitarity.
+%
+This property leads to the somehow unintuitive result that
+the study of the high-energy lepton tails in the Drell-Yan process represents a competitive probe
+of BSM dynamics compared to electroweak precision tests and low-energy
+flavour physics test.
+%a remarkable fact that has attracted a lot of attention recently.
+
+In order for the EFT interpretation of these high-$p_T$ cross sections
+to convincingly uncover a BSM effect, it becomes crucial to ensure
+full control over the SM inputs and their
+uncertainties, such as those associated to the hard-scattering (partonic) cross sections or the
+parton distribution functions (PDFs) of the nucleon~\cite{Gao:2017yyd}.
+%
+In this context, one of the key challenges hampering the applicability of the EFT programme
+to the LHC high-energy tails is indeed related to the treatment of the PDFs.
+%
+These are determined from experimental data assuming  the validity of the SM, often
+using exactly the same processes that enter EFT analyses.
+%$
+This observation naturally prompts the question of how can one make sure that eventual BSM deviations arising in high-$p_T$ tails are not being
+inadvertedly reabsorbed into the PDFs.
+
+A first take on this challenge was presented in a proof-of-concept study~\cite{Carrazza:2019sec} where
+the simultaneous determination of PDFs and EFT coefficients from deep inelastic scattering (DIS)
+structure functions was demonstrated.
+%
+There, it was found that the EFT corrections can indeed be partially reabsorbed into the PDFs
+but also that it is possible to robustly disentangle
+QCD and BSM effects by exploiting their different energy scaling.
+%
+The main goal of the present work is to extend this approach to LHC processes, specifically with the
+joint determination of PDFs and EFT coefficients from DIS and Drell-Yan data.
+%
+Drell-Yan processes in general, and high-mass measurements in particular,
+provide information on the light quark and anti-quark PDFs in a broad region of $x$ representing
+an important ingredient in modern global PDF fits~\cite{Ball:2014uwa,Ball:2017nwa,Hou:2019efy,Bailey:2020ooq}.
+%
+Furthermore, high-mass Drell-Yan data will be instrumental at the High-Luminosity LHC (HL-LHC)
+to pin down the large-$x$ PDFs~\cite{Khalek:2018mdn}.
+%
+Considering that EFT signals can lead to significant deviations from the SM
+in these same high-energy DY tails, one would like to assess to what extent they
+can be reabsorbed into the PDFs and to define strategies to
+separate QCD from BSM effects.
+
+In this work, in order to interpret the Drell-Yan data in the EFT framework
+we formulate simple, yet motivated, BSM benchmark scenarios, which are chosen to represent a wide
+class of UV-complete theories.
+%
+In the first scenario~\cite{Farina:2016rws}, we consider the $\hat{W}$ and $\hat{Y}$ electroweak parameters generated in universal theories that modify the electroweak gauge boson propagators and lead to flavour-universal deviations which grow with the invariant mass.
+%
+In the second benchmark~\cite{Greljo:2017vvb}, we consider a flavour-specific scenario motivated by the evidence of lepton flavour universality (LFU) violation in $B$-meson decays recently reported by the LHCb collaboration~\cite{Aaij:2014ora, Aaij:2017vbb, Aaij:2019wad,Aaij:2021vac}.
+%
+Our analysis accounts for available unfolded high-mass Drell-Yan cross
+section data, detector-level
+searches  based on the full Run II luminosity, and dedicated HL-LHC projections.
+%
+We do not consider other data beyond the DIS and DY processes, in order to ensure a theoretically consistent
+description of the parton distributions in the SMEFT.
+%
+The price to pay for this reduced dataset is the information loss on some flavour combinations,
+specifically on the gluon PDF.
+
+The structure of this paper is as follows.
+%
+First of all, in Sect.~\ref{sec:scenarios} we discuss the EFT benchmark scenarios that will be used
+in the fits.
+%
+Then in Sect.~\ref{sec:data} we summarise the datasets used in our
+analysis and the corresponding theoretical calculations, both in the
+SM and in the SMEFT, and we discuss their impact on a PDF fit. We also
+describe the methodology we use to simultaneously fit PDFs and SMEFT
+coefficients, and how we deal with several sources of uncertainties
+in the fits. 
+%
+In Sect.~\ref{sec:res1} we present the results for the simultaneous determination of the
+SMEFT coefficients and the PDFs from the available high-mass DY data
+from LHC Run I and Run II, in the two
+scenarios presented in Sect.~\ref{sec:scenarios} and assess how they
+modify the interpretation of BSM searches based on the SM PDFs.
+%
+In Sect.~\ref{sec:hllhc} we present a summary of the constraints we find on the two
+scenarios we consider and we assess the outcome of a joint
+PDF and EFT analysis at the HL-LHC.
+%
+Finally, we will outline our main conclusions and possible
+future developments in Sect.~\ref{sec:conclusions}.
+
+More technical discussions are collected in the appendices, and include
+detailed comparisons of the SM PDF fits produced in this work
+with previous NNPDF global fits
+(App.~\ref{app:pdfs}), the quantitative assessment of the fit quality
+to the various input datasets (App.~\ref{app:fit_quality}), a
+benchmarking study for the calculation of EFT cross sections (App.~\ref{sec:benchmarking}),
+and a study of the flavour dependence of the SMEFT PDFs (App.~\ref{add:smeftpdfs}).
+
+
+\newpage
+\section{SMEFT benchmark scenarios}
+\label{sec:scenarios}
+
+In this section we present the two SMEFT benchmark scenarios that will be
+used in this work to interpret the LHC Drell-Yan processes.
+%
+The first scenario belongs to the class of electroweak precision tests and is
+sensitive to a broad range of UV-complete theories proposed in the literature.
+%
+The second benchmark represents a consistency check of the existing hints
+of lepton universality violation in rare $B$-meson decays reported by the LHCb collaboration.
+%
+Both scenarios highlight the interplay between the PDFs and the EFT dynamics, illustrating
+in particular how the former changes and how constraints to the latter are modified.
+
+\subsection{Benchmark I: oblique corrections $\hat W$ and $\hat Y$ }
+\label{sec:scenarioI}
+
+The oblique corrections, as originally proposed in~\cite{Peskin:1991sw,Altarelli:1991fk}, play a key role in testing theories beyond the Standard Model.
+%
+They parametrise the self-energy $\Pi_V(q^2)$ of the electroweak gauge bosons $W^a_\mu$ and $B_\mu$,  where $V = W^3 W^3$, $B B$, $W^3 B$, and $W^+ W^-$.
+%
+Truncating the momentum expansion at order $q^4$, while imposing proper normalisation and symmetry constraints, one concludes that there are only four oblique
+parameters which can be identified with dimension-six operators in the SMEFT.
+%
+These are the well-known  $\hat{S}$, $\hat{T}$, $\hat{W}$, and $\hat{Y}$
+parameters~\cite{Barbieri:2004qk}.
+%
+The parameters $\hat{S}$ and $\hat{T}$ are well constrained from precision
+LEP measurements~\cite{Barbieri:2004qk} and grow slowly with $q^2$,
+while $\hat{W}$ and $\hat{Y}$ scale faster implying that their effects will be
+enhanced for the high-energy dilepton tails at the LHC~\cite{Farina:2016rws}.
+ While $\hat{T} = {\mathcal O}(q^0)$ and $\hat{S} = {\mathcal O}(q^2)$ ,
+instead one has that $\hat{W},\hat{Y} = {\mathcal O}(q^4)$.
+%
+In the universal basis (see e.g.~\cite{Englert:2019zmt}), the $\hat{W}$ and $\hat{Y}$
+parameters are the Wilson coefficients associated to the following two operators:
+\begin{equation}
+\label{eq:WY}
+\mathcal{L}_{\rm SMEFT} \supset -\frac{\hat{W}}{4 m_W^2} (D_\rho W^a_{\mu\nu})^2 -\frac{\hat{Y}}{4 m_W^2} (\partial_\rho B_{\mu\nu})^2 ~,
+\end{equation}
+%
+where $m_W$ indicates the $W$-boson mass, and $D_\rho$ is the covariant derivative.
+%
+The physical effects of the operators in Eq.~(\ref{eq:WY}) on the Drell-Yan process
+arise from the difference in the propagators through the self-energy modifications, see Eq.~(1) of Ref.~\cite{Farina:2016rws}.
+
+Alternatively, using the equations of motion, the same operators can be rotated to a basis in which the modifications to the Drell-Yan cross sections are instead captured by four-fermion contact interactions,
+\begin{equation} \label{eq:JJ}
+\mathcal{L}_{\rm SMEFT} \supset -\frac{g^2 \hat{W}}{2 m_W^2} \, J^{a}_{L \mu} J^{a \mu}_L -\frac{ g_Y^2 \hat{Y} }{2 m_W^2} \, J_{Y \mu} J^\mu_Y ~~,
+\end{equation}
+where $J_L$ and $J_Y$ are $SU(2)_L$ and $U(1)_Y$ conserved fermionic currents,
+\begin{equation}
+J^{a \mu}_L =  \frac{1}{2} \sum_{f = q, l}  \bar f \sigma^a \gamma^\mu f ~~,\quad ~~ J^\mu_Y= \sum_{f = q, l, u, d, e}  Y_f\,\bar f \gamma^\mu f~~.
+\end{equation}
+Here $q$, $l$ are the SM quark and lepton left-handed doublets, while $u$, $d$, $e$ are 
+the right-handed singlets. Also, $g$ and $g_Y$ are the corresponding electroweak gauge couplings,
+while $\sigma^a$ 
+are the Pauli matrices, and the hypercharge $Y_f = 1/6$, $-1/2$, $2/3$, $-1/3$, and $-1$ for $q,l,u,d,e$, respectively. Summation over flavour indices is assumed, which implies
+that in this scenario the fermionic currents respect the $U(3)^5$
+global flavour symmetry.
+
+Expanding Eq.~\eqref{eq:JJ}, one can relate the $\hat{W}$ and $\hat{Y}$ parameters
+to the coefficients of dimension-six operators in the Warsaw basis~\cite{Grzadkowski:2010es}.
+%
+There, the operators  relevant to the description of the Drell-Yan process are given by
+\begin{equation}
+\begin{aligned}\label{eq:Warsaw}
+\mathcal{O}_{ld} &= (\bar  l\gamma_\mu l)(\bar d \gamma^\mu d) \,, 
+&
+\mathcal{O}_{lu} &= (\bar  l\gamma_\mu l)(\bar u \gamma^\mu u) \,,
+&
+\mathcal{O}_{lq}^{(1)} &= (\bar l \gamma^\mu l) (\bar  q\gamma_\mu q)\,,   
+\\
+\mathcal{O}_{ed} &= (\bar  e\gamma_\mu e)(\bar d \gamma^\mu d) \,, 
+&
+\mathcal{O}_{eu} &= (\bar  e\gamma_\mu e)(\bar u \gamma^\mu u) \,,
+&
+\mathcal{O}_{qe} &=  (\bar  q\gamma_\mu q) (\bar e \gamma^\mu e)\,,
+\\
+\mathcal{O}_{lq}^{(3)} &=(\bar l \sigma^a \gamma^\mu l)  (\bar  q \sigma^a \gamma_\mu q) \, .
+\end{aligned}
+\end{equation}
+Again, the flavour indices are contracted within the brackets, for example $(\bar  l\gamma_\mu l) \equiv (\bar  l^1 \gamma_\mu l^1 + \bar  l^2 \gamma_\mu l^2 + \bar  l^3 \gamma_\mu l^3)$. 
+%
+Taking into account this matching between the $\hat{W}$ and $\hat{Y}$ parameters
+and the corresponding Wilson coefficients
+in the Warsaw basis,
+we can express the SMEFT Lagrangian in this scenario, Eq.~(\ref{eq:JJ}), as follows
+\begin{align}\label{eq:WYWarsaw}
+\mathcal{L}_{\rm SMEFT}=\mathcal{L}_{\rm SM}   &-\frac{g^2 \hat{W}}{4
+                                                 m_W^2}
+                                                 \mathcal{O}_{lq}^{(3)}
+                                                 - \frac{ g_Y^2
+                                                 \hat{Y} }{m_W^2}
+                                                 \Big(Y_l Y_d \,
+                                                 \mathcal{O}_{ld} +
+                                                 Y_l Y_u \,
+                                                 \mathcal{O}_{lu}
+                                                 \nonumber \\&+Y_l Y_q
+  \, \mathcal{O}_{lq}^{(1)} + Y_e Y_d \, \mathcal{O}_{ed} + Y_e Y_u \,
+  \mathcal{O}_{eu} + Y_e Y_q \, \mathcal{O}_{q e} \Big) \,.
+\end{align}
+The parametrisation in Eq.~(\ref{eq:Warsaw}) has been implemented using the {\tt SMEFTsim} package~\cite{Brivio:2017btx} and cross-checked against the reweighting method used in Ref.~\cite{Greljo:2017vvb} (see also~\cite{Ricci:2020xre}), as will be discussed in Sect.~\ref{sec:theory} and in Appendix~\ref{sec:benchmarking}.
+
+The analysis in the Ref.~\cite{Farina:2016rws} reports the following 95\% confidence level intervals on $\hat{W}$ assuming $\hat{Y}=0$,
+\begin{equation}
+\begin{split}
+\hat W &\in \left[ - 3, 15 \right]\times 10^{-4}~\textrm{(ATLAS 8 TeV, 20.3 fb$^{-1}$~\cite{Aad:2016zzw})}~,\\
+\hat W &\in \left[ - 5, 22 \right]\times 10^{-4}~\textrm{(CMS 8 TeV, 19.7 fb$^{-1}$~\cite{CMS:2014jea})}~,
+\end{split}
+\end{equation} 
+as well as, the 95\% confidence level intervals for $\hat{Y}$ assuming $\hat{W}=0$,
+\begin{equation}
+\begin{split}
+\hat Y &\in \left[ - 4, 24 \right]\times 10^{-4}~\textrm{(ATLAS 8 TeV, 20.3 fb$^{-1}$~\cite{Aad:2016zzw})}~,\\
+\hat Y &\in \left[ - 7, 41 \right]\times 10^{-4}~\textrm{(CMS 8 TeV, 19.7 fb$^{-1}$~\cite{CMS:2014jea})}~.
+\end{split}
+\end{equation}
+These bound have been computed by assuming SM PDFs. In our analysis,
+for this benchmark scenario, we see how the limits based on SM PDFs
+are modified once a consistent determination of the SMEFT PDFs is
+done, requiring a simultaneous fit of the PDFs together with the
+$\hat{W}$ and $\hat{Y}$ parameters from the high-mass Drell-Yan distributions. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Benchmark II: left-handed muon-philic lepton-quark interactions} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{sec:scenarioII}
+
+Following Ref.~\cite{Greljo:2017vvb}, here we consider
+gauge invariant four-fermion operators built from the SM quark and lepton $SU(2)_L$ doublets.
+%
+In the Warsaw basis, Eq.~(\ref{eq:Warsaw}), these correspond to the $\mathcal{O}_{lq}^{(3)}$ and $\mathcal{O}_{lq}^{(1)}$
+operators.
+%
+Expanding the $SU(2)_L$ indices, we find that the SMEFT Lagrangian contains operators
+of the form
+\begin{equation}
+  \mathcal L_{\rm SMEFT} \supset \frac{{\bf C}^{U\mu}_{ij}}{v^2} (\bar u^i_L \gamma_\mu u^j_L) (\bar \mu_L \gamma^\mu \mu_L)+ \frac{{\bf C}^{D\mu}_{ij}}{v^2} (\bar d^i_L \gamma_\mu d^j_L) (\bar \mu_L \gamma^\mu \mu_L)~,
+  \label{eq:benchmark2}
+\end{equation}
+where $v \approx 246$~GeV is the Higgs vacuum expectation value and ${\bf C}^{U\mu}_{ij}$ and
+${\bf C}^{D\mu}_{ij}$ represent matrices of Wilson coefficients.
+%
+In Eq.~(\ref{eq:benchmark2}), $i,j=1,2,3$ indicate quark flavour indices, and we have chosen
+to focus on those operators that couple the quark fields exclusively to the second lepton family.
+
+The operators highlighted in Eq.~(\ref{eq:benchmark2}) have received a lot of attention recently in the context of the LHCb anomalies reported in
+rare $B$-meson decays~\cite{Aaij:2014ora, Aaij:2017vbb, Aaij:2019wad,Aaij:2021vac}. 
+%
+The reason is that the CKM-like flavour structure relates the $b \to s \mu^+ \mu^-$ decays to
+the neutral-current Drell-Yan process at the LHC $p\, p \to \mu^+ \mu^-$~\cite{Greljo:2017vvb}.
+%
+The explicit models which successfully describe the LHCb anomalies, based on the $U(2)$ flavour symmetry and dominant dynamics with the third generation fermions~\cite{Barbieri:2011ci,Kagan:2009bn,Fuentes-Martin:2019mun,Faroughy:2020ina}, predict that the  flavour channel dominating EFT effects in the Drell-Yan production is $b \,\bar b \to  \mu^+ \mu^-$ (see~\cite{Greljo:2021xmg} for an explicit model example).
+%
+The direct $b \bar{s}$ production channel is suppressed by $V_{ts}$ and is therefore irrelevant. If the observed deviations in $R(K^{(*)})$ are due to new physics, in this class of models we generically expect $|{\bf C}^{D\mu}_{3 3}| \gtrsim 0.001$.
+
+The ATLAS dimuon search reported in Ref.~\cite{ATLAS:2017wce} is
+recast in Ref.~\cite{Greljo:2017vvb} to set the limit on this
+scenario. 
+In particular, the reported 95\% confidence level interval is
+\begin{equation}
+  \label{eq:scen2}
+{\bf C}^{D\mu}_{33} \in \left[ -0.026, 0.021 \right]~\textrm{(ATLAS 13 TeV, 36.1 fb$^{-1}$~\cite{ATLAS:2017wce})}.
+\end{equation} 
+
+For this second benchmark scenario we will assume that, out of the operators listed in
+Eq.~(\ref{eq:benchmark2}), only a single  Wilson coefficient is allowed to be non-zero.
+%
+Specifically, we allow ${\bf C}^{D\mu}_{3 3} \neq 0$, while setting to zero all the
+coefficients of the other four-fermion operators.
+%
+This assumption implies that in this scenario the SMEFT Lagrangian is reduced to
+\begin{equation}
+  \label{eq:benchmark2simplified}
+\mathcal L_{\rm SMEFT} = \mathcal L_{\rm SM} + \frac{{\bf C}^{D\mu}_{33}}{v^2} (\bar d^3_L \gamma_\mu d^3_L) (\bar \mu_L \gamma^\mu \mu_L)~.
+\end{equation}
+In contrast to the previous benchmark, now the electron channel is SM-like.
+%
+This feature provides a useful handle to separate PDF and EFT effects in the Drell-Yan process,
+by using electron data to determine the former and muon data to constrain both.
+%
+Another difference with respect to the first benchmark
+is that here the leading new physics effects arise at the dimension-six squared level,
+since the interference of the operator in Eq.~(\ref{eq:benchmark2simplified}) with the SM is subleading \cite{Greljo:2017vvb}.
+(Dijet production is another prominent process relevant for flavour physics~\cite{Bordone:2021cca} that enters into PDF fits. A detail study of the interplay is left for future work.)
+
+To summarise, in this second benchmark scenario there is a single non-zero Wilson coefficient, ${\bf C}^{D\mu}_{33}$.
+%
+Therefore, the determination of the SMEFT PDFs from Drell-Yan data requires a simultaneous
+fit of the PDFs together with the ${\bf C}^{D\mu}_{33}$ parameter.
+%
+One should also note that this
+operator enters in the description of the DIS neutral-current structure functions via $\mu\,b $
+scattering, though this contribution is highly suppressed due to the smallness
+of the bottom PDFs and the low energy scale probed by DIS data.
+%hence this operator is 
+%not included in the DIS predictions in this work.
+
+
+% \subsection{Bounds from existing analyses}
+% \label{sec:bounds_previous_analyses}
+
+% Here we summarise the bounds on the $\hat{W}$ and $\hat{Y}$ parameters (Scenario I)
+% and on the ${\bf C}^{D\mu}_{33}$ coefficient (Scenario II) that have been
+% obtained from previous analyses that assume SM PDFs.
+% %
+% In Sect.~\ref{sec:res1} we will compare these bounds with our own analysis
+% based on the SMEFT PDFs.
+
+% \paragraph{Scenario I} The analysis in the Ref.~\cite{Farina:2016rws} reports the following 95\% confidence level intervals on $\hat{W}$ assuming $\hat{Y}=0$,
+% \begin{equation}
+% \begin{split}
+% \hat W &\in \left[ - 3, 15 \right]\times 10^{-4}~\textrm{(ATLAS 8 TeV, 20.3 fb$^{-1}$~\cite{Aad:2016zzw})}~,\\
+% \hat W &\in \left[ - 5, 22 \right]\times 10^{-4}~\textrm{(CMS 8 TeV, 19.7 fb$^{-1}$~\cite{CMS:2014jea})}~,
+% \end{split}
+% \end{equation} 
+% as well as, the 95\% confidence level intervals for $\hat{Y}$ assuming $\hat{W}=0$,
+% \begin{equation}
+% \begin{split}
+% \hat Y &\in \left[ - 4, 24 \right]\times 10^{-4}~\textrm{(ATLAS 8 TeV, 20.3 fb$^{-1}$~\cite{Aad:2016zzw})}~,\\
+% \hat Y &\in \left[ - 7, 41 \right]\times 10^{-4}~\textrm{(CMS 8 TeV, 19.7 fb$^{-1}$~\cite{CMS:2014jea})}~.
+% \end{split}
+% \end{equation} 
+
+% \paragraph{Scenario II}
+
+% The ATLAS dimuon search reported in Ref.~\cite{ATLAS:2017wce} is recast in Ref.~\cite{Greljo:2017vvb} to set the limit on this scenario. In particular, the reported 95\% confidence level interval is
+% \begin{equation}
+% {\bf C}^{D\mu}_{33} \in \left[ -0.026, 0.021 \right]~\textrm{(ATLAS 13 TeV, 36.1 fb$^{-1}$)}.
+% \end{equation} 
+
+
+
+
+
+\newpage
+\section{Experimental data, theory predictions, and fit settings}
+\label{sec:data}
+
+In Sect.~\ref{sec:dataset} we present the LHC experimental data  that will be used in the present analysis
+for the simultaneous determination of the PDFs and
+the EFT coefficients from high-mass Drell-Yan cross sections.
+%
+We then describe in Sect.~\ref{sec:theory} the corresponding theoretical calculations, both in the SM
+and in the two SMEFT benchmark scenarios described in Sect.~\ref{sec:scenarios}.
+%
+In Sect.~\ref{sec:fitsettings} we  discuss the settings of the baseline SM PDF fit and assess the
+specific impact of the Run I and Run II high-mass Drell-Yan data on PDFs.
+%
+Finally, in Sect.~\ref{eq:jointfits} we outline the fitting methodology adopted for
+the determination of the PDFs in the SMEFT, along with their
+simultaneous determination with the EFT Wilson coefficients.
+
+\subsection{Experimental data}
+\label{sec:dataset}
+
+The present analysis is based on the DIS and DY measurements which were part of
+the strangeness study of~\cite{Faura:2020oom}, which in turn was a variant of the
+NNPDF3.1 global PDF determination~\cite{Ball:2017nwa}, extended with additional high-mass
+DY cross sections.
+%
+The DIS structure functions include the same legacy HERA inclusive combination~\cite{Abramowicz:2015mha}
+used in the DIS-only joint fit of PDF and EFT effects of~\cite{Carrazza:2019sec}.
+
+No other datasets beyond DIS and DY are considered.
+In particular, the inclusive jet and top quark production
+measurements used in~\cite{Faura:2020oom} are excluded from the
+present analysis.
+%
+%, to guarantee the consistent
+%treatment of SMEFT corrections for all the processes used in the fit.
+The rationale behind this choice is the following.
+SMEFT at dimension-6 level introduces 2499 independent parameters,
+many of which contribute to the processes used to extract the parton
+distribution functions. The full PDF fit in the SMEFT (with the
+consistent power counting in the inverse powers of the new physics
+scale) is the ultimate future goal of this line of research. Before
+that, we are forced to make assumptions about the subset of operators
+and processes involved. The restricted choice of DIS and DY is
+motivated by the idea that other datasets, such as inclusive jet,
+could potentially receive corrections from other SMEFT operators,
+e.g. four-quark operators while being insensitive to the semi-leptonic
+operators. Including all datasets to effectively determine PDF, while
+considering one or two operators able to impact a subset of processes,
+would misrepresent the realistic case.
+
+%
+
+For the purposes of our study, the DY data can be classified into low-mass,
+on-shell, and high-mass datasets.
+%
+Table~\ref{tab:data-low-mass} summarises
+the low-mass and on-shell datasets, where in 
+each case we indicate the experiment, the centre-of-mass energy $\sqrt{s}$,
+the publication reference, the physical observable, and the number of data points.
+%
+The only difference as compared to~\cite{Faura:2020oom} is the removal of the $W\to e\nu$
+asymmetry measurements from D0~\cite{D0:2014kma}, which were found to be inconsistent
+with the rest of the Drell-Yan data.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input{DYdata_lowmass_onshell.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In Table~\ref{tab:data-high-mass} we provide the same
+information as in Table~\ref{tab:data-low-mass} but for the neutral-current high-mass Drell-Yan datasets.
+%
+  %
+In Table~\ref{tab:data-high-mass} we also indicate the final state,
+whether the distribution is 1D or 2D (thus differential only in the
+lepton invariant mass or differential in the lepton invariant mass and
+rapidity), the integrated luminosity $\mathcal{L}$,
+and the values of the dilepton invariant mass $m_{\ell\ell}$ for the most energetic bin.
+  %
+  We note that while the ATLAS and CMS measurements at $\sqrt{s}=7$ TeV~\cite{Aad:2013iua,Chatrchyan:2013tia}
+  were already part of the  strangeness study of~\cite{Faura:2020oom},
+  the corresponding 8 TeV and 13 TeV measurements from~\cite{Aad:2016zzw,CMS:2014jea,Sirunyan:2018owv}
+were not and are being considered for the first time in this analysis.
+%
+For those datasets where data are available in terms of both Born
+and dressed leptons, the ATLAS 7 TeV analysis being an example thereof, we use
+the Born data so that it is not necessary to supplement our fixed-order predictions with
+final-state QED radiation corrections. The CMS 13 TeV data on the
+other hand are only provided in terms of dressed leptons. 
+%
+In total, there are either 270 or 313 data points in this high-mass category, depending on whether the
+13 TeV CMS data are included in the combined channel or in the separate electron and muon channels.
+
+
+%{\bf MU: this is not true for CMS 13, right? Check!}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input{DYdata_highmass.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+From Table~\ref{tab:data-high-mass} one can observe that, with the exception of the CMS 13 TeV data,
+only one specific leptonic final state is available to be used in the fit.
+%
+For the CMS 13 TeV measurement instead, one can select between the combined channel or the individual
+electron and muon final states, which are statistically independent.
+%
+The separate use of the electron and muon channels is potentially beneficial when considering BSM effects that are
+not lepton-flavour universal.
+%
+For example, in
+benchmark scenario II described in Sect.~\ref{sec:scenarios},
+the theoretical predictions for the DY electron data would be those of the SM while
+those of the muon data should include EFT corrections.
+%
+On the other
+hand in the (flavour-universal) $\hat{W}$ and $\hat{Y}$ scenario,
+it is more convenient to include the data
+from the combined channel, which displays reduced systematic
+uncertainties. 
+
+
+\subsection{Theoretical predictions}
+\label{sec:theory}
+
+We now discuss the settings of the theoretical calculations, both in
+the SM and in the SMEFT. 
+%adopted to include the Drell-Yan cross sections presented in Sect.~\ref{sec:dataset} in the fit.
+Appendix~\ref{sec:benchmarking} contains further information regarding the computation and
+benchmarking of the SMEFT corrections for both the DIS structure
+functions, for which the effect in both scenarios is negligible, and
+the DY cross sections, for which the impact of SMEFT corrections is
+much more sizeable. 
+
+\paragraph{SM cross sections.}
+%
+The SM cross sections are computed at next-to-next-to-leading order
+(NNLO) in QCD and include next-to-leading order (NLO) EW corrections,
+the latter being especially significant in the high-mass region relevant for this study.
+In particular, the DIS reduced cross sections (combinations of structure functions)
+are evaluated at NNLO in the FONLL-C general-mass 
+variable flavour number scheme~\cite{Forte_2010} with {\tt APFEL}~\cite{Bertone_2014}
+interfaced to {\tt APFELgrid}~\cite{Bertone:2016lga}.
+ %
+The Drell-Yan differential distributions are computed using {\tt
+MCFM}~\cite{Campbell:2019dru} and \texttt{amc}~\cite{Frederix:2018nkq} interfaced to
+{\tt APPLgrid}~\cite{Carli:2010rw} and {\tt APFELgrid} to generate fast NLO
+interpolation tables which are then supplemented by bin-by-bin $K$-factors to
+account for the NNLO QCD and NLO EW corrections.
+These $K$-factors are defined as
+\begin{equation}
+ d\sigma_{pp}= \left(d\widehat\sigma_{ij}\big|_{\rm NLO\, QCD}\otimes {\cal L}^{\rm NNLO}_{ij}\right)\times K_{\rm QCD} \times   K_{\rm EW} \, ,
+\end{equation}
+where $\otimes$ represents the standard convolution product, $d\sigma_{pp}$ ($d\widehat\sigma_{ij}$) is the short-hand
+notation for the bin-by-bin hadronic cross section (partonic cross
+section for partons $i,j$) differential in $m_{\ell\ell}$ (in case of neutral-current (NC)
+Drell-Yan) or $m_T$ (in case of charged-current (CC) Drell-Yan) and the partonic luminosities ${\cal L}_{ ij}$ are
+defined as
+\begin{equation}
+\mathcal{L}_{ij}(\tau,m) = \int_{\tau}^1 \frac{d x}{x}~f_i (x,m) f_j (\tau/x,m) ~,
+\end{equation}
+where $m=m_{\ell\ell}$ in the NC case and $m=m_T$ in the CC case and
+are evaluated at NNLO. The QCD and EW $K$-factors are defined as
+\begin{align}
+  K_{\rm QCD}&= \left( {\cal L}_{
+             ij}^{\rm NNLO} \otimes d\widehat\sigma_{ij}\big|_{\rm NNLO\, QCD}\right)
+             \big/\left({\cal L}_{
+             ij}^{\rm NNLO} \otimes d\widehat\sigma_{ij}\big|_{\rm NLO\, QCD}\right) \, , \label{def:kqcd}\\
+K_{\rm EW}&= \left({\cal L}_{ ij}^{\rm NNLO}\otimes
+            d\widehat\sigma_{ij}\big|_{\rm NLO~QCD+EW}\right)
+            \big/ \left({\cal L}_{ ij}^{\rm NNLO} \otimes d\widehat\sigma_{ij}\big|_{\rm NLO\, QCD} \right) \, , \label{def:kew}
+\end{align}
+%
+The NNLO QCD $K$-factors have been computed using either {\tt
+  MATRIX}~\cite{Grazzini_2018} or {\tt FEWZ}~\cite{Li:2012wna}
+and cross-checked with the analytic computations of~\cite{Duhr:2020seh,Duhr:2020sdp}.
+%
+The NLO EW $K$-factors have been evaluated with \texttt{amc}~\cite{Frederix:2018nkq}.
+%
+Eq.~(\ref{def:kew}) accounts also for photon-initiated contributions
+(using the {\tt NNPDF3.1QED} PDF set~\cite{Bertone:2017bme})
+and final-state radiation effects, except when the latter
+has already been subtracted in the corresponding experimental analysis.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+  \centering
+%  \includegraphics[width=0.49\textwidth]{cms13_electron_thpred_w_pdf_errs.pdf}
+%\includegraphics[width=0.49\textwidth]{cms13_muon_thpred_w_pdf_errs.pdf}
+\caption{\small Comparison of the CMS Drell-Yan
+  13 TeV data with the corresponding theoretical calculations at different
+  perturbative orders as a function of the
+  dilepton invariant mass $m_{\ell\ell}$ in the dielectron (left)
+  and dimuon (right panel) final states.
+  %
+  The bottom panels display the ratio of the theory calculations
+  to the central value of the experimental data.
+  %
+  We display the sum in quadrature of the experimental uncertainties, and the error
+  band in the theory predictions correspond to the one-sigma PDF uncertainties.
+  \label{fig:dysm}}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Fig.~\ref{fig:dysm} displays a comparison between the CMS Drell-Yan distributions
+at 13 TeV and the corresponding theoretical predictions as a function of the
+dilepton invariant mass $m_{\ell\ell}$, separately for the dielectron
+and dimuon final states.
+  %
+The theory calculations are presented at NLO QCD, NNLO QCD, and NNLO QCD combined with
+NLO EW corrections, in all
+cases with {\tt NNPDF3.1QED\_nnlo\_as\_0118} as input PDF set, to illustrate the
+effect of the $K$-factors of Eq.~\eqref{def:kqcd} and
+\eqref{def:kew}.
+%
+The CMS data are provided
+in terms of dressed leptons, and hence final state radiation (FSR) QED effects must be included in the electroweak
+corrections.
+%
+Accounting for these effects is essential to improve the agreement
+between theory and data in the region below the $Z$-mass peak.
+%
+NLO electroweak corrections are also important in the high-energy tail in $m_{\ell\ell}$,
+where they are driven by the interplay between (negative) virtual EW effects
+and (positive) photon-initiated contributions.
+
+A quantitative assessment of the agreement between theoretical predictions and experimental 
+data for the high-mass DY datasets listed in Table~\ref{tab:data-high-mass}
+is presented in Table~\ref{tab:dysm}, which collects the  values of the $\chi^2$ per data point
+evaluated using the full information on correlated systematics
+provided by the experimental covariance
+matrix
+\begin{equation}
+  \label{eq:chi2}
+\chi^2=\frac{1}{n_{\rm dat}}\sum_{i,j=1}^{n_{\rm
+    dat}}(D_i-T_i)\,({\rm cov}^{-1})_{ij}\, (D_j-T_j),
+\end{equation}
+where $T_i$ are the theoretical predictions, $D_i$ the central value
+of the experimental data and where the multiplicative uncertainties in
+the experimental covariance matrix $({\rm cov}_{ij})$ are treated as explained in~\cite{Ball:2009qv,Ball:2012wy}.
+%
+One can observe how in general the NNLO QCD corrections are relatively
+small and that the NLO electroweak
+ones can be significant, especially for observables presented 
+in terms of dressed leptons (such as the CMS 13 TeV ones) and are required to achieve a good description of the Drell-Yan
+data in the whole kinematical range available.
+%
+Note that the input PDF sets used for these calculations include 
+only a subset of these Drell-Yan measurements, in particular only the 7 TeV measurements, 
+for which the data-theory agreement is comparable to the one observed in~\cite{Ball:2017nwa}.
+
+The data-theory agreement before including the 
+8 TeV and 13 TeV data in the PDF fit is generally good, once EW corrections 
+are included, with the exception of the CMS 13 TeV data in the 
+$e^+e^-$ channel, for which the $\chi^2$ per data point remains above 2.
+%
+As can be
+observed in Fig.~\ref{fig:dysm}, the dielectron invariant mass distribution
+in this channel presents dips at about
+500 GeV and 900 GeV which are not present in the $\mu^+\mu^-$ channel.
+%
+These dips are the origin of this worse data-theory agreement,
+which is partially reduced once the dataset is included in the fit
+(see Sect.~\ref{sec:fitsettings}). 
+We have verified that excluding this dataset from the fit does not 
+change the results of the analysis, and therefore decided to keep it.
+Further experimental analysis based on the full Runs II and III
+datasets will tell whether the dips in the distributions in the
+electron invariant mass will stay. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[t]
+  \renewcommand{\arraystretch}{1.40}
+  \small
+  \begin{center}
+\begin{tabular}{c c c| c c c}
+\toprule       
+\multirow{3}{*}{Dataset} & \multirow{3}{*}{Final state} &  \multirow{3}{*}{$n_{\rm dat}$}    &  \multicolumn{3}{c}{$\chi^2/n_{\rm dat}$}   \\
+      &  &      &  \multirow{2}{*}{NLO QCD}
+           & \multirow{2}{*}{NNLO QCD}
+& NNLO QCD \\
+&  &      &  
+           & 
+& + NLO EW\\
+\midrule
+ATLAS 7 TeV  & $e^+e^-$            & 13  & 1.45  & 1.77  & 1.73 \\
+ATLAS 8 TeV  & $\ell^+\ell^-$      & 46  & 1.67  & -     & 1.20 \\
+\midrule
+CMS 7 TeV    & $\mu^+\mu^-$        & 127 & 3.40  & 1.27  & 1.54 \\
+CMS 8 TeV    & $\ell^+\ell^-$      & 41  & 2.22  & 2.21  & 0.70 \\
+\midrule
+CMS  13 TeV  & $\ell^+\ell^-$      & 43  & 18.7  & 19.7  & 1.91 \\
+CMS  13 TeV  & $e^+e^-$            & 43  & 9.16  & 9.45  & 2.32 \\
+CMS 13 TeV   & $\mu^+\mu^+$        & 43  & 15.7  & 15.8  & 0.81 \\
+\bottomrule
+\end{tabular}
+\end{center}
+  \caption{\label{tab:dysm}\small The values of the $\chi^2$ per data point
+    evaluated for the  high-mass DY datasets listed in Table~\ref{tab:data-high-mass},
+    using theoretical predictions computed at different perturbative accuracy.
+    %
+    The PDF sets used here are {\tt NNPDF31\_nlo\_as\_0118}, {\tt
+    NNPDF31\_nnlo\_as\_0118} and {\tt NNPDF31\_nnlo\_as\_0118\_luxqed} for
+    the NLO QCD, NNLO QCD and NNLO QCD + NLO EW predictions respectively.
+    %
+    For CMS 13 TeV, where different final states are available, we indicate the
+    $\chi^2$ values for each of them.
+    %
+    For the ATLAS 8 TeV data, we only evaluated the combined
+    NNLO QCD + NLO EW correction, and hence the  pure NNLO QCD result is not given.
+  }
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{SMEFT cross sections.}
+%
+In this work, we augment the SM calculations of the high-$Q^2$ DIS
+reduced cross sections discussed in Ref.~\cite{Carrazza:2019sec} and
+the high-mass Drell-Yan cross sections listed in
+Table~\ref{tab:data-high-mass} with the effects of dimension-six SMEFT operators following the two benchmark scenarios presented
+in Sect.~\ref{sec:scenarios}.
+%
+These corrections are negligible for dilepton invariant masses of $m_{\ell\ell}\le 200$
+GeV and for DIS structure functions with $Q\le (120)$
+GeV, and hence there can safely adopt the SM calculations.
+%
+In a similar manner as for higher-order QCD and EW corrections, we can
+define correction factors that encapsulate  the linear and quadratic modifications induced
+by the dimension-six SMEFT operators.
+%
+Adopting an operator normalisation such that
+\begin{equation}
+\label{eq:lagrangian}
+\mathcal{L}_{\rm SMEFT} = \mathcal{L}_{\rm SM} + \sum_{n=1}^{n_{\rm op}} \frac{c_n}{v^2} \,\mathcal{O}_n \, ,
+\end{equation}
+with $n_{\rm op}$ indicating the number of operators that contribute to a given
+benchmark scenario and $c_n$ being the (dimensionless) Wilson coefficient associated to $\mathcal{O}_n$,
+the linear EFT corrections can be parametrised as
+%
+\begin{equation}
+  \label{eq:mult_k_fac_app1}
+   R_{\rm SMEFT}^{(n)} \equiv \displaystyle \left( {\cal L}_{ ij}^{\rm NNLO} \otimes d\widehat{\sigma}_{ij,{\rm SMEFT}}^{(n)}\right)
+ \big/ \left( {\cal L}_{ ij}^{\rm NNLO} \otimes d\widehat{\sigma}_{ij,{\rm SM}} \right) \, , \quad
+ n=1\,\ldots, n_{\rm op} \, ,
+\end{equation}
+%
+with ${\cal L}_{ ij}^{\rm NNLO}$ being the usual partonic luminosity evaluated at NNLO QCD, 
+$d\widehat{\sigma}_{ij,{\rm SM}}$
+the bin-by-bin partonic SM cross section, and $d\widehat{\sigma}_{ij,{\rm SMEFT}}^{(n)}$
+the corresponding partonic cross section associated to the interference between 
+$\mathcal{O}_n$ and the SM amplitude $\mathcal{A}_{\rm SM}$ when setting $c_n = 1$.
+%
+Likewise, the ratio encapsulating the quadratic effects is defined as
+%
+\begin{equation}
+  \label{eq:mult_k_fac_app2}
+  R_{\rm SMEFT}^{(n,m)} \equiv \displaystyle \left( {\cal L}_{ ij}^{\rm NNLO} \otimes d\widehat{\sigma}_{ij,{\rm SMEFT}}^{(n,m)}\right)
+  \big/ \left( {\cal L}_{ ij}^{\rm NNLO} \otimes d\widehat{\sigma}_{ij,{\rm SM}} \right) \, , \quad
+ n,m=1\,\ldots, n_{\rm op} \, ,
+\end{equation}
+with the bin-by-bin partonic cross section
+$d\widehat{\sigma}_{ij,{\rm SMEFT}}^{(n,m)}$ now being evaluated from the squared amplitude $\mathcal{A}_n\mathcal{A}_m$
+associated to the operators $\mathcal{O}_n$ and $\mathcal{O}_m$ when $c_n = c_m = 1$.
+%
+The partonic cross sections in these ratios are computed at LO.
+%
+In terms of  Eqns.~(\ref{eq:mult_k_fac_app1}) and~(\ref{eq:mult_k_fac_app2}), we can define the EFT $K$-factors as
+\begin{equation}
+ \label{eq:theory_k_fac}
+  K_{\rm EFT}= 1+\sum_{n=1}^{n_{\rm op}} c_n R_{\rm SMEFT}^{(n)}
+  +\sum_{n,m=1}^{n_{\rm op}} c_n c_m R_{\rm SMEFT}^{(n,m)} \, ,
+\end{equation}
+  which allow us to express a general Drell-Yan or DIS cross sections accounting for
+  the dimension-six operators in Eq.~(\ref{eq:lagrangian}) as
+\begin{equation}
+  \label{eq:theory_k_fac_app3}
+  d\sigma_{\rm SMEFT} = d\sigma_{\rm SM}
+  \times  K_{\rm EFT} \, 
+\end{equation}
+where the $ d\sigma_{\rm SM}$ is the state-of-the-art SM prediction
+including NNLO QCD and NLO EW corrections.
+%
+In this approach, the SMEFT predictions inherit factorisable higher-order radiative correction~\cite{Greljo:2017vvb,Ricci:2020xre}. 
+%
+%
+The SMEFT $K$-factors in Eq.~(\ref{eq:theory_k_fac}) are
+precomputed before the fit using a reference SM PDF set and then kept fixed.
+%
+The effect of varying the input NNLO PDF in
+Eqns.~(\ref{eq:mult_k_fac_app1}) and~(\ref{eq:mult_k_fac_app2})
+is quantitatively assessed in Appendix~\ref{sec:benchmarking} and it
+is found to be at the permil level in Scenario I and slightly more significant but
+still at most at the percent level in Scenario II.
+As a result, this effect will be neglected in the following.
+%
+Further details about the implementation and validation of these $K$-factors
+can be found in Appendix~\ref{sec:benchmarking}.
+
+Fig.~\ref{fig:dysmeft} illustrates the size of the EFT corrections in
+benchmark scenario I from Sect.~\ref{sec:scenarios} by comparing
+$(K_{\rm EFT}$$-$$1)$
+with the relative experimental
+  uncertainties  for the ATLAS 7 TeV, CMS 8 TeV,
+  and CMS 13 TeV Drell-Yan $m_{\ell\ell}$ distributions.
+  %
+  We provide results for two representative points in the $(\hat{W}$, $\hat{Y})$
+  parameter space, namely $(\hat{W}$, $\hat{Y})=(10^{-3},0)$ and $(0,10^{-3})$.
+    %
+  One can observe how for these values of $(\hat{W}$, $\hat{Y})$, 
+and particularly for the ATLAS 8 TeV data, the SMEFT corrections
+  to the Drell-Yan cross sections become comparable with the experimental uncertainties, 
+  increasing steadily with $m_{\ell\ell}$.
+  %
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t]
+\centering
+%\includegraphics[width=0.49\textwidth]{atlas_7tev_kfacs.pdf}
+%\includegraphics[width=0.49\textwidth]{cms_8tev_kfacs.pdf}\\
+%\includegraphics[width=0.49\textwidth]{cms_13tev_kfacs.pdf}
+\caption{\small Comparison between the (relative) experimental
+  uncertainties and the corresponding EFT corrections,
+$K_{\rm EFT}(\hat{W},\hat{Y})$$-$$1$ in Eq.~(\ref{eq:theory_k_fac}),
+  for the ATLAS 7 TeV, CMS 8 TeV,
+  and CMS 13 TeV Drell-Yan $m_{\ell\ell}$ distributions,
+  for two representative values of  $\hat{W}$ and $\hat{Y}$.
+  \label{fig:dysmeft}}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Baseline SM PDFs}
+\label{sec:fitsettings}
+
+We now describe the fit settings used to assemble the PDF set that
+represents the baseline SM PDFs in this work.
+%
+In other words,
+the results that we present in this section correspond to PDFs extracted from the experimental
+data using the SM theoretical predictions, and then in the next section we will asses how these
+PDFs are modified once EFT corrections to the DIS and DY cross
+sections are accounted for in the fit of the PDFs.
+
+The settings for this baseline SM PDF fit are the same as those used in the strangeness study
+of~\cite{Faura:2020oom}, itself a variant of NNPDF3.1~\cite{Ball:2017nwa}.
+%
+As described in Sect.~\ref{sec:dataset}, in this work we consider only DIS
+and Drell-Yan datasets, with the latter augmented as compared to~\cite{Faura:2020oom} with the new high-mass
+measurements indicated in Table~\ref{tab:data-high-mass}.
+%
+A detailed comparison between this baseline SM PDF 
+and the {\tt NNPDF3.1\_str} set from~\cite{Faura:2020oom} 
+is provided in Appendix~\ref{app:pdfs},
+while Table~\ref{tab:chi2-baseline} in App.~\ref{app:fit_quality} details the breakdown of the $\chi^2$
+for all the datasets that enter the fit.
+%
+In general, the fit quality of the baseline SM PDF set
+is similar to that of the global fit of~\cite{Faura:2020oom},
+although the description of the CMS 13 TeV 
+invariant mass distribution in the combined electron and muon 
+channels remains sub-optimal.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t]
+  \centering
+%  \includegraphics[width=0.32\textwidth]{HDMY_Bases0_PDFRanges_DistPDFs_plot_pdfs_g.pdf}
+%  \includegraphics[width=0.32\textwidth]{HDMY_Bases0_PDFRanges_DistPDFs_plot_pdfs_Sigma.pdf}
+%  \includegraphics[width=0.32\textwidth]{HDMY_Bases1_PDFRanges_DistPDFs_plot_pdfs_u.pdf}
+%  \includegraphics[width=0.32\textwidth]{HDMY_Bases1_PDFRanges_DistPDFs_plot_pdfs_baru.pdf}
+%  \includegraphics[width=0.32\textwidth]{HDMY_Bases1_PDFRanges_DistPDFs_plot_pdfs_d.pdf}
+%  \includegraphics[width=0.32\textwidth]{HDMY_Bases1_PDFRanges_DistPDFs_plot_pdfs_bard.pdf}
+%  \includegraphics[width=0.32\textwidth]{HDMY_Bases0_UncRanges_UncPDFs_plot_pdf_uncertainties_g.pdf}
+%  \includegraphics[width=0.32\textwidth]{HDMY_Bases0_UncRanges_UncPDFs_plot_pdf_uncertainties_Sigma.pdf}
+%  \includegraphics[width=0.32\textwidth]{HDMY_Bases1_UncRanges_UncPDFs_plot_pdf_uncertainties_u.pdf}
+%  \includegraphics[width=0.32\textwidth]{HDMY_Bases1_UncRanges_UncPDFs_plot_pdf_uncertainties_baru.pdf}
+%  \includegraphics[width=0.32\textwidth]{HDMY_Bases1_UncRanges_UncPDFs_plot_pdf_uncertainties_d.pdf}
+%  \includegraphics[width=0.32\textwidth]{HDMY_Bases1_UncRanges_UncPDFs_plot_pdf_uncertainties_bard.pdf}
+  \caption{\small \small Comparison between the baseline SM PDF set of this work, labelled ``DIS+DY'', with
+    the corresponding fit without high-mass DY data.
+  We show results at $Q=100$ GeV for PDFs normalised to the central value of the baseline (upper) and
+  for the relative PDF uncertainties (lower panels).
+  %
+  In the latter case, we also display the PDF uncertainties from the DIS-only fit.
+  \label{fig:pdfplot-impactHMDY}}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Fig.~\ref{fig:pdfplot-impactHMDY} displays a comparison
+between this baseline SM PDF set, labelled "DIS+DY'', with
+the same fit but without any datapoints from the high-mass DY datasets
+listed in Table~\ref{tab:data-high-mass}, labelled "DIS+DY (no HM)''.
+%
+ We show results at $Q=100$ GeV both for the PDFs normalised to the
+ central value of the baseline and for the relative PDF
+ uncertainties. In the latter case we also display the PDF uncertainties from a corresponding DIS-only fit.
+The latter comparison shows that the DY cross sections significantly reduce
+the PDF uncertainties of the DIS-only fit.
+%
+The addition of the high-mass DY data leads to a visible  
+uncertainty reduction in the $0.005 \lesssim x\lesssim  0.3$ region
+as compared to the "DIS+DY(noHM)'' reference as well an upwards shift
+of the up and down quarks and antiquark PDF.
+
+We therefore find that the available high-mass DY data can
+have an appreciable impact on the light quark and antiquark PDFs,
+despite the fact that in terms of Run II data our  analysis is restricted to a single low-luminosity 
+ high-mass DY dataset.
+%
+Yet more stringent constraints on the PDFs are expected from the measurements based
+on the full Runs II and III datasets,
+as well as from those to be provided by the HL-LHC~\cite{Khalek:2018mdn}.
+%
+We study the anticipated impact of the HL-LHC measurements in
+Sect.~\ref{sec:hllhc}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Methodology for the simultaneous PDF and EFT fits}
+\label{eq:jointfits}
+
+Let us denote by ${\mathbf{c}}=(c_1,c_2,\ldots,c_{N_{\rm op}})$ the array containing
+the Wilson coefficients associated to the $N_{\rm op}$ dimension-six
+operators contributing to a given SMEFT scenario, where $c_n$ are
+defined as in Eq.~\eqref{eq:lagrangian}. 
+  %
+For each point ${\mathbf{c}_i}$ in the scan of the EFT parameter space, we evaluate
+the Drell-Yan and the DIS cross sections as described in Sect.~\ref{sec:theory}.
+%
+Subsequently, we determine the best-fit
+PDFs associated to ${\mathbf{c}_i}$ by means of the standard NNPDF methodology, which
+determines the minimum of the $\chi^2$ in the space of the PDF
+parameters (subject to cross-validation, to avoid overlearning).
+%
+We note that this $\chi^2$, defined in
+Eq.~\eqref{eq:chi2}, keeps fully into account the experimental
+systematic correlations among all the
+measurements $D_i$ included in the PDF analysis. 
+
+This procedure results in a sampling of the $\chi^2$ values
+in the EFT parameter space, which we denote by $\chi_{\rm eftp}^2({\mathbf{c}_i})$
+(as in: EFT-PDFs).
+%
+Alternatively, one could also evaluate the same DIS and DY cross sections using instead
+the baseline SM PDF set, ending up with  $\chi^2$ values which we denote by $\chi_{\rm smp}^2({\mathbf{c}_i})$
+(as in: SM-PDFs).
+%
+The comparison between the resulting bounds on the EFT coefficients
+obtained  from 
+$\chi_{\rm eftp}^2({\mathbf{c}_i})$
+and from $\chi_{\rm smp}^2({\mathbf{c}_i})$ quantifies the relevance of
+producing consistent joint determinations of PDFs and Wilson coefficients
+when studying EFTs in high-energy tails.
+%
+This strategy follows the one adopted in our proof-of-concept DIS-only
+study~\cite{Carrazza:2019sec}, now extended to LHC processes.
+
+Close enough to a local minimum $\chi_0^2=\chi^2\left( \mathbf{c}^{(0)}\right)$ associated with best-fit values $\mathbf{c}^{(0)}$,
+the $\chi^2$ as a function of the EFT coefficients can be approximated by a quadratic form
+\begin{equation}
+\label{functional-form}
+\chi_i^2 \equiv \chi^2(\mathbf{c}_i) = \chi_0^2 +
+\sum_{n,m=1}^{N_{\rm op}}\left( c_{n,i} - c^{(0)}_n\right)  H_{nm} 
+    \left( c_{m,i} - c^{(0)}_m\right)\, ,
+\end{equation}
+with $H_{nm}$ being the usual Hessian matrix in the EFT parameter space.
+%
+Restricting the EFT calculations to their linear, $\mathcal{O}\left( \Lambda^{-2}\right)$, contributions, Eq.~(\ref{functional-form})
+becomes exact
+in the case of $\chi_{\rm smp}^2({\mathbf{c}_i})$ (where cross sections are
+evaluated with SM PDFs).
+%
+The reason is that in this case
+all dependence on the EFT coefficients is encoded in the partonic cross sections.
+
+However, this is not true for $\chi_{\rm eftp}^2({\mathbf{c}_i})$, since now there will be a (non-linear) EFT back-reaction
+onto the PDFs and hence Eq.~(\ref{functional-form}) is only valid up
+to higher orders in the EFT expansion, even if the EFT cross sections themselves are evaluated in the linear
+approximation.
+%
+Eq.~(\ref{functional-form}) can thus be only considered a reasonable approximation in the case that the SMEFT PDFs are not
+too different from their SM counterparts.
+
+Hence, if we work with linear EFT calculations,
+provided the sampling in the EFT parameter space is sufficiently broad and fine-grained,
+and that the EFT-induced distortion on the PDFs is moderate,
+we can extract the parameters $\chi^2_0$ and
+${\mathbf{c}}^{(0)}$ and the Hessian matrix $H$ using least-squares regression from Eq.~(\ref{functional-form}),
+using $\chi^2_{\rm smp}$ for the SM PDFs and  $\chi^2_{\rm eftp}$ for the SMEFT PDFs.
+% 
+The associated confidence level contours are determined by imposing
+\begin{align}
+  \label{eq:deltachi2def}
+  \Delta\chi^2({\mathbf c}) \equiv \chi_i^2({\mathbf c})
+  - \chi_0^2  = \sum_{n,m=1}^{N_{\rm op}}\left( c_{n} - c^{(0)}_n\right)  H_{nm} 
+    \left( c_{m} - c^{(0)}_m\right) =\text{constant}\, ,
+\end{align}
+where this constant depends on the number of degrees of freedom.
+%
+For linear EFT two-parameter fits, such as those for
+benchmark scenario I in the context of HL-LHC projections, 
+imposing Eq.~(\ref{eq:deltachi2def}) leads to elliptic
+contours in the $( \hat{W},\hat{Y})$ plane.
+
+In the case of fits to $\chi^2$ profiles obtained from EFT calculations which include both linear, $\mathcal{O}\left(
+\Lambda^{-2}\right)$, and quadratic, $\mathcal{O}\left(\Lambda^{-4}\right)$, contributions,
+such as those arising in benchmark scenario II, rather than
+working in the Hessian approximation 
+we instead carry out a (one-dimensional) quartic fit of the form
+\begin{equation}
+\label{eq:quarticfit}
+ \chi^2\left( c\right) = \sum_{k=0}^{k_{\rm max}=4} a_k \left( c\right)^k
+ \end{equation}
+ with the $\chi^2$ values being $\chi^2_{\rm smp}$~($\chi^2_{\rm eftp}$) for the SM (SMEFT) PDFs,
+ and then determine confidence level intervals by imposing $\Delta\chi^2( c) = \chi_i^2( c)- \chi_0^2
+ =\text{constant}$.
+ %
+ We determine this constant
+numerically by finding the likelihood contour,  $\mathcal{L} \propto \exp(-\chi^{2}/2)$, containing
+95\% of the total probability (for the 95\% CL intervals).
+
+To conclude this section, we give details on how we account for PDF
+uncertainties and the statistical uncertainty associated to the finite
+replica sample of the NNPDF Monte Carlo sets that we use here.
+
+\paragraph{PDF uncertainty.} In
+Sects.~\ref{sec:results_scenarioI},~\ref{sec:scenarioIIresults}
+and~\ref{sec:hllhc_joint_fits} we
+will present bounds on the EFT parameters  using the SM PDFs
+with and without the PDF uncertainties being accounted for.
+%
+In order to estimate these, we follow the procedure detailed above to
+determine the confidence level intervals for the EFT parameters but now
+using the $k$th Monte Carlo replica of the PDF set, rather than the central replica $k=0$
+as done when PDF uncertainties are neglected.
+%
+One ends up with  $N_{\rm rep}$ values of
+the upper and lower bounds:
+\begin{equation}
+\left[{\mathbf c}^{(k)}_{\rm min},{\mathbf c}^{(k)}_{\rm max}\right] \, ,\qquad k=1,\ldots,N_{\rm rep} \, ,
+\end{equation}
+and then the outermost bounds in the \(68\%\) envelope are considered to be the bounds
+on the EFT parameters ${\mathbf c}$, now including the 1$\sigma$-PDF uncertainty.
+%
+This is very important to account for, given that in the case of the
+bounds determined using $\chi^2_{\rm eftp}$, the PDF
+uncertainty is already included by
+construction, given that the Wilson coefficients are determined from the
+global set of PDFs, exactly as in the case of the $\alpha_s$
+determination from a global set of PDFs of
+\cite{Lionetti:2011pw,Ball:2011us}. A more sophisticated way to
+extract parameters such as $\alpha_s$ of the Wilson coefficients from
+a global fit of PDFs, that includes the correlations between these parameters
+and the PDFs, is given by the correlated replica method proposed in the more recent $\alpha_s$ determination in
+\cite{Ball:2018iqk}. The latter would allow better accounting of the correlations
+between Wilson coefficients and PDFs. However we do not use it here due to the fact that these correlations of the
+PDFs with the Wilson coefficients are much smaller than those with the strong
+coupling constant and due to its large computational cost. We endeavour to address this issue in future work.
+
+\paragraph{Methodological uncertainty.} In a simultaneous fit of PDFs and EFT coefficients,
+for each set of Wilson coefficients \(\mathbf{c}_i\)
+one has a PDF fit composed of \(N_\text{rep}\) Monte Carlo replicas.
+%
+The major methodological uncertainty is associated to  finite-\(N_\text{rep}\) effects
+can be estimated by bootstrapping across the replicas, as explained in the $\alpha_s(m_Z)$
+extraction of~\cite{Ball:2018iqk}.
+%
+Specifically, for each value of \(\mathbf{c}_i\)
+we perform \(N_\text{res}\) re-samples of all \(N_\text{rep}\) replicas with replacement, and compute the theory predictions:
+\begin{equation}
+  \mathbf{T}^{\text{(res)}}_{i,lk} \, ,\quad
+  \begin{matrix}
+    l = 1,\dots,N_\text{res} \\
+    k = 1,\dots,N_\text{rep}
+  \end{matrix} \, ,
+\end{equation}
+such that there are \(N_\text{res}\) re-samples each composed of an \(N_\text{rep}\)-sized array
+of theory predictions.
+%
+Since this re-sampling is done with replacement,
+it differs from the original sample in that it contains  duplicates and missing values.
+%
+The average theory prediction is then obtained for each of these bootstrapped sets:
+\begin{equation}
+  \overline{\mathbf{T}}_{i,l} = \left<\mathbf{T}^\text{(res)}_{i,lk}\right>_\text{rep}\, ,
+  \quad l = 1,\dots,N_{\text{res}} \, .
+\end{equation}
+These bootstrapped  theory predictions $\overline{\mathbf{T}}_{i,l}$ are used to evaluate the $\chi^2$ to data,
+with the finite-size uncertainty given by the standard deviation across each bootstrap re-sample:
+\begin{equation}
+  \label{eq:finitesizechi2}
+  \sigma_{\chi^2_i} = \text{std}\left(\chi^2_{i,l}\right)\Big|_\text{res}\, .
+\end{equation}
+A value of $N_\text{res}\simeq 10^4$ re-samples is found to be sufficient to achieve stable results
+for the estimate of the finite-size uncertainties defined by Eq.~(\ref{eq:finitesizechi2}).
 
 
 
@@ -3728,6 +4848,167 @@ There are two possible outcomes of such a fit. The contamination of the PDFs may
 Throughout this thesis, particularly in Chapters ... and ..., the Monte-Carlo replica method has played an important role. However, it was ...
 
 
+\section{A closer look at the Monte-Carlo replica method}
+\label{sec:careful_mc}
+Given an observed value of the data $\vec{d}$, we construct pseudodata $\vec{d}_p$ by sampling from the distribution:
+\begin{equation}
+\vec{d}_p \sim \mathcal{N}(\vec{d}, \Sigma).
+\end{equation}
+We then construct the best-fit theory parameters $\vec{c}_p(\vec{d}_p)$ via:
+\begin{equation}
+\vec{c}_p(\vec{d}_p) = \argmin_{\vec{c}}\ (\vec{d}_p - \vec{t}(\vec{c}))^T \Sigma^{-1} (\vec{d}_p - \vec{t}(\vec{c})) .
+\end{equation}
+As above, this function is possibly multi-valued; assume that it is only \textit{discretely} multi-valued (i.e. we do not have flat directions), and let $\vec{c}_p^{(i)}$ for $i=1,...,N_{\text{branch}}$ denote the branches of the function. The probability density function of $\vec{c}_p(\vec{d}_p)$ is then given by:
+\begin{equation}
+f_{\vec{c}_p(\vec{d}_p)}(\vec{c}) = \int\limits_{\mathbb{R}^{N_{\text{dat}}}} d^{N_{\text{dat}}}\vec{d}_p\ \left( \sum_{i=1}^{N_{\text{branch}}(\vec{d}_p)}\delta\left(\vec{c} - \vec{c}_p^{(i)}(\vec{d}_p) \right)\right) \exp\left( -\frac{1}{2} (\vec{d}_p - \vec{d})^T \Sigma^{-1} (\vec{d}_p - \vec{d}) \right).
+\end{equation}
+For now, let us assume that $N_{\text{branch}} = 1$ for simplicity, and then generalise later. We have shown in the note that $\vec{c}_p(\vec{d}_p)$ necessarily satisfies the implicit equation:
+\begin{equation*}
+0 = \frac{\partial \vec{t}^T}{\partial c_i} (\vec{c}_p(\vec{d}_p)) \Sigma^{-1} \left( \vec{d}_p - \vec{t}(\vec{c}_p(\vec{d}_p)) \right).
+\end{equation*}
+For convenience, let us define the Jacobian matrix $\partial \vec{t} / \partial \vec{c}$ via:
+\begin{equation*}
+\left(\frac{\partial \vec{t}}{\partial \vec{c}}\right)_{ij} = \frac{\partial t_i}{\partial c_j},
+\end{equation*}
+so that $\partial \vec{t} / \partial \vec{c}$ is an $N_{\text{dat}} \times N_{\text{op}}$ matrix. The implicit equation defining $\vec{c}_p(\vec{d}_p)$ can then be rewritten as the matrix condition:
+\begin{equation}
+\vec{0} = \left(\frac{\partial \vec{t}}{\partial \vec{c}}\right)^T(\vec{c}_p(\vec{d}_p)) \Sigma^{-1} \left( \vec{d}_p - \vec{t}(\vec{c}_p(\vec{d}_p)) \right).
+\end{equation}
+Suppose that we are given a fixed value of the parameters $\vec{c}$, and we wish to determine the posterior distribution function $f_{\vec{c}_p(\vec{d}_p)}(\vec{c})$ at this point. We can centre the pseudodata on the corresponding theory point by making the change of variables:
+\begin{equation}
+\vec{d}_p = \vec{t}(\vec{c}) + \vec{w},
+\end{equation}
+which is always valid and has Jacobian matrix given by the identity. The posterior distribution then becomes:
+\begin{equation}
+f_{\vec{c}_p(\vec{d}_p)}(\vec{c}) = \int\limits_{\mathbb{R}^{N_{\text{dat}}}} d^{N_{\text{dat}}}\vec{w}\ \delta\left(\vec{c} - \vec{c}_p(\vec{t}(\vec{c}) + \vec{w}) \right) \exp\left( -\frac{1}{2} (\vec{t}(\vec{c}) + \vec{w} - \vec{d})^T \Sigma^{-1} (\vec{t}(\vec{c}) + \vec{w} - \vec{d}) \right),
+\end{equation}
+which simplifies to:
+\begin{align}
+& \exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T\Sigma^{-1} (\vec{d} - \vec{t}(\vec{c})) \right)\notag\\[1.5ex]
+& \cdot \int\limits_{\mathbb{R}^{N_{\text{dat}}}} d^{N_{\text{dat}}}\vec{w}\ \delta\left(\vec{c} - \vec{c}_p(\vec{t}(\vec{c}) + \vec{w}) \right) \exp\left( -\frac{1}{2} \vec{w}^T \Sigma^{-1} \vec{w} + \vec{w}^T \Sigma^{-1} (\vec{d} - \vec{t}(\vec{c})) \right)
+\end{align}
+The delta function condition is satisfied only if:
+\begin{equation}
+\left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T (\vec{c}) \Sigma^{-1} \vec{w} = 0 \qquad \Leftrightarrow \qquad \vec{w} \in \textrm{Ker}\left( \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \right).
+\end{equation}
+However, this is not \textit{sufficient} for the delta function to be satisfied (the condition may lead to a maximum rather than a minimum of the $\chi^2$-statistic). Nevertheless, this is all we have to go on. Let's make a change of variables that will allow us to eliminate the delta function. Let $M(\vec{c})$ be a matrix whose columns form a basis of:
+\begin{equation}
+\textrm{Ker}\left( \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \right),
+\end{equation}
+and let $M'(\vec{c})$ be a matrix whose columns form a basis of the orthogonal space:
+\begin{equation}
+\textrm{Ker}\left( \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \right)_{\perp}.
+\end{equation}
+Then the matrix $(M|M')$ is invertible. Define a change of variables:
+\begin{equation}
+\vec{w} = (M|M') \begin{pmatrix} \vec{v}_{\perp} \\ \vec{v}_{\parallel} \end{pmatrix} = M\vec{v}_{\perp} + M'\vec{v}_{\parallel}.
+\end{equation}
+Taking the derivative we have $|\det(\partial \vec{w} / \partial (\vec{v}_{\perp}, \vec{v}_{\parallel}))| = |\det(M|M')|$. Thus overall we have:
+\begin{align}
+& |\det(M|M')|\exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T\Sigma^{-1} (\vec{d} - \vec{t}(\vec{c})) \right) \int d\vec{v}_{\perp} \int d\vec{v}_{\parallel}\ \delta\left(\vec{c} - \vec{c}_p\left(\vec{t}(\vec{c}) + M\vec{v}_{\perp} + M'\vec{v}_{\parallel}\right) \right)\notag\\[1.5ex]
+& \cdot \exp\left( -\frac{1}{2} (M\vec{v}_{\perp} + M' \vec{v}_{\parallel})^T \Sigma^{-1} (M\vec{v}_{\perp} + M' \vec{v}_{\parallel}) + (M\vec{v}_{\perp} + M' \vec{v}_{\parallel})^T \Sigma^{-1} (\vec{d} - \vec{t}(\vec{c})) \right).
+\end{align}
+The delta function condition is satisfied only if $M'\vec{v}_{\parallel} = \vec{0}$, so we can apply this directly to the exponential, reducing the posterior distribution to:
+\begin{align}
+&|\det(M|M')| \exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T\Sigma^{-1} (\vec{d} - \vec{t}(\vec{c})) \right) \int d\vec{v}_{\perp} \int d\vec{v}_{\parallel}\ \delta\left(\vec{c} - \vec{c}_p\left(\vec{t}(\vec{c}) + M\vec{v}_{\perp} + M'\vec{v}_{\parallel}\right) \right)\notag\\[1.5ex]
+& \cdot \exp\left( -\frac{1}{2} \vec{v}_{\perp}^T M^T \Sigma^{-1}M \vec{v}_{\perp} + \vec{v}_{\perp}^T M^T \Sigma^{-1} (\vec{d} - \vec{t}(\vec{c})) \right).
+\end{align}
+Completing the square in the exponential, the posterior can be rewritten as:
+\begin{align}
+& |\det(M|M')|\exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T \left( \Sigma^{-1} - \Sigma^{-1} M (M^T\Sigma^{-1}M)^{-1} M^T \Sigma^{-1}\right) (\vec{d} - \vec{t}(\vec{c})) \right) \notag\\[1.5ex]
+& \cdot \int d\vec{v}_{\perp} \int d\vec{v}_{\parallel}\ \delta\left(\vec{c} - \vec{c}_p\left(\vec{t}(\vec{c}) + M\vec{v}_{\perp} + M'\vec{v}_{\parallel}\right) \right)\notag\\[1.5ex]
+& \cdot \exp\left( -\frac{1}{2} \left(\vec{v}_{\perp} - (M^T \Sigma^{-1}M)^{-1} M^T \Sigma^{-1} (\vec{d} - \vec{t}(\vec{c}))\right)^T M^T \Sigma^{-1}M \left(\vec{v}_{\perp} - (M^T \Sigma^{-1}M)^{-1} M^T \Sigma^{-1} (\vec{d} - \vec{t}(\vec{c}))\right) \right).
+\end{align}
+We can simplify lots of the $M$ expressions similarly to the other derivation. Introducing the Cholesky decomposition $\Sigma = AA^T$ of the covariance matrix, where $A$ is an invertible matrix, we have that $\Sigma^{-1} = A^{-T} A^{-1}$ and hence:
+\begin{equation}
+\Sigma^{-1} M (M^T \Sigma^{-1} M)^{-1} M^T \Sigma^{-1} = A^{-T} \left[ (A^{-1}M) ((A^{-1}M)^T(A^{-1}M))^{-1} (A^{-1}M)^T \right] A^{-1}.
+\end{equation}
+Now the matrix $\left[ (A^{-1}M) ((A^{-1}M)^T(A^{-1}M))^{-1} (A^{-1}M)^T \right]$ is the projector onto the subspace spanned by the columns of $A^{-1}M$. Recalling the definition of $M$, we have that the columns of:
+\begin{equation}
+A^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}}
+\end{equation}
+span the subspace orthogonal to the subspace spanned by the columns of $A^{-1} M$. It follows that the orthogonal projector $I - (A^{-1}M) ((A^{-1}M)^T(A^{-1}M))^{-1} (A^{-1}M)^T$ is given by:
+\begin{equation}
+\left(A^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \right) \left( \left(A^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}}\right)^T \left( A^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \right) \right)^{-1} \left( A^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T.
+\end{equation}
+Simplifying, this can be reduced to:
+\begin{equation}
+A^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \left( \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}}  \right)^{-1} \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T A^{-T}.
+\end{equation}
+Hence we have established:
+\begin{equation}
+\Sigma^{-1} - \Sigma^{-1} M (M^T\Sigma^{-1}M)^{-1} M^T \Sigma^{-1} = \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \left( \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}}  \right)^{-1} \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1}.
+\end{equation}
+As in the other derivation, let us define:
+ the \textit{tangent inverse covariance matrix} by:
+\begin{equation}
+\Sigma^{-1}_t(\vec{c}) := \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \left( \left(\frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \right)^{-1} \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1},
+\end{equation}
+(though note that it is not typically invertible, so care with the notation!) and the \textit{orthogonal inverse covariance matrix} by:
+\begin{equation}
+\Sigma^{-1}_o(\vec{c}) := \Sigma^{-1} - \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \left( \left(\frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \right)^{-1} \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1}.
+\end{equation}
+Then we can simplify the posterior distribution to:
+\begin{align}
+& |\det(M|M')|\exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T\Sigma_t^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c})) \right) \int d\vec{v}_{\perp} \int d\vec{v}_{\parallel}\ \delta\left(\vec{c} - \vec{c}_p\left(\vec{t}(\vec{c}) + M\vec{v}_{\perp} + M'\vec{v}_{\parallel}\right) \right)\notag\\[1.5ex]
+& \cdot \exp\left( -\frac{1}{2} \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right)^T \Sigma \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right) \right).
+\end{align}
+Depending on the dimension of the space $\textrm{Ker}((\partial \vec{t} / \partial \vec{c})^T \Sigma^{-1})$, there are different sizes of the vector $\vec{v}_{\parallel}$. If $\dim(\textrm{Ker}((\partial \vec{t} / \partial \vec{c})^T \Sigma^{-1})) = N_{\text{dat}} - N_{\text{op}}$, then $\vec{v}_{\parallel}$ has size $N_{\text{op}}$ so can absorb all the delta functions. In particular, we should be able to evaluate:
+\begin{equation}
+\int d\vec{v}_{\parallel}\ \delta\left(\vec{c} - \vec{c}_p\left(\vec{t}(\vec{c}) + M\vec{v}_{\perp} + M'\vec{v}_{\parallel}\right) \right).
+\end{equation}
+To do so, consider making the change of variables $\vec{c}' = \vec{c}_p(\vec{t}(\vec{c}) + M\vec{v}_{\perp} + M'\vec{v}_{\parallel})$ in the integral. This implies that $\vec{c}'$ is the minimum of the $\chi^2$-statistic on the pseudodata $\vec{t}(\vec{c}) + M\vec{v}_{\perp} + M'\vec{v}_{\parallel}$, and hence $\vec{c}'$ is defined by the implicit equation:
+\begin{equation}
+\left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T (\vec{c}') \Sigma^{-1} \left( \vec{t}(\vec{c}) + M\vec{v}_{\perp} + M'\vec{v}_{\parallel} - \vec{t}(\vec{c}') \right) = \vec{0}.
+\end{equation}
+Recalling the definition of $M$, we can rewrite this in the form:
+\begin{equation}
+\left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T (\vec{c}') \Sigma^{-1} M' \vec{v}_{\parallel} = \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T (\vec{c}') \Sigma^{-1} \left( \vec{t}(\vec{c}) - \vec{t}(\vec{c}') \right).
+\end{equation}
+The matrix $\left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T (\vec{c}') \Sigma^{-1} M'$ is an $N_{\text{op}} \times N_{\text{op}}$ matrix, so stands a chance of being invertible. \JM{Should really justify this.} Assuming this is the case, we can rewrite this equation as:
+\begin{equation}
+\vec{v}_{\parallel} = \left( \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T (\vec{c}') \Sigma^{-1} M' \right)^{-1} \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T (\vec{c}') \Sigma^{-1} \left( \vec{t}(\vec{c}) - \vec{t}(\vec{c}') \right).
+\end{equation}
+Now writing the identity in the form:
+\begin{equation}
+I = M(M^TM)^{-1} M^T + M'({M'}^T M')^{-1} {M'}^T,
+\end{equation}
+using the two projectors on the relevant subspaces, we can rewrite the right hand side as:
+\begin{equation}
+\vec{v}_{\parallel} = ({M'}^T M')^{-1} {M'}^T(\vec{t}(\vec{c}) - \vec{t}(\vec{c}')).
+\end{equation}
+This reveals that the Jacobian of the transformation, evaluated at $\vec{c}' = \vec{c}$, is:
+\begin{equation}
+\det\left( \frac{\partial \vec{v}_{\parallel}}{\partial \vec{c}'}\right) = \det\left( ({M'}^T M')^{-1} {M'}^T \frac{\partial \vec{t}}{\partial \vec{c}} \right).
+\end{equation}
+Hence the posterior distribution reduces to:
+\begin{align}
+& |\det(M|M')| \left| \det\left( ({M'}^T M')^{-1} {M'}^T \frac{\partial \vec{t}}{\partial \vec{c}} \right) \right| \exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T\Sigma_t^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c})) \right) \int d\vec{v}_{\perp} \notag\\[1.5ex]
+& \cdot \exp\left( -\frac{1}{2} \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right)^T \Sigma \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right) \right).
+\end{align}
+\JM{In fact, we can perform a similar trick without this assumption, but the algebra is a little more complicated.} Assuming we choose $(M | M')$ to have orthonormal columns, then we can further reduce this expression to:
+\begin{align}
+& \left| \det\left({M'}^T \frac{\partial \vec{t}}{\partial \vec{c}} \right) \right| \exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T\Sigma_t^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c})) \right) \int d\vec{v}_{\perp} \notag\\[1.5ex]
+& \cdot \exp\left( -\frac{1}{2} \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right)^T \Sigma \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right) \right).
+\end{align}
+To make this match the previous derivation, note that:
+\begin{equation}
+\begin{pmatrix} M^T \\ {M'}^T \end{pmatrix} \begin{pmatrix} M & \frac{\partial \vec{t}}{\partial \vec{c}} \end{pmatrix} = \begin{pmatrix} M^TM & M^T \frac{\partial \vec{t}}{\partial \vec{c}} \\ 0 & {M'}^T \frac{\partial \vec{t}}{\partial \vec{c}} \end{pmatrix}.
+\end{equation}
+So taking determinants we see that:
+\begin{equation}
+\det\left( {M'}^T \frac{\partial \vec{t}}{\partial \vec{c}}\right) = \det\begin{pmatrix} M^T \\ {M'}^T \end{pmatrix}\det\begin{pmatrix} M & \frac{\partial \vec{t}}{\partial \vec{c}} \end{pmatrix} = \det\left( \frac{\partial \vec{t}}{\partial \vec{c}} \bigg| M \right).
+\end{equation}
+Hence the posterior can be rewritten in the final form:
+\begin{align}
+& \left|\det\left( \frac{\partial \vec{t}}{\partial \vec{c}} \bigg| M \right) \right| \exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T\Sigma_t^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c})) \right)  \notag\\[1.5ex]
+& \cdot \int d\vec{v}_{\perp} \exp\left( -\frac{1}{2} \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right)^T \Sigma \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right) \right).
+\end{align}
+The other condition that the delta function should have enforced is a valid range of $\vec{v}_{\perp}$. The integration range here is only over $\vec{v}_{\perp}$ such that the pseudodata $\vec{t}(\vec{c}) + M\vec{v}_{\perp}$ leads to $\vec{c}$ as a minimum of the $\chi^2$-statistic.
+
+This \textit{can} now be evaluated numerically, though is likely to be extremely inefficient.
+
+\JM{Where does the $M$ derivative dependence disappear to in this derivation? Are both derivations correct and should match up? Or is there a mistake in one?}
 
 
 
