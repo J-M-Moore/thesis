@@ -107,6 +107,16 @@
 \setlength{\thickarrayrulewidth}{3\arrayrulewidth}
 
 \newcommand{\JM}[1]{{\bf\color{cyan}JM: #1}}
+\newcommand*{\tmp}[4]{\ensuremath{%
+    {#4%
+    \ifx\empty#3\empty\ifx\empty#1\empty\else^{#1}\fi\else^{#1(#3)}\fi%
+    \ifx\empty#2\empty\else_{#2}\fi}%
+}}
+\newcommand*{\ccc}[4][]{\tmp{#2}{#3}{#4}{#1{c}}}
+\newcommand{\sss}{\scriptscriptstyle}
+\newcommand{\OO}{\ensuremath{\mathcal{O}}}
+\newcommand{\Op}[1]{\OO_{\sss #1}}
+\def\lra#1{\overset{\text{\scriptsize$\leftrightarrow$}}{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Thesis meta-information
@@ -157,13 +167,13 @@
 %\collegeshield{CollegeShields/FitzwilliamRed}
 
 %% Submission date [optional]:
-% \submissiondate{November, 2042}
+ \submissiondate{July, 2023}
 
 %% You can redefine the submission notice [optional]:
 % \submissionnotice{A badass thesis submitted on time for the Degree of PhD}
 
 %% Declaration date:
-\date{June, 2023}
+\date{July, 2023}
 
 %% PDF meta-info:
 \subjectline{Applied Mathematics and Theoretical Physics}
@@ -176,6 +186,16 @@
 %%
 \abstract{%
   Parton distributions are a key ingredient of precise predictions for collider experiments. They are usually determined from fits to experimental data under the assumption that the Standard Model of particle physics is complete. 
+  
+  This thesis is based on four published works in this direction, together with work for an upcoming publication. In summary, Chapter 2 is based on Ref.~\cite{McCullough:2022hzr}. This work was produced in collaboration with Maria Ubiali and Matthew McCullough. The work contained in the project is my own, except for 
+  
+  Chapter 3 is based on my first paper, Ref.~\cite{greljo_parton_2021}, for which my main contribution was the production and benchmarking of the SMEFT theory predictions for the DIS sector. I ran a small number of fits for this project, benchmarked the SMEFT $K$-factors for the charged current DY using an analytic calculation, and...
+  
+  Chapter 4 is based on my third paper, Ref.~\cite{Kassabov:2023hbm}. For this project, I implemented all of the new top datasets, and produced their associated Standard Model predictions at NLO in QCD, with corresponding NNLO $K$-factors. I ran all of the Standard Model PDF fits presented in Chapter... and . I worked significantly on the fitting methodology presented in ..., implementing the functionality for fitting quadratic cross-terms, computing matched $\chi^2$-predictions, and . I worked extensively on the Appendices of the paper, producing...
+  
+  Chapter 5 is based on my fourth paper, Ref. . For this project, I wrote the code which facilitates the production of all of the contaminated PDF fits, which forms an extension of the NNPDF closure test methodology. I additionally wrote the analysis code which produces the bounds shown in Fig... and 
+  
+  Chapter 6 is based on an upcoming publication, worked on together with Maeve Madigan and Luca Mantani. The calculation presented therein is my own original work.
 }
 
 
@@ -214,7 +234,7 @@
 %
 %To Manda, the HEP group secretary, who is always a pleasure to talk to.\\
 %
-%Thanks also to Philip for the lovely, if brief, time we spent together; it was a high point of my PhD years. You will always mean a lot to me.\\
+%A special thanks to Philip for the lovely, if brief, time we spent together; it was a high point of my PhD years. You will always mean a lot to me.\\
 %
 %Thanks to Will and Elena for your company, it's always a pleasure seeing you both. And Elena, thank you for the beautiful chocolate birthday cake you made me for my 26th birthday; it was such a wonderfully kind gesture.\\
 %
@@ -1125,34 +1145,109 @@ In the second part of this text, \textit{Future considerations for fitting parto
 
 \epigraph{Stars, everywhere. So many stars that I could not for the life me understand how the sky could contain them all yet be so black.}{\textit{\\ from Blindsight, \\ by Peter Watts}}
 
-In Section~\ref{sec:globalfits}, it was argued that when performing a fit of parameters in a BSM theory using data which involves initial-state hadrons, one should consider the impact of simultaneously extracting both PDFs and the parameters of the BSM model. In this chapter, we discuss how this issue might be handled in the context of a toy dark matter model, where the New Physics is \textit{light} and \textit{weakly-coupled}.
+\noindent \textit{[This chapter is based on Ref.~\cite{McCullough:2022hzr}, produced in collaboration with Matthew McCullough and Maria Ubiali. The original idea for the study was Matthew's. The results were produced by myself. Section~\ref{sec:existingconstraints} was written by Matthew, but is included for context; the remaining sections were written collaboratively.]}\\
 
-We begin in Section~\ref{sec:darkphoton} with a brief review of dark matter, and introduce the toy dark matter model which shall be used in the rest of this chapter. In Section~\ref{sec:dark_pdfs}, we describe how PDF evolution is modified in the presence of our proposed dark matter candidate. In Section~\ref{sec:dark_pheno}, we place projected bounds on the mass and coupling of our dark matter candidate by considering the quality of the data-theory agreement on projected high-mass Drell-Yan data. In Section~\ref{sec:dark_future}, we discuss how this work might be improved and extended in the future.
+\noindent In Section~\ref{sec:globalfits}, it was argued that when performing a fit of parameters in a BSM theory using data which involves initial-state hadrons, one should consider the impact of simultaneously extracting both PDFs and the parameters of the BSM model. In this chapter, we discuss how this issue might be handled in the context of a `toy' dark matter model, where the New Physics is \textit{light} and \textit{weakly-coupled}.
+
+We begin in Section~\ref{sec:darkphoton} with a brief review of dark matter and dark photons, and introduce the `toy' dark matter model which shall be used in the rest of this chapter. In Section~\ref{sec:dark_pdfs}, we describe how PDF evolution is modified in the presence of our proposed dark matter candidate. In Section~\ref{sec:dark_pheno}, we place projected bounds on the mass and coupling of our dark matter candidate by considering the quality of the data-theory agreement on projected high-mass Drell-Yan data. In Section~\ref{sec:dark_future}, we discuss how this work might be improved and extended in the future.
 
 
-\section{A dark photon model}
+\section{Dark matter and dark photons}
 \label{sec:darkphoton}
 
-\textit{Dark matter} is the name given to an unknown form of matter, hypothesised as a result of collection of astronomical observations in the mid $20$th century. In more detail, ...
+\textit{Dark matter} is the name given to an unknown form of matter, hypothesised as a result of a collection of astronomical observations in the mid $20$th century. Some of the first evidence for its existence came from the study of \textit{galactic rotation curves}, which describe the average angular velocity of stars in a galaxy as a function of their distance from the galactic centres. Observational evidence suggests these distributions are flat as we approach the edge of the galaxy; this contradicts the na\"{i}ve theoretical prediction, based on assuming the mass of the galaxy entirely results from the stars comprising it, which produces an exponential decay of the profile at the edge of the galaxy (see e.g. Fig. 1 of Ref.~\cite{1972ApJ}). Astronomers concluded the existence of additional `dark' matter in galaxies to explain the unexpected results. Subsequently, evidence for dark matter was supported by cosmological observations. For example, in Ref.~\cite{Peebles1982LargescaleBT}, it was shown that a universe dominated by baryonic matter alone would result in fluctuations of the Cosmic Microwave Background (CMB) which are not observed in the data; this can be explained by the introduction of an unseen form of weakly-interacting matter, identified once again with dark matter.
 
-In particle physics, we can make progress towards understanding dark matter by hypothesising non-gravitational interactions between dark matter and the known SM particles. Proposed dark matter candidates could then be revealed either by \textit{direct detection} at collider experiments, or via \textit{indirect detection}... 
+In particle physics, we can make progress towards understanding dark matter by hypothesising (non-gravitational) interactions between dark matter and the known SM particles. Proposed dark matter candidates could then be revealed either by \textit{direct detection}, through its production at collider experiments, or via \textit{indirect detection}, by comparing precise theoretical predictions in the SM and dark matter models with equally precise experimental data, and determining which of the two scenarios provides a better explanation of the current data. In this chapter, we shall focus exclusively on indirect detection, which is becoming an increasingly attractive avenue as we enter the high-luminosity phase of the Large Hadron Collider's (HL-LHC) operation; this phase will result in a significant reduction in experimental uncertainties.
 
-The avenue of indirect detection is interesting 
+\paragraph{Dark photons.} The majority of the visible sector cosmological energy budget is comprised of hadrons,
+yet it is rendered visible by the photon, which itself makes up only a tiny fraction of the energy
+budget and does not behave as matter.  It is not unreasonable to expect that the moment the curtains
+to the dark sector are drawn back it will be rays of `dark light' that flood detectors and not necessarily
+the dominant matter component itself. Thus, the most effective strategy to unveil the particle physics of
+the dark sector \textit{might} be to search for new light states carrying a vanishingly small fraction of the dark
+energy budget; perhaps, even, \textit{dark photons} (hereafter referred to as `$B$').  In recent years, searches
+for dark photons have gained momentum, both theoretically and experimentally; see, for example, the recent reviews \cite{Battaglieri:2017aum,Fabbrichesi:2020wbt,Graham:2021ggy}, which paint a picture of the breadth of activities in this area.
 
-The little we know about the nature of dark matter dictates the...
+Being Abelian vectors, dark photons can naturally be light, thus no specific mass scale is particularly
+deserving of attention than another.  As a result experimental search strategies should endeavour to
+cover as broad a mass range as possible.  Below $m_B \lesssim 1$ GeV a variety of intensity frontier
+experiments have significant sensitivity to the presence of dark photons, however above this mass
+scale only high energy accelerators have the capability to probe dark photon parameters.
 
+Pursuing this program, \cite{Kribs:2020vyk,Thomas:2021lub,Yan:2022npz} use deep
+inelastic scattering (DIS) data from HERA, and projected data at the upcoming
+Electron-Ion Collider (EIC) and Large Hadron Electron Collider (LHeC), to derive bounds on a particular class of dark photon models, in which the dark photon is introduced via kinetic mixing with the
+SM electroweak bosons. In these studies, the dark photon is treated as a mediator of DIS,
+hence modifying the theoretical expressions for the DIS structure functions, which allows
+for the extraction of bounds.
+Further, as we noted in Sect.~\ref{sec:globalfits} generally, and is also noted in~\cite{Thomas:2021lub}, a fully-consistent treatment using this approach requires a simultaneous fit of both parton 
+distribution functions (PDFs) and dark photon parameters;
+here, the interplay is a mild second-order effect, yielding a small relaxation of the constraints derived in~\cite{Kribs:2020vyk} (however, as we shall see in Chapter~\ref{chap:smeftdy}, at the reach and precision of the high-luminosity phase of the Large Hadron Collider, simultaneous 
+analysis of PDFs and BSM effects will be significantly more impactful). \\
 
-\paragraph{A toy dark photon.} In this chapter, we consider a `toy' dark matter model which extends the SM Lagrangian via the interaction term:
+\noindent What if a dark photon was baryonic, being primarily coupled to quarks over leptons? In this case, PDF effects take centre-stage, and 
+it becomes reasonable to consider the dark photon not simply as a mediator of DIS, but as a \textit{constituent} of the proton in its own right. 
+
+This is not without precedent; whilst the vast majority of New Physics (NP) searches at the LHC
+involve processes initiated by coloured partons, namely
+quarks and gluons, it is well-known that quantum fluctuations can give rise to non-coloured
+partons inside hadrons, although with much smaller abundance. A key example is the inclusion 
+of photons and leptons as constituents of the proton, which can play a
+crucial role in achieving precise phenomenological
+predictions at the LHC. In the recent {\tt LUXqed} publication it was shown that the photon PDF can
+be determined in a model-independent manner, using DIS structure
+function data~\cite{Manohar:2016nzj,Manohar:2017eqh}. These results brought an extremely accurate
+determination of the photon PDF, that superseded the previous model-driven or purely data-driven analyses~\cite{Martin:2005,Ball:2013}; now, the {\tt LUXqed} method has been incorporated in several global PDF sets~\cite{Bertone:2017bme,Cridge:2021pxm,Guzzi:2021rvo}.
+Going beyond just photon PDFs, the {\tt LUXqed} approach has since been extended to the computation
+of $W$ and $Z$ boson PDFs~\cite{Fornal:2018znf}, and lepton PDFs~\cite{Buonocore:2020nai}.
+Whilst the impact of the photon PDFs is sizeable in a number of
+kinematic regions, the impact of lepton PDFs is rather small at Run III. However
+lepton-initiated processes will become an important feature in the near future, 
+in particular in the HL-LHC phase, which  
+will provide the largest proportion of new high-energy particle physics data in the next 20 years~\cite{Buonocore:2020erb,Greljo:2020tgv,Buonocore:2021bsf,Harland-Lang:2021zvr}.
+
+In this spirit, we might reasonably ask whether the proton could contain small contributions from a dark photon, the consideration of which
+could be important in the near future. In this work, we assess the impact of the inclusion in the proton
+of a new, light baryonic dark photon $B$ with mass in the 
+range $m_B \in [2,80]\ \text{GeV}$,\footnote{The mass range considered here is due to strong constraints from low-energy probes for $m_B < 2\text{ GeV}$, and because we wish to treat the theory as \textit{effective}, remaining agnostic to the UV completion - in the region $m_B > 80\text{ GeV}$ kinetic mixing effects with the $Z$-boson begin to become important in dark photon models; see Sect.~\ref{sec:existingconstraints} for further explanation.} coupling primarily to quarks via
+the effective interaction Lagrangian:
+%
 \begin{equation}
-\label{eq:dm_lagrangian}
-\mathcal{L}_{\text{DM}} = \frac{1}{3}g_B \overline{q} \slashed{B} q.
+\label{eq:darkphotoninteraction}
+\mathcal{L}_{\text{int}} = \frac{1}{3}g_B\sum_{q} \bar{q} \slashed{B} q,
 \end{equation}
-It was shown in the review paper ... that there
+where the dark fine structure constant is of the order $\alpha_B \sim 10^{-3}$.
+The dark photon's parton distribution enters into the PDF evolution equations 
+in the same way as the photon PDF, except for a flavour-universal
+coupling and a non-zero mass threshold. 
+The other PDFs, particularly the quarks and antiquarks, are modified by the presence of a dark photon,
+especially in the large-$x$ region; this gives rise to significantly
+different predictions for key observables that can be measured at a
+very high degree of precision at the LHC. In Sect.~\ref{sec:dark_pheno}, we focus on the
+high invariant-mass Drell-Yan (DY) differential distributions, whose
+theoretical description is significantly affected by the distortion of
+the quark and antiquark PDFs due to the presence of a non-zero dark
+parton density.
+
+For the first time in the literature, we demonstrate the strong
+sensitivity to this dark photon's mass and coupling
+of the precise measurements of the high-mass Drell-Yan tails at the HL-LHC, by looking at the
+data-theory agreement using the standard PDFs and the PDFs modified by the presence of a non-zero
+dark photon distribution.
+Whilst the sensitivity of collider measurements to BSM colored
+partons in the proton has been shown to be very
+strong~\cite{Berger:2004mj,Berger:2010rj} -- as one would expect given that light coloured
+particles very rapidly distort both the DGLAP evolution and the
+running of $\alpha_S$~\cite{Becciolini:2014lya} --
+in this chapter, we show that in the near future we will still be able to competitively probe the presence of a dark parton that couples to
+quarks via a much more subtle QED-like mixing.
+
+%%%%
 
 
-\paragraph{The dark photon PDF.} Our proposed dark matter candidate is leptophobic, primarily coupling to quarks over leptons. In particular, it will be generated in the proton via quark splitting, and hence (depending on the size of the coupling) could be considered an important contribution to proton structure, similar to the SM photon itself, when QED corrections to proton structure are considered. In this chapter, we take this possibility seriously, by introducing a \textit{dark photon PDF}, and adding it to the normal collection of PDF flavours which are considered. 
-
-Whilst we will not fit the resulting dark photon PDF (the way in which it is introduced is through dynamic generation through DGLAP evolution, the same method by which the photon PDF was first introduced - see Sect.~\ref{sec:dark_pdfs} below for further detail), we will eventually consider a collection of PDF sets which have been generated under the assumption 
+%\paragraph{The dark photon PDF.} Our proposed dark matter candidate is leptophobic, primarily coupling to quarks over leptons. In particular, it will be generated in the proton via quark splitting, and hence (depending on the size of the coupling) could be considered an important contribution to proton structure, similar to the SM photon itself, when QED corrections to proton structure are considered. In this chapter, we take this possibility seriously, by introducing a \textit{dark photon PDF}, and adding it to the normal collection of PDF flavours which are considered. 
+%
+%Whilst we will not fit the resulting dark photon PDF (the way in which it is introduced is through dynamic generation through DGLAP evolution, the same method by which the photon and lepton PDFs were first introduced - see Sect.~\ref{sec:dark_pdfs} below for further detail), we will eventually consider a collection of PDF sets which have been generated under the assumption that a dark photon (of varying masses and coupling strengths) exists in Nature. This allows us to derive the sensitivity of observables at the HL-LHC as probes of our dark photon; this study is presented in Sect.~\ref{sec:dark_pheno}.
 
 \section{Parton distributions in the dark photon model}
 \label{sec:dark_pdfs}
@@ -1193,7 +1288,7 @@ required by the presence of dark photons in the proton.
 We then display and discuss the resulting `dark PDF sets',
 and compare them to baseline PDF sets excluding the dark photon.
 In particular, we analyse the dark luminosities, which show an appreciable deviation
-from their standard counterparts for sufficiently large values of the coupling $\alpha_B$;
+from their SM counterparts for sufficiently large values of the coupling $\alpha_B$;
 this motivates the phenomenological study that we present in Sec.~\ref{sec:dark_pheno}.
 
 
@@ -1203,7 +1298,7 @@ this motivates the phenomenological study that we present in Sec.~\ref{sec:dark_
 %For any given parton flavour $i$, the parton density $f_i(x,\mu^2)$ is a function of two variables: $x$, the momentum fraction, and $\mu^2$, the \textit{factorisation scale}, usually chosen to be about the hard energy scale of the process. The  %latter is introduced to parametrise the absorption of infrared collinear divergences into the PDFs, analogous to the absorption of ultraviolet divergences in standard perturbative renormalisation. Importantly, the 
 %parton densities obey a Callan-Symanzik equation in the variable $\mu^2$, the DGLAP equation. 
 
-As we alluded to in Sec.~\ref{sec:pdfproperties}, in order to combine  QCD and electroweak
+As alluded to in Sec.~\ref{sec:pdfproperties}, in order to combine  QCD and electroweak
 calculations at hadron colliders,
 the PDF evolution must be determined using the coupled QCD and QED
 DGLAP
@@ -1241,8 +1336,8 @@ With the orders and flavours specified, the modified DGLAP equations which we us
 \mu_F^2 \frac{\partial B}{\partial \mu_F^2} &= \sum_{j=1}^{n_f} P_{Bq_j} \otimes q_j +\sum_{j=1}^{n_f} P_{B\bar{q}_j} \otimes \bar{q}_j + P_{BB}\otimes B,\notag
 \end{align}
 %
-where $\mu^2$ is the factorisation scale, $n_f$ the number of active
-flavours, $q_i$ ($\overline{q}_i$) the parton density of the $i$th (anti)quark, $g$ the gluon PDF, $\gamma$ the photon PDF, and
+where $\mu_F^2$ is the factorisation scale, $n_f$ the number of active
+flavours, $q_i$ ($\overline{q}_i$) the parton density of the $i$th (anti)quark,\footnote{We now ease notation; in general, instead of writing $f_q$ for the PDF as we did in the introduction, we simply write it as $q$.} $g$ the gluon PDF, $\gamma$ the photon PDF, and
 $B$ the new dark photon PDF.
 
 As described in Sec.~\ref{sec:pdfproperties}, the splitting functions are perturbatively calculable order by order in QCD and QED perturbation theory, hence we can decompose the splitting functions into series of the form:
@@ -1312,7 +1407,7 @@ finding the most collinearly-divergent parts of the four dark
 splitting channels pictured in Fig.~\ref{fig:splittingfunctions}. The only non-zero contributions are given by $ij=qq, qB, Bq$ and $BB$ (the results are the same for antiquarks).
 A summary of the calculation is given in App. A of Ref.~\cite{McCullough:2022hzr}; 
 however, a detailed calculation is not strictly necessary, since the form
-of the interaction Lagrangian Eq.~(\ref{eq:dm_lagrangian}) is identical
+of the interaction Lagrangian Eq.~(\ref{eq:darkphotoninteraction}) is identical
 to that of the electromagnetic-hadronic interaction in the SM,
 except with a universal coupling $\frac{1}{3}g_B$ to all quarks and antiquarks.
 It follows that the splitting function contributions provided by the
@@ -1341,7 +1436,7 @@ P_{qB}^{(0,0,1)}(x) &= \frac{1}{9} P_{q\gamma}^{(0,1,0)}(x) = \frac{x^2 + (1-x)^
 \label{sec:pdf_sets_with_dark_photons}
 
 We have implemented the modified DGLAP equations described in~Sec. \ref{subsec:dglap} in the
-public APFEL PDF evolution code~\cite{Bertone:2013vaa}, which is an accurate and flexible that can be used to perform PDF evolution up to NNLO
+public APFEL PDF evolution code~\cite{Bertone:2013vaa}, which is an accurate and flexible code that can be used to perform PDF evolution up to NNLO
 in QCD and NLO in QED, using a variety of heavy flavour schemes.
 The evolution is performed in $x$-space,\footnote{Rather than Mellin $N$-space, which is an alternative obtained by taking the Mellin transform of the DGLAP equations.} and uses a rotated 
 basis of PDFs such that a maximal number of PDF flavour combinations
@@ -1377,9 +1472,9 @@ splitting.
 An appropriate initial condition in this case would be given by:
 \begin{equation}
 \label{eq:lowmassansatz}
-B(x,Q_0^2) = \frac{\alpha_B}{2\pi} \log\left( \frac{Q_0^2}{m_B^2} \right) \sum_{j=1}^{n_f} (P_{Bq_j} \otimes (q_j(x,Q_0^2)+ \bar{q}_j(x,Q_0^2)),.
+B(x,Q_0^2) = \frac{\alpha_B}{2\pi} \log\left( \frac{Q_0^2}{m_B^2} \right) \sum_{j=1}^{n_f} \left(P_{Bq_j} \otimes q_j(x,Q_0^2)+ P_{B\overline{q}_j} \otimes \bar{q}_j(x,Q_0^2) \right).
 \end{equation}
-On the other hand, we shall shortly describe that the region of interest in our case is $m_B \in [2,80]$ GeV;
+On the other hand, our region of interest is $m_B \in [2,80]$ GeV;
 in this region, we always have $m_B >
 2$ GeV. Thus in our case, we always have $m_B > Q_0$; that is, the mass threshold is always greater than
 the initial scale. As a result, we set $B(x,Q^2) = 0$ for all $Q < m_B$ and we generate the dark photon PDF dynamically at the threshold $Q = m_B$ from PDF evolution, similar to the treatment of heavy quarks~\cite{Maltoni:2012pa,Bertone:2017djs}, and the tau PDF in~\cite{Bertone:2015lqa}. 
@@ -1577,9 +1672,9 @@ bounds derived in the literature.
 To appreciate the utility of the dark photon PDF at colliders, we may compare to alternative probes.  Recent works considering this class of baryonic dark photon models include \cite{Dobrescu:2014fca,Dror:2017ehi,Ismail:2017fgq,Dror:2018wfl,Ilten:2018crw,Dobrescu:2021vak}.  There are a variety of competing constraints on this scenario, of varying theoretical robustness.
 
 One class of constraints, first considered in detail in
-\cite{Dobrescu:2014fca}, is theoretical and concerns the mixed $\text{U}(1)_B-$EW anomalies.  Suppose we envisage that the UV-completion of the model Eq.~\eqref{eq:value} is perturbative with $\text{U}(1)_B$ linearly realised.  In that case, the mixed anomaly must be UV-completed by some fermions with electroweak charges.  Early studies of the classes of fermions that can achieve this include \cite{Duerr:2013dza,FileviezPerez:2014lnj}.\footnote{Note also that the required fermions could serve as potential dark matter candidates, as discussed in \cite{FileviezPerez:2019jju,Perez:2020jyg,Perez:2021rbo}.}   In this perturbative UV-completion they will obtain their mass from spontaneous $\text{U}(1)_B$-breaking.  As a result, they will be coupled to the longitudinal mode of $B$ and an additional Higgs-like scalar with a Yukawa coupling $\lambda \propto M_F/v_B$, where $M_F$ is the fermion mass, $v_B$ is the $\text{U}(1)_B$-breaking expectation value, and we have assumed three sets of fermions with the same charge ($1/3$) as the left-handed fermions, for simplicity.  On the other hand we have $g_B  \propto M_B/v_B$ following from the charge and symmetry-breaking vacuum expectation value.  As a result, we expect:
+\cite{Dobrescu:2014fca}, is theoretical and concerns the mixed $\text{U}(1)_B-$EW anomalies.  Suppose we envisage that the UV-completion of the model Eq.~\eqref{eq:darkphotoninteraction} is perturbative with $\text{U}(1)_B$ linearly realised.  In that case, the mixed anomaly must be UV-completed by some fermions with electroweak charges.  Early studies of the classes of fermions that can achieve this include \cite{Duerr:2013dza,FileviezPerez:2014lnj}.\footnote{Note also that the required fermions could serve as potential dark matter candidates, as discussed in \cite{FileviezPerez:2019jju,Perez:2020jyg,Perez:2021rbo}.}   In this perturbative UV-completion they will obtain their mass from spontaneous $\text{U}(1)_B$-breaking.  As a result, they will be coupled to the longitudinal mode of $B$ and an additional Higgs-like scalar with a Yukawa coupling $\lambda \propto M_F/v_B$, where $M_F$ is the fermion mass, $v_B$ is the $\text{U}(1)_B$-breaking expectation value, and we have assumed three sets of fermions with the same charge ($1/3$) as the left-handed fermions, for simplicity.  On the other hand we have $g_B  \propto M_B/v_B$ following from the charge and symmetry-breaking vacuum expectation value.  As a result, we expect:
 \begin{equation}
-g_B \approx \frac{2 \lambda}{3} \frac{M_B}{M_F} ~~,
+g_B \approx \frac{2 \lambda}{3} \frac{M_B}{M_F},
 \end{equation}
 where the precise numerical factors are taken from \cite{Dobrescu:2014fca}.  Thus, requiring perturbativity $\lambda \lesssim 4 \pi$ implies an upper bound on $g_B$, where the factor $1/3$ follows from the fact that each family of fermions is in triplicate to mirror the QCD multiplicity of the SM quarks.  This limit is shown as a dashed line in Fig.~\ref{fig:limits} where we have taken $M_F\geq 90$ GeV for the electroweak-charged fermions. 
 
@@ -1642,12 +1737,12 @@ on the dominant partonic channels.
 %including also the dark photon. %{\color{red} Text here very similar to lepton PDF paper.}
 Parton luminosities are doubly differential quantities defined as:
 \begin{equation}
-\frac{d{\cal L}_{ij}}{dyd\tau}=f_i(x_1,Q)f_j(x_2,Q)\qquad x_{1,2}=\sqrt{\tau}\exp(\pm
+\frac{d{\cal L}_{ij}}{dyd\tau}=f_i(x_1,Q^2)f_j(x_2,Q^2)\qquad x_{1,2}=\sqrt{\tau}\exp(\pm
 y)\qquad \tau=\frac{M_X^2}{S},
 \end{equation}
 where $S$ is the squared centre-of-mass energy of the hadronic collision, $M_X$ is the invariant mass
 of the partonic final state, $y$ is the rapidity of the partonic final state, and 
-$f_i(x,Q)$ is the PDF of the $i$th parton evaluated at the
+$f_i(x,Q^2)$ is the PDF of the $i$th parton evaluated at the
 scale $Q$. Different choices for $Q$ can be adopted in order to improve predictions
 of a particular process and/or distribution.
 At the level of pure luminosities, without the convolution with
@@ -1657,7 +1752,7 @@ $M_X$-differential luminosities, given by:
 \begin{equation}
   \label{eq:lumidef}
 \Phi_{ij}(M_X) \,=\,\frac{d{\cal L}_{ij}}{dM_X^2}=\frac{1}{S}\,\int\limits_{M_X^2/S}^1
-\frac{dx}{x}\ f_i(x,M_X)f_j\left(\frac{M_X^2}{xS},M_X\right).
+\frac{dx}{x}\ f_i(x,M_X^2)f_j\left(\frac{M_X^2}{xS},M_X^2\right).
 \end{equation}
 
 %
@@ -1980,7 +2075,13 @@ We observe that the projected HL-LHC sensitivity to the detection of a dark phot
 \section{Future directions}
 \label{sec:dark_future}
 
-We have made several approximations in this chapter which should be lifted in future work.
+There are several approximations made in this chapter which should be lifted in future work, and there are various directions that future studies could pursue based on the method presented here.
+
+First, we note that our projected sensitivity is based on the phenomenological tools that we currently have available; we will be able to make more robust statements with the advent of the HL-LHC. Most importantly new global PDF sets will be made available, which will possibly be accurate to N$^3$LO in QCD, to be used consistently with N$^3$LO computations of the matrix elements. Moreover the associated PDF uncertainty will most certainly include a missing higher order uncertainty component in the PDF uncertainty that is not currently included in any of the global NNLO PDF fits.
+
+Further, the treatment of the dark photon itself could naturally be improved. Here, we make a coarse leading order approximation, based on conjecturing a form for the dark photon PDF and computing the impact of such a PDF on the evolution of the other flavours. Naturally, a more robust analysis would perform a \textit{fit} of a PDF set including dark photon contributions; the expectation would be to treat the dark photon using the \texttt{LUXqed} method in the same manner as the photon. There are some technical barriers to such an analysis, but these could be investigated in future works.
+
+Finally, it would be interesting to ask whether similar analyses could be performed for other BSM particles. A particularly interesting candidate is an \textit{axion}, which depending on the model, might couple to gluons and hence have a significant impact on the evolution of the gluon PDF. This could effect interesting processes like top-pair production, extending works such as the recent Ref.~\cite{Esser:2023fdo}. 
 
 
  
@@ -1990,9 +2091,11 @@ We have made several approximations in this chapter which should be lifted in fu
 \chapter{Parton distributions in the SMEFT from high-energy Drell-Yan tails}
 \label{chap:smeftdy}
 
-In Chapter~\ref{chap:darkphoton}, we focussed on simultaneous extraction of PDFs and BSM parameters in the case of a dark photon model, where the only BSM particle was \textit{light}. Whilst this model was motivated by the desire to provide a possible dark matter candidate, it is only one of plethora of models which we could have investigated. This suggests the need for a more general framework in which to search for BSM physics.
+\noindent \textit{[This chapter is based on Ref.~\cite{greljo_parton_2021}, produced in collaboration with ... , and on Ref.~\cite{}, produced in collaboration with Maeve Madigan. My main contributions to the work~\cite{greljo_parton_2021} comprised: the calculation and production of SMEFT $K$-factors for all of the DIS processes entering the study, accurate to next-to-leading order in QCD; benchmarking of the charged current DY $K$-factors against an analytic calculation; running some of the fits and analysis, especially in the follow-up study presented in Ref.~\cite{}.]}\\
 
-In the case of \textit{heavy} New Physics, this can be facilitated through the language of \textit{effective field theories} (EFTs). In this chapter, we shall introduce the idea of treating the Standard Model within the effective field theory approach, in Section~\ref{sec:eft_intro}. We shall subsequently present a study wherein we simultaneously extract PDFs and two couplings drawn from the Standard Model EFT, using both DIS and DY data; we shall find that the interplay between PDFs and the Standard Model EFT is mild with the current data, but when we move to using projected HL-LHC data (just as in Section~\ref{subsec:dark_constraints}), the interplay becomes significant. This study motivates a more comprehensive extraction of PDFs alongside Standard Model EFT couplings in the top sector, which we present in Chapter~\ref{chap:top}.
+\noindent In Chapter~\ref{chap:darkphoton}, we focussed on simultaneous extraction of PDFs and BSM parameters in the case of a dark photon model, where the only BSM particle was \textit{light}. Whilst this model was motivated by the desire to provide a possible dark matter candidate, it is only one of plethora of models which we could have investigated. This suggests the need for a more general framework in which to search for BSM physics.
+
+In the case of \textit{heavy} New Physics, this can be facilitated through the language of \textit{effective field theories} (EFTs). In this chapter, we shall introduce the idea of treating the Standard Model within the effective field theory approach. We shall subsequently present a study wherein we simultaneously extract PDFs and two couplings drawn from the Standard Model EFT, using both DIS and DY data; we shall find that the interplay between PDFs and the Standard Model EFT is mild with the current data, but when we move to using projected HL-LHC data (just as in Section~\ref{subsec:dark_constraints}), the interplay becomes significant. This study motivates a more comprehensive extraction of PDFs alongside Standard Model EFT couplings in the top sector, which we present in Chapter~\ref{chap:top}.
 
 \section{The Standard Model as an effective field theory}
 \label{sec:eft_intro}
@@ -2003,7 +2106,27 @@ We begin with a general discussion of the basic principles of EFTs, in particula
 \subsection{Effective field theories}
 \label{subsec:eft_background}
 
-Top-down and bottom-up EFTs. Renormalisability of EFTs order-by-order in perturbation theory.
+To introduce the concept of an \textit{effective} theory, consider the basic example of a field theory comprising precisely two (real) scalar fields $\phi, \chi$, with squared masses $m^2, M^2$ respectively, and with Lagrangian density:
+\begin{equation}
+\mathcal{L} = \frac{1}{2} (\partial \phi)^2 + \frac{1}{2}(\partial \chi)^2 - \frac{1}{2} m^2 \phi^2 - \frac{1}{2} M^2 \chi^2 - \frac{\lambda}{4} \phi^2 \chi^2.
+\end{equation}
+Suppose additionally that $\chi$ is much heavier than $\phi$, with $M^2 \gg m^2$, so that $\chi$ cannot be produced on-shell in any current experiments, say. The partition function for the theory takes the form:
+\begin{equation}
+\mathcal{Z} = \int \mathcal{D}\phi \mathcal{D}\chi \exp\left(i \int d^4x \left( \frac{1}{2} (\partial \phi)^2 + \frac{1}{2}(\partial \chi)^2 - \frac{1}{2} m^2 \phi^2 - \frac{1}{2} M^2 \chi^2 - \frac{\lambda}{4} \phi^2 \chi^2\right) \right),
+\end{equation}
+where $\mathcal{D}\phi, \mathcal{D}\chi$ indicate the measures over the relevant functional spaces.\footnote{Which of course, in the strictest sense, do not actually exist.} By performing the integral over $\chi$, we can derive an equivalent theory entirely in terms of $\phi$. This can be facilitated by moving to momentum space, and completing the square. We have:
+
+The result is a theory with Lagrangian:
+\begin{equation}
+\mathcal{L}_{\text{eff}} = \frac{1}{2} (\partial \phi)^2 - \frac{1}{2}m^2 \phi^2 - ... 
+\end{equation}
+We say that this theory is an \textit{effective theory}, valid below the energy scale $M^2$, with \textit{ultraviolet (UV) completion} given by the original theory.
+
+\paragraph{Top-down vs bottom-up.} The construction above is known as \textit{top-down} construction of an EFT. We begin with a UV-complete theory, and we integrate out modes to produce an effective theory containing non-renormalisable operators which is only valid up to some large energy scale. Top-down construction of an EFT is useful if we wish to work with simplified theories (for example, this approach is often adopted when studying the electroweak theory...).
+
+On the other hand, the EFT approach can also be applied in a \textit{bottom-up} fashion. Suppose that we have a Lagrangian that works well at low energies, ...
+
+\paragraph{Renormalisability.} 
 
 \subsection{EFT bases}
 \label{subsec:eft_bases}
@@ -2011,11 +2134,14 @@ Integration by parts, equations of motion.
 
 \subsection{The SMEFT}
 \label{subsec:the_smeft}
-The framework of bottom-up EFTs can naturally be applied to the Standard Model itself, producing an EFT known as the \textit{Standard Model Effective Field Theory} (SMEFT). The Lagrangian of the SMEFT:
+The framework of bottom-up EFTs can naturally be applied to the Standard Model itself, producing an EFT known as the \textit{Standard Model Effective Field Theory} (SMEFT). Following the procedure outlined above, the Lagrangian of the SMEFT must take the form:
+\begin{equation}
+\mathcal{L}_{\text{SMEFT}} = \mathcal{L}_{\text{SM}} + \sum_{d=5}^{\infty} 
+\end{equation}
+The types of operators that arise at dimension $d=5$, $d=6$ in the expansion have been completely classified. The operators at dimension $d=5$ are known as \textit{Weinberg operators}, and... . At dimension $d=6$, there are a total of $2499$ independent operators, parametrised by the so-called \textit{Warsaw basis}, introduced in [].
 
-The Warsaw basis. Some discussion of the types of operators that arise.
-
-We are now in a position where we can classify all dimension five operators in the SMEFT. 
+The types of operators appearing in the Warsaw basis are summarised in Table...
+ 
 
 \section{Introduction}
 \label{sec:introduction}
@@ -3124,7 +3250,9 @@ for the estimate of the finite-size uncertainties defined by Eq.~(\ref{eq:finite
 \chapter{Parton distributions in the SMEFT from the LHC Run II top dataset}
 \label{chap:top}
 
-In Chapter~\ref{chap:smeftdy}, we introduced the SMEFT, and demonstrated that a simultaneous extraction of PDFs and SMEFT Wilson coefficients may be necessary for the high luminosity LHC. However, this study was limited in scope, fitting only two Wilson coefficients together with PDFs. In this chapter, we perform a much more comprehensive simultaneous extraction of PDFs, together with more than twenty SMEFT Wilson coefficients, focussing this time on those which affect processes involving top quark production.
+\noindent \textit{[This chapter is based on Ref.~\cite{Kassabov:2023hbm}, produced in collaboration with ... . My contributions to this study comprised: implementation of all new datasets included in this study in the NNPDF framework; production of all SM predictions for all datasets in this study, available as NLO grids suitable for PDF fitting and NNLO QCD $K$-factors; re-implementation and re-structuring of the \textsc{SIMUnet} code to additionally include general quadratic contributions, ; running all SM PDF fits presented in this study; writing the various appendices...]}\\
+
+\noindent In Chapter~\ref{chap:smeftdy}, we introduced the SMEFT, and demonstrated that a simultaneous extraction of PDFs and SMEFT Wilson coefficients may be necessary for the high luminosity LHC. However, this study was limited in scope, fitting only two Wilson coefficients together with PDFs. In this chapter, we perform a much more comprehensive simultaneous extraction of PDFs, together with more than twenty SMEFT Wilson coefficients, focussing this time on those which affect processes involving top quark production.
 
 We begin in Sect.~\ref{sec:exp} with a review of our dataset, which combines standard data entering SM PDF fits with the broadest and most up-to-date subset of the Run II LHC top data ever considered. In Sect.~\ref{sec:theory}, we continue to describe the SM theory predictions used for the top quark data given in Sect.~\ref{sec:exp}. In Sect.~\ref{sec:}, we introduce the SMEFT operators which affect the top processes considered in Sect.~\ref{sec:exp}. We describe the generation of the SMEFT theory predictions, and how these augment the existing SM theory calculations.
 
@@ -3677,7 +3805,8 @@ only massive fermion in the theory is the top.
 %
 As far as the electroweak input scheme is concerned, we work in the $m_W$-scheme, meaning that the $4$
 electroweak inputs are
-$\{m_W, G_F, m_h, m_Z\}$.
+$\{m_W, G_F, m_h, m_Z\}$. In particular, the electric charge $e$ becomes a dependent parameter and is shifted by 
+the effects of higher-dimensional operators.
 
 At dimension-six, SMEFT operators modify the SM Lagrangian as:
 \begin{equation}
@@ -3686,13 +3815,125 @@ At dimension-six, SMEFT operators modify the SM Lagrangian as:
 \end{equation}
 %
 where $\Lambda$ is the UV-cutoff energy scale, $\{\mathcal{O}_{n} \}$ are dimension-six operators, and
-$\{ c_n \}$ are Wilson coefficients.
+$\{ c_n \}$ are Wilson coefficients. The $25$ dimension-six operators considered in this chapter 
+are listed in Table~\ref{tab:ops} in the Warsaw basis~\cite{Grzadkowski:2010es}.\footnote{Note that in this chapter, we neglect renormalisation group effects on the Wilson coefficients~\cite{Aoude:2022aro}. } 
+The upper part in Table~\ref{tab:ops} defines the relevant two-fermion 
+operators modifying the interactions of the third-generation
+quarks.
 %
-The $25$ operators considered for this study 
-are listed in Table~\ref{tab:ops} in the Warsaw basis~\cite{Grzadkowski:2010es}.
+We also indicate the notation used for the associated Wilson coefficients; those
+in brackets are not degrees of freedom entering the fit,
+and instead the two additional DoF defined in the middle table are used.
 %
-In this work we neglect renormalisation group effects on the Wilson coefficients~\cite{Aoude:2022aro}. 
-%
+The bottom table defines the four-fermion DoF entering the fit,
+expressed in terms of the corresponding four-fermion Wilson coefficients
+associated to dimension-six SMEFT operators in the Warsaw basis.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[htbp]
+  \begin{center}
+    \renewcommand{\arraystretch}{1.25}
+    {\footnotesize
+    \begin{tabular}{lll}
+      \toprule
+      Operator $\qquad$ & Coefficient & Definition \\
+                \midrule
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $\Op{\varphi Q}^{(1)}$ & ($c_{\varphi Q}^{(1)}$) & $i\big(\varphi^\dagger\lra{D}_\mu\,\varphi\big)
+ \big(\bar{Q}\,\gamma^\mu\,Q\big)$ \\\hline
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $\Op{\varphi Q}^{(3)}$ & $c_{\varphi Q}^{(3)}$  & $i\big(\varphi^\dagger\lra{D}_\mu\,\tau_{\sss I}\varphi\big)
+ \big(\bar{Q}\,\gamma^\mu\,\tau^{\sss I}Q\big)$ \\ \hline
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $\Op{\varphi t}$ & $c_{\varphi t}$& $i\big(\varphi^\dagger\,\lra{D}_\mu\,\,\varphi\big)
+ \big(\bar{t}\,\gamma^\mu\,t\big)$ \\ \hline
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      $\Op{tW}$ & $c_{tW}$ & $i\big(\bar{Q}\tau^{\mu\nu}\,\tau_{\sss I}\,t\big)\,
+ \tilde{\varphi}\,W^I_{\mu\nu}
+ + \text{h.c.}$ \\  \hline
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ $\Op{tB}$ & ($c_{tB}$) &
+ $i\big(\bar{Q}\tau^{\mu\nu}\,t\big)
+ \,\tilde{\varphi}\,B_{\mu\nu}
+ + \text{h.c.}$ \\\hline
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $\Op{t G}$ & $c_{tG}$ & $i\,\big(\bar{Q}\tau^{\mu\nu}\,T_{\sss A}\,t\big)\,
+ \tilde{\varphi}\,G^A_{\mu\nu}
+ + \text{h.c.}$ \\
+ \bottomrule\\
+ \toprule
+      DoF $\qquad$  & Definition \\
+                \midrule
+$c_{\varphi Q}^{(-)}$ &  $c_{\varphi Q}^{(1)} - c_{\varphi Q}^{(3)}$ \\
+\midrule
+$c_{tZ}$ &   $-\sin\theta_W c_{tB} + \cos\theta_W c_{tW} $\\
+  \bottomrule\\
+ \toprule
+          DoF $\qquad$ &  Definition (Warsaw basis) \\
+          \midrule
+      $c_{QQ}^1$    &   $2\ccc{1}{qq}{3333}-\frac{2}{3}\ccc{3}{qq}{3333}$ \\ \hline
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $c_{QQ}^8$       &         $8\ccc{3}{qq}{3333}$\\  \hline
+          %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ $c_{Qt}^1$         &         $\ccc{1}{qu}{3333}$\\   \hline
+          %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ $c_{Qt}^8$         &         $\ccc{8}{qu}{3333}$\\   \hline
+          %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  $c_{tt}^1$         &     $\ccc{}{uu}{3333}$  \\    \hline
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ $c_{Qq}^{1,8}$       &      $\ccc{1}{qq}{i33i}+3\ccc{3}{qq}{i33i}$     \\   \hline
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  $c_{Qq}^{1,1}$         &   $\ccc{1}{qq}{ii33}+\frac{1}{6}\ccc{1}{qq}{i33i}+\frac{1}{2}\ccc{3}{qq}{i33i} $   \\    \hline
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   $c_{Qq}^{3,8}$         &   $\ccc{1}{qq}{i33i}-\ccc{3}{qq}{i33i} $   \\   \hline
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  $c_{Qq}^{3,1}$          &     $\ccc{3}{qq}{ii33}+\frac{1}{6}(\ccc{1}{qq}{i33i}-\ccc{3}{qq}{i33i}) $   \\     \hline
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   $c_{tq}^{8}$         &  $ \ccc{8}{qu}{ii33}   $ \\    \hline
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   $c_{tq}^{1}$       &   $  \ccc{1}{qu}{ii33} $\\    \hline
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   $c_{tu}^{8}$      &   $2\ccc{}{uu}{i33i}$  \\     \hline
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $c_{tu}^{1}$        &   $ \ccc{}{uu}{ii33} +\frac{1}{3} \ccc{}{uu}{i33i} $ \\   \hline
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $c_{Qu}^{8}$         &  $  \ccc{8}{qu}{33ii}$\\     \hline
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $c_{Qu}^{1}$     &  $  \ccc{1}{qu}{33ii}$  \\     \hline
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $c_{td}^{8}$        &   $\ccc{8}{ud}{33jj}$ \\    \hline
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $c_{td}^{1}$          &  $ \ccc{1}{ud}{33jj}$ \\     \hline
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $c_{Qd}^{8}$        &   $ \ccc{8}{qd}{33jj}$ \\     \hline
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    $c_{Qd}^{1}$         &   $ \ccc{1}{qd}{33jj}$\\
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+         \bottomrule
+\end{tabular}
+}
+\end{center}
+  \caption{Upper table:  definition of the two-fermion dimension-six
+    SMEFT operators relevant for this analysis.
+    %
+    These operators modify the interactions of the third-generation
+    quarks.
+    %
+    We also indicate the notation for the associated Wilson coefficients; those
+    in brackets are not degrees of freedom entering the fit.
+      %
+    Middle table: the two additional degrees of freedom
+    used in the fit involving two-fermion operators, defined in terms
+    of the coefficients of the upper table.
+    %
+    Bottom table:
+    the four-fermion degrees of freedom considered here,
+    expressed in terms of the corresponding four-fermion Wilson coefficients
+    of dimension-six SMEFT operators in the Warsaw basis.
+    \label{tab:ops}}
+\end{table}
+
+
+
 For hadronic data, i.e. for proton-proton collisions, which are the only data affected by the SMEFT in this study,
  the linear effect of the $n$-th SMEFT operator on a theoretical prediction can be quantified by:
 %
@@ -3750,14 +3991,13 @@ with
     +\sum_{1 \leq n \leq m \leq N} c_{nm} R_{\rm SMEFT}^{(n,m)} \, ,
 \end{equation}
 %
-with $c_{nm} = c_n c_m$. Eq. (\ref{eq:theory_k_fac_app3}) is at the centre of the \simunet{} methodology, which we discuss in Sect.~\ref{sec:methodology}. 
+with $c_{nm} = c_n c_m$. Eq. (\ref{eq:theory_k_fac_app3}) is at the centre of the \simunet{} methodology, which we discuss in Sect.~\ref{sec:simunet_methodology}. 
 
 
-\newpage
 \section{Fitting methodology}
-\label{sec:methodology}
+\label{sec:simunet_methodology}
 
-In this work, the joint determination of the PDFs and the EFT coefficients is
+In this chapter, the joint determination of the PDFs and the EFT coefficients is
 carried out using the \simunet{} methodology, first presented
 in~\cite{Iranipour:2022iak}, which is substantially extended in this work.
 %
@@ -3796,7 +4036,7 @@ input data.
 %
 As in the NNPDF methodology, the error uncertainty estimation makes use of the Monte
 Carlo replica method, which yields an uncertainty estimate on both PDF and EFT
-parameters.  We discuss the limitations of this method in App.~\ref{app:quad}.
+parameters.  We discuss the limitations of this method in Sect.~\ref{sec:quad}.
 
 The SM theoretical observables are encoded using interpolation grids,
 known as {\tt FK}-tables~\cite{Ball:2010de,Ball:2012cx,Bertone:2016lga}, which 
@@ -4654,6 +4894,283 @@ per data point improves (from $1.139$ to $1.102$) once all data are included
 in the fit. This confirms the overall consistency of the analysis. 
 
 
+%%%%%%%%%
+% Monte Carlo replica method in the top project
+%%%%%%%%%
+\section{Pitfalls of the Monte-Carlo replica method for quadratic EFT fits}
+\label{sec:quad}
+
+The analysis presented in this chapter was originally prepared with the intention of performing a fully simultaneous SMEFT-PDF
+fit using NLO QCD theory, including \textit{quadratic}, $\mathcal{O}\left( \Lambda^{-4}\right)$, contributions from the SMEFT.
+To this end, the capabilities of the \simunet{} framework were extended, as discussed in Sect.~\ref{sec:new_simunet}, and
+all necessary SMEFT $K$-factors needed for the quadratic predictions were produced.
+%
+However, whilst benchmarking our code, we noticed significant disagreement between quadratic SMEFT-only fits
+produced using the \simunet{} methodology and the \smefit Nested Sampling option;\footnote{This disagreement is not present at the linear level; in this case, \simunet{} using the fixed-PDF option and \smefit using either the Nested Sampling or MCfit options perfectly coincide. See App.~\ref{app:benchmark} for more details.} on the other hand, we note perfect agreement
+between our \simunet{} quadratic SMEFT-only fits and the \smefit MCfit option.
+
+This disagreement can be traced back to 
+a deficiency in the Monte-Carlo sampling method used to propagate experimental error to the SMEFT coefficients, which
+currently prevents us from applying the
+the \simunet{} framework to joint SMEFT-PDF
+fits with quadratic EFT calculations. 
+%
+In this Appendix, we describe our current understanding of these limitations within the context of a toy model, 
+and give a more realistic example from this work; further work on the topic is deferred to a future publication..
+
+\subsection{A toy model for quadratic EFT fits}
+In the following subsection, we consider a toy scenario involving a single data point $d$ and only one
+Wilson coefficient $c$ (we ignore all PDF-dependence).
+%
+We suppose that our observed experimental data point $d$ is a random variable drawn from a normal distribution
+centred on the underlying quadratic theory prediction, and with experimental variance $\sigma^2$:
+\begin{equation}
+\label{eq:data_gaussian}
+d \sim N(t(c), \sigma^2).
+\end{equation}
+We assume that the theory prediction is quadratic in the SMEFT Wilson coefficient $c$, taking the form:
+\begin{equation}
+t(c) = t^{\text{SM}} + c t^{\text{lin}} + c^2 t^{\text{quad}} \, ,
+\end{equation}
+where we set $\Lambda=1$ TeV for convenience. Recall that $t^{\text{quad}} > 0$, since it corresponds
+to a squared amplitude.
+%
+Given the observed data $d$, we would like to construct interval estimates for the parameter
+$c$ (usually \textit{confidence intervals} in a frequentist setting or \textit{credible intervals} in a Bayesian setting).
+%
+Here, we shall describe the analytical construction of two interval estimates: first, using the Bayesian method, and second, using the
+Monte-Carlo replica method.
+
+\paragraph{Bayesian method.}
+In the Bayesian approach, $c$ is treated as a random variable with its own distribution. By Bayes'
+theorem, we can write the probability distribution of $c$, given the observed data $d$, up to a proportionality constant (given by $1/\mathbb{P}(d)$, where $\mathbb{P}(d)$ is called the \textit{Bayes' evidence}) as:
+\begin{equation}
+\mathbb{P}(c | d) \propto \mathbb{P}(d | c) \mathbb{P}(c),
+\end{equation}
+\noindent
+where $\mathbb{P}(c|d)$ is called the \textit{posterior distribution} of $c$, given the observed data $d$,
+and  $\mathbb{P}(c)$ is called the \textit{prior distribution} of $c$ - this is our initial `best guess' of the distribution of $c$ before the observation
+of the data takes place.
+%
+This distribution 
+is often taken to be uniform in SMEFT fits; we shall assume this here.
+
+Given a value of $c$, the distribution $\mathbb{P}(d|c)$ of the data $d$ is assumed to be Gaussian, as specified in Eq.~(\ref{eq:data_gaussian}). In particular, we can deduce that the posterior distribution of $c$ obeys the following proportionality relation:\footnote{Technically, truncated according to the end-points of the uniform prior.}
+\begin{equation}
+\label{eq:bayesian_posterior}
+\mathbb{P}(c|d) \propto \exp\left( -\frac{1}{2\sigma^2} \left( d - t(c) \right)^2 \right).
+\end{equation}
+\noindent This posterior distribution can be used to place interval estimates on the parameter $c$. One way of doing this is to construct \textit{highest density intervals}. These are computed as follows.
+%
+For a $100\alpha$\% credible interval, we determine the constant $p(\alpha)$ satisfying:
+\begin{equation}
+\int\limits_{\{c : ~\mathbb{P}(c|d) > p(\alpha)\}} \mathbb{P}(c|d)\ dc = \alpha.
+\end{equation}
+\noindent An interval estimate for $c$ is then given by $\{c : \mathbb{P}(c|d) > p(\alpha)\}$. In order to obtain such intervals then, we must construct the posterior $\mathbb{P}(c|d)$; efficient sampling from the posterior
+is guaranteed by methods such as Nested Sampling~\cite{Feroz:2013hea,Feroz:2007kg}.
+
+\paragraph{The Monte-Carlo replica method.}
+%
+This method takes a different approach in order to produce a posterior distribution for the parameter $c$.
+%
+Given the observed central data value $d$, one samples repeatedly from the normal distribution $N(d, \sigma^2)$ to generate a collection of \textit{pseudodata replicas}, which we shall denote as $d^{(1)}, ..., d^{(N_{\text{rep}})}$, where $N_{\text{rep}}$ is the total number of replicas.
+%
+Given a pseudodata replica $d^{(i)}$, one obtains a corresponding best-fit value of the Wilson coefficient parameter $c^{(i)}$ by minimising the $\chi^2$ of the theory to the pseudodata:
+\begin{equation}
+c^{(i)} = \argmin_{c} \chi^2(c,d^{(i)}) = \argmin_{c} \left( \frac{(d^{(i)} - t(c))^2}{\sigma^2} \right).
+\end{equation}
+In this toy scenario, we can determine an analytical formula for $c^{(i)}$:
+\begin{equation}
+  c^{(i)} = \begin{cases} \displaystyle -\frac{t^{\text{lin}}}{2t^{\text{quad}}}, & \text{if $d^{(i)} \leq \left( t^{\text{SM}} - (t^{\text{lin}})^2/4t^{\text{quad}}\right) $ ;} \label{eq:app1} \\[2ex]
+    \displaystyle \frac{-t^{\text{lin}} \pm \sqrt{(t^{\text{lin}})^2 - 4t^{\text{quad}}(t^{\text{SM}} - d^{(i)})}}{2t^{\text{quad}}}, & \text{if $d^{(i)} \geq \left( t^{\text{SM}} - (t^{\text{lin}})^2/4t^{\text{quad}}\right) $  \, .} \end{cases}
+\end{equation}
+The first case arises when the $\chi^2$ to the pseudodata $d^{(i)}$ has a single minimum, whilst the second case arises when the $\chi^2$  has two minima.
+%
+The two cases are split based on the value of
+\begin{equation}
+\label{eq:crosssec_minimum}
+t_{\text{min}} = t^{\text{SM}} - (t^{\text{lin}})^2/4t^{\text{quad}} \, ,
+\end{equation}
+which is the minimum value of the quadratic theory prediction $t(c) = t^{\text{SM}} + c t^{\text{lin}} + c^2 t^{\text{quad}}$. Note that for data replicas such that $d^{(i)}\le t_{\text{min}}$, the best-fit value $c^{(i)}$
+becomes independent of $d^{(i)}$ and depends only on the ratio between linear and quadratic
+EFT cross-sections.
+
+Now, given that $d^{(i)}$ is a random variable drawn from the normal distribution $N(d,\sigma^2)$, one can infer the corresponding distribution of the random variable $c^{(i)}$, which is a function of the pseudodata $d^{(i)}$.
+%
+For a real random variable $X$ with associated probability density $P_X(x)$, a function $f : \mathbb{R} \rightarrow \mathbb{R}$ of the random variable has the distribution:
+\begin{equation}
+P_{f(X)}(y) = \int\limits_{-\infty}^{\infty} dx\ P_X(x) \delta(y - f(x)).
+\end{equation}
+In our case, $c^{(i)}$ is a multi-valued function of $d^{(i)}$ given the two square roots, but the formula is easily generalised to this case.
+%
+Recalling that the pseudodata replicas are generated according
+to a Gaussian distribution around the central measurement $d$ with variance $\sigma^2$,
+we find that the probability density function for the Wilson coefficient replica
+$c^{(i)}$ is given (up to a proportionality constant) by:
+\begin{align}
+P_{c^{(i)}}(c) &\propto \int\limits_{-\infty}^{t_{\text{min}}} dx\ \delta\left( c + \frac{t^{\text{lin}}}{2t^{\text{quad}}} \right) \exp\left( -\frac{1}{2\sigma^2} (x - d)^2 \right) \notag \\[1.5ex]
+&\qquad + \int\limits_{t_{\text{min}}}^{\infty} dx\  \delta\left( c - \left(\frac{-t^{\text{lin}} + \sqrt{(t^{\text{lin}})^2 - 4t^{\text{quad}}(t^{\text{SM}} - x)}}{2t^{\text{quad}}}\right)\right)\exp\left( -\frac{1}{2\sigma^2} (x - d)^2 \right) \notag\\[1.5ex]
+& \qquad + \int\limits_{t_{\text{min}}}^{\infty} dx\ \delta\left( c - \left(\frac{-t^{\text{lin}} - \sqrt{(t^{\text{lin}})^2 - 4t^{\text{quad}}(t^{\text{SM}} - x)}}{2t^{\text{quad}}}\right)\right) \exp\left( -\frac{1}{2\sigma^2} (x - d)^2 \right).
+\end{align}
+Simplifying the delta functions in the second and third integrals, we find:
+\begin{equation}
+\label{eq:mc_posterior}
+P_{c^{(i)}}(c) \propto \delta\left( c + \frac{t^{\text{lin}}}{2t^{\text{quad}}} \right) \int\limits_{-\infty}^{t_{\text{min}}} dx\ \exp\left( -\frac{1}{2\sigma^2} (x - d)^2 \right) + \frac{2}{|2ct^{\text{quad}}  + t^{\text{lin}}|} \exp\left( -\frac{1}{2\sigma^2} (d - t(c))^2 \right) \, .
+\end{equation}
+This result is different from the posterior distribution obtained by the Bayesian method in Eq.~(\ref{eq:bayesian_posterior}). Notable features of the posterior distribution $P_{c^{(i)}}(c)$ are: (i) the distribution has a Dirac-delta peak at $c = -t^{\text{lin}}/2t^{\text{quad}}$; (ii) elsewhere, the distribution is given by the Bayesian posterior distribution rescaled by a prefactor dependent on $c$.
+%
+Therefore, the Monte Carlo
+replica optimisation method will not in general reproduce the Bayesian posterior.
+
+However, one can note that in an appropriate limit, the Bayesian posterior \textit{is} indeed recovered.
+In particular, suppose that the quadratic EFT cross-section is subdominant
+compared to the linear term, $t^{\text{lin}} \gg t^{\text{quad}}$; in this case, we have that
+$t_{\text{min}} \rightarrow -\infty$ so that the first term in Eq.~\eqref{eq:mc_posterior} vanishes
+and the prefactor of the second term can be approximated with $2ct^{\text{quad}} + t^{\text{lin}} \approx t^{\text{lin}}$. 
+Thus, the Bayesian posterior from Eq.~(\ref{eq:bayesian_posterior}) is indeed recovered, and we 
+see that the two methods are formally identical for a linear EFT analysis.
+%
+Further, it is possible to show analytically that for multiple SMEFT parameters and multiple correlated data points, 
+if only linear theory is used the two distributions agree exactly.
+
+%However, one can note that in appropriate limits, the Bayesian posterior \textit{is} indeed recovered. For example, in the case that  i.e. the case in which the quadratic terms are weaker compared to the linear terms, we find that Hence the first term in Eq.~(\ref{eq:mc_posterior}) vanishes, whilst the denominator of the prefactor in the second term approaches $2ct^{\text{quad}} + t^{\text{lin}} \approx t^{\text{lin}}$. Indeed, more generally, one can show that for multiple SMEFT parameters and multiple correlated data points, if only linear theory is used the two distributions agree exactly.\\
+%\noindent Using the identity:
+%\begin{equation}
+%\int\limits_{t_{\text{\min}}}^{\infty} dx\ \exp\left( -\frac{1}{2\sigma^2} (x - d)^2 \right) = \sqrt{2\pi \sigma^2} - \int\limits_{-\infty}^{t_{\text{min}}} dx\ \exp\left( -\frac{1}{2\sigma^2} (x - d)^2 \right),
+%\end{equation}
+%\noindent we have:
+%\begin{equation}
+%P_{c^{(i)}}(c) \propto \left(\delta\left( c + \frac{t^{\text{lin}}}{2t^{\text{quad}}} \right) -\frac{2 }{2ct^{\text{quad}}  + t^{\text{lin}}} \right) \int\limits_{-\infty}^{t_{\text{min}}} dx\ \exp\left( -\frac{1}{2\sigma^2} (x - d)^2 \right) + \frac{2\sqrt{2\pi \sigma^2}}{2ct^{\text{quad}}  + t^{\text{lin}}}.
+%\end{equation}
+
+This calculation demonstrates that, for quadratic EFT fits, the Monte-Carlo replica method
+will not in general reproduce the Bayesian posteriors that one would obtain from, say, a 
+nested sampling approach; agreement will only occur provided quadratic EFT corrections 
+are sufficiently subdominant in comparison with the linear ones.
+%
+For this reason, in this work we restrict the SMEFT-PDF fits based on \simunet{} (which rely
+on the use of the Monte-Carlo replica method) to linear EFT calculations;
+we defer the further investigation of the use of the Monte-Carlo replica method, and how
+it might be modified for use in \simunet{}, to future works. 
+
+%n the case where quadratic theory is used, the  cannot be expected to reliably reproduce the  distributions that one would obtain, say, from a nested sampling approach. It is for this reason that we choose to neglect quadratic contributions in our \simunet{} fits in this work; like \nnpdf and \smefit, \simunet{} assumes that the use of the Monte-Carlo method will produce a reliable posterior, but this is in fact not the case, and - as far as we are aware - has never been justified rigorously in the literature. In Section~\ref{subsec:mc_examples}, we give explicit examples of the failure of the Monte-Carlo method relative to the Bayesian method.
+
+\subsection{Application to one-parameter fits}
+\label{subsec:mc_examples}
+
+As demonstrated above, the Monte-Carlo replica method will lead to
+posterior distributions differing from their Bayesian counterparts whenever quadratic
+EFT corrections dominate over linear ones.
+%
+Here, we show the numerical impact of these differences in a model case, namely
+the one-parameter fit of the coefficient $c_{dt}^8$ to
+the CMS 13 TeV $t\bar{t}$ invariant mass distribution measurement
+based on the $\ell+$jets final-state~\cite{CMS:2021vhb}.
+%
+Fig.~\ref{fig:data-theory-CMS} compares the experimental data
+from this measurement with the corresponding
+SM theory calculations at NNLO using the NNPDF4.0 (no top) PDF
+set as input.
+%
+We observe that the SM theory predictions overshoot the data, especially in the high $m_{t\bar{t}}$
+regions, where energy-growing effects enhance the EFT corrections.
+%
+Given that the pseudodata replicas $d^{(i)}$ are fluctuated around the central value $d$,
+the configuration where the SM overshoots the data
+potentially enhances the contribution of the upper solution in Eq.~(\ref{eq:app1})
+leading to the Dirac delta peak in the posterior Eq.~(\ref{eq:mc_posterior}).     
+
+%-----------------------------------------
+\begin{figure}[t]
+        \centering
+        \includegraphics[width=0.82\linewidth]{data_theory_plots/CMS_TTBAR_13TEV_TTMNORM_NNPDF40-notop.pdf}
+        \caption{Comparison between the experimental data
+          for the top-quark pair invariant mass $m_{t\bar{t}}$ distribution
+          from the $\ell+$jets CMS measurement at 13 TeV~\cite{CMS:2021vhb}, with the corresponding
+          SM theory calculations at NNLO using the NNPDF4.0 (no top) PDF
+          set as input.
+          %
+          For the latter, the error band indicates the PDF uncertainties, and
+          for the former the diagonal entries of the experimental covariance matrix.
+          %
+          Results are shown as ratios to the central value of the data.
+          %
+          The SM theory predictions overshoot the data, especially in the high $m_{t\bar{t}}$
+          regions, where energy-growing effects enhance the EFT corrections.
+        }
+    \label{fig:data-theory-CMS}
+\end{figure}
+%-----------------------------------------
+
+For the case of the $c_{dt}^8$ coefficient, the quadratic EFT corrections dominate over the linear ones
+and hence the net effect of a non-zero coefficient is typically an upwards shift
+of the theory prediction.
+%
+Indeed, we have verified that for this coefficient
+the biggest negative correction one can obtain is of order $\sim 2\%$.
+%
+For the last $m_{t\bar{t}}$ bin, the minimum of the  theory cross
+section $t_{\rm min}$ in Eq.~(\ref{eq:crosssec_minimum}) is obtained for a value
+$c_{dt}^8 \approx -0.2$, while for the second to last bin instead $t_{\rm min}$
+is minimised by $c_{dt}^8 \approx -0.3$.
+%
+The combination of these two features (a dominant quadratic EFT term, and a SM prediction overshooting
+the data) suggests that the Monte-Carlo replica method's
+posterior will be enhanced for $c_{dt}^8 \in (-0.3,-0.2)$ as compared
+to the Bayesian posterior.
+
+%-----------------------------------------
+\begin{figure}[htb]
+        \centering
+        \includegraphics[width=0.49\linewidth]{smeft_plots/linear_O8dt.png}
+        \includegraphics[width=0.49\linewidth]{smeft_plots/quadratic_O8dt.png}
+        \caption{Posterior distributions for a one-parameter fit
+          of the four-fermion coefficient $c_{dt}^8$ with the sole experimental
+          input being the CMS $m_{t\bar{t}}$ distribution
+          displayed in Fig.~\ref{fig:data-theory-CMS}.
+          %
+          Results are obtained with \smefit and we compare the outcome of Nested Sampling (in blue) with
+          that of MCfit (in red)
+          for linear (left panel) and quadratic (right panel) EFT fits.
+        }
+    \label{fig:O8dt-fit}
+\end{figure}
+%-----------------------------------------
+
+In Fig.~\ref{fig:O8dt-fit} we
+compare the posterior distributions for a one-parameter fit
+of the four-fermion coefficient $c_{dt}^8$ with the sole experimental
+input being the CMS $m_{t\bar{t}}$ distribution
+displayed in Fig.~\ref{fig:data-theory-CMS}.
+%
+Results are obtained with \smefit and we compare the outcome of Nested Sampling (in blue) with
+that of MCfit (in red)
+for linear and quadratic  EFT fits.
+%
+The agreement in the linear fit is lost for its quadratic counterpart,
+with the main difference being a sharp peak in the region
+$c_{dt}^8 \in (-0.3,-0.2)$ in which the contribution
+from the delta function in Eq.~\ref{eq:mc_posterior} is most
+marked.
+
+The scenario displayed in Fig.~\ref{fig:O8dt-fit} is chosen to display the maximum effect,
+based on a single coefficient with large quadratic EFT corrections, and a dataset
+where the SM overshoots the data in the $m_{t\bar{t}}$ region where EFT effects
+are the largest.
+%
+Within a global fit, these differences are \textit{partially} washed out
+(indeed the Bayesian and MCfit posterior distributions mostly agree well for
+the quadratic \smefit analysis, as shown in~\cite{Giani:2023gfq}, for the majority
+of fitted coefficients).
+%
+Nevertheless, at least in its current implementation, Fig.~\ref{fig:O8dt-fit} highlights
+that the Monte-Carlo replica method is affected by pitfalls that
+prevent its straightforward application to global EFT interpretations of experimental
+data which include quadratic corrections.
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % COMMENTED OUT TEXT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4719,14 +5236,20 @@ in the fit. This confirms the overall consistency of the analysis.
 \chapter{Disentangling New Physics effects and parton distributions}
 \label{chap:contamination}
 
-In order to systematically study New Physics contamination effects in PDF fits and address
-the questions introduced in Sect.~\ref{sec:intro}, we work in a setting in which we pretend
-we know the underlying law of nature. In our case the law of nature consists of the ``true''
-PDFs, which are low-energy quantities that have nothing to do with new physics, and the ``true''
-Lagrangian of nature, which at low energy is well approximated by the Standard Model (SM) Lagrangian.
-The data in our analysis will be generated according to the law of nature.
-In particular, if the law of nature includes a new particle or set of particles at high energy,
-this will show in the data in some high energy distributions.
+So far, this thesis has exclusively focussed on the simultaneous determination of PDFs
+and BSM couplings in a selection of models (namely a dark matter model, and two SMEFT scenarios). 
+In this chapter, we ask a more general question: what kind of errors are committed if we do \textit{not} 
+perform a simultaneous extraction, instead fitting the PDFs \textit{assuming} the SM,
+but New Physics (NP) \textit{is} indeed present in the data that goes into the PDF fit? This could bias the
+PDFs, and result in further errors if the PDFs are subsequently used in fits of BSM theories themselves. 
+
+In order to facilitate this, we work in a setting in which we pretend
+we know the underlying law of nature, the so-called `closure test' setting, which we shall describe in 
+significantly more detail in Sec.~\ref{sec:methodology}. We work in two specific scenarios, based 
+on two possible UV-complete extensions of the SM (which we treat using an EFT approach for 
+convenience), described in Sec.~\ref{sec:scenarios}. Finally, in Sec.~\ref{}, we give recommendations
+for how to guard against accidental `absorption' of NP into a SM PDF fit.
+
 
 \section{Methodology}
 \label{sec:methodology}
@@ -4846,6 +5369,14 @@ There are two possible outcomes of such a fit. The contamination of the PDFs may
 \epigraph{Yesterday, \\ All my troubles seemed so far away, \\ Now it looks as if they're here to stay.}{\textit{\\ from Yesterday, \\ by The Beatles}}
 
 Throughout this thesis, particularly in Chapters ... and ..., the Monte-Carlo replica method has played an important role. However, it was ...
+
+
+\section{Interval estimation with Bayesian, frequentist and Monte-Carlo methods}
+\label{sec:interval_estimation}
+
+In this section, we begin by introducing the idea of placing \textit{interval estimates} on theory parameters using Bayesian, frequentist and Monte-Carlo replica methods. We shall see that all three methods are inequivalent beyond linear theories, and we shall argue that the most robust interval estimates are in fact given by Bayesian methods.
+
+\paragraph{Bayesian method.} 
 
 
 \section{A closer look at the Monte-Carlo replica method}
@@ -5009,6 +5540,12 @@ The other condition that the delta function should have enforced is a valid rang
 This \textit{can} now be evaluated numerically, though is likely to be extremely inefficient.
 
 \JM{Where does the $M$ derivative dependence disappear to in this derivation? Are both derivations correct and should match up? Or is there a mistake in one?}
+
+
+
+\section{Future directions}
+
+It is important to assess the impact this has on PDF fits.
 
 
 
