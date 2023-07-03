@@ -2091,58 +2091,106 @@ Finally, it would be interesting to ask whether similar analyses could be perfor
 \chapter{Parton distributions in the SMEFT from high-energy Drell-Yan tails}
 \label{chap:smeftdy}
 
-\noindent \textit{[This chapter is based on Ref.~\cite{greljo_parton_2021}, produced in collaboration with Admir Greljo, Shayan Iranipour, Zahari Kassabov, Maeve Madigan, Juan Rojo, Maria Ubiali and Cameron Voisy, and additionally on Ref.~\cite{Madigan:2021uho}, produced in collaboration with Maeve Madigan. My main contributions to the work~\cite{greljo_parton_2021} comprised: the calculation and production of SMEFT $K$-factors for all of the DIS processes entering the study, accurate to next-to-leading order in QCD; benchmarking of the charged current DY $K$-factors against an analytic calculation; running a subset of the fits and analysis, especially in the follow-up study of Ref.~\cite{Madigan:2021uho}, presented in Sect.~\ref{sec:hllhc_extension}.]}\\
+\noindent \textit{[This chapter is based on Ref.~\cite{greljo_parton_2021}, produced in collaboration with Admir Greljo, Shayan Iranipour, Zahari Kassabov, Maeve Madigan, Juan Rojo, Maria Ubiali and Cameron Voisey, and additionally on Ref.~\cite{Madigan:2021uho}, produced in collaboration with Maeve Madigan. My main contributions to the work comprised: the calculation and production of SMEFT $K$-factors for all of the DIS processes entering the study, accurate to next-to-leading order in QCD; benchmarking of the charged current DY $K$-factors against an analytic calculation; running a subset of the fits and analysis, especially in the follow-up study of Ref.~\cite{Madigan:2021uho}, presented in Sect.~\ref{sec:hllhc_extension}.]}\\
 
 \noindent In Chapter~\ref{chap:darkphoton}, we focussed on simultaneous extraction of PDFs and BSM parameters in the case of a dark photon model, where the only BSM particle was \textit{light}. Whilst this model was motivated by the desire to provide a possible dark matter candidate, it is only one of plethora of models which we could have investigated. This suggests the need for a more general framework in which to search for BSM physics.
 
-In the case of \textit{heavy} New Physics, this can be facilitated through the language of \textit{effective field theories} (EFTs). In this chapter, we shall introduce the idea of treating the Standard Model within the effective field theory approach. We shall subsequently present a study wherein we simultaneously extract PDFs and two couplings drawn from the Standard Model EFT, using both DIS and DY data; we shall find that the interplay between PDFs and the Standard Model EFT is mild with the current data, but when we move to using projected HL-LHC data (just as in Sect.~\ref{subsec:dark_constraints}), the interplay becomes significant. This study motivates a more comprehensive extraction of PDFs alongside Standard Model EFT couplings in the top sector, which we present in Chapter~\ref{chap:top}. Further, we present a first glimpse of extraction of PDFs from projected data \textit{which contains New Physics} in Sect.\ref{sec:hllhc_extension}, an idea which will be investigated in much greater detail in Chapter~\ref{chap:contamination}.
+In the case of \textit{heavy} New Physics, this can be facilitated through the language of \textit{effective field theories} (EFTs). In this chapter, we shall introduce the idea of treating the Standard Model within the effective field theory approach. We shall subsequently present a study wherein we simultaneously extract PDFs and two couplings drawn from the Standard Model EFT, using both DIS and DY data; we shall find that the interplay between PDFs and the Standard Model EFT is mild with the current data, but when we move to using projected HL-LHC data (just as in Sect.~\ref{subsec:dark_constraints}), the interplay becomes significant. This study motivates a more comprehensive extraction of PDFs alongside Standard Model EFT couplings in the top sector, which we present in Chapter~\ref{chap:top}. Further, we present a first glimpse of extraction of PDFs from projected data \textit{which contains New Physics} in Sect.~\ref{sec:hllhc_extension}, an idea which will be investigated in much greater detail in Chapter~\ref{chap:contamination}.
 
 \section{Effective field theories and the SMEFT}
 \label{sec:eft_intro}
 The language of \textit{effective field theory} (EFT) provides a twofold advantage when discussing QFTs: the method of \textit{top-down} EFT can simplify calculations by removing degrees of freedom from a theory which are not relevant at low energy scales, whilst the method of \textit{bottom-up} EFT allows us to parametrise deviations from a good low-energy theory due to unknown high-energy physics. 
 
-In this section, shall provide a brief review of both of these techniques, especially bottom-up EFT as applied to the SM. We begin in Sect.~\ref{subsec:eft_background} with a basic demonstration of the key ideas involved in EFT, using a toy model that comprises a single light scalar and a single heavy scalar. Subsequently, in Sect.~\ref{subsec:eft_bases} we discuss how the various higher-dimensional operators that arise in a bottom-up EFT approach can be organised into an irredundant basis using integration by parts and the equations of motion. Finally, in Sect.~\ref{subsec:the_smeft}, we apply these ideas to the SM, describing how it can be treated in the bottom-up EFT approach resulting in an effective field theory called the \textit{Standard Model Effective Field Theory} (SMEFT). The remainder of the chapter is dedicated to fitting PDFs and two parameters drawn from the SMEFT.
+In this section, shall provide a brief review of both of these techniques, especially bottom-up EFT as applied to the SM. We begin in Sect.~\ref{subsec:eft_background} with a basic demonstration of the key ideas involved in EFT, using a toy model that comprises a single light fermion and a single heavy scalar. In Sect.~\ref{subsec:the_smeft}, we then apply these ideas to the SM, describing how it can be treated in the bottom-up EFT approach resulting in an effective field theory called the \textit{Standard Model Effective Field Theory} (SMEFT). The remainder of the chapter is dedicated to fitting PDFs and two parameters drawn from the SMEFT.
 
 \subsection{Introduction to effective field theories}
 \label{subsec:eft_background}
 
-To introduce the concept of an \textit{effective} theory, consider the basic example of a field theory comprising precisely two (real) scalar fields $\phi, \chi$, with squared masses $m^2, M^2$ respectively, and with Lagrangian density:
+To introduce the concept of an \textit{effective} theory, we follow the example of Sect. 4.1 of Ref.~\cite{Petrov:2016azi}, and consider a field theory comprising a single real scalar field $\phi$ and a single fermionic field $\psi$, with squared masses $M^2, m^2$ respectively, and with Lagrangian density:
 \begin{equation}
-\mathcal{L} = \frac{1}{2} (\partial \phi)^2 + \frac{1}{2}(\partial \chi)^2 - \frac{1}{2} m^2 \phi^2 - \frac{1}{2} M^2 \chi^2 - \frac{\lambda}{4} \phi^2 \chi^2.
+\label{eq:yukawa}
+\mathcal{L} = \frac{1}{2} (\partial \phi)^2 - \frac{1}{2} M^2 \phi^2 + \overline{\psi}(i \slashed{\partial} - m) \psi - g \phi \overline{\psi} \psi.
 \end{equation}
-Suppose additionally that $\chi$ is much heavier than $\phi$, with $M^2 \gg m^2$, so that $\chi$ cannot be produced on-shell in any current experiments, say. The partition function for the theory takes the form:
+Suppose additionally that $\phi$ is much heavier than $\psi$, with $M^2 \gg m^2$, so that $\phi$ cannot be produced on-shell in any current experiments, say. The partition function for the theory takes the form:
 \begin{equation}
-\mathcal{Z} = \int \mathcal{D}\phi \mathcal{D}\chi \exp\left(i \int d^4x \left( \frac{1}{2} (\partial \phi)^2 + \frac{1}{2}(\partial \chi)^2 - \frac{1}{2} m^2 \phi^2 - \frac{1}{2} M^2 \chi^2 - \frac{\lambda}{4} \phi^2 \chi^2\right) \right),
+\label{eq:partition_function}
+\mathcal{Z} = \int \mathcal{D}\phi \mathcal{D}\psi \exp\left(i \int d^4x \left( \frac{1}{2} (\partial \phi)^2 - \frac{1}{2} M^2 \phi^2 + \overline{\psi}(i \slashed{\partial} - m) \psi - g \phi \overline{\psi} \psi\right) \right),
 \end{equation}
-where $\mathcal{D}\phi, \mathcal{D}\chi$ indicate the measures over the relevant functional spaces.\footnote{Which of course, in the strictest sense, do not actually exist.} By performing the integral over $\chi$, we can derive an equivalent theory entirely in terms of $\phi$. This can be facilitated by moving to momentum space, and completing the square. We have:
+where $\mathcal{D}\phi, \mathcal{D}\chi$ indicate the measures over the relevant functional spaces.\footnote{Which of course, in the strictest sense, do not actually exist.} By performing the integral over $\phi$, we can derive an equivalent theory entirely in terms of $\psi$; this theory will apply below the scale at which $\phi$ can be produced on-shell. 
 
-The result is a theory with Lagrangian:
+To perform the integral, it is convenient to change variables, introducing:
 \begin{equation}
-\mathcal{L}_{\text{eff}} = \frac{1}{2} (\partial \phi)^2 - \frac{1}{2}m^2 \phi^2 - ... 
+\phi'(x) := \phi(x) + ig \int d^4y\ D_F(x-y)\overline{\psi}(y) \psi(y),
 \end{equation}
-We say that this theory is an \textit{effective theory}, valid below the energy scale $M^2$, with \textit{ultraviolet (UV) completion} given by the original theory.
+where $D_F$ is the free-space propagator for the $\phi$-field, given by:
+\begin{equation}
+\label{eq:propagator}
+D_F(z) := \int \frac{d^4k}{(2\pi)^4} \frac{i}{k^2 - M^2 + i\epsilon} e^{-ik \cdot z}.
+\end{equation}
+Making this change of variables in Eq.~\eqref{eq:partition_function}, we obtain:
+\begin{align}
+\mathcal{Z} &= \int \mathcal{D}\phi' \mathcal{D}\psi \exp\left(i \int d^4x\ \overline{\psi}(i \slashed{\partial} - m) \psi \right) \exp\left( i \int d^4x \left( \frac{1}{2} (\partial \phi')^2 - \frac{1}{2}M^2 {\phi'}^2\right) \right) \notag \\[1.5ex]
+&\qquad \cdot \exp\left( i \int d^4x d^4y\ ig^2\overline{\psi}(x) \psi(x)D_F(x-y)\overline{\psi}(y) \psi(y) \right).
+\end{align}
+The integral over $\phi'$ can now be performed, producing an irrelevant overall constant of normalisation. The resulting theory then has the non-local Lagrangian:
+\begin{equation}
+\label{eq:first_try_eft}
+\mathcal{L}_{\text{eff}} = \overline{\psi}(i \slashed{\partial} - m) + ig^2 \int d^4y\ \overline{\psi}(x) \psi(x) D_F(x-y) \overline{\psi}(y)\psi(y).
+\end{equation}
+In the limit $M^2 \rightarrow \infty$, we may expand the denominator of $D_F$ in Eq.~\eqref{eq:propagator} in powers of $k^2/M^2$, which to a leading approximation gives:
+\begin{equation}
+D_F(z) = - \frac{i}{M^2} \delta^4(z),
+\end{equation}
+hence we may rewrite the Lagrangian Eq.~\eqref{eq:first_try_eft} as:
+\begin{equation}
+\label{eq:top_down_eft}
+\mathcal{L}_{\text{eff}} = \overline{\psi}(i \slashed{\partial} - m)\psi + \frac{g^2}{M^2} (\overline{\psi}\psi)^2 + O\left( \frac{1}{M^4} \right). 
+\end{equation}
+We say that this theory is an \textit{effective theory}, valid below the energy scale $M$, with \textit{ultraviolet (UV) completion} given by the original theory. Important features to note are the following:
+\begin{enumerate}[label = (\roman*)]
+\item Integrating out the field $\phi$ has resulted in a Lagrangian containing a \textit{non-renormalisable} term, $(\overline{\psi}\psi)^2$; this can be seen by counting mass dimensions, which in this case shows that this operator is in fact a dimension \textit{six} operator. In a QFT that we expect to hold to arbitrarily high energy scales, such terms are not permissible. However, in our \textit{effective} theory, there is no such stringent requirement; we indeed expect the theory to break down at the scale $M$, and so non-renormalisable terms are in fact allowed.
+
+\item The non-renormalisable operators in the effective theory have been organised into a series, with their associated couplings suppressed by increasing powers of $1/M^2$. By counting mass dimensions, we see that the higher the dimension of the operator, the more subleading its effect. 
+\end{enumerate}
 
 \paragraph{Top-down vs bottom-up.} The construction above is known as \textit{top-down} construction of an EFT. In this paradigm, we begin with a UV-complete theory, and then we integrate out modes to produce an effective theory containing non-renormalisable operators; the theory is then valid only up to some large energy scale. Top-down construction of an EFT is particularly useful if we wish to simplify calculations by ignoring degrees of freedom which are not relevant at the energy scale of study (for example, the $W$ and $Z$ bosons are often integrated out of the electroweak theory when performing low-energy calculations, resulting in the \textit{Fermi effective theory}).
 
-On the other hand, the EFT approach can also be applied in a \textit{bottom-up} fashion. Suppose that we have a renormalisable theory which works well at low energies, but we expect to break down at some higher energy scale, making way for another theory which contains additional, unknown, heavy degrees of freedom. The low-energy limit of this high-energy theory must match our low-energy theory; in particular, our low-energy theory should be considered the leading approximation in a top-down EFT approach to the unknown high-energy theory. 
+On the other hand, the EFT approach can also be applied in a \textit{bottom-up} fashion. Suppose that we have a renormalisable theory which works well at low energies, but we expect to break down at some higher energy scale, making way for another theory which contains additional, unknown, heavy degrees of freedom. The low-energy limit of this high-energy theory must match our low-energy theory; in particular, our low-energy theory should be considered the leading approximation in a top-down EFT approach to the unknown high-energy theory. Therefore, we can build more precise approximations to the high-energy theory by adding on all non-renormalisable operators to the low-energy Lagrangian, built from the low-energy degrees of freedom and respecting any symmetries of the low-energy theory that we believe still hold in the high-energy theory. These non-renormalisable operators can be organised in terms of importance by their \textit{mass dimension}, since dimensional analysis tells us their couplings must be increasingly suppressed by a characteristic scale of the high-energy physics (e.g. the mass of the lowest-energy degree of freedom that is integrated out at low energies) as the mass dimension of the operator increases.
 
-For a concrete example, suppose that we have the theory:
+For a concrete example, suppose that we believe that at low energies, Nature is described by the fermionic Lagrangian:
 \begin{equation}
-\mathcal{L}_{\text{low}} = \frac{1}{2}(\partial \phi)^2 - \frac{1}{2}m^2 \phi^2,
+\mathcal{L}_{\text{low}} = \overline{\psi} (i \slashed{\partial} - m) \psi.
 \end{equation}
-as described above. We can extend this with all possible higher-dimensional operators, organised by their mass dimension, to produce a \textit{bottom-up} EFT which is the low-energy limit of the unknown high-energy theory:
+This theory has a $U(1)$ global vector symmetry $\psi \mapsto e^{i\theta}\psi$ and a $U(1)$ global axial symmetry $\psi \mapsto e^{i\theta \gamma^5} \psi$, which perhaps we believe to be fundamental (and suppose we also believe that Lorentz symmetry is fundamental). We can describe theories which have the low-energy limit $\mathcal{L}_{\text{low}}$ by adding on all possible higher-dimensional operators which respect the symmetry, organised by their mass dimension, to produce a \textit{bottom-up} EFT which is the low-energy limit of the unknown high-energy theory. Such operators can only be built from $\psi, \overline{\psi}$ and the derivative $\partial$; the mass dimensions of these objects are $[\psi] = [\overline{\psi}] = 3/2$ and $[\partial] = 1$ respectively. Considering the ways in which these objects can be combined at each mass dimension, we therefore obtain an EFT approximation of the form (up to operators of mass dimension $6$):
 \begin{equation}
-\mathcal{L}_{\text{low}}^{\text{EFT}} = \frac{1}{2} (\partial \phi)^2 - \frac{1}{2}m^2 \phi^2 - \frac{\lambda}{4!} \phi^4 - \frac{g_6}{\Lambda^2} \phi^6 - \frac{g_8}{\Lambda^4} \phi^8 - \cdots.
+\label{eq:first_try_bottom_up_eft}
+\mathcal{L}_{\text{low}}^{\text{EFT}} = \overline{\psi}(i\slashed{\partial} - m) \psi - \frac{g_5}{\Lambda} \overline{\psi} \partial^2 \psi -  \frac{g_6^{(1)}}{\Lambda^2} (\overline{\psi}\psi)^2 - \frac{g_6^{(2)}}{\Lambda^2} \overline{\psi} \partial^2 \slashed{\partial} \psi - ...,
 \end{equation}
+where $\Lambda$ is some characteristic scale of New Physics.
 
+Importantly, some of these operators can be removed by considering the \textit{equations of motion} of the theory (a point we shall shortly return to when we discuss EFT bases below). The fermion $\psi$ obeys the free Dirac equation in the low-energy theory, given by $$(i \slashed{\partial} - m)\psi = 0,$$ which yields the Klein-Gordon equation $(\partial^2 + m^2)\psi = 0$ when the operator $(i\slashed{\partial} - m)$ is applied a second time. Therefore, whenever a second derivative term appears, we may replace $\partial^2$ with $-m^2$. As a result, the effective theory can be simplified to:
+\begin{equation}
+\label{eq:bottom_up_eft}
+\mathcal{L}_{\text{low}}^{\text{EFT}} = \overline{\psi}(i\slashed{\partial} - m) \psi -  \frac{g_6}{\Lambda^2} (\overline{\psi}\psi)^2 - ...\ .
+\end{equation}
+The reason that we can apply the \textit{free} equations of motion here, even though we believe the fermion is actually coupled in the high-energy theory, is that the corrections to the free equations of motion enter at order $1/\Lambda$, so are suppressed when inserted into the Lagrangian and can be neglected at the order we are considering. The unknown coefficients in the expansion, $g_6$, etc, are called \textit{Wilson coefficients}.
 
-\paragraph{Renormalisability.} By their very construction, effective theories contain non-renormalisable operators, and hence are not renormalisable theories. However, this does not prove a barrier to the application of EFTs; the requirement that a theory is renormalisable comes from a desire for it to hold to arbitrary large energy scales. We place no such expectation on an EFT, since it is expected to hold only up to some large scale at which the theory will, by construction, break down.
+As expected, if we know that the UV-completion of the theory is given by Eq.~\eqref{eq:yukawa}, the bottom-up EFT Eq.~\eqref{eq:bottom_up_eft} can be \textit{matched} to the UV-complete theory. In this case, this can be achieved by comparing Eq.~\eqref{eq:top_down_eft} with Eq.~\eqref{eq:bottom_up_eft}, where we identify:
+\begin{equation}
+\frac{g_6}{\Lambda^2} = -\frac{g^2}{M^2}.
+\end{equation}
+In more complicated scenarios, matching can be performed order-by-order in perturbation theory by computing processes using both the diagrams of the UV-complete theory and the diagrams of the effective theory, and then comparing the results. There are also other methods of matching available, including \textit{functional matching} (see for example Ref.~\cite{Henning:2014wua}). 
 
-Further, whilst EFTs are not renormalisable \textit{per se}, they do have the useful property that they are renormalisable order by order in perturbation theory.
+\paragraph{Renormalisability.} By their very construction, effective theories contain non-renormalisable operators, and hence are not renormalisable theories. However, as we mentioned above, this is no problem in the EFT philosophy, since we do not expect EFTs to hold to arbitrarily high energies. 
 
-\subsection{EFT bases}
-\label{subsec:eft_bases}
-In the case of a more general bottom-up EFT, with many more low-energy degrees of freedom, there will be a vast array of possible operators that can be written down at a given mass dimension in the EFT expansion. Crucially, these operators \textit{may not be independent}. Consider, for example, the following pair of operators:
+Further, whilst EFTs are not renormalisable \textit{per se}, they do have the useful property that they are renormalisable \textit{order by order} in $1/\Lambda$, where $\Lambda$ is the characteristic scale of the New Physics. This manifests in the following way: if we perform a loop calculation in our EFT, we shall find that we obtain divergent contributions which can only be cancelled by counterterms with higher mass dimensions than those considered at a fixed order in $1/\Lambda$. However, the divergent contribution will itself be multiplied by a higher power in $1/\Lambda$ than the fixed order we are considering; hence, it can be dropped. Details of such a calculation are presented in Sect. 5.4 of Ref.~\cite{Manohar:2018aog}.
+
+Renormalisation of an EFT also results in \textit{running} of the Wilson coefficients in the EFT. We will neglect this effect in the rest of the thesis, since it will be subleading in all scenarios considered, but it is worth noting that the coefficients are not constants.
+
+\paragraph{EFT bases.} In the case of a more general bottom-up EFT, with many more low-energy degrees of freedom, there will be a vast array of possible operators that can be written down at a given mass dimension in the EFT expansion. Crucially, these operators \textit{may not be independent}. Generically, there are two ways in which operators may be dependent on one another:
+\begin{enumerate}[label = (\roman*)]
+\item \textbf{Equations of motion.} The operators might be related by the \textit{equations of motion} of the low-energy theory. We already saw an example of this when reducing Eq.~\eqref{eq:first_try_bottom_up_eft} to Eq.~\eqref{eq:bottom_up_eft}.
+\item \textbf{Integration by parts.} The operators might be related by \textit{integration by parts}. Consider, for example, the following pair of operators:
 \begin{equation}
 \phi^2 \partial^2 \phi, \qquad \qquad \phi (\partial\phi)^2,
 \end{equation}
@@ -2150,22 +2198,21 @@ built from a scalar field $\phi$ and the derivative $\partial_{\mu}$. On the sur
 \begin{equation}
 \int d^4x\ \phi^2 \partial^2 \phi = -\int d^4x\ \partial(\phi^2) \cdot \partial \phi = -2 \int d^4x\ \phi (\partial \phi)^2,
 \end{equation}
-assuming that boundary terms decay at infinity. Therefore, if we were to na\"{i}vely insert the sum $g \phi^2 \partial^2 \phi + g' \phi (\partial \phi)^2$, we would find that it in all processes the EFT coefficients $g, g'$ would enter in the combination $g' - 2g$; we would never be able to determine them independently of one another.
-
-It follows that in any construction of a bottom-up EFT, we should endeavour to find a minimal set of operators which are independent of one another, so that their associated EFT coefficients can additionally be determined independently of one another. It can be shown (see e.g. Ref.~\cite{}) that there are only two ways in which :
-\begin{enumerate}[label = (\roman*)]
-\item \textbf{Integration by parts,} in the manner described above.
-\item \textbf{Equations of motion.} Two operators can be related by the equations of motion.
+assuming that boundary terms decay at infinity. Therefore, if we were to na\"{i}vely insert the sum $g \phi^2 \partial^2 \phi + g' \phi (\partial \phi)^2$, we would find that it in all processes the Wilson coefficients $g, g'$ would enter in the combination $g' - 2g$; we would never be able to determine them independently of one another.
 \end{enumerate}
-Provided that we construct a list of operators which cannot be related by either (i), (ii), we have found a minimal set of independent operators. This will be immediately useful when we construct the SMEFT using the so-called \textit{Warsaw basis} in the following section, Sect.~\ref{subsec:the_smeft}.
+It follows that in any construction of a bottom-up EFT, to avoid redundancy we should endeavour to find a minimal set of operators (at each mass dimension) which are independent of one another, so that their associated Wilson coefficients can additionally be determined independently of one another. Such a minimal set is called a \textit{basis} for the EFT at the given mass dimension; this notion will be immediately useful when we construct the SMEFT using the so-called \textit{Warsaw basis} in the following section, Sect.~\ref{subsec:the_smeft}.
 
 \subsection{The SMEFT}
 \label{subsec:the_smeft}
-The framework of bottom-up EFTs can naturally be applied to the Standard Model itself, producing an EFT known as the \textit{Standard Model Effective Field Theory} (SMEFT) \cite{Weinberg:1979sa,Buchmuller:1985jz,Georgi:1994qn,Giudice:2007fh,Grzadkowski:2010es,Alonso:2013hga,Jenkins:2013wua,Jenkins:2013zja,Henning:2014wua,Brivio:2017vri,Wells:2015uba,Englert:2019zmt,Fuentes-Martin:2020udw,Cohen:2020qvb}. Following the procedure outlined above, the Lagrangian of the SMEFT must take the form:
+The framework of bottom-up EFTs can naturally be applied to the Standard Model itself, producing an EFT known as the \textit{Standard Model Effective Field Theory} (SMEFT) (see e.g. Ref.~\cite{Brivio:2017vri} for a review). 
+%\cite{Weinberg:1979sa,Buchmuller:1985jz,Georgi:1994qn,Giudice:2007fh,Grzadkowski:2010es,Alonso:2013hga,Jenkins:2013wua,Jenkins:2013zja,Henning:2014wua,Brivio:2017vri,Wells:2015uba,Englert:2019zmt,Fuentes-Martin:2020udw,Cohen:2020qvb}. 
+Following the procedure outlined above, the Lagrangian of the SMEFT must take the form:
 \begin{equation}
-\mathcal{L}_{\text{SMEFT}} = \mathcal{L}_{\text{SM}} + \sum_{d=5}^{\infty} 
+\mathcal{L}_{\text{SMEFT}} = \mathcal{L}_{\text{SM}} + \sum_{d=5}^{\infty} \sum_{i=1}^{n_d} \frac{c_d^{(i)}}{\Lambda^{d-4}} \mathcal{O}_{d}^{(i)},
 \end{equation}
-The types of operators that arise at dimension $d=5$, $d=6$ in the expansion have been completely classified. The operators at dimension $d=5$ are known as \textit{Weinberg operators}, and... . At dimension $d=6$, there are a total of $2499$ independent operators, parametrised by the so-called \textit{Warsaw basis}, introduced in Ref.~\cite{Grzadkowski:2010es}.
+where $\mathcal{L}_{\text{SM}}$ denotes the Lagrangian of the Standard Model, and $\mathcal{O}_{d}^{(i)}$ denotes the $i$th operator in a basis for the $d$-dimensional operators built from the SM fields and obeying the SM symmetries (Lorentz symmetry and gauge symmetry). Here, $n_d$ denotes the number of independent operators of mass dimension $d$, $c_d^{(i)}$ denotes the $i$th Wilson coefficient at mass dimension $d$, and $\Lambda$ represents a characteristic scale of New Physics.
+
+The types of operators that arise at dimension $d=5$, $d=6$ in the expansion have been completely classified. The operators at dimension $d=5$ are known as \textit{Weinberg operators}, and are all lepton number violating; strong constraints on their respective Wilson coefficients from LEP mean that these operators are usually ignored. At dimension $d=6$, there are a total of $n_6 = 2499$ independent operators, parametrised by the so-called \textit{Warsaw basis}, introduced in Ref.~\cite{Grzadkowski:2010es}. It is the dimension six terms which we shall be most interested in throughout this thesis. 
 
 The types of operators appearing in the Warsaw basis are summarised in Table...
  
@@ -2184,7 +2231,7 @@ $\mathcal{A} \propto E^2 / \Lambda^2$,  where $E$ is the energy of the process a
 %
 Thus, rather generically, a less precise measurement of a high-mass tail can compete with a low-energy precision measurement due to this energy enhancement, which can be traced back to the preservation of unitarity.
 %
-This property leads to the somehow unintuitive result that
+This property leads to the somewhat unintuitive result that
 the study of the high-energy lepton tails in the Drell-Yan process represents a competitive probe
 of BSM dynamics compared to electroweak precision tests and low-energy
 flavour physics test.
