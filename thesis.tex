@@ -3986,6 +3986,43 @@ uncertainties.
 \section{A first look at PDF `contamination': injecting New Physics into the HL-LHC data}
 \label{sec:hllhc_extension}
 
+The study presented in Sect.~\ref{sec:hllhc} was based entirely on the assumption that data on NC and CC DY from the HL-LHC will be entirely consistent with the Standard Model. It is interesting to ask what happens if instead we inject the data with some New Physics, that is, if we base the generation of the HL-LHC pseudodata in Sect.~\ref{sec:hllhc} not on SM central values, but instead on SM central values multiplied by some non-unit $K$-factor combination of the $\hat{W}, \hat{Y}$ parameters. Such a study was performed in the conference proceedings given in Ref.~\cite{Madigan:2021uho}, and is described here.
+
+Let us suppose that we now generate the HL-LHC pseudodata in Sect.~\ref{sec:hllhc} with $\hat{W},\hat{Y}$ fixed to the values $(\hat{W}, \hat{Y}) = (4,8) \times 10^{-5}$, taking these values from within the 95\% confidence intervals presented in Sect.~\ref{sec:hllhc}. Performing the same analysis, and in particular recomputing the EFT bounds, we obtain the results given in Table~\ref{tab:hllhc_w_y_bounds}.
+
+\begin{table}[H]
+ \renewcommand{\arraystretch}{1.40}
+  \centering
+  \begin{tabular}{l|c|c|c}
+    & SM PDFs & SM cons. PDFs  & SMEFT PDFs \\
+    \hline
+    $\hat{W}\times 10^5$ (95\% CL)& $[-1.5,1.2]$ & $[3.1,5.0]$ & $[-5.3,9.0]$ \\
+    \hline
+   $\hat{Y}\times 10^5$ (95\% CL) & $[-3.1,8.7]$ & $[5.8,13.6]$ & $[-0.2,26.7]$  \\
+    \hline
+  \end{tabular}
+  \caption{ \label{tab:hllhc_w_y_bounds}\small
+    We inject a spurious signal of new physics into the HL-LHC pseudodata, taking $(\hat{W},\hat{Y}) = (4,8) \times 10^{-5}$ as a benchmark. The table shows the 95\% CL marginalised bounds on the $\hat{W}$ and $\hat{Y}$ parameters
+obtained from the two-dimensional $(\hat{W},\hat{Y})$ fits that include this HL-LHC pseudodata. PDF uncertainties are
+accounted for.
+}
+\end{table}
+
+We find that the fully simultaneous fit does a good job of detecting New Physics, with the
+bounds moving to the right relative to those in Sect.~\ref{sec:hllhc}. In contrast, the fit using SM PDFs that have
+seen the SMEFT-affected data are unable to detect New Physics: the point $(\hat{W},\hat{Y}) = (4,8) \times 10^{-5}$
+lies outside of the marginalised bounds at 95\% CL shown in the leftmost column of Table~\ref{tab:hllhc_w_y_bounds}. Finally
+we find that using conservative SM PDFs we are able to detect the New Physics, and the bounds
+are in fact tighter than those obtained using SMEFT PDFs. Our results suggest that a more careful
+study of conservative PDFs will be very important in the future, as PDF fits continue to include
+more and more data, some of which could be SMEFT-contaminated. In particular, it will be crucial
+for those performing SMEFT fits to know whether a fully simultaneous PDF-SMEFT fit is required,
+or whether they can reliably use conservative sets instead. A discussion of this point is given in the
+dedicated study presented in Chapter~\ref{chap:contamination}.
+
+
+
+
 
 
 
@@ -3993,7 +4030,7 @@ uncertainties.
 \chapter{Parton distributions in the SMEFT from the LHC Run II top dataset}
 \label{chap:top}
 
-\noindent \textit{[This chapter is based on Ref.~\cite{Kassabov:2023hbm}, produced in collaboration with Zahari Kassabov, Maeve Madigan, Luca Mantani, Manuel Morales Alvarado, Juan Rojo and Maria Ubiali. My contributions to this study comprised: implementation of all new datasets included in this study in the NNPDF framework; production of all SM predictions for all datasets in this study, available as NLO grids suitable for PDF fitting and NNLO QCD $K$-factors; re-implementation and re-structuring of the \textsc{SIMUnet} code to additionally include general quadratic contributions, ; running all SM PDF fits presented in this study; writing the various appendices...]}\\
+\noindent \textit{[This chapter is based on Ref.~\cite{Kassabov:2023hbm}, produced in collaboration with Zahari Kassabov, Maeve Madigan, Luca Mantani, Manuel Morales Alvarado, Juan Rojo and Maria Ubiali. My contributions to this study comprised: implementation of all new datasets included in this study in the NNPDF framework; production of all SM predictions for all datasets in this study, available as NLO grids suitable for PDF fitting and NNLO QCD $K$-factors; re-implementation and re-structuring of much of the \textsc{SIMUnet} code; running all SM PDF fits presented in this study; writing appendices to the study concerning fit quality and the pitfalls of the Monte Carlo replica method.]}\\
 
 \noindent In Chapter~\ref{chap:smeftdy}, we introduced the SMEFT, and demonstrated that a simultaneous extraction of PDFs and SMEFT Wilson coefficients may be necessary for the high luminosity LHC. However, this study was limited in scope, fitting only two Wilson coefficients together with PDFs. In this chapter, we perform a much more comprehensive simultaneous extraction of PDFs, together with more than twenty SMEFT Wilson coefficients, focussing this time on those which affect processes involving top quark production.
 
