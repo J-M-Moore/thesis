@@ -1901,7 +1901,7 @@ operate with a total integrated luminosity of $\mathcal{L} = 6\ \text{ab}^{-1}$
 (from the combination of ATLAS and CMS, which provide ${\cal L}=3 \,{\rm ab}^{-1}$ each),
 and also assuming a five-fold reduction in systematic uncertainty
 compared to ~\cite{CMS:2018mdl}. 
-We regard this scenario as {\it optimistic} in this paper; we also
+We regard this scenario as {\it optimistic} in this chapter; we also
 manipulated the projected data so that it reflected a more {\it
   conservative} possibility, where the total integrated luminosity of
 the high-mass Drell-Yan tail measurements is $\mathcal{L} = 3\
@@ -1925,7 +1925,44 @@ compute the maximal sensitivity to the dark photon parameters.
 
 The central PDF set used as an input to generate the theoretical prediction is the SM baseline
 that we use throughout the paper, namely the NNLO {\tt NNPDF3.1luxQED} set.
-The central values for the HL-LHC pseudodata are then generated
+The percentage statistical and systematic uncertainties on the HL-LHC pseudodata are then estimated as follows.
+Let us denote by  $\sigma^{\rm th}_{i}$ the theoretical prediction for the
+DY cross-section from the \texttt{luXQED} set, including all relevant selection cuts
+as well as the leptonic branching fractions.
+%
+The expected number of events in this bin and the associated (relative)
+statistical uncertainty $\delta_i^{\rm stat}$ are given by 
+\begin{equation}
+  N_{i}^{\rm th}= \sigma^{\rm th}_{i}\times \mathcal{L} \,, \quad \delta_i^{\rm stat}\equiv
+  \frac{\left( \delta N_{i}\right)_{\rm stat}}{N_{i}^{\rm th}} = \frac{1}{\sqrt{N_{i}^{\rm th}}} \, .
+\end{equation}
+Note that this bin-by-bin relative statistical uncertainty is the same both at the level
+of number of events and at the level of fiducial cross sections.
+
+The HL-LHC systematic uncertainties are also estimated from the same reference
+measurements.
+%
+If $\delta_{i,j}^{\rm sys}$ denotes the $j^{\rm th}$ relative systematic uncertainty
+associated to the $i^{\rm th}$ bin of the reference
+measurement, and if this bin contains $N_i^{\rm th}$ events,
+then for our projections we assume that the same systematic error
+associated to a bin with a similar number of expected events will be given by 
+$f_{{\rm red},j}\delta_{i,j}^{\rm sys}$, where $f_{{\rm red},j}$
+is the expected reduction in systematic errors foreseen at the HL-LHC (we take the reduction factor to be $0.2$ in the \textit{optimistic scenario} and $0.5$ in the \textit{conservative scenario}).
+%
+This assumption is justified since most systematic errors improve with the sample size
+thanks to {\it e.g.} better calibration.
+
+Adding in quadrature systematic uncertainties with the statistical error,
+the total relative uncertainty for the $i$th bin of our HL-LHC projections
+is:
+\begin{equation}
+\delta_{{\rm tot},i}^{\rm exp} = \left( \left( \delta_i^{\rm stat}\right)^2 + \sum_{j=1}^{n_{\rm sys}}
+\left( f_{{\rm red},j}\delta_{i,j}^{\rm sys} \right)^2\right)^{1/2} \, ,
+\end{equation}
+where $n_{\rm sys}$ indicates the number of systematic error sources.
+
+The final central values for the HL-LHC pseudodata are then generated
 by fluctuating the reference theory prediction by the expected total experimental
 uncertainty, namely
 \begin{equation}
@@ -2090,6 +2127,8 @@ Finally, it would be interesting to ask whether similar analyses could be perfor
 \newpage
 \chapter{Parton distributions in the SMEFT from high-energy Drell-Yan tails}
 \label{chap:smeftdy}
+
+\epigraph{...}{\textit{\\ from ..., \\ by ...}}
 
 \noindent \textit{[This chapter is based on Ref.~\cite{Greljo:2021kvv}, produced in collaboration with Admir Greljo, Shayan Iranipour, Zahari Kassabov, Maeve Madigan, Juan Rojo, Maria Ubiali and Cameron Voisey, and additionally on Ref.~\cite{Madigan:2021uho}, produced in collaboration with Maeve Madigan. My main contributions to the work comprised: the calculation and production of SMEFT $K$-factors for all of the DIS processes entering the study, accurate to next-to-leading order in QCD; benchmarking of the charged current DY $K$-factors against an analytic calculation; running a subset of the fits and analysis, especially in the follow-up study of Ref.~\cite{Madigan:2021uho}, presented in Sect.~\ref{sec:hllhc_extension}.]}\\
 
@@ -3155,8 +3194,7 @@ uncertainties and the statistical uncertainty associated to the finite
 replica sample of the NNPDF Monte Carlo sets that we use here.
 
 \paragraph{PDF uncertainty.} In
-Sects.~\ref{sec:results_scenarioI},~\ref{sec:scenarioIIresults}
-and~\ref{sec:hllhc_joint_fits} we
+Sects.~\ref{sec:res1} and~\ref{sec:hllhc_joint_fits} we
 will present bounds on the EFT parameters  using the SM PDFs
 with and without the PDF uncertainties being accounted for.
 %
@@ -3236,8 +3274,7 @@ of partonic luminosities
 and assess how the bounds obtained on the $\hat{W}$ and $\hat{Y}$
 parameters in this simultaneous SMEFT and PDF fit compare to those based on assuming SM PDFs.
 We present results for one-dimensional fits where only one of the $\hat{W}$ or the $\hat{Y}$
-parameter is allowed to be non-zero.
-The reason for this choice is that, in a fit including only high-mass neutral-current
+parameter is allowed to be non-zero; the reason for this choice is that, in a fit including only high-mass neutral-current
 Drell-Yan processes, there exists a flat direction when $\hat{W}$ and $\hat{Y}$ are varied
 simultaneously, since both operators scale as $O(q^4)$ and thus cannot both be constrained by a single 1D distribution.
 %
@@ -3246,7 +3283,7 @@ This degeneracy can only be lifted once high-mass charged-current DY data is inc
 As we  demonstrate in Sect.~\ref{sec:hllhc}, thanks to the HL-LHC it will be possible 
 to carry out a simultaneous fit of the PDFs and the two EFT parameters $(\hat{W},\hat{Y}) $.
 
-Taking into account the existing bounds reported in Sect.~\ref{sec:},
+Taking into account the existing bounds reported in Sect.~\ref{sec:dy_scenarios},
 as well as the sensitivity of available high-mass Drell-Yan
 data to the EFT coefficients illustrated by Fig.~\ref{fig:dysmeft}, here we have adopted
 the following sampling ranges for the $\hat{W}$ and $\hat{Y}$ parameters:
@@ -3263,9 +3300,9 @@ in steps of $\Delta \hat{W}=2\times 10^{-4}$,
 and then to add two more values at $\hat{W}=-18\times 10^{-4}$ and $-22\times 10^{-4}$.
 
 Fig.~\ref{fig:parabolas1} displays the obtained values of $\Delta \chi^2$, Eq.~(\ref{eq:deltachi2def}),
-as a function of $\hat{W}_i$ 
-and $\hat{Y}_i$ in the case of the SMEFT PDFs. That is, using
-the values of $\chi_{\rm eftp}^2({\mathbf{c}_i})$.
+as a function of $\hat{W}$ 
+and $\hat{Y}$ in the case of the SMEFT PDFs (that is, using
+the values of $\chi_{\rm eftp}^2({\mathbf{c}_i})$).
 %
 These $\chi^2$ values are  evaluated as a sum over
 those datasets from Table~\ref{tab:data-low-mass} and
@@ -3480,7 +3517,7 @@ is proportional to the $u\bar{u}$ and $d\bar{d}$ combinations at leading order,
 but the up and down quark PDFs are already well constrained by lower-energy DIS measurements.
 %
 Furthermore, we have verified
-that the size PDF uncertainties is unchanged in the SMEFT fits.
+that the size of the PDF uncertainties is unchanged in the SMEFT fits.
  %
 The results of  Fig.~\ref{fig:SMEFT_lumis} are consistent with those of 
 Table~\ref{tab:bound1w} and demonstrate
@@ -3510,8 +3547,7 @@ parameters.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 One important question in this context concerns how one could disentangle the EFT-induced shifts in
-the PDF luminosities   displayed in Fig.~\ref{fig:SMEFT_lumis} (see also
-the corresponding PDF comparisons in Fig.~\ref{fig:SMEFT_PDFs}) from other possible sources
+the PDF luminosities displayed in Fig.~\ref{fig:SMEFT_lumis} from other possible sources
 of deviations, such as internal inconsistencies in some datasets or missing higher
 orders in the SM calculations. A dedicated study to this end is performed in Chapter~\ref{chap:contamination}.
 
@@ -3533,53 +3569,26 @@ We demonstrate that a consistent joint determination of PDFs is crucial for
 EFT studies at the HL-LHC.
 
 \subsection{Generation of HL-LHC pseudo-data}
+The HL-LHC pseudodata in this chapter is generated in the same way as in Sect.~\ref{subsec:dark_constraints}
+of Chapter~\ref{chap:darkphoton}. However, here we also generate data for charged-current DY data,
+whereas in Sect.~\ref{subsec:dark_constraints} we used only neutral-current DY data.
+Additionally, the PDF set used as an input to
+generate the theoretical prediction on which the pseudodata is based
+ is the DIS+DY baseline that was presented
+in Sect.~\ref{sec:fitsettings} (rather than the \texttt{luxQED} set used in Sect.~\ref{subsec:dark_constraints}).
 
-\JM{Rewrite so it matches the dark photon.}
-Following the strategy adopted in~\cite{Khalek:2018mdn} to estimate the ultimate PDF reach
-of the HL-LHC measurements (see also~\cite{Azzi:2019yne,Cepeda:2019klc}), here
-we generate HL-LHC pseudo-data for NC and CC high-mass Drell-Yan
-cross sections at $\sqrt{s}=14$ TeV and for a total integrated luminosity of $\mathcal{L}=6$ ab$^{-1}$
-(from the combination of ATLAS and CMS, which provide
-$\mathcal{L}=3$ ab$^{-1}$ each).
-%
-For these projections, theoretical predictions are evaluated at NNLO
-in QCD including NLO EW corrections, as is
-explained in detail in Sect.~\ref{sec:theory}. The PDF set used as an input to
-generate the theoretical prediction is the DIS+DY baseline that was presented
-in Sect.~\ref{sec:fitsettings}.
-
-For the generation of the NC pseudo-data, we adopt as reference the CMS  measurement
-at 13 TeV~\cite{Sirunyan:2018owv} based on $\mathcal{L}=2.8$ fb$^{-1}$.
-%
-The dilepton invariant mass distribution $m_{\ell\ell}$ is evaluated using the same selection
-and acceptance cuts of~\cite{Sirunyan:2018owv} but now with an extended
-binning in the $m_{\ell\ell}$ to account for the increase in luminosity.
-%
-We assume equal cuts for electrons and muons and impose $|\eta_\ell|\le 2.4$,
-$p_T^{\rm lead}\ge 20$ GeV, and $p_T^{\rm sublead}\ge 15$ GeV for the two
-leading charged leptons of the event.
-%
 In the case of the  CC pseudo-data, the lack of unfolded measurements
 of the $m_T$ distribution at 13 TeV to be used as reference forces
 us to base our projections on the
 ATLAS search for $W'$ bosons in the dilepton channel~\cite{Aad:2019wvl}.
 %
-As in the case of the NC projections, theory predictions for
+As in the case of the NC projections (discussed in Sect.~\ref{subsec:dark_constraints}), theory predictions for
 the $m_T$ distribution at high-mass are generated
 using the same selection and acceptance cuts as in~\cite{Aad:2019wvl}
-but now using an extended coverage in $m_T$.
+but now using an extended coverage in $m_T$. Further, we similarly restrict ourselves
+to events with either $m_{\ell\ell}$ or $m_T$ greater than 500 GeV.
 
-Both in the case of NC and CC Drell-Yan cross sections, we restrict ourselves
-to  events with either $m_{\ell\ell}$ or $m_T$ greater than 500 GeV.
-%
-Otherwise, the total experimental uncertainty would be limited by our modelling
-of the expected systematic errors and thus our projections could become unreliable.
-%
-Furthermore, we require that the expected number of events per bin
-is bigger than 30 to ensure the applicability of Gaussian statistics.
-%
-Taking into account these considerations, our choice of binning
-for the $m_{\ell\ell}$~($m_T$) distribution at the HL-LHC
+The pseudodata for the $m_{\ell\ell}$~($m_T$) distribution at the HL-LHC
 is displayed in Fig.~\ref{fig:hllhc-nc}~(Fig.~\ref{fig:hllhc-cc}),
 with the highest energy bins reaching $m_{\ell\ell}\simeq 4 $ TeV
 ($m_T\simeq 3.5$ TeV) for neutral-current (charged-current) scattering.
@@ -3587,8 +3596,8 @@ with the highest energy bins reaching $m_{\ell\ell}\simeq 4 $ TeV
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[t]
 \begin{center}
-%  \includegraphics[width=0.49\textwidth]{plots/HLLHC_HMDY_NC_EL_FINAL_plot_error_breakdown_0.pdf}
-%  \includegraphics[width=0.49\textwidth]{plots/HLLHC_HMDY_NC_MU_FINAL_plot_error_breakdown_0.pdf}
+  \includegraphics[width=0.49\textwidth]{dy_figures/HLLHC_HMDY_NC_EL_FINAL_plot_error_breakdown_0.pdf}
+  \includegraphics[width=0.49\textwidth]{dy_figures/HLLHC_HMDY_NC_MU_FINAL_plot_error_breakdown_0.pdf}
   \caption{\label{fig:hllhc-nc} Top panels: comparison  of the
     projected HL-LHC pseudo-data for high-mass neutral-current Drell-Yan in the dielectron (left)
     and dimuon (right) final states
@@ -3609,8 +3618,8 @@ with the highest energy bins reaching $m_{\ell\ell}\simeq 4 $ TeV
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[t]
 \begin{center}
-%  \includegraphics[width=0.49\textwidth]{plots/HLLHC_HMDY_CC_EL_FINAL_plot_error_breakdown_0.pdf}
-%  \includegraphics[width=0.49\textwidth]{plots/HLLHC_HMDY_CC_MU_FINAL_plot_error_breakdown_0.pdf}
+  \includegraphics[width=0.49\textwidth]{dy_figures/HLLHC_HMDY_CC_EL_FINAL_plot_error_breakdown_0.pdf}
+  \includegraphics[width=0.49\textwidth]{dy_figures/HLLHC_HMDY_CC_MU_FINAL_plot_error_breakdown_0.pdf}
     \caption{\label{fig:hllhc-cc} Same as Fig.~\ref{fig:hllhc-nc} for
       charged-current Drell-Yan in bins of the transverse mass $m_T$.
     }
@@ -3619,52 +3628,21 @@ with the highest energy bins reaching $m_{\ell\ell}\simeq 4 $ TeV
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The percentage statistical and systematic uncertainties associated to the HL-LHC pseudo-data
-are displayed in the lower panels of Figs.~\ref{fig:hllhc-nc} and~\ref{fig:hllhc-cc}
-and have been estimated as follows.
+are displayed in the lower panels of Figs.~\ref{fig:hllhc-nc} and~\ref{fig:hllhc-cc}, and are 
+estimated using the same procedure as outlined in Sect.~\ref{subsec:dark_constraints} (choosing
+to work with a five-fold reduction factor for the systematics, corresponding to the \textit{optimistic} 
+scenario there\footnote{We note that the \textit{conservative scenario} for the reduction of systematic errors,
+namely $f_{{\rm red},j}=0.5$, is not expected to qualitatively
+modify our results.
 %
-Let us denote by  $\sigma^{\rm th}_{i}$ the theoretical prediction for the
-DY cross section, including all relevant selection cuts
-as well as the leptonic branching fractions.
-%
-The expected number of events in this bin and the associated (relative)
-statistical uncertainty $\delta_i^{\rm stat}$ are given by 
-\begin{equation}
-  N_{i}^{\rm th}= \sigma^{\rm th}_{i}\times \mathcal{L} \,, \quad \delta_i^{\rm stat}\equiv
-  \frac{\left( \delta N_{i}\right)_{\rm stat}}{N_{i}^{\rm th}} = \frac{1}{\sqrt{N_{i}^{\rm th}}} \, .
-\end{equation}
-Note that this bin-by-bin relative statistical uncertainty is the same both at the level
-of number of events and at the level of fiducial cross sections.
-
-The HL-LHC systematic uncertainties are also estimated from the same reference
-measurements.
-%
-If $\delta_{i,j}^{\rm sys}$ denotes the $j^{\rm th}$ relative systematic uncertainty
-associated to the $i^{\rm th}$ bin of the reference
-measurement, and if this bin contains $N_i^{\rm th}$ events,
-then for our projections we assume that the same systematic error
-associated to a bin with a similar number of expected events will be given by 
-$f_{{\rm red},j}\delta_{i,j}^{\rm sys}$, where $f_{{\rm red},j}$
-is the expected reduction in systematic errors foreseen at the HL-LHC.\footnote{
-  The binning of  the CC reference measurement, the ATLAS $W'$ search, is much finer
-than for our  HL-LHC projections and hence we first match them by means
-of a weighted average.
-}
-%
-This assumption is justified since most systematic errors improve with the sample size
-thanks to {\it e.g.} better calibration.
-
-Adding in quadrature systematic uncertainties with the statistical error,
-the total relative uncertainty for the $i$th bin of our HL-LHC projections
-is
-\begin{equation}
-\delta_{{\rm tot},i}^{\rm exp} = \left( \left( \delta_i^{\rm stat}\right)^2 + \sum_{j=1}^{n_{\rm sys}}
-\left( f_{{\rm red},j}\delta_{i,j}^{\rm sys} \right)^2\right)^{1/2} \, ,
-\end{equation}
-where $n_{\rm sys}$ indicates the number of systematic error sources.
-%
-The central values for the HL-LHC pseudo-data is then generated
+The reason is that, as indicated by
+the bottom panels of Figs.~\ref{fig:hllhc-nc} and~\ref{fig:hllhc-cc},
+for the highest energy bins (which dominate
+the EFT sensitivity), specifically above
+$m_{\ell\ell}\approx$ 1.7 TeV and $m_T \approx$ 1.5 TeV, the measurement
+will be limited by statistical uncertainties.}). As in Sect.~\ref{subsec:dark_constraints}, the central values for the HL-LHC pseudodata are then generated
 by fluctuating the reference theory prediction by the expected total experimental
-uncertainty, namely
+uncertainty, namely:
 \begin{equation}
   \label{eq:hllhc}
 \sigma^{\rm hllhc}_{i} \equiv \sigma^{\rm th}_{i} \left( 1+ \lambda
@@ -3675,36 +3653,18 @@ is the total (relative) experimental uncertainty corresponding to this
 specific bin
 (excluding the luminosity and normalisation uncertainties), and $\delta_{\cal L}^{\rm exp}$
 is the luminosity uncertainty, which is fully correlated amongst all
-the pseudo-data bins of the same experiment. We take this luminosity uncertainty to be
+the pseudo-data bins of the same experiment. Again, we take this luminosity uncertainty to be
 $\delta_{\cal L}^{\rm exp}=1.5$\%  for both ATLAS and CMS, as done in Ref.~\cite{Khalek:2018mdn}.
 
-Here we adopt the baseline SM PDF set described in Sect.~\ref{sec:res1},
-which is denoted as ``DIS+DY'',
-to evaluate the $ \sigma^{\rm th}_{i}$ cross sections entering Eq.~(\ref{eq:hllhc}).
-%
 We have verified that, both at the pre- and post-fit levels, the fit quality to the HL-LHC pseudo-data
 satisfies $\chi^2/n_{\rm bin} \simeq 1$ in the case of the SM PDFs
 as expected.
-%
-Furthermore,
-we assume $f_{{\rm red},j}=0.2$ for all systematic sources, as done in the optimistic scenario of
-Ref.~\cite{Khalek:2018mdn}.
-%
-We note that more conservative values for the reduction of systematic errors,
-such as $f_{{\rm red},j}=0.5$, are not expected to qualitatively
-modify our results.
-%
-The reason is that, as indicated by
-the bottom panels of Figs.~\ref{fig:hllhc-nc} and~\ref{fig:hllhc-cc},
-for the highest energy bins (which dominate
-the EFT sensitivity), specifically above
-$m_{\ell\ell}\approx$ 1.7 TeV and $m_T \approx$ 1.5 TeV, the measurement
-will be limited by statistical uncertainties.
+
 
 \subsection{Impact on PDF uncertainties}
 
 From Figs.~\ref{fig:hllhc-nc} and \ref{fig:hllhc-cc},  one can observe that
-the PDF uncertainties in the SM PDF baseline used to generate the pseudo-data
+the PDF uncertainties in the SM PDF baseline used to generate the pseudodata
 are either comparable or larger than the corresponding
 projected experimental uncertainties at the  HL-LHC.
 %
@@ -3714,14 +3674,14 @@ while in the CC case the associated PDF errors become clearly larger
 than the experimental ones starting at $m_T\simeq 2 $ TeV.
 %
 This comparison suggests that one should expect a significant 
-uncertainty reduction once the HL-LHC pseudo-data is included
+uncertainty reduction once the HL-LHC pseudodata is included
 in the PDF fit.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[t]
 \begin{center}
-%  \includegraphics[width=0.49\textwidth]{plots/DataHL_lumi_channels0_plot_lumi1d.pdf}
-%  \includegraphics[width=0.49\textwidth]{plots/DataHL_lumi_channels0_UncRange_plot_lumi1d_uncertainties.pdf}
+  \includegraphics[width=0.49\textwidth]{dy_figures/DataHL_lumi_channels0_plot_lumi1d.pdf}
+  \includegraphics[width=0.49\textwidth]{dy_figures/DataHL_lumi_channels0_UncRange_plot_lumi1d_uncertainties.pdf}
     \caption{\label{fig:hllhc-lumi-qqb} Impact of the
       HL-LHC pseudo-data on the quark-antiquark luminosity $\mathcal{L}_{q\bar{q}}$
       of the SM PDF baseline fit as a function
@@ -3781,26 +3741,16 @@ as compared to the results reported in the previous section.
 %
 With this motivation, we first of all repeat the joint
 determination of PDFs and the $\hat{W},\hat{Y}$ coefficients
-from EFT  scenario I presented in Sect.~\ref{sec:results_scenarioI}
+from the benchmark scenario presented in Sect.~\ref{sec:res1}
 now accounting for the constraints of the HL-LHC pseudo-data.
 %
 An important difference in this case is that the
 inclusion of CC data lifts the flat direction in the $(\hat{W},\hat{Y})$
-plane, making a full two-dimensional fit possible.
-%
-Secondly, the availability of the HL-LHC pseudo-data allows
-us to assess the interplay between the PDFs and the EFT
-coefficient ${\bf C}^{D\mu}_{33}$  from benchmark scenario II,
-whose analysis in Sect.~\ref{sec:scenarioIIresults} was restricted
-to fixed SM PDFs.
+plane, making a full two-dimensional fit possible.\\
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Scenario I.}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-For the simultaneous determination of PDFs and the $\hat{W},\hat{Y}$ coefficients
+\noindent For the simultaneous determination of PDFs and the $\hat{W},\hat{Y}$ coefficients
 accounting for the constraints provided by the HL-LHC pseudo-data,
-we use 35 sampling values of $(\hat{W}_i,\hat{Y}_i)$, 25 of which are equally spaced in
+we use 35 sampling values of $(\hat{W},\hat{Y})$, 25 of which are equally spaced in
 either $\hat{W}\in (-1.6,1.6)\times 10^{-5}$ or $\hat{Y}\in (-8,+8)\times 10^{-5}$
 (hence in steps of $\Delta\hat{W}=0.8 \times 10^{-6}$ and
 $\Delta\hat{Y}=4 \times 10^{-6}$ respectively), and then 10 additional points along the
@@ -3809,17 +3759,8 @@ diagonals.
 In order to assess the robustness of the results, we added 12
 more sampling values, 8 further away from the origin and 4 more along
 the $\hat{W}=0$ and $\hat{Y}=0$ axes, and verified that the confidence
-level countours are stable upon their addition. 
+level contours are stable upon their addition. 
 
-Fig.~\ref{fig:hllhc-ellipse} displays the  68\% and 95\% confidence level contours
-in the ($\hat{W}$,$\hat{Y}$) plane obtained from the DIS+DY fits that
-include the HL-LHC high-mass DY pseudo-data summarised
-in Figs.~\ref{fig:hllhc-nc} and \ref{fig:hllhc-cc}, both for the NC and CC channels.
-%
-Results are provided when using either SM PDFs (hence the contours
-are derived from a parabolic fit to $\chi^2_{\rm smp}$)
-or SMEFT PDFs (and thus from a parabolic fit to $\chi^2_{\rm eftp}$).
-%
 We find that the constraints on the $(\hat{W},\hat{Y})$ parameters are completely
 dominated by the HL-LHC projections and that current data exhibit a much
 smaller pull, consistent with the findings of previous
@@ -3829,24 +3770,8 @@ are included in the computation of the $\chi^2$.
 %
 The corresponding 
 marginalised bounds on $\hat{W}$ and $\hat{Y}$
-are then reported in Table~\ref{tab:hlbounds} using the same
+are reported in Table~\ref{tab:hlbounds} using the same
 format as in  Table~\ref{tab:bound1w}.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[t]
-\begin{center}
-%  \includegraphics[width=0.9\textwidth]{plots/WY-hl-2curves.pdf}
-  \caption{\label{fig:hllhc-ellipse} The 68\% and 95\% confidence level contours
-    in the ($\hat{W}$,$\hat{Y}$) plane obtained from the DIS+DY fits that
-    include the high-mass Drell-Yan HL-LHC pseudo-data (both in the NC and CC channels)
-    when using either SM PDFs (parabolic fit to $\chi^2_{\rm smp}$)
-    or SMEFT PDFs (parabolic fit to $\chi^2_{\rm eftp}$).
-    %
-    The red cross indicates
-  the SM expectation, $\hat{W}=\hat{Y}=0$. }
-\end{center}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}
@@ -3883,11 +3808,11 @@ format as in  Table~\ref{tab:bound1w}.
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-From both Fig.~\ref{fig:hllhc-ellipse} and Table~\ref{tab:hlbounds},
+From Table~\ref{tab:hlbounds},
 one can observe how including high-mass data at the LHC both in a fit of PDFs and
 in a fit of SMEFT coefficients and neglecting the interplay between
 them could result in a significant underestimate
-of the  uncertainties associated to the EFT parameters.
+of the uncertainties associated to the EFT parameters.
 %
 Indeed, the marginalised 95\% CL bound on the $\hat{W}$~($\hat{Y}$) parameter becomes looser
 once SMEFT PDFs are consistently used, with a broadening, defined in Eq.~(\ref{eq:broadening}),
@@ -3898,26 +3823,6 @@ been accounted for in EFT fits based on SM PDFs,
 where the same broadening factors would be 940\% and 190\%
 respectively.
 
-
-A further important question is whether the bounds obtained with SM
-PDFs appearing on the left column of Table~\ref{tab:hlbounds}  would become
-more comparable to those obtained from the simultaneous fit of PDFs
-and SMEFT coefficients, in case a
-conservative set of PDF was used in the analysis based on SM PDFs. To
-address this question, in Table~\ref{tab:hlboundscons} we display the
-bounds that are obtained using a PDF set that does not include any of
-the high-mass Drell-Yan sets (neither the HL-LHC projections nor the
-current datasets listed in Table.~\ref{tab:data-high-mass}) and
-compare the bounds obtained using this set of PDFs to those obtained
-consistently using SMEFT PDFs.
-%
-We observe that, once this set of conservative PDF is used as an input
-PDF set and the PDF uncertainty is included in the computation of the
-bounds, the latter increases as compared to the bounds in
-Table~\ref{tab:hlbounds}. As a result, the size of the bounds obtained
-by keeping fixed SM PDFs is closer to the size obtained from the
-simultaneous fits, although still slightly underestimated.
-At the same time, the shift in the best-fit becomes more marked. 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}
@@ -3946,29 +3851,88 @@ At the same time, the shift in the best-fit becomes more marked.
     fits that include the HL-LHC pseudo-data for NC and CC
     Drell-Yan distributions. The input PDF set for the analysis done
     using fixed SM PDFs (corresponding to the results displayed in the
-    column ``SM cons. PDFs'') is a conservative PDF set that does not
+    column `SM cons. PDFs') is a conservative PDF set that does not
     include any of the high-mass
     distributions or the HL-LHC projections nor the Run I and
     Run II high-mass dataset listed in Table
     ~\ref{tab:data-high-mass}. The limits obtained from the simultaneous fit
     of PDFs and Wilson coefficients  (corresponding to the results displayed on the
-    column ``SMEFT PDFs'') are the same as those in Table~\ref{tab:hlbounds}. 
+    column `SMEFT PDFs') are the same as those in Table~\ref{tab:hlbounds}. 
 }
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-We should also emphasise that, while in this work we use pseudo-data and
-hence the best-fit values are by construction
-unchanged, this would not be necessarily the case for the analysis of real data, and hence
-neglecting the PDF interplay might even result in spurious "signals''
-of EFT effects, even when a conservative set of PDFs is used. 
+
+A further important question is whether the bounds obtained with SM
+PDFs appearing on the left column of Table~\ref{tab:hlbounds}  would become
+more comparable to those obtained from the simultaneous fit of PDFs
+and SMEFT coefficients, in case a
+conservative set of PDF was used in the analysis based on SM PDFs. To
+address this question, in Table~\ref{tab:hlboundscons} we display the
+bounds that are obtained using a PDF set that does not include any of
+the high-mass Drell-Yan sets (neither the HL-LHC projections nor the
+current datasets listed in Table.~\ref{tab:data-high-mass}) and
+compare the bounds obtained using this set of PDFs to those obtained
+consistently using SMEFT PDFs.
+%
+We observe that, once this set of conservative PDF is used as an input
+PDF set and the PDF uncertainty is included in the computation of the
+bounds, the latter increases as compared to the bounds in
+Table~\ref{tab:hlbounds}. As a result, the size of the bounds obtained
+by keeping fixed SM PDFs is closer to the size obtained from the
+simultaneous fits, although still slightly underestimated.
+At the same time, the shift in the best-fit becomes more
+marked.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t]
+\begin{center}
+  \includegraphics[width=0.9\textwidth]{dy_figures/WY-contours-sm-smeft-hl-ref-160621-2.pdf}
+  \caption{\label{fig:hllhc-ellipse} The 95\% confidence level contours
+    in the ($\hat{W}$,$\hat{Y}$) plane obtained from the DIS+DY fits that
+    include the high-mass Drell-Yan HL-LHC pseudo-data (both in the NC
+    and CC channels) 
+    when using either SM PDFs (blue) or conservative SM PDFs (green). In both cases
+    the ellipses are obtained by performing a parabolic fit to
+    $\chi^2_{\rm smp}$ with fixed PDFs. PDF
+    uncertainties are included in the solid lines and not included in
+    the dashed lines.  The results are compared to
+    those obtained in a simultaneous fit, namely with SMEFT PDFs
+    (orange). In this case, the parabolic fit is performed to $\chi^2_{\rm eftp}$ by varying
+    simultaneously the Wilson Coefficients and the PDFs. 
+    %
+    The crosses indicate the best fits in the three cases discussed in
+    the text. }
+\end{center}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+Results are graphically displayed in
+Fig.~\ref{fig:hllhc-ellipse}, where the 95\% confidence level contours
+    in the ($\hat{W}$,$\hat{Y}$) plane obtained from the DIS+DY fits that
+    include the high-mass Drell-Yan HL-LHC pseudo-data  when using either SM PDFs, SM conservative
+    PDFs or SMEFT PDFs are compared. All solid contours include PDF
+    uncertainties, while the dashed contours that do not include PDF
+    uncertainties are also indicated to visualise the impact of the
+    inclusion of the PDF uncertainties.
+
+  To conclude, we should also emphasise that, while in this chapter we use pseudodata
+and hence the best-fit values are by construction unchanged, this
+would not necessarily be the case in the analysis of real data, where
+improper treatment of PDFs could result in a spurious EFT `signal', or
+even missing a signal which is indeed present in the data. A detailed
+study aimed at a precise definition of `conservative' PDFs is given in Chapter~\ref{chap:contamination}; 
+a thorough comparison of the consistent
+simultaneous approach, versus the use of conservative PDF sets, will
+be of particular interest in cases of EFT manifestations of new
+physics.
 
 The increased role that the interplay between PDFs and EFT coefficients
 will play at the HL-LHC can also be illustrated by
 comparing the expected behaviour of the quark-antiquark
 luminosity, displayed in Fig.~\ref{fig:HLlumiWY},
 for the SMEFT PDFs corresponding
-to representative values of the $\hat{W}$ and $\hat{Y}$ parameters of benchmark scenario I
+to representative values of the $\hat{W}$ and $\hat{Y}$ parameters of the benchmark scenario
 as compared to the  SM PDFs.
 %
 Note that the corresponding comparison for $\mathcal{L}_{q\bar{q}}$ 
@@ -3976,7 +3940,7 @@ in the fits to available Drell-Yan data
     was displayed in Fig.~\ref{fig:SMEFT_lumis}.
 %
     Indeed, the central value of the quark-antiquark luminosity
-    for SMEFT PDFs corresponding to values of $(\hat{W}_i,\hat{Y}_i)$ selected along the grid used
+    for SMEFT PDFs corresponding to values of $(\hat{W},\hat{Y})$ selected along the grid used
     to derive
 Fig.~\ref{fig:HLlumiWY} changes greatly, well
 outside the one-sigma error band of the SM PDFs, while the
@@ -3989,10 +3953,10 @@ $\chi^2$ values as compared to those obtained with the SM PDFs.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
 \begin{figure}[t]
 \begin{center}
-%  \includegraphics[width=0.49\textwidth]{plots/HighLumiCoef_lumi_channels0_plot_lumi1d.pdf}
-%  \includegraphics[width=0.49\textwidth]{plots/HighLumiCoef_lumi_channels0_UncRange_plot_lumi1d_uncertainties.pdf}
+  \includegraphics[width=0.49\textwidth]{dy_figures/HighLumiCoef_lumi_channels0_plot_lumi1d.pdf}
+  \includegraphics[width=0.49\textwidth]{dy_figures/HighLumiCoef_lumi_channels0_UncRange_plot_lumi1d_uncertainties.pdf}
   \caption{\label{fig:HLlumiWY} Same as Fig.~\ref{fig:hllhc-lumi-qqb}, now comparing
-    the quark-antiquark SM PDF luminosity in the fits including the HL-LHC pseudo-data
+    the quark-antiquark SM PDF luminosity in the fits including the HL-LHC pseudodata
     with those obtained in the SMEFT PDF fits for representative values
     of the $\hat{W}$ and $\hat{Y}$ parameters.
     %
@@ -4016,53 +3980,6 @@ luminosity of $\mathcal{L}=6$ fb$^{-1}$ (from the combination
 of ATLAS and CMS) rather than 3 fb$^{-1}$ as well as a more optimistic
 scenario concerning the reduction of the experimental systematic
 uncertainties.
-
-Fig.~\ref{fig:cutmax_hl} then displays the $R_{\chi^2}$ estimator, defined in
-Eq.~(\ref{mllratio}) and shown in Fig.~\ref{fig:cutmax} for the case
-of available LHC data, now evaluated from
-the fits including the HL-LHC pseudo-data.
-  %
-In this case, the $m_{\ell\ell}^{(\rm max)}$ cut applies to $m_{\ell\ell}$
-for the neutral-current distributions and to
- the transverse mass $m_T$ for the charged-current ones.
-%
- As in the case of Fig.~\ref{fig:cutmax},
- we observe an approximately monotonic growth of $R_{\chi^2}$
-for the SM PDFs arising
-from the energy-growing EFT corrections that dominate the high-energy
-DY tails, an effect which is now rather larger thanks to the presence
-of the HL-LHC pseudo-data.
-%
-The most striking difference as compared to  Fig.~\ref{fig:cutmax}
-is that now the  SMEFT PDF curve is much flatter,
-indicating that EFT effects
-are being almost totally reabsorbed into the PDFs.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[t]
-\begin{center}
-%\includegraphics[width=0.49\textwidth]{plots/W_sliding_invmass_max_hl.pdf}
-%\includegraphics[width=0.49\textwidth]{plots/Y_sliding_invmass_max_hl.pdf}
-\caption{\label{fig:cutmax_hl} Same as Fig.~\ref{fig:cutmax} now
-  for the fits including the HL-LHC pseudo-data.
-  %
-  Note that in this case the $m_{\ell\ell}^{(\rm max)}$ cut refers to
- the transverse mass $m_T$ for the charged-current distributions.
-}
-\end{center}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The findings summarised by Fig.~\ref{fig:cutmax_hl} demonstrate that, at the HL-LHC, EFT-induced deviations
-could be indeed inadvertently "fitted away'' into a PDF redefinition,
-explaining the large broadenings reported in Fig.~\ref{fig:HLlumiWY},
-and highlight the need to devise novel strategies to disentangle the effects
-of PDFs and EFT contributions from the high-energy tails of LHC cross-sections.
-%
-Such strategies could exploit, for instance, the availability of measurements sensitive
-to large-$x$ PDFs but not to high scales,
-such as forward electroweak gauge boson production by LHCb~\cite{Khalek:2018mdn}.
-
 
 
 
