@@ -1029,6 +1029,7 @@ xf(x,Q_0^2) = x^{\alpha}(1-x)^{\beta} \text{NN}(x; \vec{w}),
 where $\text{NN}(x; \vec{w})$ is the output of a neural network parametrised by $\vec{w}$ (the details of the architecture, and how it is extended appropriately for this thesis, are given in Sec.~\ref{sec:simunet}), and $\alpha, \beta$ are fixed prior to the fit;\footnote{Technically fixed for each \textit{replica} in the fit individually; see the below discussion of the Monte Carlo replica method of error propagation used by the NNPDF collaboration. On a separate note, it has recently been shown in Ref.~\cite{Carrazza:2021yrg} that the scaling prefactor is not in fact necessary, and the network can learn this behaviour.} the fit is then iterated to check stability of $\alpha, \beta$. The main advantage claimed by NNPDF in using a neural network parametrisation is that it allows the exploration of an extremely large space of functions, removing the bias inherent in fixed functional form approaches. This is supported by so-called `universal approximation theorems' (see Ref.~\cite{HORNIK1989359}, for example), which tell us that any given function can be well-approximated by a sufficiently deep neural network.
 
 \subsection{The loss function}
+\label{sec:the_loss_function}
 Once we have decided on a functional form with which to model the PDFs, we must obtain the parameters in the model by the minimisation of a loss function on the global dataset. The natural first-choice for a loss function is the $\chi^2$-statistic, defined by:
 \begin{equation}
 \label{eq:chi2}
@@ -2155,7 +2156,7 @@ Suppose additionally that $\phi$ is much heavier than $\psi$, with $M^2 \gg m^2$
 \label{eq:partition_function}
 \mathcal{Z} = \int \mathcal{D}\phi \mathcal{D}\psi \exp\left(i \int d^4x \left( \frac{1}{2} (\partial \phi)^2 - \frac{1}{2} M^2 \phi^2 + \overline{\psi}(i \slashed{\partial} - m) \psi - g \phi \overline{\psi} \psi\right) \right),
 \end{equation}
-where $\mathcal{D}\phi, \mathcal{D}\chi$ indicate the measures over the relevant functional spaces.\footnote{Which of course, in the strictest sense, do not actually exist.} By performing the integral over $\phi$, we can derive an equivalent theory entirely in terms of $\psi$; this theory will apply below the scale at which $\phi$ can be produced on-shell. 
+where $\mathcal{D}\phi, \mathcal{D}\psi$ indicate the measures over the relevant functional spaces.\footnote{Which of course, in the strictest sense, do not actually exist in a strict mathematical sense.} By performing the integral over $\phi$, we can derive an equivalent theory entirely in terms of $\psi$; this theory will apply below the scale at which $\phi$ can be produced on-shell. 
 
 To perform the integral, it is convenient to change variables, introducing:
 \begin{equation}
@@ -2200,14 +2201,18 @@ For a concrete example, suppose that we believe that at low energies, Nature is 
 \begin{equation}
 \mathcal{L}_{\text{low}} = \overline{\psi} (i \slashed{\partial} - m) \psi.
 \end{equation}
-This theory has a $U(1)$ global vector symmetry $\psi \mapsto e^{i\theta}\psi$ and a $U(1)$ global axial symmetry $\psi \mapsto e^{i\theta \gamma^5} \psi$, which perhaps we believe to be fundamental (and suppose we also believe that Lorentz symmetry is fundamental). We can describe theories which have the low-energy limit $\mathcal{L}_{\text{low}}$ by adding on all possible higher-dimensional operators which respect the symmetry, organised by their mass dimension, to produce a \textit{bottom-up} EFT which is the low-energy limit of the unknown high-energy theory. Such operators can only be built from $\psi, \overline{\psi}$ and the derivative $\partial$; the mass dimensions of these objects are $[\psi] = [\overline{\psi}] = 3/2$ and $[\partial] = 1$ respectively. Considering the ways in which these objects can be combined at each mass dimension, we therefore obtain an EFT approximation of the form (up to operators of mass dimension $6$):
+This theory has a $U(1)$ global vector symmetry $\psi \mapsto e^{i\theta}\psi$ and a $U(1)$ global axial symmetry $\psi \mapsto e^{i\theta \gamma^5} \psi$, which perhaps we believe to be fundamental (and suppose we also believe that Lorentz symmetry is fundamental). We can describe theories which have the low-energy limit $\mathcal{L}_{\text{low}}$ by adding on all possible higher-dimensional operators which respect the symmetry, organised by their mass dimension, to produce a \textit{bottom-up} EFT which is the low-energy limit of the unknown high-energy theory. Such operators can only be built from $\psi, \overline{\psi}$ and the derivative $\partial$; the mass dimensions of these objects are $[\psi] = [\overline{\psi}] = 3/2$ and $[\partial] = 1$, respectively. Considering the ways in which these objects can be combined at each mass dimension, we therefore obtain an EFT approximation of the form (up to operators of mass dimension $6$):
 \begin{equation}
 \label{eq:first_try_bottom_up_eft}
 \mathcal{L}_{\text{low}}^{\text{EFT}} = \overline{\psi}(i\slashed{\partial} - m) \psi - \frac{g_5}{\Lambda} \overline{\psi} \partial^2 \psi -  \frac{g_6^{(1)}}{\Lambda^2} (\overline{\psi}\psi)^2 - \frac{g_6^{(2)}}{\Lambda^2} \overline{\psi} \partial^2 \slashed{\partial} \psi - ...,
 \end{equation}
 where $\Lambda$ is some characteristic scale of New Physics.
 
-Importantly, some of these operators can be removed by considering the \textit{equations of motion} of the theory (a point we shall shortly return to when we discuss EFT bases below). The fermion $\psi$ obeys the free Dirac equation in the low-energy theory, given by $$(i \slashed{\partial} - m)\psi = 0,$$ which yields the Klein-Gordon equation $(\partial^2 + m^2)\psi = 0$ when the operator $(i\slashed{\partial} - m)$ is applied a second time. Therefore, whenever a second derivative term appears, we may replace $\partial^2$ with $-m^2$. As a result, the effective theory can be simplified to:
+Importantly, some of these operators can be removed by considering the \textit{equations of motion} of the theory (a point we shall shortly return to when we discuss EFT bases below). The fermion $\psi$ obeys the free Dirac equation in the low-energy theory, given by:
+\begin{equation}
+(i \slashed{\partial} - m)\psi = 0,
+\end{equation}
+which yields the Klein-Gordon equation $(\partial^2 + m^2)\psi = 0$ when the operator $(i\slashed{\partial} - m)$ is applied a second time. Therefore, whenever a second derivative term appears, we may replace $\partial^2$ with $-m^2$. As a result, the effective theory can be simplified to:
 \begin{equation}
 \label{eq:bottom_up_eft}
 \mathcal{L}_{\text{low}}^{\text{EFT}} = \overline{\psi}(i\slashed{\partial} - m) \psi -  \frac{g_6}{\Lambda^2} (\overline{\psi}\psi)^2 - ...\ .
@@ -2382,15 +2387,14 @@ J^{a \mu}_L =  \frac{1}{2} \sum_{f = q, l}  \bar f \sigma^a \gamma^\mu f ~~,\qua
 \end{equation}
 Here $q$, $l$ are the SM quark and lepton left-handed doublets, while $u$, $d$, $e$ are 
 the right-handed singlets. Also, $g$ and $g_Y$ are the corresponding electroweak gauge couplings,
-while $\sigma^a$ 
-are the Pauli matrices, and the hypercharge $Y_f = 1/6$, $-1/2$, $2/3$, $-1/3$, and $-1$ for $q,l,u,d,e$, respectively. Summation over flavour indices is assumed, which implies
+$\sigma^a$ are the Pauli matrices, and the hypercharges are given by $Y_f = 1/6$, $-1/2$, $2/3$, $-1/3$, and $-1$ for $q,l,u,d,e$, respectively. Summation over flavour indices is assumed, which implies
 that in this scenario the fermionic currents respect the $U(3)^5$
 global flavour symmetry.
 
 Expanding Eq.~\eqref{eq:JJ}, one can relate the $\hat{W}$ and $\hat{Y}$ parameters
 to the coefficients of dimension-six operators in the Warsaw basis introduced in Sect.~\ref{subsec:the_smeft}.
 %
-There, the operators  relevant to the description of the Drell-Yan process are given by
+There, the operators  relevant to the description of the Drell-Yan process are given by:
 \begin{equation}
 \begin{aligned}\label{eq:Warsaw}
 \mathcal{O}_{ld} &= (\bar  l\gamma_\mu l)(\bar d \gamma^\mu d) \,, 
@@ -2428,7 +2432,7 @@ we can express the SMEFT Lagrangian in this scenario, Eq.~(\ref{eq:JJ}), as foll
   \, \mathcal{O}_{lq}^{(1)} + Y_e Y_d \, \mathcal{O}_{ed} + Y_e Y_u \,
   \mathcal{O}_{eu} + Y_e Y_q \, \mathcal{O}_{q e} \Big) \,.
 \end{align}
-The parametrisation in Eq.~(\ref{eq:Warsaw}) has been implemented using the {\tt SMEFTsim} package~\cite{Brivio:2017btx} and cross-checked against the reweighting method used in Ref.~\cite{Greljo:2017vvb} (see also~\cite{Ricci:2020xre}), as will be discussed in Sect.~\ref{sec:theory}.
+The parametrisation in Eq.~(\ref{eq:Warsaw}) was implemented using the {\tt SMEFTsim} package~\cite{Brivio:2017btx} and cross-checked against the reweighting method used in Ref.~\cite{Greljo:2017vvb} (see also~\cite{Ricci:2020xre}).
 
 The analysis in Ref.~\cite{Farina:2016rws} reports the following 95\% confidence level intervals on $\hat{W}$ assuming $\hat{Y}=0$,
 \begin{equation}
@@ -2462,10 +2466,10 @@ Subsequently in Sect.~\ref{sec:dy_theory}, we describe the corresponding theoret
 and in the SMEFT benchmark scenario described in Sect.~\ref{sec:dy_scenarios}.
 %
 In Sect.~\ref{sec:fitsettings} we  discuss the settings of the baseline SM PDF fit and assess the
-specific impact of the Run I and Run II high-mass Drell-Yan data on PDFs.
+specific impact of the Run I and Run II high-mass Drell-Yan data on PDFs only.
 %
 Finally, in Sect.~\ref{eq:jointfits} we outline the fitting methodology adopted for
-the determination of the PDFs in the SMEFT in this chapter (a different method will be
+the determination of the PDFs in the SMEFT in this chapter (a different, improved method will be
 used in Chapter~\ref{chap:top}), along with their
 simultaneous determination with the SMEFT Wilson coefficients.
 
@@ -2503,21 +2507,7 @@ considering one or two operators able to impact a subset of processes,
 would misrepresent the realistic case. We shall investigate the impact of 
 a different collection of SMEFT operators and a different dataset in Chapter~\ref{chap:top}.
 
-%
-
-For the purposes of this chapter's study, the DY data can be classified into low-mass,
-on-shell, and high-mass datasets.
-%
-Table~\ref{tab:data-low-mass} summarises
-the low-mass and on-shell datasets, where in 
-each case we indicate the experiment, the centre-of-mass energy $\sqrt{s}$,
-the publication reference, the physical observable, and the number of data points.
-%
-The only difference as compared to~\cite{Faura:2020oom} is the removal of the $W\to e\nu$
-asymmetry measurements from D0~\cite{D0:2014kma}, which were found to be inconsistent
-with the rest of the Drell-Yan data.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}[H]
   \begin{center}
@@ -2570,6 +2560,18 @@ with the rest of the Drell-Yan data.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+For the purposes of this chapter's study, the DY data can be classified into low-mass,
+on-shell, and high-mass datasets.
+%
+Table~\ref{tab:data-low-mass} summarises
+the low-mass and on-shell datasets, where in 
+each case we indicate the experiment, the centre-of-mass energy $\sqrt{s}$,
+the publication reference, the physical observable, and the number of data points.
+%
+The only difference as compared to~\cite{Faura:2020oom} is the removal of the $W\to e\nu$
+asymmetry measurements from D0~\cite{D0:2014kma}, which were found to be inconsistent
+with the rest of the Drell-Yan data.
 
 In Table~\ref{tab:data-high-mass} we provide the same
 information as in Table~\ref{tab:data-low-mass} but for the neutral-current high-mass Drell-Yan datasets.
@@ -2763,7 +2765,7 @@ matrix
 \end{equation}
 where $T_i$ are the theoretical predictions, $D_i$ the central value
 of the experimental data and where the multiplicative uncertainties in
-the experimental covariance matrix $({\rm cov}_{ij})$ are treated as explained in~\cite{Ball:2009qv,Ball:2012wy}.
+the experimental covariance matrix $({\rm cov}_{ij})$ are treated using the $t_0$ prescription as explained in Sect.~\ref{sec:the_loss_function} and in the references Refs.~\cite{Ball:2009qv,Ball:2012wy}.
 %
 One can observe how in general the NNLO QCD corrections are relatively
 small and that the NLO electroweak
@@ -2838,7 +2840,7 @@ CMS 13 TeV   & $\mu^+\mu^+$        & 43  & 15.7  & 15.8  & 0.81 \\
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\paragraph{SMEFT corrections to the DIS structure functions.} In this work, we augment the SM calculations of the high-$Q^2$ DIS
+\paragraph{SMEFT corrections to the DIS structure functions.} In this chapter, we augment the SM calculations of the high-$Q^2$ DIS
 reduced cross sections discussed in Ref.~\cite{Carrazza:2019sec} and
 the high-mass Drell-Yan cross sections listed in
 Table~\ref{tab:data-high-mass} with the effects of dimension-six SMEFT operators following the benchmark scenario presented in
@@ -3094,7 +3096,7 @@ despite the fact that in terms of Run II data our  analysis is restricted to a s
  high-mass DY dataset.
 %
 Yet more stringent constraints on the PDFs are expected from the measurements based
-on the full Runs II and III datasets,
+on the full Run II and Run III datasets,
 as well as from those to be provided by the HL-LHC~\cite{Khalek:2018mdn}.
 %
 We study the anticipated impact of the HL-LHC measurements in
@@ -3222,15 +3224,16 @@ extract parameters such as $\alpha_s$ of the Wilson coefficients from
 a global fit of PDFs, that includes the correlations between these parameters
 and the PDFs, is given by the correlated replica method proposed in the more recent $\alpha_s$ determination in
 \cite{Ball:2018iqk}. The latter would allow better accounting of the correlations
-between Wilson coefficients and PDFs. However we do not use it here due to the fact that these correlations of the
+between Wilson coefficients and PDFs. However we do not use it here due to the fact that the correlations of the
 PDFs with the Wilson coefficients are much smaller than those with the strong
-coupling constant and due to its large computational cost. We endeavour to address this issue in future work.
+coupling constant, and due to its large computational cost. This issue is addressed with the introduction of a new
+methodology, presented in Chapter~\ref{chap:top}.
 
 \paragraph{Methodological uncertainty.} In a simultaneous fit of PDFs and EFT coefficients,
 for each set of Wilson coefficients \(\mathbf{c}_i\)
 one has a PDF fit composed of \(N_\text{rep}\) Monte Carlo replicas.
 %
-The major methodological uncertainty is associated to  finite-\(N_\text{rep}\) effects
+The major methodological uncertainty is associated to  finite-\(N_\text{rep}\) effects, and
 can be estimated by bootstrapping across the replicas, as explained in the $\alpha_s(m_Z)$
 extraction of~\cite{Ball:2018iqk}.
 %
