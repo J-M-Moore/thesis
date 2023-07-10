@@ -118,6 +118,31 @@
 \newcommand{\Op}[1]{\OO_{\sss #1}}
 \def\lra#1{\overset{\text{\scriptsize$\leftrightarrow$}}{#1}}
 
+
+
+% Angled brackets
+\newcommand{\la}{\left\langle}
+\newcommand{\ra}{\right\rangle}
+
+%%Subfigures
+%%\usepackage{caption}
+%%\usepackage{subcaption}
+%%
+%%\makeatletter
+%%\def\thickhline{%
+%%             \noalign{\ifnum0 =`}\fi\hrule \@height \thickarrayrulewidth \futurelet
+%%             \reserved@a\@xthickhline}
+%%\def\@xthickhline{\ifx\reserved@a\thickhline
+%%                \vskip\doublerulesep
+%%                \vskip -\thickarrayrulewidth
+%%                \fi
+%%                \ifnum0 =`{\fi}}
+%%\xpatchcmd{\linklayers}{\nn@lastnode}{\lastnode}{}{}
+%%\xpatchcmd{\linklayers}{\nn@thisnode}{\thisnode}{}{}
+%%\makeatother
+%%\newlength{\thickarrayrulewidth}
+%%\setlength{\thickarrayrulewidth}{3\arrayrulewidth}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Thesis meta-information
 %%
@@ -4033,11 +4058,23 @@ dedicated study presented in Chapter~\ref{chap:contamination}.
 \chapter{Parton distributions in the SMEFT from the LHC Run II top dataset}
 \label{chap:top}
 
-\noindent \textit{[This chapter is based on Ref.~\cite{Kassabov:2023hbm}, produced in collaboration with Zahari Kassabov, Maeve Madigan, Luca Mantani, Manuel Morales Alvarado, Juan Rojo and Maria Ubiali. My contributions to this study comprised: implementation of all new datasets included in this study in the NNPDF framework; production of all SM predictions for all datasets in this study, available as NLO grids suitable for PDF fitting and NNLO QCD $K$-factors; re-implementation and re-structuring of much of the \textsc{SIMUnet} code; running all SM PDF fits presented in this study; writing appendices to the study concerning fit quality and the pitfalls of the Monte Carlo replica method.]}\\
+\noindent \textit{[This chapter is based on Ref.~\cite{Kassabov:2023hbm}, produced in collaboration with Zahari Kassabov, Maeve Madigan, Luca Mantani, Manuel Morales Alvarado, Juan Rojo and Maria Ubiali. My contributions to this study comprised: implementation of all new datasets included in this study in the NNPDF framework; production of all SM predictions for all datasets in this study, available as NLO grids suitable for PDF fitting and NNLO QCD $K$-factors; re-implementation and re-structuring of much of the \textsc{SIMUnet} code, and extending it with new features and analysis tools together with Manuel; running all SM PDF fits presented in this study, and a subset of the SMEFT-PDF fits; writing appendices to the study concerning fit quality and the pitfalls of the Monte Carlo replica method.]}\\
 
 \noindent In Chapter~\ref{chap:smeftdy}, we introduced the SMEFT, and demonstrated that a simultaneous extraction of PDFs and SMEFT Wilson coefficients may be necessary for the high luminosity LHC. However, this study was limited in scope, fitting only two Wilson coefficients together with PDFs. In this chapter, we perform a much more comprehensive simultaneous extraction of PDFs, together with more than twenty SMEFT Wilson coefficients, focussing this time on those which affect processes involving top quark production.
+ 
+Being the heaviest elementary particle known to date, with a mass around 185 times heavier than a proton,
+and the only fermion with an $\mathcal{O}(1)$
+Yukawa coupling to the Higgs boson, the top quark has long been suspected to play a privileged role
+in potential new physics extensions beyond the Standard Model (BSM).
+%
+For instance, radiative corrections involving top quarks are responsible
+for the so-called hierarchy problem of the SM, and the value of its mass $m_t$ determines
+whether the vacuum state of our Universe is stable, metastable,
+or unstable~\cite{Isidori:2001bm,Buttazzo:2013uya,DiLuzio:2015iua}. For this reason,
+a comprehensive interpretation of the top sector within the framework of the SMEFT, and a 
+precise discussion of the SMEFT-PDF interplay from the top sector, is an interesting avenue of study.
 
-We begin in Sect.~\ref{sec:exp} with a review of our dataset, which combines standard data entering SM PDF fits with the broadest and most up-to-date subset of the Run II LHC top data ever considered. In Sect.~\ref{sec:theory}, we continue to describe the SM theory predictions used for the top quark data given in Sect.~\ref{sec:exp}. In Sect.~\ref{sec:}, we introduce the SMEFT operators which affect the top processes considered in Sect.~\ref{sec:exp}. We describe the generation of the SMEFT theory predictions, and how these augment the existing SM theory calculations.
+We begin in Sect.~\ref{sec:exp} with a review of our dataset, which combines standard data entering SM PDF fits with the broadest and most up-to-date subset of the Run II LHC top data ever considered. In Sect.~\ref{sec:theory}, we continue to describe the SM theory predictions used for the top quark data given in Sect.~\ref{sec:exp}. In Sect.~\ref{sec:top_theory}, we introduce the SMEFT operators which affect the top processes considered in Sect.~\ref{sec:exp}. We also describe the generation of the SMEFT theory predictions, and how these augment the existing SM theory calculations. In Sect.~\ref{sec:} we present the results of SM PDF fits using the dataset given in Sect.~\ref{sec:exp}. In Sect.~\ref{sec:} we present
 
 
 \section{The Run II top quark dataset}
@@ -4067,7 +4104,7 @@ for more details.
 Concerning the LHC top quark measurements considered in the present
 analysis,
 they partially overlap, but significantly extend, the top datasets included in
-global PDF fits such as NNPDF ~\cite{NNPDF:2021njg} as well as in SMEFT analyses of the top quark sector~\cite{Ellis:2020unq,Ethier:2021bye}.
+global PDF fits such as NNPDF~\cite{NNPDF:2021njg} as well as in SMEFT analyses of the top quark sector~\cite{Ellis:2020unq,Ethier:2021bye}.
 %
 Here we discuss in turn the different types of measurements to be included: inclusive $t\bar{t}$ cross sections and differential distributions; $t\bar{t}$ production asymmetries; the $W$-helicity fractions;
  associated top pair production with vector bosons and heavy quarks, including $\bar{t}t Z$, $\bar{t}t W$, $\bar{t}t \gamma$, $\bar{t}t\bar{t}t$, $\bar{t}t\bar{b}b$;
@@ -4181,19 +4218,11 @@ We indicate in each case
  rather than the double-differential one in $(m_{t\bar{t}},
  y_{t\bar{t}})$, which is also available, since we find that the
  latter cannot be reproduced by the NNLO SM predictions. We present a
- dedicated analysis of the double-differential distribution in Sect.~\ref{sec:cms2d}.
+ dedicated analysis of the double-differential distribution in Sect.~\ref{subsec:cms2d}.
  %
  As mentioned above, we will study the impact of our dataset selection choices
  by presenting variations of the baseline SM-PDF, fixed-PDF, and SMEFT-PDF analyses
  in the following sections.
-
-%. Our reasoning is as follows: \JM{insert Rene's reasoning here.} Whilst these considerations have convinced us that it is safer to use the one-dimensional distribution rather than the two-dimensional distribution, we will study the impact of its inclusion as variants of our final SMEFT and simultaneous PDF-SMEFT analyses.\\
-%On the other hand, the measurement in the $\ell+$jets channel supersedes the corresponding measurements previously included in both the SMEFiT and FitMaker paper; furthermore, it has never been included in a PDF fit before. Therefore, it was implemented especially for this work following the NNPDF theory pipeline described above (with the same top mass and scale settings, and with QCD C-factors from HighTea); a data-theory comparison for the new set is given in Fig.~\ref{fig:cms2D}. \JM{The set has an unusually high $\chi^2$ of 7.14 which is currently unexplained; we should probably comment on this here if we are going to use it in this work. Then again, maybe we'll find something wrong with it eventually!}\\
-%%%  \JM{Note no filter rule is required for the CMS $8$TeV dilepton distribution - Emanuele explained why here: https://github.com/NNPDF/nnpdf/issues/1600.}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{tables/table-input-dataset-top1.tex}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ttbar asymmetry  %%%%%%%%%%%%%%%%%%%%
@@ -4218,6 +4247,10 @@ of top quark data, we consider here the $A_C$ measurement as part of our baselin
 and hence study whether or not they also provide relevant PDF information. 
 % 
 A summary of the asymmetry measurements included in this work is given in Table~\ref{tab:input_datasets_topasymmetries}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{tables/table-input-dataset-top1.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{tables/table-input-dataset-top1b.tex}
@@ -4508,7 +4541,7 @@ largely compatible with the rest of the dataset, hence they are kept.
     perfectly described in the baseline fit.  To check whether the
     incompatibility we observe in the double-differential distribution can be
     cured by the inclusion of SMEFT corrections, we will run a devoted analysis
-    presented in Sect.~5.3.
+    presented in Sect.~\ref{subsec:cms2d}.
 
 \section{Theoretical predictions}
 \label{sec:theory}
@@ -4863,8 +4896,8 @@ addition to the $N$ trainable weights, a set of $N(N+1)/2$ non-trainable
 parameters, which are functions of the trainable weights, is included to account
 for all diagonal and non-diagonal contributions of EFT-EFT interference to the
 cross-sections. The results obtained with the quadratic functionality
-of \simunet{} are, however, not displayed in this work, for the reasons explained in
-App.~\ref{app:quad}. 
+of \simunet{} are, however, not displayed in this chapter, for the reasons explained in
+Sect.~\ref{sec:quad}. 
 The PDF parameters $\pmb{\theta}$
 and the EFT coefficients $\boldsymbol{c}$ entering the evaluation
 of the SMEFT observable in Fig.~\ref{fig: architecture} are then determined
@@ -4872,48 +4905,48 @@ simultaneously from the minimisation of the fit figure of merit (also
 known as loss function).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[t]
+\begin{figure}[H]
   \centering
-%  \begin{neuralnetwork}[height=10, layerspacing=26mm, nodesize=25pt]
-%    \newcommand{\x}[2]{\IfEqCase{#2}{{1}{\small $x$}{2}{\small $\ln{x}$}}}
-%    \newcommand{\y}[2]{$f_#2$}
-%    \newcommand{\basis}[2]{\ifnum #2=4 \(\mathcal{L}^{(0)}\) \else $\Sigma$ \fi}
-%    \newcommand{\hfirst}[2]{\ifnum #2=7 $h^{(1)}_{25}$ \else $h^{(1)}_#2$ \fi}
-%    \newcommand{\hsecond}[2]{\ifnum #2=5 $h^{(2)}_{20}$ \else $h^{(2)}_#2$ \fi}
-%    \newcommand{\standardmodel}[2] {$\mathcal{T}^\text{SM}$}
-%    \newcommand{\eft}[2] {$\mathcal{T}$}
-%    \newcommand{\co}[4]{$c_1$}
-%    \newcommand{\ct}[4]{$c_2$}
-%    \newcommand{\cnn}[4]{$c_{N-1}$}
-%    \newcommand{\cn}[4]{$c_{N}$}
-%    \newcommand{\vd}[4]{$\vdots$}
-%    \newcommand{\FK}[2]{$\sigma$}
-%    \newcommand{\convolve}[4]{$\otimes$}
-%    \newcommand{\ci}[4]{$c_1$}
-%    \newcommand{\cj}[4]{$c_2$}
-%    \newcommand{\ck}[4]{$c_N$}
-%    \newcommand{\calpha}[4]{$c_{11}$}
-%    \newcommand{\cbeta}[4]{$c_{12}$}
-%    \newcommand{\cgamma}[4]{$c_{NN}$}
-%    \inputlayer[count=2, bias=false, title=Input\\layer, text=\x]
-%    \hiddenlayer[count=7, bias=false, title=Hidden\\layer 1, text=\hfirst, exclude={6}]\linklayers[not to={6}]
-%    \hiddenlayer[count=5, bias=false, title=Hidden\\layer 2, text=\hsecond, exclude={4}]\linklayers[not from={6}, not to={4}]
-%    \outputlayer[count=8, title=PDF\\flavours, text=\y] \linklayers[not from={4}]
-%    \hiddenlayer[count=4, bias=false, text=\basis, title=Convolution\\step, exclude={2,3}]\linklayers[not to={1,2,3}, style={dashed}]
-%    \hiddenlayer[count=1, bias=false, title=SM\\Observable, text=\standardmodel]\linklayers[not from={2,3}, style={dashed}]
-%    \outputlayer[count=1, bias=false, text=\eft, title=SMEFT \\ Observable]
-%    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={bend left=79}, label={\ci}]
-%    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={bend left=57}, label={\cj}]
-%    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={bend left=30}, label={\vd}]
-%    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={bend left=10}, label={\ck}]
-%    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={dashed, bend right=10}, label={\calpha}]
-%    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={dashed, bend right=30}, label={\cbeta}]
-%    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={dashed, bend right=57}, label={\vd}]
-%    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={dashed, bend right=79}, label={\cgamma}]
-%
-%    \path (L1-5) -- node{$\vdots$} (L1-7);
-%    \path (L2-3) -- node{$\vdots$} (L2-5);
-%  \end{neuralnetwork}
+  \begin{neuralnetwork}[height=8, layerspacing=23mm, nodesize=23pt]
+    \newcommand{\x}[2]{\IfEqCase{#2}{{1}{\small $x$}{2}{\small $\ln{x}$}}}
+    \newcommand{\y}[2]{$f_#2$}
+    \newcommand{\basis}[2]{\ifnum #2=4 \(\mathcal{L}^{(0)}\) \else $\Sigma$ \fi}
+    \newcommand{\hfirst}[2]{\ifnum #2=7 $h^{(1)}_{25}$ \else $h^{(1)}_#2$ \fi}
+    \newcommand{\hsecond}[2]{\ifnum #2=5 $h^{(2)}_{20}$ \else $h^{(2)}_#2$ \fi}
+    \newcommand{\standardmodel}[2] {$\mathcal{T}^\text{SM}$}
+    \newcommand{\eft}[2] {$\mathcal{T}$}
+    \newcommand{\co}[4]{$c_1$}
+    \newcommand{\ct}[4]{$c_2$}
+    \newcommand{\cnn}[4]{$c_{N-1}$}
+    \newcommand{\cn}[4]{$c_{N}$}
+    \newcommand{\vd}[4]{$\vdots$}
+    \newcommand{\FK}[2]{$\sigma$}
+    \newcommand{\convolve}[4]{$\otimes$}
+    \newcommand{\ci}[4]{$c_1$}
+    \newcommand{\cj}[4]{$c_2$}
+    \newcommand{\ck}[4]{$c_N$}
+    \newcommand{\calpha}[4]{$c_{11}$}
+    \newcommand{\cbeta}[4]{$c_{12}$}
+    \newcommand{\cgamma}[4]{$c_{NN}$}
+    \inputlayer[count=2, bias=false, title=Input\\layer, text=\x]
+    \hiddenlayer[count=7, bias=false, title=Hidden\\layer 1, text=\hfirst, exclude={6}]\linklayers[not to={6}]
+    \hiddenlayer[count=5, bias=false, title=Hidden\\layer 2, text=\hsecond, exclude={4}]\linklayers[not from={6}, not to={4}]
+    \outputlayer[count=8, title=PDF\\flavours, text=\y] \linklayers[not from={4}]
+    \hiddenlayer[count=4, bias=false, text=\basis, title=Convolution\\step, exclude={2,3}]\linklayers[not to={1,2,3}, style={dashed}]
+    \hiddenlayer[count=1, bias=false, title=SM\\Observable, text=\standardmodel]\linklayers[not from={2,3}, style={dashed}]
+    \outputlayer[count=1, bias=false, text=\eft, title=SMEFT \\ Observable]
+    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={bend left=79}, label={\ci}]
+    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={bend left=57}, label={\cj}]
+    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={bend left=30}, label={\vd}]
+    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={bend left=10}, label={\ck}]
+    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={dashed, bend right=10}, label={\calpha}]
+    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={dashed, bend right=30}, label={\cbeta}]
+    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={dashed, bend right=57}, label={\vd}]
+    \link[from layer = 5, to layer = 6, from node = 1, to node = 1, style={dashed, bend right=79}, label={\cgamma}]
+
+    \path (L1-5) -- node{$\vdots$} (L1-7);
+    \path (L2-3) -- node{$\vdots$} (L2-5);
+  \end{neuralnetwork}
   \caption{Schematic representation of the \simunet{} architecture for a
     general observable.
     %
@@ -5006,8 +5039,9 @@ that minimises the corresponding figure of merit:
 where the covariance matrix in Eq.~(\ref{eq:simunet_loss})
 is the $t_0$ covariance matrix, which is constructed from all sources of statistical and
 systematic uncertainties that are made available by the experiments
-with correlated multiplicative uncertainties treated via the ‘t0’ prescription~\cite{Ball:2009qv} 
-in the fit to avoid fitting bias associated with multiplicative uncertainties. 
+with correlated multiplicative uncertainties treated via the $t_0$ prescription~\cite{Ball:2009qv} 
+in the fit to avoid fitting bias associated with multiplicative uncertainties, as described in the introductory
+chapter.
 
 %
 Once Eq.~(\ref{eq:simunet_loss}) is minimised for each replica, subject
@@ -5180,12 +5214,12 @@ uncertainty.
 The possibility to include PDF-independent observables makes \simunet{} a global SMEFT analysis tool 
 on the same footing as \smefit~\cite{Hartland:2019bjb,Giani:2023gfq}, \fitm~\cite{Ellis:2020unq},
 {\sc\small HepFit}~\cite{DeBlas:2019ehy}, {\sc\small EFTfitter}~\cite{Castro:2016jjv},
-and {\sc\small Sfitter}~\cite{Brivio:2019ius} among others. This is
-demonstrated in App.~\ref{app:benchmark}, where it is shown that the
+and {\sc\small Sfitter}~\cite{Brivio:2019ius} among others. This was explicitly demonstrated
+in App.~C of Ref.~\cite{Kassabov:2023hbm}, where it is shown that the
 results of a linear fixed-PDF SMEFT analysis
 performed with \simunet{} coincide with those obtained with
 \smefit~\cite{Giani:2023gfq} once the same
-experimental data and theory calculations are used. 
+experimental data and theory calculations are used (this benchmark is omitted here for brevity).
 %
 Moreover, the new feature will allow us to include in future analyses any non-hadronic
 observables, such as electroweak precision observables (EWPO)~\cite{Han:2004az}. 
@@ -5670,11 +5704,1035 @@ Finally, concerning the fit quality of fit H is essentially stable, actually
 better relative to the NNPDFnotop baseline. The experimental $\chi^2$ per data point on
 their respective datasets is $1.156$ for the no-top baseline, whilst for
 fit H is reduced to $1.144$. A complete summary of the $\chi^2$ information
-for all of the fits in this section is given in App.~\ref{app:fit_quality}.
+for all of the fits in this section is given in App.~D of Ref.~\cite{Kassabov:2023hbm} (the Appendix
+is omitted in this thesis for brevity).
 It is interesting to observe that all new top data included in fit H are
 already described well by using the NNPDF set, although clearly the $\chi^2$
 per data point improves (from $1.139$ to $1.102$) once all data are included
 in the fit. This confirms the overall consistency of the analysis. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Impact of the top quark Run II dataset on the SMEFT}
+\label{sec:res_smeft}
+
+We now quantify the impact of the LHC Run II legacy measurements, described in Sect.~\ref{sec:exp},
+on the top quark sector of the SMEFT.
+%
+As compared to previous investigations of SMEFT operators modifying top-quark
+interactions~\cite{Ellis:2020unq,Ethier:2021bye}~\cite{Aguilar-Saavedra:2018ksv,
+  Buckley:2015lku, Brivio:2019ius, Bissmann:2019gfc, Hartland:2019bjb,
+  Durieux:2019rbz, vanBeek:2019evb, Yates:2021udl}, the current analysis
+considers a wider dataset, in particular extended
+to various measurements based on the full LHC Run II luminosity.
+%
+In the last column of Tables~\ref{tab:input_datasets_toppair}--\ref{tab:input_datasets_4} we indicated
+which of the datasets included here were considered
+for the first time within a SMEFT interpretation.
+%
+Here we assess the constraints that the available LHC top quark measurements
+provide on the SMEFT parameter space, and in particular study the
+impact of the new measurements as compared to those used in~\cite{Ellis:2020unq,Ethier:2021bye}.
+%
+In this section we restrict ourselves to fixed-PDF EFT fits, where the input PDFs used in the calculation
+of the SM cross-sections are kept fixed.
+%
+Subsequently, in Sect.~\ref{sec:joint_pdf_smeft},
+we generalise to the case in which PDFs are extracted simultaneously
+together with the EFT coefficients.
+
+The structure of this section is as follows. We begin in Sect.~\ref{subsec:smeftfitsettings} 
+by describing the methodologies used
+to constrain the EFT parameter space both at linear and quadratic
+order in the EFT expansion.
+%,namely the \simunet{} methodology at linear level and the \smefit methodology at quadratic
+%(a discussion of why the \simunet{} methodology cannot be suitably applied to quadratic problems
+%at present is given in App.~\ref{app:quad}). REPEATED
+%
+We also present results for the Fisher information matrix, which indicates which datasets
+provide constraints on which operators.
+In Sect.~\ref{subsec:smeftresults}, we proceed to give the results of the fixed-PDF EFT 
+fits at both linear and quadratic order,
+highlighting the impact of the new Run II top quark data by comparison with 
+previous global SMEFT analyses.
+%
+In Sect.~\ref{subsec:cms1dvs2d}, we assess the impact of replacing the CMS 13 TeV differential
+measurement of $t\bar{t}$ in the $\ell+$jets channel, binned with respect to invariant top quark pair
+mass, by the corresponding double-differential measurement binned with respect to both invariant
+top quark pair mass and top quark pair rapidity. In the dataset selection performed in Sect~\ref{sec:dataselection}
+we rejected the double-differential distribution due to its poor $\chi^2$-statistic in the SM, which could
+not be improved by a weighted fit of PDFs; in the present section, it is interesting to see whether the
+SMEFT can help account for the poor fit of this dataset.
+%
+Finally, in Sect.~\ref{subsec:pdfeftcorr} we evaluate the correlation between PDFs and EFT coefficients
+to identify the kinematic region and EFT operators which are potentially
+sensitive to the SMEFT-PDF interplay to be studied in Sect.~\ref{sec:joint_pdf_smeft}.
+
+\subsection{Fit settings}
+\label{subsec:smeftfitsettings}
+
+Throughout this section, we will allow only the SMEFT coefficients to vary in the fit,
+keeping the PDFs fixed to the SM-PDFs baseline obtained in the
+NNPDF no-top 
+fit discussed in Sect.~\ref{sec:baseline_sm_fits}; with this choice, one removes the overlap
+between the datasets entering the PDF fit and the EFT coefficients determination.
+%
+Our analysis is sensitive to the $N=25$ Wilson coefficients defined
+in Table~\ref{tab:ops}, except at the linear level where the four-heavy
+coefficients $c_{Qt}^{8}$, $c_{QQ}^{1}$, $c_{QQ}^{8}$, $c_{Qt}^{1}$ and $c_{tt}^{1}$ (which are 
+constrained only by $t\bar{t}t\bar{t}$ and $t\bar{t}b\bar{b}$ data)
+exhibit three flat directions~\cite{Ethier:2021bye}. In order to tackle this, we remove the five four-heavy coefficients from the linear fit\footnote{In principle one could instead rotate to the principal component analysis (PCA) basis
+  and constrain the two non-flat directions in the four-heavy subspace,
+  but even so, the obtained constraints
+  remain much looser in comparison with those obtained in the quadratic EFT fit~\cite{Ethier:2021bye}. 
+  
+  In our fits, we also keep the $t\bar{t} t\bar{t}$ and $t\bar{t} b \bar{b}$ datasets after removing the five four-heavy coefficients. We 
+  have verified that including or excluding theses sets has no
+  significant impact whatsoever on the remaining coefficients.
+}
+%
+Hence, in our linear fit we have $N=20$ independent coefficients constrained
+from the data, whereas in the quadratic fit, we fit all $N=25$ independent coefficients.
+
+The linear EFT fits presented in this section are performed with the \simunet{}  methodology
+in the fixed-PDF option, as described in Sect.~\ref{sec:methodology}; 
+we explicitly verified that the \simunet{} methodology reproduces the posterior distributions 
+provided by \smefit (using
+either the NS (Nested Sampling) or MCfit options)
+for a common choice of inputs, as explicitly demonstrated in App.~C of Ref.~\cite{Kassabov:2023hbm}, but is omitted
+in this thesis for brevity.
+%
+However, in the case of the quadratic EFT fits we are unable to use the \simunet{} 
+methodology due to a failure of the Monte-Carlo sampling method utilised in the \simunet{} and \smefit codes;
+this is discussed in Sect.~\ref{sec:quad} and a dedicated study of the problem will be the subject of future work
+(with some preliminary discussion in Chapter~\ref{chap:montecarlo}).
+%
+For this reason, quadratic EFT fits in this section are carried out
+with the public {\sc\small SMEFiT} code using the NS
+mode~\cite{Giani:2023gfq}. 
+%
+To carry out these fits, the full dataset listed in
+Tables~\ref{tab:input_datasets_toppair}--\ref{tab:input_datasets_4}, together
+with the corresponding SM and EFT theory calculations described in Sect.~\ref{sec:theory},
+have been converted to the {\sc\small SMEFiT} data format (this conversion
+was also already used for the benchmarking in App.~C of Ref.~\cite{Kassabov:2023hbm}).
+
+\paragraph{Fisher information.}
+The sensitivity to the EFT operators of the various processes entering
+the fit can be evaluated by means of the Fisher information, $F_{ij}$, which
+quantifies the information carried by a given dataset on the EFT coefficients $c_i$~\cite{Brehmer:2016nyr}. 
+In a linear EFT setting,
+the Fisher information is given by:
+\begin{equation}
+\label{eq:fisherdef}
+F_{ij} = L^{(i)T} ({\rm cov}_{\rm exp})^{-1} L^{(j)}
+\end{equation}
+where the $k$-th entry, $L^{(i)}_k$, of the vector $L^{(i)}$ is the
+linear contribution multiplying $c_i$ in the SMEFT theory prediction
+for the $k$-th data point, and ${\rm cov}_{\rm exp}$ is the
+experimental covariance matrix. In particular, the Fisher information
+is an $N \times N$ matrix, where $N$ is the number of EFT
+coefficients, and it depends on the dataset. 
+%For quadratic fits, the Fisher information acquires a dependence on the Wilson coefficients $c_i$; see Eq. (3.4) of \cite{Ethier:2021bye} for details. 
+An important property of the Fisher information is that it is related the covariance matrix $C_{ij}$ of the maximum likelihood estimators by the \textit{Cramer-Rao bound}:
+\begin{equation}
+\label{eq:cramerrao}
+C_{ij} \geq (F^{-1})_{ij},
+\end{equation}
+indicating that larger values of $F_{ij}$ will translate to tighter bounds on the
+EFT coefficients.
+
+Before displaying the results of the fixed-PDF SMEFT analysis in
+Sect.~\ref{subsec:smeftresults}, we use the Fisher information 
+to assess the relative impact of each sector of top quark data on the
+EFT parameter space; this is done in the linear analysis, including
+${\cal O}(1/\Lambda^2)$ SMEFT corrections.  
+In the quadratic case, once ${\cal O}(1/\Lambda^4)$ SMEFT corrections
+are included, the dependence of $F_{ij}$ on the Wilson coefficients makes interpretation more difficult.
+Writing $F_{ij}(D)$ for the
+Fisher information matrix evaluated on the dataset $D$, we define the relative constraining power of the dataset $D$
+via:
+\begin{equation}
+\label{eq:relativeconstrainingpower}
+	\textrm{relative constraining power of }D\textrm{ on operator }c_i = F_{ii}(D) \bigg/ \displaystyle \sum_{\text{sectors }D'} F_{ii}(D').
+\end{equation}
+%
+Since $F_{ii}(D)$ corresponds to the constraining power of the dataset $D$ in a one-parameter fit of the Wilson coefficient $c_i$,
+this definition only quantifies how much a dataset impacts one-parameter fits of single Wilson coefficients in turn; however, this will give 
+a general qualitative picture of some of the expected behaviour in the global fit too. 
+We display the results of evaluating the relative constraining power of each top quark data sector on each of the
+parameters in Fig.~\ref{fig:fisher_diag}, quoting the results in percent (\%).
+
+%--------------------------------------------------------------------------------------------
+\begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.4]{smeft_plots/plot_fisher_information_by_sector.pdf}
+	\caption{Relative constraining power (in \%) on each of the operators for each of the processes entering the fit, 
+	as defined in Eq.~\eqref{eq:relativeconstrainingpower}.}
+	\label{fig:fisher_diag}
+\end{figure}
+%--------------------------------------------------------------------------------------------
+
+As expected, $t \bar{t}$ total cross sections constitute the dominant source of constraints
+on the coefficient $c_{tG}$.  Each of the four-fermion operators receive important constraints
+from differential $t \bar{t}$ distributions and charge asymmetry measurements.
+Note that this impact is magnified when we go beyond individual fits, in which
+case measurements of charge asymmetries are helpful in breaking flat directions 
+amongst the four-fermion operators~\cite{Brivio:2019ius,Ellis:2020unq}.
+The coefficient $c_{Qq}^{1,3}$ is the exception as it 
+is instead expected to be well-constrained by single top production.  
+We note that the measurements of $W$ helicities are helpful in constraining the coefficient $c_{tW}$,
+while $t \bar{t} Z$ measurements provide the dominant source of constraints on $c_{\varphi Q}^{(-)}$.
+We observe that the neutral top coupling $c_{tZ}$ is entirely 
+constrained by $t \bar{t} \gamma$, 
+and that the effects of $t \bar{t} t \bar{t}$ and $t \bar{t} b \bar{b}$ are mostly restricted to the 4-heavy operators
+$c_{Qt}^{8}$, $c_{QQ}^{1}$, $c_{QQ}^{8}$, $c_{Qt}^{1}$ and $c_{tt}^{1}$. 
+
+\subsection{Fixed-PDF EFT fit results}
+\label{subsec:smeftresults}
+
+In this section, we present the results of the linear and quadratic fixed-PDF fits
+with the settings described in Sect~\ref{subsec:smeftfitsettings}. 
+
+\paragraph{Fit quality.}
+We begin by discussing the fit quality of the global SMEFT determination, quantifying 
+the change in the data-theory agreement relative to the SM in both the linear and quadratic SMEFT
+scenarios.  Table~\ref{tab:smeft_fit_quality} provides the values of the $\chi^2$ per data point in the SM and in the case of 
+the SMEFT at both linear and quadratic order in the EFT expansion for
+each of the processes entering the fit.
+Here, in order to ease the comparison of our results to those of
+\smefit and \fitm, we quote the $\chi^2$ per data point computed
+by using the covariance matrix defined in Eq.~\eqref{eq:expthcov},
+which includes both the experimental uncertainty and the PDF
+uncertainty. The corresponding values obtained by using the
+experimental $\chi^2$ definition of Eq.~\eqref{eq:chi2exp}, along with
+a fine-grained fit quality description are given in App. D of Ref.~\cite{Kassabov:2023hbm}.
+
+We observe that in many sectors, the linear EFT fit improves the fit
+quality compared to the SM; notably, the $\chi^2_{\rm exp+th}$ per data point for inclusive $t\bar{t}$ is vastly improved from 1.71 to 1.11. When
+quadratic corrections are also considered, the fit quality is usually poorer compared to the linear fit. For example,
+in inclusive $t\bar{t}$ the $\chi^2_{\rm exp+th}$ per data point deteriorates from 1.11 to 1.69. This is not unexpected, however,
+since the flexibility of the quadratic fit is limited by the fact that 
+for sufficiently large values of Wilson coefficients the EFT can only
+make positive corrections.\footnote{This also has methodological implications.
+Large quadratic corrections can negatively impact the Monte-Carlo sampling method
+used by \simunet, as discussed in Sect.~\ref{sec:quad}.} 
+
+
+%-------------------------------------------------------------------------------------
+\begin{table}[t!]
+\begin{center}
+\centering
+\renewcommand{\arraystretch}{1.4}
+%\setlength{\tabcolsep}{5pt}
+\begin{tabularx}{\textwidth}{lcccc}
+\toprule
+Process  $\qquad $ & $n_{\rm dat}$ &  {\footnotesize$\chi^2_{\rm exp+th}$ [SM]} & {\footnotesize$\chi^2_{\rm exp+th}$ [SMEFT $\mathcal{O}(\Lambda^{-2})]$ }
+& {\footnotesize$\chi^2_{\rm exp+th}$  [SMEFT $\mathcal{O}(\Lambda^{-4})]$}
+\\ \midrule
+	$t \bar{t}$ & 86 & 1.71 & 1.11 & 1.69 \\
+	$t \bar{t}$ AC & 18 & 0.58 & 0.50 & 0.60 \\
+	$W$ helicities & 4 & 0.71 & 0.45 & 0.47  \\
+        \midrule
+        $t\bar{t}Z$ & 12 & 1.19 & 1.17 & 0.94  \\ 
+        $t\bar{t}W$ & 4 & 1.71 & 0.46 & 1.66 \\
+        $t \bar{t} \gamma$ & 2 & 0.47 & 0.03 & 0.59 \\ 
+        \midrule
+        $t \bar{t} t \bar{t}$ \& $t \bar{t} b \bar{b}$ & 8 & 1.32 & 1.06 & 0.49  \\
+        \midrule
+        single top & 30 & 0.504& 0.33 & 0.37  \\ 
+        $tW$ & 6 & 1.00 & 0.82 & 0.82 \\ 
+        $tZ$ & 5 & 0.45 & 0.30 & 0.31 \\
+        \midrule
+        {\bf Total} & {\bf 175} & {\bf 1.24} & {\bf 0.84} & {\bf 1.14}  \\ 
+\bottomrule
+\end{tabularx}
+%\vspace{0.3cm}
+\end{center}
+\caption{The values of the $\chi^2$ per data point for the fixed-PDF EFT fits presented in this section,
+  both for individual groups of processes, and for the total
+  dataset. Here the $\chi^2$ is actually the $\chi^2_{\rm exp+th}$
+  defined by using the theory covariance matrix defined in
+  Eq.~\eqref{eq:expthcov}. 
+  %
+  In each case we indicate the number of data points, the $\chi^2_{\rm exp+th}$ obtained using the baseline
+  SM calculations, and the results of both the linear and quadratic EFT fits.
+}
+\label{tab:smeft_fit_quality}
+\end{table}
+%---------------------------------------------------------------------------------------
+
+It is also useful to calculate the goodness of fit, quantified by the
+the $\chi^2$ per degree of freedom, $\chi^2/n_{\rm dof} = \chi^2/(n_{\rm dat} - n_{\rm param})$, 
+which additionally accounts for the complexity of the models we are
+using in each fit. In our case, we find $\chi^2_{\rm exp+th}/n_{\rm dof} = 1.25$ in the SM and $\chi^2_{\rm exp+th}/n_{\rm dof} = 0.95$ 
+and $1.33$ in the linear
+and quadratic EFT scenarios respectively.  
+We see that while the EFT at quadratic order does not provide a better fit than the SM, neglecting quadratic EFT corrections leads to
+a significant improvement in the overall fit quality.
+
+
+
+
+\paragraph{Constraints on the EFT parameter space.}
+Next, we present the constraints on the EFT parameter space. In
+Fig.~\ref{fig:linear_eft_constraints}, we display the 95\% CL
+constraints on the 20 Wilson coefficients entering the linear fit. Two
+sets of constraints are shown; in green, we give the intervals
+obtained from a fit to the 175 data points introduced in
+Sect.~\ref{sec:exp}, whilst in orange, we give in the intervals
+obtained from a fit to the older top quark dataset used in the global
+analysis of Ref.~\cite{Ethier:2021bye}, obtained from a fit of 150
+data points. This comparison allows us to quantify the information
+gained from the latest Run II datasets, relative to those available to
+previous analyses. The same comparison, this time at quadratic order in the EFT expansion,  
+is shown in Fig.~\ref{fig:quadratic_eft_constraints} (note that in this plot we display constraints on 
+all 25 coefficients, including the 4-heavy coefficients $c_{Qt}^{8}$, $c_{QQ}^{1}$, $c_{QQ}^{8}$, $c_{Qt}^{1}$ and $c_{tt}^{1}$).
+%In both Figs.~\ref{fig:linear_eft_constraints} and ~\ref{fig:quadratic_eft_constraints}, the constraints on selected coefficients 
+%are rescaled by the factors shown such that their constraints can appear on the same scale.
+
+%------------------------------------------------------------------------------------
+\begin{figure}[tb!]
+	\centering
+	\includegraphics[scale=0.7]{smeft_plots/smeft_lin_nlo_comparison.pdf}
+	\caption{The 95\% CL intervals on the EFT coefficients entering the linear fit,
+          evaluated with \simunet{} on the dataset considered in this work, and evaluated with \smefit on the
+          top quark dataset entering the analysis of~\cite{Ethier:2021bye} 
+          (note that at the linear EFT level, the results obtained with \simunet{}
+          coincide with those provided by \smefit for the same dataset, as demonstrated in
+          App.~C of Ref.~\cite{Kassabov:2023hbm}).
+          %
+         Note also that the constraints on selected coefficients 
+          are rescaled by the factors shown, for display purposes.
+	  }
+	\label{fig:linear_eft_constraints}
+\end{figure}
+%------------------------------------------------------------------------------------
+
+We first note that Figures~\ref{fig:linear_eft_constraints} and~\ref{fig:quadratic_eft_constraints} both
+demonstrate good agreement between the fits using old and new datasets,
+and consistency between the new fit SMEFT bounds and the SM.
+At the linear level, the most noticeable improvement concerns $c_{tG}$; its
+ 95\% C.L. bounds decrease from $[-0.13, 0.41]$ to $[-0.18, 0.17]$,
+ thanks to the increased amount of information in the input dataset,
+ coming in particular from $t \bar{t}$ data. This results in both a 
+ tightening of the constraints by about 35\% and a shift in the best-fit point. 
+%
+For many of the other coefficients, the bounds are either stable
+(e.g. $c_{tZ}$), or exhibit a shift in central value but no significant tightening (e.g. $c_{\varphi t}$, undergoes
+a shift of -14.3, but a decrease in the size of the constraints 95\%
+C.L. by only 1\%, and $c_{\varphi Q}^{(-)}$ undergoes a shift of
+$-7.33$, but its bounds only tighten by 2\%). Finally, we note that some coefficients instead exhibit a broadening of constraints with the new dataset relative to the old
+dataset (for example, some of the four-fermion operators). The increase in the size of the constraints could point to some
+inconsistency within the new inclusive $t\bar{t}$ dataset; however, given that the bounds are very large anyway, at the edges of the 
+intervals we are likely to approach a region where the EFT is no
+longer valid in both cases, hence no definite conclusions may be
+drawn. 
+
+%We also observe subtle improvements in $c_{\varphi t}$ and $c_{\varphi Q}^{(-)}$ resulting from the addition of new $t \bar{t} Z$ $p_T^Z$ 
+%data, whilst the constraints on $c_{\varphi Q}^{(3)}$ are improved slightly by the increase in $tZj$ measurements. 
+%-----------------------------------------------------------------------------------
+\begin{figure}[tb!]
+        \centering
+        \includegraphics[scale=0.7]{smeft_plots/smeft_quad_nlo_comparison.pdf}
+	\caption{The 95\% CL intervals on the EFT coefficients entering the quadratic fit,
+          evaluated with {\sc\small SMEFiT}.
+          %
+          We compare the results based on the full top quark dataset with
+          the corresponding results obtained from the subset of top quark
+          measurements entering the analysis of~\cite{Ethier:2021bye}.  
+          %
+           %
+         As in Fig.~\ref{fig:linear_eft_constraints}, the constraints on selected coefficients 
+          are rescaled by the factors shown, for display purposes.        
+        }
+	\label{fig:quadratic_eft_constraints}
+\end{figure}
+%-----------------------------------------------------------------------------------
+
+At the quadratic order in the EFT expansion, however, the impact of the latest Run II dataset is clear;
+we see a marked improvement in many of the SMEFT constraints.
+As shown in Fig.~\ref{fig:quadratic_eft_constraints}, the bounds on all 14 of the four-fermion operators become noticeably smaller as a result of 
+the increase in precision in the $t \bar{t}$ sector.
+The constraint on $c_{tZ}$ is improved by the inclusion of
+measurements of the $t \bar{t} \gamma$ total cross sections, resulting
+in a tightening of 24\%.
+The addition of the $p_{T}^{\gamma}$ spectrum~\cite{Aad:2020axn} would
+yield an even stronger constraint, as seen in~\cite{Ellis:2020unq}. We will make use of this observable in future work when 
+unfolded measurements are made available.
+Contrary to the linear fit, where we singled out $c_{\varphi t}$ and $c_{\varphi Q}^{(-)}$ as examples of coefficients which shift, but whose bounds are not improved, the constraints on $c_{\varphi t}$, $c_{\varphi Q}^{(-)}$ markedly tighten in the quadratic fit in the presence of new data; in particular, the size of the bounds on $c_{\varphi t}$, $c_{\varphi Q}^{(-)}$ decrease by 35\% and 28\%, respectively.
+On the other hand, despite the addition of new $t\bar{t}t\bar{t}$,
+$t\bar{t} b \bar{b}$ datasets, we find limited sensitivity to the five
+four-heavy coefficients $c_{Qt}^{8}$, $c_{QQ}^{1}$, $c_{QQ}^{8}$,
+$c_{Qt}^{1}$ and $c_{tt}^{1}$. In fact, with the new data we see a
+broadening of the bounds. As with the linear fit, this could point to
+either an inconsistency in the $t\bar{t}t\bar{t}$, $t\bar{t}b\bar{b}$ data, or
+simply to the ambiguity associated to the EFT validity in that
+particular region of the parameter space. 
+
+\paragraph{Correlations.}
+Figure~\ref{fig:bsmcorr} shows the correlations the between Wilson
+coefficients evaluated in this analysis both at the linear and the
+quadratic order in the EFT expansion, shown on the left and right
+panels respectively.
+In the linear fit, we first note a number of large correlations amongst the octet four-fermion operators
+which enter the $t \bar{t}$ production together.  
+The singlet four-fermion operators are similarly correlated among themselves, although 
+their correlations are comparatively suppressed.  
+The coefficients $c_{\varphi t}$ and $c_{\varphi Q}^{(-)}$
+exhibit a large positive correlation due to their
+entering into $t \bar{t} Z$ production together,
+while $c_{Qq}^{3,1}$ and $c_{\varphi Q}^{(3)}$ have positive
+correlations through their contribution to single top production.
+Further non-zero correlations are found, for example amongst the pairs $c_{Qq}^{8,3}$ \& $c_{\varphi Q}^{(3)}$,
+$c_{Qd}^{8}$ \& $c_{tZ}$ and $c_{Qu}^{8}$ \& $c_{tZ}$.
+
+At quadratic order, however, we observe that many of these correlations are suppressed,
+as a result of the fact that the inclusion of quadratic corrections lifts many of the 
+degeneracies in the fit.
+We observe that the pairs $c_{\varphi t}$, $c_{\varphi Q}^{(-)}$
+and $c_{Qq}^{1,3}$, $c_{\varphi Q}^{(3)}$ remain correlated though.
+The 4-heavy operators are also included in this quadratic fit, and we find large anti-correlations between 
+$c_{QQ}^{1}$ and $c_{QQ}^8$, indicating that they are poorly distinguished in the $t \bar{t} t \bar{t}$
+and $t \bar{t} b \bar{b}$ processes.  Finally, note that we obtain subtle non-zero correlations
+between the octet and singlet four-fermion operators constructed from the same fields, for example between $c_{Qd}^8$ and $c_{Qd}^1$.
+This is a result of the fact that $t \bar{t}$ measurements provide the dominant source of constraints on these coefficients and are
+very sensitive to
+quadratic corrections, and at this order the contribution from these operators differs only by
+a numerical factor.
+
+%-----------------------------------------------------------------------------
+\begin{figure}[htb!]
+\centering
+        \subfigure{
+        \includegraphics[scale=0.31]{smeft_plots/plot_bsm_corr_linear.pdf}
+        }
+        \subfigure{
+        \includegraphics[scale=0.34]{smeft_plots/plot_bsm_corr_quad.pdf}
+        }
+	\caption{The values of the correlation coefficients evaluated
+          between all pairs of Wilson coefficients entering the
+          EFT fit at the  linear (left) and quadratic (right)  order.
+          %
+          As explained in the next, the number of fitted DoFs is different
+          in each case.
+        }
+\label{fig:bsmcorr}
+\end{figure}
+%-----------------------------------------------------------------------------
+
+
+
+\subsection{Study of the CMS 1D vs 2D distribution}
+\label{subsec:cms1dvs2d}
+In the dataset selection discussed in Sect.~\ref{sec:dataselection}, 
+the double-differential distribution measurements performed by CMS at $\sqrt{s}=13$~TeV
+in the $\ell+$jets channel~\cite{CMS:2021vhb} -- binned with respect to the top
+quark pair invariant mass $m_{t\bar{t}}$ and the top quark pair rapidity $y_{t\bar{t}}$ -- is found to be poorly described by the
+SM theory, with an experimental $\chi^2$ that is $22\sigma$ 
+away from the median of the $\chi^2$ distribution of a
+perfectly consistent dataset made of $n_{\rm dat}=34$.
+Even by increasing the weight of this dataset in a weighted fit (see Sect.~\ref{sec:dataselection} for a more
+detailed explanation), the $\chi^2_{\rm exp}$ per data point improves
+only moderately to 4.56 and the  $\chi^2$-statistic of the other datasets deteriorates significantly, hinting
+to both an internal incompatibility of the CMS 2D distribution and to an incompatibility with the rest of the data. 
+For this reason, the dataset was excluded from our analysis, and replaced by the the single-differential
+distribution in $m_{t\bar{t}}$ -- presented in the same publication~\cite{CMS:2021vhb}. The latter is well 
+described by the SM theoretical predictions. 
+
+ In this section we present a dedicated analysis to assess whether the SMEFT corrections can improve the
+ theoretical description of this dataset. In particular, we compare a fixed-PDF fit including the 13 TeV
+ CMS double-differential $(m_{t\bar{t}},y_{t\bar{t}})$  distribution (CMS 2D)
+ to the default one including the 13 TeV single-differential $m_{t\bar{t}}$ distribution (CMS 1D).
+
+ % 
+%-------------------------------------------------------------------------------------
+\begin{table}[thb]
+\begin{center}
+\centering
+\renewcommand{\arraystretch}{1.2}
+%\setlength{\tabcolsep}{5pt}
+\begin{tabularx}{\textwidth}{l|c|cc|cc|cc}
+\toprule
+Process  & $n_{\rm dat}$ &
+\multicolumn{2}{|c|}{\footnotesize $\chi^2_{\rm exp+th}$ [SM]} &
+\multicolumn{2}{|c|}{\footnotesize $\chi^2_{\rm exp+th}$ [SMEFT $\mathcal{O}(\Lambda^{-2})]$}&
+\multicolumn{2}{|c}{\footnotesize $\chi^2_{\rm exp+th}$ [SMEFT $\mathcal{O}(\Lambda^{-4})]$}\\
+& & {\footnotesize CMS 1D} &{\footnotesize CMS 2D }& {\footnotesize CMS 1D }& {\footnotesize CMS 2D} & {\footnotesize CMS 1D} & {\footnotesize CMS 2D}\\
+\midrule
+	$t \bar{t}$ & 86 & 1.71 & 2.07 & 1.11 &  1.18 & 1.69& 1.87\\
+	$t \bar{t}$ AC & 18 & 0.58 & 0.58 & 0.50 & 0.47 & 0.60& 0.60 \\
+	$W$ helicities & 4 & 0.71 & 0.71& 0.45 & 0.45 & 0.48& 0.46  \\
+        \midrule
+	$t\bar{t}Z$ & 12 & 1.19 & 1.19 & 1.17 & 1.07  &0.94 & 0.95  \\ 
+	$t\bar{t}W$ & 4 & 1.71 & 1.71& 0.46 & 0.46 &1.66 & 1.82\\
+        $t \bar{t} \gamma$ & 2 & 0.47 & 0.47& 0.03 & 0.03& 0.58 & 0.18\\ 
+        \midrule
+        $t \bar{t} t \bar{t}$ \& $t \bar{t} b \bar{b}$ & 8 & 1.32 &
+        1.32 & 1.06 & 1.28& 0.49 & 0.49  \\
+        \midrule
+        single top & 30 & 0.50 & 0.50 & 0.33 & 0.34 & 0.37 & 0.35\\ 
+        $tW$ & 6 & 1.00 & 01.00& 0.82 & 0.86 & 0.82 & 0.84\\ 
+        $tZ$ & 5 & 0.45 & 0.45& 0.30 & 0.30 & 0.31 & 0.30\\
+        \midrule
+        {\bf Total} & {\bf 175} & {\bf 1.24} & {\bf 1.48} & {\bf
+          0.84} & {\bf 0.91} & {\bf 1.14}  & {\bf 1.29}\\ 
+\bottomrule
+\end{tabularx}
+%\vspace{0.3cm}
+\end{center}
+\caption{\label{tab:chi2-cms2d1d} Same as Table~\ref{tab:smeft_fit_quality}, now comparing the values of the $\chi^2_{\rm exp+th}$ per data point for
+  the fixed-PDF EFT fits presented in this section, the default one including the 13 TeV single-differential $m_{t\bar{t}}$ distribution (CMS 1D) and the one including the 13 TeV  CMS double-differential $(m_{t\bar{t}},y_{t\bar{t}})$  distribution (CMS 2D), both for individual groups of processes, and for the total dataset.
+}
+\end{table}
+ %
+
+ First of all, it is interesting to notice that the inclusion of
+ quadratic SMEFT corrections in the fit does not improve much the
+ quality of the fit of the CMS 2D distribution, with $\chi^2_{\rm exp+th}/n_{\rm
+   dat}$ decreasing from 2.80 (in the SM) 
+to $\chi^2_{\rm exp+th}/n_{\rm dat}=2.57$ including  SMEFT $\mathcal{O}(\Lambda^{-4})$ corrections.
+ On the other hand, if SMEFT linear $\mathcal{O}(\Lambda^{-2})$ corrections are included, the fit quality of the CMS 2D distribution
+ improves substantially with $\chi^2_{\rm exp+th}/n_{\rm dat}=1.22$. 
+
+ In order to assess what is the effect of the inclusion of the CMS 2D distribution on the other top sector data,
+ in Table~\ref{tab:chi2-cms2d1d} we compare the fit quality of the two (fixed-PDF) SMEFT fits, CMS 1D and CMS 2D,
+ both for individual groups of processes, and for the total dataset.
+ We observe that the fit quality deteriorates both in the SM and in
+ the quadratic SMEFT fit once the CMS 2D distribution is fitted. The deterioration of the fit
+ quality is mostly driven by a deterioration of the fit quality of the
+ $t\bar{t}$ and $t\bar{t}W$ sectors. However at the level of linear
+ SMEFT fit, the quality of the fit deteriorates only moderately and it
+ is mostly driven by the slight deterioration in the inclusive
+ $t\bar{t}$ sector and in the $t\bar{t}t\bar{t}\,\&\,
+ t\bar{t}b\bar{b}$ one.
+
+At the level of fit of the Wilson coefficients, the quadratic SMEFT
+fits yields similar 95\% C.L. bounds on the EFT coefficients. This is
+somewhat expected, given that the fit quality of the CMS 2D data does not improve once quadratic SMEFT
+corrections are included, and the fit quality of the other datasets remains pretty much the same.
+%
+\begin{figure}[htb]
+        \centering
+        \includegraphics[scale=0.7]{smeft_plots/smeft_lin_lo_cms2d_cms1d.pdf}
+	\caption{The 95\% CL intervals on the EFT coefficients entering the liner fits,
+          evaluated with \simunet.
+          %
+          We compare the results based on the default full top quark dataset (CMS 1D) with
+          the corresponding results obtained from the same set of top quark
+          measurements in which the single-differential $m_{t\bar{t}}$ 13 TeV CMS distribution is substituted by the
+          double differential  $(m_{t\bar{t}},y_{t\bar{t}})$ 13 TeV CMS distribution (CMS 2D).        
+        }
+	\label{fig:linear_eft_cms2d_cms1d}
+      \end{figure}
+%
+On the other hand the bounds obtained from a SMEFT linear fit change
+more significantly depending on whether the CMS 1D or the CMS 2D
+distribution is used in the fit.
+In particular the central value of the $c_{tG}$ 95\% C.L. bounds is
+shifted upwards by 1$\sigma$, as well as the bounds on $c^1_{Qd}$ and
+$c^1_{ut}$, while the bounds on $c^1_{Qu}$ and
+$c^1_{qt}$ shift downwards, as expected from the EFT coefficient
+correlations displayed in Fig.~\ref{fig:bsmcorr}.
+
+As a result of our analysis, we observe that the bounds on the EFT in
+the linear case do depend on the input dataset quite significantly and
+careful consideration has to be made to the overall dataset
+compatibility and to the outcome of the fit once quadratic corrections
+are included. The current analysis in particular shows that the
+incompatibility of the 13 TeV CMS double differential distribution
+cannot be entirely attributed to new physics effects parametrised by
+the SMEFT expansion, rather there are internal experimental or
+theoretical incompatibilities that affect the results.
+
+ To conclude, it is interesting to observe that, if one
+  tries to include the CMS double differential distribution dataset
+  instead of the single differential dataset in a simultaneous fit of
+  PDFs and SMEFT at the linear level, the improvement in the fit quality that is obtained
+  in a SMEFT linear fit is reverted. Indeed, the SMEFT PDF resulting
+  from the simultaneous fit including the CMS double differential
+distribution (instaed of the CMS single differential one) are
+basically unchanged with respect to the ones that will be presented in
+Sect.~6, and the bounds on the SMEFT coefficients are quite similar. However, 
+the fit quality of the CMS double differential distribution is rather poor,
+with $\chi^2_{\rm exp}/n_{\rm dat}=5.69$ (only marginally decreasing from 6.43 in the
+PDF-only fit). 
+This means that, in a simultaneous fit, the degrees of freedom of the PDFs
+tend to contrast the direction that the SMEFT coefficients would take
+in the absence of PDFs because the latter would require a change in
+the PDFs that is disfavoured by the other datasets in the global
+analysis. All results can be found on the public web page that
+includes the additional material that we do not show in this chapter\footnote{\url{https://www.pbsp.org.uk/topproject/}}.
+
+
+
+
+\subsection{Correlations between PDFs and EFT coefficients}
+\label{subsec:pdfeftcorr}
+
+%-----------------------------------------------------------------------------
+\begin{figure}[hbt!]
+\centering
+        \includegraphics[width=0.48\textwidth]{smeft_plots/correlations_fixed_fitpdf_plot_bsm_pdf_corr_OtG.pdf}
+        %
+        \includegraphics[width=0.48\textwidth]{smeft_plots/correlations_fixed_fitpdf_plot_bsm_pdf_corr_O8ut.pdf}
+	\caption{The value of the correlation coefficient $\rho$
+          between the PDFs and selected EFT coefficients as a function of $x$
+          and $Q=172.5$ GeV.
+          %
+          We show the results for the gluon, the total singlet $\Sigma$, total valence $V$, and non-singlet
+          triplet $T_3$ PDFs.
+          We provide results for representative EFT coefficients, namely $c_{tG}$ and  $c_{ut}^{(8)}$.
+        }
+\label{fig:pdfbsmcorr}
+\end{figure}
+%-----------------------------------------------------------------------------
+
+We conclude this section by discussing the correlations observed between the PDFs and Wilson coefficients.
+The PDF-EFT correlation coefficient for a Wilson coefficient $c$ and a
+PDF $f(x, Q)$ at a given $x$ and $Q^2$ is defined as
+%
+\begin{equation}
+\label{eq:correlationL2CT}
+\rho\left( c, f(x,Q^2)\right)=\frac{\la c^{(k)}f^{(k)}(x,Q^2)\ra_k - \la c^{(k)}\ra_k \la f^{(k)}(x,Q^2)\ra_k
+}{\sqrt{\la (c^{(k)})^2\ra_k - \la c^{(k)}\ra_k^2}\sqrt{\la\left( f^{(k)}(x,Q^2)\right)^2\ra_k - \la f^{(k)}(x,Q^2)\ra_k^2}}  \, ,
+\end{equation}
+%
+where $c^{(k))}$ is the best-fit value of the Wilson coefficient for
+the $k$-th replica and $f^{(k)}$ is the $k$-th PDF replica computed at
+a given $x$ and $Q$, and $\la \cdot \ra_k$ represents the average
+over all replicas. We will compute the correlation between a SM PDF and the Wilson coefficients, both of which have been separately determined from 
+the total dataset including all new top quark data.  
+By doing so we hope to shed light on which Wilson coefficients,
+and which PDF flavours and kinematical regions, are strongly impacted by the top quark data and therefore exhibit a potential for interplay
+in a simultaneous EFT-PDF determination.
+The EFT corrections will be
+restricted to linear order in the EFT expansion.
+
+Fig.~\ref{fig:pdfbsmcorr} displays a selection of the largest correlations.
+We observe that the gluon PDF in the large-$x$ region is significantly correlated with the Wilson coefficients 
+$c_{tG}$, $c_{ut}^{(8)}$.  On the other hand, relatively large correlations are observed between $c_{tG}$ and the
+the total singlet $\Sigma$, while the total valence $V$, and non-singlet triplet $T_3$ PDFs show no relevant correlations
+with the selected coefficients.
+This is not surprising, given the impact of top quark pair production total cross sections and differential distributions
+in constraining these PDFs and Wilson coefficients.  
+Whilst these correlations are computed from a determination of the SMEFT in which the PDFs are fixed to SM PDFs, 
+the emergence of non-zero correlations provides an indication of the potential for interplay between the PDFs and the SMEFT
+coefficients; this interplay will be investigated in a simultaneous determination
+in the following section.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{SMEFT-PDFs from top quark data}
+\label{sec:joint_pdf_smeft}
+
+In this section we present the main results of this work, namely
+the simultaneous determination of the proton PDFs and the SMEFT Wilson coefficients
+from the LHC Run II top quark data described in Sect.~\ref{sec:exp},
+following the \simunet{} methodology summarised in Sect.~\ref{sec:methodology}.
+%
+This determination of the SMEFT-PDFs from top quark data is carried
+out at the linear, $\mathcal{O}(1/\Lambda^2)$, level in the EFT expansion.
+We do not perform simultaneous fits at the quadratic level due to
+shortcomings of the Monte Carlo replica method, on which
+\simunet{} is based; this is discussed in detail in Sect.~\ref{sec:quad}, and
+is also the subject of Chapter~\ref{chap:montecarlo}.
+
+\paragraph{PDFs from a joint SMEFT-PDF fit.} We begin by discussing the PDFs obtained through a
+joint fit of PDFs and Wilson coefficients
+from the complete LHC top quark dataset considered in this work.
+%
+Simultaneously extracting the PDFs and the EFT coefficients
+from top quark data has a marked impact on the former, as compared to a SM-PDF
+baseline, but we shall see has much less impact on the latter, as compared to the results of the
+corresponding fixed-PDF EFT analyses.
+%
+Fig.~\ref{fig:SMEFTpdf_gluon}
+displays a comparison between the gluon and quark singlet PDFs, as
+well as of their relative $1\sigma$ PDF uncertainties, for 
+the no-top baseline, the SM-PDFs of
+fit H in Table~\ref{tab:fit_list} which include
+the full top quark dataset, and their SMEFT-PDF counterparts based
+on the same dataset.
+%
+PDFs are compared in the large-$x$ region for   $Q=m_t=172.5$ GeV. In
+the left panel they are normalised to the central value of the
+no-top fit.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\centering
+  \subfigure{
+  \includegraphics[scale=0.5]{smeft_plots/SMEFTpdf_gluon.pdf}
+ }
+        %
+  \subfigure{
+    \includegraphics[scale=0.5]{smeft_plots/SMEFTpdf_gluon_unc.pdf}
+  }
+   \subfigure{
+  \includegraphics[scale=0.5]{smeft_plots/SMEFTpdf_sigma.pdf}
+ }
+        %
+  \subfigure{
+  \includegraphics[scale=0.5]{smeft_plots/SMEFTpdf_sigma_unc.pdf}
+  }
+        \caption{
+    Left: a comparison between the gluon (upper panel)
+    and quark singlet (lower panel) PDFs evaluated at $Q=m_t=172.5$ GeV
+    in the large-$x$ region.
+    %
+    We display the no-top baseline, the SM-PDFs of
+    fit H in Table~\ref{tab:fit_list} which include
+    the full top quark dataset, and their SMEFT-PDF counterparts.
+    %
+    The results are normalised to the central value of the no-top fit.
+    %
+    Right: the same comparison, but now for the relative $1\sigma$ PDF uncertainties.
+}
+\label{fig:SMEFTpdf_gluon}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+While differences are negligible for the quark singlet PDF, both in terms of
+central values and uncertainties, they are more marked for the gluon
+PDF. Two main effects are observed therein.
+%
+First, the central value of the SMEFT-PDF gluon moves upwards as compared
+to the SM-PDF fit based on the same dataset, ending up halfway between the latter
+and the no-top fit.
+%
+Second, uncertainties increase for the SMEFT-PDF determination as compared
+to the SM-PDFs extracted from the same data, becoming close to the uncertainties
+of the no-top fit except for $x\gsim 0.5$.
+%
+In both cases, differences are restricted to the large-$x$ region with $x\gsim 0.1$,
+where the impact of the dominant top quark pair production measurements is
+the largest.
+
+The results of Fig.~\ref{fig:SMEFTpdf_gluon} for the gluon PDF therefore indicate that
+within a simultaneous extraction of the PDFs and the EFT coefficients, the impact
+of the top quark data on the PDFs is diluted, with the constraints it provides 
+partially `reabsorbed' by the Wilson coefficients.
+%
+This said, there remains a pull of the top quark data as compared to
+the no-top baseline fit
+which is qualitatively consistent with the pull
+obtained in a SM-PDF determination based on the same dataset, albeit of reduced magnitude.
+%
+Interestingly, as we show below, while the SMEFT-PDF gluon is significantly
+modified in the joint fit as compared to a SM-PDF reference, much smaller
+differences are observed at the level of the bounds on the EFT parameters themselves.
+
+Fig.~\ref{fig:simu_luminosities} displays the same comparison
+as in Fig.~\ref{fig:SMEFTpdf_gluon} now for the case of the gluon-gluon and quark-gluon 
+partonic luminosities at $\sqrt{s}=13$ TeV, as a function of the final-state
+invariant mass $m_X$.
+%
+Consistently with the results obtained at the PDF level, one finds that
+the three luminosities are almost identical for $m_X \le 1$ TeV, and
+at higher invariant masses the SMEFT-PDF predictions are bracketed
+between the no-top fit from above and the SM-PDF which includes
+all top data (fit H in Table~\ref{tab:fit_list}) from below.
+%
+Hence, the net effect of simultaneously fitting the PDFs
+and the EFT coefficients  is a dilution of constraints
+provided by the top quark data on the former,
+which translates into larger PDF uncertainties (which end up being rather similar to
+those of no-top) and an increase
+in the large-$m_X$ luminosity, e.g. of 5\% in the $gg$ case for $m_X\simeq 3$ TeV,
+as compared to the SM-PDF luminosity.
+
+This dilution arises because of an improved description of the top quark
+data included in the fit, especially in the high $m_{t\bar{t}}$ bins.
+In the SM-PDF case this can only be obtained by suppressing
+the large-$x$ gluon, while in a SMEFT-PDF analysis this can also be achieved by shifting the EFT coefficients
+from their SM values.
+%
+In other words, as compared to the no-top baseline, the gluon PDF experiences
+a suppression at large-$x$ of up to 10\% when fitting the top quark data, and this
+pull is reduced by approximately a factor two in the joint SMEFT-PDF determination due to the
+coherent effect of the linear EFT cross-sections.
+
+It is worth mentioning that, since we include the SMEFT corrections by applying BSM factors computed bin-by-bin by taking ratios of the SMEFT contributions and the SM cross sections with a specific PDF set, a change of the PDFs can in principle translate into a change of these factors. Our current methodology relies therefore on performing this check a posteriori and in the case of modified  BSM factors, the fit is reiterated with the new ones. However, in the present case, we find that the BSM factors are substantially unaffected and we do not reiterate the fit. The parton luminosities are indeed very similar to the ones of the PDF set \texttt{NNPDF40\_nnlo\_as\_01180} used for the original calculation, with deviations of $2-3\%$ at most. At the current experimental sensitivity, changes of $\mathcal{O}(1\%)$ in the EFT corrections can be safely ignored as they do not impact in a significant way the fits.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.49\textwidth]{smeft_plots/SIMU_lumi_comparison_gg.pdf}
+\includegraphics[width=0.49\textwidth]{smeft_plots/SIMU_lumi_comparison_gq.pdf}
+\caption{The gluon-gluon (left panel) and quark-gluon (right panel)
+  partonic luminosities at $\sqrt{s}=13$ TeV as a function of the final-state
+  invariant mass $m_X$.
+  %
+  We compare the no-top baseline fit with its SM-PDF counterpart
+  including all top quark data considered (fit H in Table~\ref{tab:fit_list}) as well as with
+  the SMEFT-PDF determination.
+   %
+  Results are presented as the ratio to the central value of the
+  no-top baseline.
+}
+\label{fig:simu_luminosities}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{EFT coefficients from a joint SMEFT-PDF fit.} 
+As opposed to the marked effect of the SMEFT-PDF interplay found for the large-$x$ gluon,
+its impact is more moderate at the level of the bounds on the EFT coefficients,
+and is restricted to mild shifts in the central values and a slight broadening
+of the uncertainties.
+%
+This is illustrated by Fig.~\ref{fig:simultaneous_broadening},
+showing the posterior distributions for the Wilson coefficient $c_{tG}$
+  associated to the chromomagnetic operator in the joint SMEFT-PDF determination, compared
+  with the corresponding results from the fixed-PDF EFT analysis whose settings are described in
+  Sect.~\ref{sec:res_smeft}.
+  %
+  The comparison is presented both for the fits which consider only top-quark pair production data
+  and those based on the whole top quark dataset considered in this work.
+  %
+  The leading effect of the chromomagnetic operator $\mathcal{O}_{tG}$ is to modify the
+  total rates of 
+  $t \bar{t}$ production without altering the shape of the differential distributions, and hence
+  it plays an important role in a simultaneous SMEFT-PDF determination based on top quark data.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.49\textwidth]{smeft_plots/plot_otg_ttbar_nlo_lin.pdf}
+\includegraphics[width=0.49\textwidth]{smeft_plots/plot_otg_alltop_nlo_lin.pdf}
+\caption{Posterior distributions for the Wilson coefficient $c_{tG}$
+  associated to the chromomagnetic operator in the joint SMEFT-PDF determination, compared
+  with the corresponding results from the fixed-PDF EFT analysis whose settings are described in
+  Sect.~\ref{sec:res_smeft}.
+  %
+  We show results based on only top-quark pair production data (left) and
+  in the whole top quark dataset considered in this work (right panel).
+}
+\label{fig:simultaneous_broadening}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+For fits based only on inclusive $t\bar{t}$ data, as shown in the left panel of
+Fig.~\ref{fig:simultaneous_broadening}, the two posterior
+distributions are similar; the distribution based on the SMEFT-PDF analysis
+is slightly broader, approximately $10 \%$ so, as compared to the fixed-PDF EFT fit
+to the same measurements.
+%
+This slight broadening is washed out in the fit to the full top quark dataset, as shown in the right panel of Fig.~\ref{fig:simultaneous_broadening}.
+%
+In both cases, the determination of $c_{tG}$ is consistent with the SM
+at a 95\% CL, and the best-fit values of the coefficient
+are the same in the SMEFT-PDF and fixed-PDF EFT analyses.
+%
+Hence, in the specific case of the chromomagnetic operator, the interplay between PDFs and EFT fits
+is rather moderate and restricted to a broadening of at most $10\%$ in the 95\% CL bounds.
+%
+Similar comparisons have been carried out for other EFT coefficients as well as in the context
+of fits to a subset of the data and/or to a subset of the coefficients.
+%
+We find that in general the impact of the SMEFT-PDF interplay
+translates to a broadening of the uncertainties
+in the EFT coefficients, which at most reaches $30\%$, and
+alongside which the best-fit values remain stable\footnote{All results
+  obtained with various subsets of the data and of the
+  coefficients can be found at \url{https://www.pbsp.org.uk/research/topproject}}.
+%
+
+All in all, within  the global fit based on the best available theory predictions,
+results for the EFT coefficients turn out to be very similar
+in the fixed-PDF EFT and SMEFT-PDF fits.
+%
+This indicates that, provided a broad enough dataset and the most
+up-to-date theory calculations are used, the PDF dependence on the cross-sections
+entering an EFT interpretation of the LHC data is currently
+subdominant and can be neglected (this is not the case for the
+PDFs, see Fig.~\ref{fig:simu_luminosities}).
+%
+Nevertheless, this statement applies only to the dataset currently available,
+and it is likely that the SMEFT-PDF interplay will become more significant in the future
+once HL-LHC measurements become available~\cite{AbdulKhalek:2018rok,Azzi:2019yne},
+as demonstrated in the case of high-mass Drell-Yan~\cite{Greljo:2021kvv}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t!]
+\centering
+\includegraphics[width=0.99\textwidth]{smeft_plots/smeft-pdf-95cl-bounds.pdf}
+\caption{
+  Comparison of the $95 \%$ CL intervals on the 20 Wilson coefficients
+  considered in this work (in the linear EFT case) between the outcome of the joint SMEFT-PDF determination
+  and that of the fixed-PDF EFT analysis.
+  %
+  The latter is based on SM and EFT calculations performed with
+ no-top as input, see also  Sect.~\ref{sec:res_smeft}.
+  %
+  In both cases, results are based on the full 
+  top quark dataset being considered and EFT cross-sections
+	are evaluated up  to linear, $\mathcal{O}\left( \Lambda^{-2}\right)$, corrections.
+  %
+  The dashed horizontal line indicates the SM prediction, $c_k=0$.
+  %
+  Note that some coefficients are multiplied by the indicated prefactor
+  to facilitate the visualisation of the results. 
+}
+\label{fig:smeft_simu_bounds}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The moderate impact of the SMEFT-PDF interplay on the Wilson coefficients 
+for the full top quark dataset considered in this work is summarised in Fig.~\ref{fig:smeft_simu_bounds},
+which 
+compares the $95 \%$ CL intervals of the 20 fitted Wilson coefficients
+relevant for the linear EFT fit obtained from the outcome of the joint SMEFT-PDF determination
+and the fixed-PDF EFT analysis.
+%
+The latter is based on SM and EFT calculations performed with
+no-top as input; see also the description of the settings in
+Sect.~\ref{sec:res_smeft}.
+%
+The dashed horizontal line indicates the SM prediction,
+and  some coefficients are multiplied by the indicated prefactor
+to facilitate the visualisation of the results. 
+%
+Fig.~\ref{fig:smeft_simu_bounds} demonstrates that, other than slight
+broadenings and shifts in the central values,
+the results of the two analyses coincide.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t!]
+\centering
+\includegraphics[width=0.49\textwidth]{smeft_plots/correlations_fitpdf_plot_bsm_pdf_corr_O8dt.pdf}
+\includegraphics[width=0.49\textwidth]{smeft_plots/correlations_fitpdf_plot_bsm_pdf_corr_O8ut.pdf}
+\includegraphics[width=0.49\textwidth]{smeft_plots/correlations_fitpdf_plot_bsm_pdf_corr_OtG.pdf}
+\includegraphics[width=0.49\textwidth]{smeft_plots/correlations_fitpdf_plot_bsm_pdf_corr_OtW.pdf}
+\caption{The correlation coefficient $\rho(f_i, c_k)$
+  between the SMEFT-PDFs $f_i$ and the Wilson coefficients $c_k$ evaluated at $Q=172.5$ GeV
+  as a function of $x$.
+  %
+  Each panel displays the correlations of the coefficient $c_k$
+  with the gluon and the total singlet $\Sigma$, total valence $V$, and non-singlet
+  triplet $T_3$ PDFs.
+  %
+  We provide results for representative EFT coefficients, namely $c_{td}^{8}$,
+  $c_{tu}^{8}$, $c_{tG}$, and $c_{tW}$.
+  %
+  The largest correlations within the EFT coefficients  considered in this
+  work are associated to four-fermion operators such as  $c_{td}^{8}$ and $c_{tu}^{8}$.
+}
+\label{fig:smeft_pdf_corr}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{Correlations.} Fig.~\ref{fig:smeft_pdf_corr} displays the
+correlation coefficients~\cite{Ball:2010de}
+between the SMEFT-PDFs and the Wilson coefficients evaluated at $Q=172.5$ GeV
+as a function of $x$.
+%
+Each panel displays the correlations of the coefficient $c_k$
+with the gluon and the total singlet $\Sigma$, total valence $V$, and non-singlet
+triplet $T_3$ PDFs, and we consider four representative EFT coefficients, namely $c_{td}^{8}$,
+$c_{tu}^{8}$, $c_{tG}$, and $c_{tW}$.
+%
+The largest correlations within the EFT coefficients  considered in this
+work are associated to the gluon PDF and four-fermion operators such as  $c_{td}^{8}$ and $c_{tu}^{8}$
+in the large-$x$ region, peaking at $x\simeq 0.3$.
+%
+Correlations for other values of $x$ and for the quark PDFs are negligible
+for all operators entering the analysis.
+%
+We note that future data with an enhanced coverage of the high-$m_{t\bar{t}}$ region in top quark
+pair-production
+might alter this picture, given that for $m_{t\bar{t}}\gsim 3$ TeV
+the  $q\bar{q}$ luminosity starts to become more relevant and eventually dominates over the $gg$
+contribution.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.98\textwidth]{smeft_plots/fixedsmeftpdf_res.pdf}
+\caption{The 68\% CL residuals, Eq.~(\ref{eq:residuals}), for the
+  same Wilson coefficients displayed in Fig.~\ref{fig:smeft_simu_bounds},
+  comparing the outcome of the joint SMEFT-PDF determination
+  with that of a fixed-PDF EFT analysis.
+  %
+  In the latter, we use as input for the theory calculations
+  the  SMEFT-PDFs obtained in the joint fit rather than the
+  no-top set
+  used in Sect.~\ref{sec:res_smeft}.
+  %
+  The horizontal dashed lines indicate the $\pm 1\sigma$ regions.
+}
+\label{fig:fixedsmeftpdf_res}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{Residuals.} Finally, Fig.~\ref{fig:fixedsmeftpdf_res} displays a similar comparison as
+in Fig.~\ref{fig:smeft_simu_bounds} now at the level of the 68\% CL fit residuals defined as
+\begin{equation}
+  \label{eq:residuals}
+R_n = \frac{c_n^*}{\sigma_n} \, ,
+\end{equation}
+where $c_n^*$ and $\sigma_n$ are the median value and the standard deviation of the Wilson coefficient
+$c_n$ respectively, with $n=1,\ldots,N$, where $N$ is the number of operators.
+%
+The outcome of the joint SMEFT-PDF determination
+is compared with that of a fixed-PDF EFT analysis
+where we use as input for the theory calculations
+the  SMEFT-PDFs obtained in the joint fit, rather than the no-top set.
+%
+That is, in both cases the information provided by the top quark data on the PDFs
+and Wilson coefficients is accounted for, but in one case the cross-correlations
+are neglected whereas they are accounted for in the other.
+%
+The residuals are similar in the two cases; they are slightly bigger (in absolute value)
+in the fixed-PDF case in which the correlations between the SMEFT-PDFs and the EFT
+coefficients are ignored.
+%
+This analysis further emphasises that, for the currently available top quark data, the cross-talk
+between PDFs and EFT degrees of freedom does not significantly modify the posterior
+distributions in the space spanned by the Wilson coefficients.\\
+
+\noindent In summary, on the one hand we find that from the point of view of a PDF determination,
+SM-PDFs and SMEFT-PDFs extracted from top quark data differ by an amount comparable
+to their respective uncertainties in the case of the large-$x$ gluon.
+%
+On the other hand, at the level of Wilson coefficients the results are unchanged irrespective
+of the PDF set used as input for the theory calculations; that is, bounds based
+on the no-top fit or the SMEFT-PDFs are almost the same.
+%
+Hence, while EFT interpretations of top quark data can safely ignore the PDF dependence,
+at least for the settings adopted in this work, a global PDF fit could be significantly
+distorted if BSM physics were to be present in the large-energy top quark distributions.
+
+%\subsection{SMEFT-PDFs as proxy for simultaneous fits}
+%\label{sec:proxy}
+
+%The \simunet{} framework allows us to produce PDF sets with EFT degrees of freedom taken into account.
+%The resulting PDF is given by a set of replicas, as in NNPDF4.0, and each one of them has a specific associated configuration of Wilson coefficients,
+%i.e. the best fit solution for that specific replica of the dataset. As a consequence, each replica will have different 
+%associated EFT coefficients and therefore the resulting PDF cannot be interpreted as a PDF extracted with a specific NP
+%assumption. A PDF of that kind could easily be obtained in the \simunet{} framework by fitting PDFs with fixed values of the
+%Wilson coefficients. However, the PDF obtained from the simultaneous fit could still be useful and have a sensible interpretation
+%for future SMEFT fixed PDF fits.
+%The conservative PDF approach has the advantage of avoiding overlap between datasets, but the PDF is potentially lacking
+%key information which could result in both different central predictions and underestimation of the theory uncertainty outside of the
+%data region. As an example, a conservative PDF set without top data has very few information on the high-x gluon PDF, which means
+%that both the central prediction and relative theory uncertainties from the PDF side are the result of an extrapolation. This is
+%potential cause of concern in the future in the scenario of observing deviations from the SM, especially given that we need 
+%to approach the EFT from a global perspective by amassing as many data as possible and we do not want to remove too many datasets from PDF extraction.
+
+%On the other hand, the SMEFT PDF produced by the simultaneous fit has been extracted from a dataset containing top% data and
+%therefore will have a better estimate of the PDFs in the data region relevant for top quark data. Consequently, it% can be used
+%as a PDF set for fixed PDF SMEFT studies, with a sensibly reduced risk of having NP absorbed in the parametrisation. This would not be the case
+%if one would use a SM PDF which contains top data, as in that case one can end up with both a bias in the predicts%ons and an underestimation of the actual 
+%PDF uncertainties. In this sense, the SMEFT PDFs, thanks to their enhanced uncertainties, can be thought of as a proxy to simultaneous fits
+%when performing EFT interpretations.
+
+
+
+
+
+
+
 
 
 %%%%%%%%%
@@ -5689,8 +6747,8 @@ To this end, the capabilities of the \simunet{} framework were extended, as disc
 all necessary SMEFT $K$-factors needed for the quadratic predictions were produced.
 %
 However, whilst benchmarking our code, we noticed significant disagreement between quadratic SMEFT-only fits
-produced using the \simunet{} methodology and the \smefit Nested Sampling option;\footnote{This disagreement is not present at the linear level; in this case, \simunet{} using the fixed-PDF option and \smefit using either the Nested Sampling or MCfit options perfectly coincide. See App.~\ref{app:benchmark} for more details.} on the other hand, we note perfect agreement
-between our \simunet{} quadratic SMEFT-only fits and the \smefit MCfit option.
+produced using the \simunet{} methodology and the \smefit Nested Sampling option;\footnote{This disagreement is not present at the linear level; in this case, \simunet{} using the fixed-PDF option and \smefit using either the Nested Sampling or MCfit options perfectly coincide. See App.~C of Ref.~\cite{Kassabov:2023hbm} for more details.} on the other hand, we note perfect agreement
+between our \simunet{} quadratic SMEFT-only fits and the \smefit{}~MCfit option.
 
 This disagreement can be traced back to 
 a deficiency in the Monte-Carlo sampling method used to propagate experimental error to the SMEFT coefficients, which
@@ -5698,8 +6756,9 @@ currently prevents us from applying the
 the \simunet{} framework to joint SMEFT-PDF
 fits with quadratic EFT calculations. 
 %
-In this Appendix, we describe our current understanding of these limitations within the context of a toy model, 
-and give a more realistic example from this work; further work on the topic is deferred to a future publication..
+In this section, we describe our current understanding of these limitations within the context of a toy model, 
+and give a more realistic example from this work; further work on the topic is deferred to a future publication, with
+some preliminary discussion given in Chapter~\ref{chap:montecarlo}.
 
 \subsection{A toy model for quadratic EFT fits}
 In the following subsection, we consider a toy scenario involving a single data point $d$ and only one
@@ -5949,7 +7008,7 @@ of fitted coefficients).
 Nevertheless, at least in its current implementation, Fig.~\ref{fig:O8dt-fit} highlights
 that the Monte-Carlo replica method is affected by pitfalls that
 prevent its straightforward application to global EFT interpretations of experimental
-data which include quadratic corrections.
+data which include quadratic corrections. We will revisit this more carefully in Chapter~\ref{chap:montecarlo}.
 
 
 
