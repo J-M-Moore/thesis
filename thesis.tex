@@ -4218,7 +4218,7 @@ We indicate in each case
  rather than the double-differential one in $(m_{t\bar{t}},
  y_{t\bar{t}})$, which is also available, since we find that the
  latter cannot be reproduced by the NNLO SM predictions. We present a
- dedicated analysis of the double-differential distribution in Sect.~\ref{subsec:cms2d}.
+ dedicated analysis of the double-differential distribution in Sect.~\ref{subsec:cms1dvs2d}.
  %
  As mentioned above, we will study the impact of our dataset selection choices
  by presenting variations of the baseline SM-PDF, fixed-PDF, and SMEFT-PDF analyses
@@ -4270,7 +4270,7 @@ to include in the fit datasets that either lack, or have negligible, PDF sensiti
 and depend only on the EFT coefficients.
 %
 We describe how this can be achieved within the \simunet{} framework
-in Sect.~\ref{sec:methodology}. 
+in Sect.~\ref{sec:simunet_methodology}. 
 
 In Table~\ref{tab:input_datasets_helicityfractions} we list
 the LHC measurements of the $W$-helicity fractions considered in the current analysis.
@@ -4320,8 +4320,8 @@ For top-quark production associated with a photon, we include the fiducial
 cross-section measurements from ATLAS and CMS at 8 TeV; also available is a
 differential distribution at 13 TeV from ATLAS binned in the photon transverse
 momentum $p_T^\gamma$~\cite{Aad:2020axn}, but we exclude this from our analysis because of the difficulty in
-producing SMEFT predictions in the fiducial phase space (in the \fitm analysis, its inclusion
-is only approximate, and in \smefit this distribution is neglected entirely).
+producing SMEFT predictions in the fiducial phase space (in the \fitm{}~analysis, its inclusion
+is only approximate, and in \smefit{}~this distribution is neglected entirely).
 %
 Finally, we include fiducial measurements of
 $t\bar{t}b\bar{b}$ and $t\bar{t}t\bar{t}$ production at 13 TeV considering
@@ -4340,7 +4340,7 @@ comprises measurements of
 single-top production in the $t$-channel, which have previously been included
 in PDF fits~\cite{Nocera:2019wyk,NNPDF:2021njg}, as well as measurements of single-top production in the $s$-channel, which in the context of PDF studies have been implemented for the first time in this study.
 %
-For $t$-channel production, we consider the ATLAS and CMS top and anti-top fiducial cross sections
+For $t$-channel production, we consider the ATLAS and CMS top and anti-top fiducial cross sections at
 $\sqrt{s}=7,8,$ and 13 TeV, as well as normalised $y_t$ and $y_{\bar{t}}$ distributions
 at 7 and 8 TeV (ATLAS) and at 13 TeV (CMS).
 %
@@ -4463,7 +4463,7 @@ they affect the resulting pre- and post-fit $\chi^2$.
 To quantify whether datasets with large $Z$ distort the fit results in a sizable
 manner, one can run fit variants applying this decorrelation procedure such that all datasets
 exhibit a value of the $Z$-metric below the threshold. We do not find it necessary
-to run such fits in this work.
+to run such fits in this chapter.
 
 \end{itemize}
 
@@ -4504,7 +4504,7 @@ it should be retained in the fit:
 
     From the analysis of Tables~\ref{tab:datasets_selection_atlas} and~\ref{tab:datasets_selection_cms},
     one finds that only two datasets in the inclusive
-    top quark pair production (lepton+jets final state) category are flagged as potentially
+    top quark pair production ($\ell$+jets final state) category are flagged as potentially
     problematic: the ATLAS $|y_{t\bar{t}}|$ distribution at 8 TeV
     and the CMS double-differential distributions in $m_{t\bar{t}}$ and $y_{t}$
     at 13 TeV.
@@ -4541,7 +4541,7 @@ largely compatible with the rest of the dataset, hence they are kept.
     perfectly described in the baseline fit.  To check whether the
     incompatibility we observe in the double-differential distribution can be
     cured by the inclusion of SMEFT corrections, we will run a devoted analysis
-    presented in Sect.~\ref{subsec:cms2d}.
+    presented in Sect.~\ref{subsec:cms1dvs2d}.
 
 \section{Theoretical predictions}
 \label{sec:theory}
@@ -4577,8 +4577,8 @@ an event database for distributing and analysing the results of fixed order NNLO
 calculations for LHC processes.
 %
 The NNLO PDF set used in the computation of these $K$-factors is either 
-{\tt NNPDF3.1} or NNPDF, depending on whether a given dataset was already included
-in the NNPDF global fit or not, respectively.
+NNPDF3.1 or NNPDF4.0, depending on whether a given dataset was already included
+in the NNPDF4.0 global fit or not, respectively.
 
 For associated $t\bar{t}$ and $W$ or $Z$ production, dedicated fast NLO grids  have been generated.
 %
@@ -4757,20 +4757,20 @@ For hadronic data, i.e. for proton-proton collisions, which are the only data af
   \label{eq:mult_k_fac_app1}
    R_{\rm SMEFT}^{(n)} \equiv \displaystyle \left( {\cal L}_{ ij}^{\rm NNLO} \otimes d\widehat{\sigma}_{ij,{\rm SMEFT}}^{(n)}\right)
  \big/ \left( {\cal L}_{ ij}^{\rm NNLO} \otimes d\widehat{\sigma}_{ij,{\rm SM}} \right) \, , \quad
- n=1\,\ldots, N \, ,
+ n=1,\ldots, N,
 \end{equation}
 %
 where $i, j$ are parton indices, ${\cal L}_{ ij}^{\rm NNLO}$ is the NNLO partonic luminosity defined as 
 %
 \begin{equation}
 \label{eq:lumidef}
-\mathcal{L}_{ij}(\tau,M_X) = \int_{\tau}^1 \frac{d x}{x}~f_i (x,M_X) f_j (\tau/x,M_X) ~, \quad \tau=M_X^2/s,
+\mathcal{L}_{ij}(\tau,M_X) = \int_{\tau}^1 \frac{d x}{x}~f_i (x,M_X^2) f_j (\tau/x,M_X^2) ~, \quad \tau=M_X^2/s,
 \end{equation}
 %
 $d\widehat{\sigma}_{ij,{\rm SM}}$ the bin-by-bin partonic SM cross section, and $d\widehat{\sigma}_{ij,{\rm SMEFT}}^{(n)}$
 the corresponding partonic cross section associated to the interference between 
 $\mathcal{O}_n$ and the SM amplitude $\mathcal{A}_{\rm SM}$ when setting $c_n = 1$. This value of $c_n$ 
-is only used to initialize the potential contributions of the
+is only used to initialise the potential contributions of the
 SMEFT operator; the effective values of the Wilson coefficient 
 are found after the fit is performed. 
 %
@@ -4781,7 +4781,7 @@ SMEFT operators can be evaluated as
   \label{eq:mult_k_fac_app2}
   R_{\rm SMEFT}^{(n,m)} \equiv \displaystyle \left( {\cal L}_{ ij}^{\rm NNLO} \otimes d\widehat{\sigma}_{ij,{\rm SMEFT}}^{(n,m)}\right)
   \big/ \left( {\cal L}_{ ij}^{\rm NNLO} \otimes d\widehat{\sigma}_{ij,{\rm SM}} \right) \, , \quad
- n,m=1\,\ldots, N \, ,
+ n,m=1, \ldots, N  ,
 \end{equation}
 with the bin-by-bin partonic cross section
 $d\widehat{\sigma}_{ij,{\rm SMEFT}}^{(n,m)}$ now being evaluated from the squared amplitude $\mathcal{A}_n\mathcal{A}_m$
@@ -4792,14 +4792,14 @@ performed numerically with the FeynRules~\cite{Alloul:2013bka} model SMEFTatNLO~
 produce $R_{\rm SMEFT}^{(n)}$ and $R_{\rm SMEFT}^{(n,m)}$, respectively the linear and quadratic corrections.
 
 With these considerations, we can account for SMEFT effects in our theoretical predictions
-by mapping the SM prediction $T^{\rm SM}$ to 
+by mapping the SM prediction $T^{\rm SM}$ to:
 %
 \begin{equation}
 \label{eq:theory_k_fac_app3}
  T = T^{\rm SM} \times  K(\{c_n\})\, , 
 \end{equation}
 %
-with 
+with:
 %
 \begin{equation}
 \label{eq:theory_k_fac}
@@ -4852,11 +4852,12 @@ input data.
 %
 As in the NNPDF methodology, the error uncertainty estimation makes use of the Monte
 Carlo replica method, which yields an uncertainty estimate on both PDF and EFT
-parameters.  We discuss the limitations of this method in Sect.~\ref{sec:quad}.
+parameters.  We discuss the limitations of this method in Sect.~\ref{sec:quad}, and further
+in Chapter~\ref{chap:montecarlo}.
 
 The SM theoretical observables are encoded using interpolation grids,
 known as {\tt FK}-tables~\cite{Ball:2010de,Ball:2012cx,Bertone:2016lga}, which 
-encode the contribution of both the DGLAP evolution
+capture the contribution of both the DGLAP evolution
 and the hard-scattering matrix elements and interface it with the
 initial-scale PDFs in a fast and efficient way. 
 %
@@ -4901,8 +4902,9 @@ Sect.~\ref{sec:quad}.
 The PDF parameters $\pmb{\theta}$
 and the EFT coefficients $\boldsymbol{c}$ entering the evaluation
 of the SMEFT observable in Fig.~\ref{fig: architecture} are then determined
-simultaneously from the minimisation of the fit figure of merit (also
-known as loss function).
+simultaneously from the minimisation of the fit figure of merit (the loss function
+described in the introductory chapter, namely the $t_0$ modified $\chi^2$ with
+positivity and integrability penalty terms).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[H]
@@ -5041,7 +5043,8 @@ is the $t_0$ covariance matrix, which is constructed from all sources of statist
 systematic uncertainties that are made available by the experiments
 with correlated multiplicative uncertainties treated via the $t_0$ prescription~\cite{Ball:2009qv} 
 in the fit to avoid fitting bias associated with multiplicative uncertainties, as described in the introductory
-chapter.
+chapter. This loss is also augmented by positivity and integrability penalty terms, also
+described in the introductory chapter.
 
 %
 Once Eq.~(\ref{eq:simunet_loss}) is minimised for each replica, subject
@@ -5057,7 +5060,7 @@ coefficients and the PDF parameters:
 from which one can evaluate statistical properties such as averages,
 variances, higher moments, or confidence level intervals.
 For example, the preferred value of the EFT coefficients
-could be evaluated over the mean over the replica sample,
+could be evaluated as the mean over the replica sample,
 \begin{equation}
   c_\ell^* = \left\langle c_\ell^{(k)} \right\rangle_{\rm rep} =
   \frac{1}{N_{\rm rep}}\sum_{k=1}^{N_{\rm rep}}  c_\ell^{(k)}
@@ -5067,7 +5070,8 @@ though one could also define the preferred value as the median or mode
 of the distribution. Note that, in this methodology, the Monte Carlo
 error propagation automatically propagates the PDF uncertainty to the
 distribution of the best-fit values of the EFT
-coefficients. Hence the variance on the EFT coefficients reflects not
+coefficients.\footnote{At least, it has been traditionally thought to do so. 
+This is not in fact the case - see Sect.~\ref{sec:quad} and Chapter~\ref{chap:montecarlo}.} Hence the variance on the EFT coefficients reflects not
 only the experimental uncertainty of the data included in the fit, but
 also the functional uncertainty associated with the PDFs.
 
@@ -5132,7 +5136,7 @@ coefficients are equivalent assuming that PDF uncertainties are Gaussian and unc
  in an iterative way until convergence is achieved.
  %
  In doing so, we also iterate the $t_0$ covariance matrix and the preprocessing
- exponents as customary in the NNPDF procedure.
+ exponents as is customary in the NNPDF procedure.
  %
  In the fixed-PDF EFT fit, the user can decide
  both the ranges and the prior distributions to be used in the initial
@@ -5169,7 +5173,7 @@ contributions to the EFT cross-sections, including the non-diagonal cross-terms.
 %
 This feature can be especially important for the interpretation of top quark
 measurements at the LHC, given that for many observables quadratic corrections, including
-cross-terms relating different operators, can be sizeable specially in the high-energy region.
+cross-terms relating different operators, can be sizeable especially in the high-energy region.
 %
 %However, the results obtained with this feature are not displayed in this work, for the reasons explained
 %in App.~\ref{app:quad}. ! MU: we already said that.
@@ -5261,16 +5265,14 @@ by the user.
 %
 In this work, we have developed more flexible initialisation schemes for the Wilson
 coefficients, in the sense that they can now be sampled from a prior probability
-distributed defined by the user.
-%
-Specifically, each Wilson coefficient $c_i$ can be
+distribution defined by the user; specifically, each Wilson coefficient $c_i$ can be
 sampled from either a uniform $\mathcal{U} [a_i, b_i]$ or a normal $\mathcal{N}(\mu_i,
 \sigma_i)$ distribution.
 %
 The ranges  $(a_i, b_i)$  of the uniform distribution $\mathcal{U}$
 and the mean and standard deviation $(\mu_i, \sigma_i)$ of the Gaussian
 distribution $\mathcal{N}$ are now user-defined parameters, which can
-be assigned independently to each Wilson coefficients that enter the fit.
+be assigned independently to each Wilson coefficients that enters the fit.
 %
 This feature enhances the effectiveness and flexibility of the minimisation procedure by
 starting from the regions of the parameter space with the best sensitivity
@@ -5331,10 +5333,10 @@ will all be of the same order, and hence use a unique learning rate which is app
 
 Here we present the results of a global SM-PDF determination which accounts for the constraints
 of the most extensive top quark dataset considered to date
-in such analyses and described in Sect.~\ref{sec:exp}.
+in such analyses, described in Sect.~\ref{sec:exp}.
 %
 The fitting methodology adopted follows closely the settings of the NNPDF
-study~\cite{NNPDF:2021njg}, see also~\cite{Ball:2022uon} for a rebuttal of some critical arguments.
+study~\cite{NNPDF:2021njg}.
 %
 This dataset includes not only the most up-to-date measurements of top quark
 pair production from Run II, but it also includes all available single top
@@ -5361,8 +5363,8 @@ associated vector boson and single-top ($tV$) as well as associated vector boson
 top-quark pair production ($t \bar{t} V$) data in a PDF fit.
 %
 Finally in Sect.~\ref{sec:alltop} we combine these results and present a
-NNPDF fit variant including all data described in Sect.~\ref{sec:exp},
-which is compared to both the NNPDFnotop baseline and to the original
+fit variant including all data described in Sect.~\ref{sec:exp},
+which is compared to both the NNPDF no-top baseline and to the original
 NNPDF set.
 
 \subsection{Fit settings}
@@ -5371,8 +5373,8 @@ NNPDF set.
 An overview of the SM-PDF fits that are discussed in this section is
 presented in Table~\ref{tab:fit_list}. 
 %
-First of all, we produce a baseline fit, denoted
-by NNPDFnotop, which is based on the same dataset as NNPDF
+First of all, we produce a baseline fit, which we refer to 
+as NNPDF no-top, which is based on the same dataset as NNPDF
 but with all top quark measurements excluded.
 %
 Then we produce fit variants A to G, which quantify the impact of
@@ -5404,9 +5406,9 @@ the training/validation split used for the cross-validation stopping criterion.
 %
  Nevertheless, we have verified that the resulting SM-PDF fits are statistically equivalent to the fits obtained by setting the training fraction to be $0.75$ for all data, including for the top quark observables.
 
- Fits A--G in Table~\ref{tab:fit_list}  are composed by $N_{\rm rep}=100$ Monte Carlo replicas after post-fit selection criteria, while the NNPDFnotop baseline fit and fit H are instead composed by $N_{\rm rep}=1000$  replicas.
+ Fits A--G in Table~\ref{tab:fit_list}  are composed of $N_{\rm rep}=100$ Monte Carlo replicas after post-fit selection criteria, while the NNPDF no-top baseline fit and fit H are instead composed by $N_{\rm rep}=1000$  replicas.
 %
- As customary, all fits presented in this section are iterated with respect
+ As is customary, all fits presented in this section are iterated with respect
  to the $t_0$ PDF set and the pre-processing exponents.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -5417,59 +5419,59 @@ the training/validation split used for the cross-validation stopping criterion.
 \label{sec:individual}
 
 First we assess the impact of specific subsets of LHC top quark data when added
-to the NNPDFnotop baseline, fits A--G in Table~\ref{tab:fit_list}. 
+to the NNPDF no-top baseline, fits A--G in Table~\ref{tab:fit_list}. 
 In the next section we discuss the outcome of fit H, which contains the full
 top quark dataset considered in this work.
 
 Fig.~\ref{fig:fitD_gluon}
 displays the comparison between the gluon PDF at $Q=m_t=172.5$ GeV obtained
-in the NNPDF and NNPDFnotop fits against fit D, which includes all top-quark
+in the NNPDF4.0 and NNPDF no-top fits against fit D, which includes all top-quark
 pair (also the charge asymmetry $A_C$) and all single-top quark production
 data considered in this analysis.
 %
-Results are normalised to the central value of the NNPDFnotop fit,
+Results are normalised to the central value of the NNPDF no-top fit,
 and in the right panel we show the corresponding PDF uncertainties, all 
-normalised to the central value of the NNPDFnotop baseline. 
+normalised to the central value of the NNPDF no-top baseline. 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[t]
 \centering
 	\subfigure{
-	\includegraphics[scale=0.5]{pdf_plots/fitD_vs_notop_vs_40_g_172.pdf}
+	\includegraphics[scale=0.45]{pdf_plots/fitD_vs_notop_vs_40_g_172.pdf}
 	}
         %
 	\subfigure{
-	\includegraphics[scale=0.5]{pdf_plots/fitD_vs_notop_vs_40_g_172_unc.pdf}
+	\includegraphics[scale=0.45]{pdf_plots/fitD_vs_notop_vs_40_g_172_unc.pdf}
 	}
         \caption{Left: comparison between the gluon PDF at $Q=m_t=172.5$ GeV
-          obtained in the NNPDF and NNPDFnotop fits
+          obtained in the NNPDF4.0 and NNPDF no-top fits
           against fit D in Table~\ref{tab:fit_list}, which includes all
           top-quark
           pair (also the charge asymmetry $A_C$)
           and single-top quark production data considered in this analysis.
           %
-          Results are normalised to the central value of the NNPDFnotop set.
+          Results are normalised to the central value of the NNPDF no-top set.
           %
           Right: same comparison now for the PDF uncertainties (all
-          normalised to the central value of the NNPDFnotop set).
+          normalised to the central value of the NNPDF no-top set).
 }
 \label{fig:fitD_gluon}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 From Fig.~\ref{fig:fitD_gluon} one finds that the main impact of the
-additional LHC Run II $t\bar{t}$ and sinle-top data included in fit D as compared to that
-already present in NNPDF is a further depletion of the large-$x$ gluon
-PDF as compared to the NNPDFnotop baseline, together with a reduction of
+additional LHC Run II $t\bar{t}$ and single-top data included in fit D as compared to that
+already present in NNPDF4.0 is a further depletion of the large-$x$ gluon
+PDF as compared to the NNPDF no-top baseline, together with a reduction of
 the PDF uncertainties in the same kinematic region.
 %
-While fit D and NNPDF agree within uncertainties in the whole range of $x$,
-fit D and NNPDFnotop agree only at the $2\sigma$ level
+While fit D and NNPDF4.0 agree within uncertainties in the whole range of $x$,
+fit D and NNPDF no-top agree only at the $2\sigma$ level
 in the region $x\approx [0.2,0.4]$.
 %
 These findings imply that the effect on the SM-PDFs of the new Run II top
 data is consistent with, and strengthens, that of the data already part of
-NNPDF, and suggests a possible tension
+NNPDF4.0, and suggests a possible tension
 between top quark data and other measurements in the global PDF sensitive
 to the large-$x$ gluon, in particular inclusive jet and di-jet production.
 %
@@ -5483,7 +5485,7 @@ with central values essentially unchanged.
 To disentangle which of the processes
 considered dominates the observed effects on the gluon and the light
 quarks PDFs, Fig.~\ref{fig:fitABCD} compares the relative PDF uncertainty
-on the gluon and on the $d/u$ quark ratio in the NNPDFnotop 
+on the gluon and on the $d/u$ quark ratio in the NNPDF no-top 
 baseline fit at $Q=m_t=172.5$ GeV with the results from fits A, B, C, and D.
 %
 As indicated in Table~\ref{tab:fit_list}, these fit variants include the following top datasets:  inclusive $t\bar{t}$ (A),
@@ -5492,7 +5494,7 @@ inclusive $t\bar{t}$ + $A_C$ (B), single top (C), and their sum (D).
 The inclusion of the top charge asymmetry $A_C$ data does not have any
 impact on the PDFs; indeed fits A and B are statistically equivalent.
 %
-This is not surprising, given that in  Eq.~\eqref{eq:ac} the dependence
+This is not surprising, given that in Eq.~\eqref{eq:ac} the dependence
 on PDFs cancels out.
 %
 Concerning the inclusion of single top data (fit C), it does not affect
@@ -5512,14 +5514,14 @@ single top data moderately helping to constrain the light quark PDFs
 in the intermediate-$x$ region. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
 	\subfigure{
-	\includegraphics[scale=0.55]{pdf_plots/fitABCD_g_172_unc.pdf}
+	\includegraphics[scale=0.45]{pdf_plots/fitABCD_g_172_unc.pdf}
 	}
         %
 	\subfigure{
-	\includegraphics[scale=0.54]{pdf_plots/fitABCD_du_172_unc.pdf}
+	\includegraphics[scale=0.45]{pdf_plots/fitABCD_du_172_unc.pdf}
 	}
         \caption{The ratio between the PDF 1$\sigma$ uncertainty and the
           central value of the NNPDFnotop baseline in the case of the gluon
@@ -5535,22 +5537,22 @@ in the intermediate-$x$ region.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-We now consider the effect of the inclusion of data that were not included before in any PDF fit, namely either $t\bar{t}$ or single-top production in association with a weak vector boson.
+We now consider the effect of the inclusion of processes that were not included before in any PDF fit, namely either $t\bar{t}$ or single-top production in association with a weak vector boson.
 %
 Although current data exhibits large experimental and theoretical uncertainties, it is interesting to
 study whether  they impact PDF fits at all, in view of their increased precision expected in future measurements; in particular, it is useful to know which parton flavours are most affected.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
 	\subfigure{
-	\includegraphics[scale=0.5]{pdf_plots/fitEFG_g_172.pdf}
+	\includegraphics[scale=0.45]{pdf_plots/fitEFG_g_172.pdf}
 	}
         %
 	\subfigure{
-	\includegraphics[scale=0.5]{pdf_plots/fitEFG_g_172_unc.pdf}
+	\includegraphics[scale=0.45]{pdf_plots/fitEFG_g_172_unc.pdf}
 	}
-        \caption{Same as Fig.~\ref{fig:fitD_gluon} comparing the NNPDFnotop
+        \caption{Same as Fig.~\ref{fig:fitD_gluon} comparing the NNPDF no-top
           baseline fit with variants E, F, and G from Table~\ref{tab:fit_list}.
           %
           These variants include associated $t\bar{t}$ and vector boson
@@ -5562,7 +5564,7 @@ study whether  they impact PDF fits at all, in view of their increased precision
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Fig.~\ref{fig:fitEFG} displays the same comparison as in
-Fig.~\ref{fig:fitD_gluon} now for the NNPDFnotop baseline
+Fig.~\ref{fig:fitD_gluon} now for the NNPDF no-top baseline
 and the variants E, F, and G from Table~\ref{tab:fit_list}, which 
 include the $t\bar{t}V$ (E) and $tV$ (F) data
 as well as their sum (G).
@@ -5573,7 +5575,7 @@ with those of the inclusive  $t\bar{t}$ measurements, namely preferring a
 depletion of the large-$x$ gluon.
 %
 This result indicates that $t\bar{t}V$  and $tV$  data may be
-helpful in constraining PDF once both future experimental data 
+helpful in constraining PDFs once both future experimental data 
 and theoretical predictions become more precise, although
 the corresponding inclusive measurements are still expected to provide
 the dominant constraints. 
@@ -5582,13 +5584,13 @@ the dominant constraints.
 \label{sec:alltop}
 
 The main result of this section is displayed in Fig.~\ref{fig:fitH_gluon},
-which compares the NNPDF and the NNPDFnotop fits with variant H in
+which compares the NNPDF4.0 and the NNPDF no-top fits with variant H in
 Table~\ref{tab:fit_list},
 namely with the fit where the full set of top quark measurements considered
 in this analysis has been added to the no-top baseline.
 %
 As in the case of Fig.~\ref{fig:fitD_gluon}, we show the large-$x$ gluon
-normalised to the central value of NNPDFnotop and the associated
+normalised to the central value of NNPDF no-top and the associated
 1$\sigma$ PDF uncertainties (all normalised to the central value of the
 baseline).
 %
@@ -5601,21 +5603,21 @@ and $tV$ carry little weight in the fit.
 \begin{figure}[t]
 \centering
 	\subfigure{
-	\includegraphics[scale=0.5]{pdf_plots/fitH_vs_notop_vs_40_g_172.pdf}
+	\includegraphics[scale=0.45]{pdf_plots/fitH_vs_notop_vs_40_g_172.pdf}
 	}
         %
 	\subfigure{
-	\includegraphics[scale=0.5]{pdf_plots/fitH_vs_notop_vs_40_g_172_unc.pdf}
+	\includegraphics[scale=0.45]{pdf_plots/fitH_vs_notop_vs_40_g_172_unc.pdf}
 	}
         \caption{ Same as Fig.~\ref{fig:fitD_gluon} comparing NNPDF4.0
-          and NNPDF4.0 (no top) with fit variant H in Table~\ref{tab:fit_list},
+          and NNPDF no-top with fit variant H in Table~\ref{tab:fit_list},
           which includes the full set of top quark measurements considered in this analysis.}
 \label{fig:fitH_gluon}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 From Fig.~\ref{fig:fitH_gluon} one observes
-how the gluon PDF of fit H deviates from the NNPDFnotop baseline
+how the gluon PDF of fit H deviates from the NNPDF no-top baseline
 markedly in the data region $x \in [0.1, 0.5]$.
 %
 The shift in the gluon PDF can be up to the $2\sigma$ level, and
@@ -5625,21 +5627,21 @@ in the region $x\in \left( 0.2, 0.35\right) $.
 As before, we  observe that the inclusion of
 the latest Run II top quark measurements enhances the effect of the top
 data already
-included in NNPDF, by further depleting the gluon in the large-$x$ region
+included in NNPDF4.0, by further depleting the gluon in the large-$x$ region
  and  by reducing its uncertainty by a factor up to 25\%.
 %
  Hence, one finds again that the new Run II top quark production
  measurements lead to
  a strong pull on the large-$x$ gluon, qualitatively
  consistent but stronger as compared
- with the pulls associated from the datasets already included in NNPDF.
+ with the pulls associated from the datasets already included in NNPDF4.0.
 
  To assess the phenomenological impact of our analysis at the level
  of LHC processes, Fig.~\ref{fig:fith_luminosities}
  compares the gluon-gluon and quark-gluon 
   partonic luminosities at $\sqrt{s}=13$ TeV (restricted to
   the central acceptance region with $|y|\le 2.5$)
-between  NNPDF, NNPDFnotop, and fit H including the full top quark dataset
+between  NNPDF4.0, NNPDF no-top, and fit H including the full top quark dataset
   considered here and Fig.~\ref{fig:fith_luminosities} compares their
   uncertainties. 
   %
@@ -5651,17 +5653,17 @@ between  NNPDF, NNPDFnotop, and fit H including the full top quark dataset
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.49\textwidth]{pdf_plots/fitH_gg_lumi.pdf}
-\includegraphics[width=0.49\textwidth]{pdf_plots/fitH_gq_lumi.pdf}
+\includegraphics[width=0.45\textwidth]{pdf_plots/fitH_gg_lumi.pdf}
+\includegraphics[width=0.45\textwidth]{pdf_plots/fitH_gq_lumi.pdf}
 \caption{The gluon-gluon (left) and quark-gluon (right panel)
   partonic luminosities at $\sqrt{s}=13$ TeV restricted to
   the central acceptance region with $|y|\le 2.5$.
   %
-  We compare the NNPDF and NNPDFnotop fits with the
+  We compare the NNPDF4.0 and NNPDF no-top fits with the
   predictions based on fit H, which includes the full top quark dataset
   considered here.
   %
-  Results are presented as the ratio to the NNPDFnotop baseline fit.
+  Results are presented as the ratio to the central replica of the NNPDF no-top baseline fit.
 }
 \label{fig:fith_luminosities}
 \end{figure}
@@ -5675,39 +5677,39 @@ of the LHC top quark data is concentrated on the region above $m_X \gsim 1$ TeV.
 As already reported for the case of the gluon PDF, also for the luminosities
 the net effect of the new LHC Run II top quark data is to further reduce
 the luminosities for invariant masses in the TeV range, with a qualitatively
-similar but stronger pull as compared to that obtained in NNPDF.
+similar but stronger pull as compared to that obtained in NNPDF4.0.
 %
-While NNPDF and its no-top variant agree at the $1\sigma$ level in the full
+While NNPDF4.0 and its no-top variant agree at the $1\sigma$ level in the full
 kinematical range considered, this is not true for fit H,  whose error bands
-do not overlap with those of NNPDFnotop for invariant masses $m_X$ between
+do not overlap with those of NNPDF no-top for invariant masses $m_X$ between
 2 and 4 TeV.
 %
-On the other hand, NNPDF and fit H are fully consistent across the full
+On the other hand, NNPDF4.0 and fit H are fully consistent across the full
 $m_X$ range, and hence we conclude that predictions for LHC observables
-based on NNPDF will not be significantly affected by the inclusion
+based on NNPDF4.0 will not be significantly affected by the inclusion
 of the latest LHC top quark data considered in this work.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.49\textwidth]{pdf_plots/fitH_gg_lumi_unc.pdf}
-\includegraphics[width=0.49\textwidth]{pdf_plots/fitH_gq_lumi_unc.pdf}
+\includegraphics[width=0.45\textwidth]{pdf_plots/fitH_gg_lumi_unc.pdf}
+\includegraphics[width=0.45\textwidth]{pdf_plots/fitH_gq_lumi_unc.pdf}
 \caption{Same as Fig.~\ref{fig:fith_luminosities}, now for the
   relative luminosity uncertainties, all normalised to the
-  NNPDFnotop baseline fit.
+  NNPDF no-top baseline fit.
 }
 \label{fig:fith_luminosities_unc}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Finally, concerning the fit quality of fit H is essentially stable, actually 
-better relative to the NNPDFnotop baseline. The experimental $\chi^2$ per data point on
+Finally, the fit quality of fit H is essentially stable, actually 
+better relative to the NNPDF no-top baseline. The experimental $\chi^2$ per data point on
 their respective datasets is $1.156$ for the no-top baseline, whilst for
 fit H is reduced to $1.144$. A complete summary of the $\chi^2$ information
 for all of the fits in this section is given in App.~D of Ref.~\cite{Kassabov:2023hbm} (the Appendix
 is omitted in this thesis for brevity).
 It is interesting to observe that all new top data included in fit H are
-already described well by using the NNPDF set, although clearly the $\chi^2$
+already described well by using the NNPDF4.0 set, although clearly the $\chi^2$
 per data point improves (from $1.139$ to $1.102$) once all data are included
 in the fit. This confirms the overall consistency of the analysis. 
 
@@ -5755,7 +5757,7 @@ fits at both linear and quadratic order,
 highlighting the impact of the new Run II top quark data by comparison with 
 previous global SMEFT analyses.
 %
-In Sect.~\ref{Greljo:2021kvv}, we assess the impact of replacing the CMS 13 TeV differential
+In Sect.~\ref{subsec:cms1dvs2d}, we assess the impact of replacing the CMS 13 TeV differential
 measurement of $t\bar{t}$ in the $\ell+$jets channel, binned with respect to invariant top quark pair
 mass, by the corresponding double-differential measurement binned with respect to both invariant
 top quark pair mass and top quark pair rapidity. In the dataset selection performed in Sect~\ref{sec:dataselection}
@@ -5796,13 +5798,13 @@ from the data, whereas in the quadratic fit, we fit all $N=25$ independent coeff
 The linear EFT fits presented in this section are performed with the \simunet{}  methodology
 in the fixed-PDF option, as described in Sect.~\ref{sec:methodology}; 
 we explicitly verified that the \simunet{} methodology reproduces the posterior distributions 
-provided by \smefit (using
+provided by \smefit{}~(using
 either the NS (Nested Sampling) or MCfit options)
 for a common choice of inputs, as explicitly demonstrated in App.~C of Ref.~\cite{Kassabov:2023hbm}, but is omitted
 in this thesis for brevity.
 %
 However, in the case of the quadratic EFT fits we are unable to use the \simunet{} 
-methodology due to a failure of the Monte-Carlo sampling method utilised in the \simunet{} and \smefit codes;
+methodology due to a failure of the Monte-Carlo sampling method utilised in the \simunet{}~and \smefit{}~codes;
 this is discussed in Sect.~\ref{sec:quad} and a dedicated study of the problem will be the subject of future work
 (with some preliminary discussion in Chapter~\ref{chap:montecarlo}).
 %
@@ -5900,7 +5902,7 @@ scenarios.  Table~\ref{tab:smeft_fit_quality} provides the values of the $\chi^2
 the SMEFT at both linear and quadratic order in the EFT expansion for
 each of the processes entering the fit.
 Here, in order to ease the comparison of our results to those of
-\smefit and \fitm, we quote the $\chi^2$ per data point computed
+\smefit{}~and \fitm, we quote the $\chi^2$ per data point computed
 by using the covariance matrix defined in Eq.~\eqref{eq:expthcov},
 which includes both the experimental uncertainty and the PDF
 uncertainty. The corresponding values obtained by using the
@@ -5979,7 +5981,7 @@ Fig.~\ref{fig:linear_eft_constraints}, we display the 95\% CL
 constraints on the 20 Wilson coefficients entering the linear fit. Two
 sets of constraints are shown; in green, we give the intervals
 obtained from a fit to the 175 data points introduced in
-Sect.~\ref{sec:exp}, whilst in orange, we give in the intervals
+Sect.~\ref{sec:exp}, whilst in orange, we give the intervals
 obtained from a fit to the older top quark dataset used in the global
 analysis of Ref.~\cite{Ethier:2021bye}, obtained from a fit of 150
 data points. This comparison allows us to quantify the information
@@ -6019,7 +6021,7 @@ At the linear level, the most noticeable improvement concerns $c_{tG}$; its
 %
 For many of the other coefficients, the bounds are either stable
 (e.g. $c_{tZ}$), or exhibit a shift in central value but no significant tightening (e.g. $c_{\varphi t}$, undergoes
-a shift of -14.3, but a decrease in the size of the constraints 95\%
+a shift of $-14.3$, but a decrease in the size of the constraints 95\%
 C.L. by only 1\%, and $c_{\varphi Q}^{(-)}$ undergoes a shift of
 $-7.33$, but its bounds only tighten by 2\%). Finally, we note that some coefficients instead exhibit a broadening of constraints with the new dataset relative to the old
 dataset (for example, some of the four-fermion operators). The increase in the size of the constraints could point to some
@@ -6070,7 +6072,7 @@ simply to the ambiguity associated to the EFT validity in that
 particular region of the parameter space. 
 
 \paragraph{Correlations.}
-Figure~\ref{fig:bsmcorr} shows the correlations the between Wilson
+Figure~\ref{fig:bsmcorr} shows the correlations between Wilson
 coefficients evaluated in this analysis both at the linear and the
 quadratic order in the EFT expansion, shown on the left and right
 panels respectively.
@@ -6123,14 +6125,14 @@ a numerical factor.
 
 
 \subsection{Study of the CMS 1D vs 2D distribution}
-\label{Greljo:2021kvv}
+\label{subsec:cms1dvs2d}
 In the dataset selection discussed in Sect.~\ref{sec:dataselection}, 
 the double-differential distribution measurements performed by CMS at $\sqrt{s}=13$~TeV
 in the $\ell+$jets channel~\cite{CMS:2021vhb} -- binned with respect to the top
 quark pair invariant mass $m_{t\bar{t}}$ and the top quark pair rapidity $y_{t\bar{t}}$ -- is found to be poorly described by the
 SM theory, with an experimental $\chi^2$ that is $22\sigma$ 
 away from the median of the $\chi^2$ distribution of a
-perfectly consistent dataset made of $n_{\rm dat}=34$.
+perfectly consistent dataset made of $n_{\rm dat}=34$ points.
 Even by increasing the weight of this dataset in a weighted fit (see Sect.~\ref{sec:dataselection} for a more
 detailed explanation), the $\chi^2_{\rm exp}$ per data point improves
 only moderately to 4.56 and the  $\chi^2$-statistic of the other datasets deteriorates significantly, hinting
@@ -6187,14 +6189,14 @@ Process  & $n_{\rm dat}$ &
  %
 
  First of all, it is interesting to notice that the inclusion of
- quadratic SMEFT corrections in the fit does not improve much the
+ quadratic SMEFT corrections in the fit does not significantly improve the
  quality of the fit of the CMS 2D distribution, with $\chi^2_{\rm exp+th}/n_{\rm
    dat}$ decreasing from 2.80 (in the SM) 
 to $\chi^2_{\rm exp+th}/n_{\rm dat}=2.57$ including  SMEFT $\mathcal{O}(\Lambda^{-4})$ corrections.
  On the other hand, if SMEFT linear $\mathcal{O}(\Lambda^{-2})$ corrections are included, the fit quality of the CMS 2D distribution
  improves substantially with $\chi^2_{\rm exp+th}/n_{\rm dat}=1.22$. 
 
- In order to assess what is the effect of the inclusion of the CMS 2D distribution on the other top sector data,
+ In order to assess the effect of the inclusion of the CMS 2D distribution on the other top sector data,
  in Table~\ref{tab:chi2-cms2d1d} we compare the fit quality of the two (fixed-PDF) SMEFT fits, CMS 1D and CMS 2D,
  both for individual groups of processes, and for the total dataset.
  We observe that the fit quality deteriorates both in the SM and in
@@ -6206,7 +6208,7 @@ to $\chi^2_{\rm exp+th}/n_{\rm dat}=2.57$ including  SMEFT $\mathcal{O}(\Lambda^
  $t\bar{t}$ sector and in the $t\bar{t}t\bar{t}\,\&\,
  t\bar{t}b\bar{b}$ one.
 
-At the level of fit of the Wilson coefficients, the quadratic SMEFT
+At the level of the fit of the Wilson coefficients, the quadratic SMEFT
 fits yields similar 95\% C.L. bounds on the EFT coefficients. This is
 somewhat expected, given that the fit quality of the CMS 2D data does not improve once quadratic SMEFT
 corrections are included, and the fit quality of the other datasets remains pretty much the same.
@@ -6260,8 +6262,8 @@ This means that, in a simultaneous fit, the degrees of freedom of the PDFs
 tend to contrast the direction that the SMEFT coefficients would take
 in the absence of PDFs because the latter would require a change in
 the PDFs that is disfavoured by the other datasets in the global
-analysis. All results can be found on the public web page that
-includes the additional material that we do not show in this chapter\footnote{\url{https://www.pbsp.org.uk/topproject/}}.
+analysis. All results can be found on a public web page that
+includes the additional material that we do not show in this chapter.\footnote{\url{https://www.pbsp.org.uk/topproject/}}
 
 
 
@@ -6326,7 +6328,7 @@ in the following section.
 \section{SMEFT-PDFs from top quark data}
 \label{sec:joint_pdf_smeft}
 
-In this section we present the main results of this work, namely
+In this section we present the main results of this chapter, namely
 the simultaneous determination of the proton PDFs and the SMEFT Wilson coefficients
 from the LHC Run II top quark data described in Sect.~\ref{sec:exp},
 following the \simunet{} methodology summarised in Sect.~\ref{sec:methodology}.
@@ -6363,18 +6365,18 @@ no-top fit.
 \begin{figure}[H]
 \centering
   \subfigure{
-  \includegraphics[scale=0.5]{smeft_plots/SMEFTpdf_gluon.pdf}
+  \includegraphics[scale=0.45]{smeft_plots/SMEFTpdf_gluon.pdf}
  }
         %
   \subfigure{
-    \includegraphics[scale=0.5]{smeft_plots/SMEFTpdf_gluon_unc.pdf}
+    \includegraphics[scale=0.45]{smeft_plots/SMEFTpdf_gluon_unc.pdf}
   }
    \subfigure{
-  \includegraphics[scale=0.5]{smeft_plots/SMEFTpdf_sigma.pdf}
+  \includegraphics[scale=0.45]{smeft_plots/SMEFTpdf_sigma.pdf}
  }
         %
   \subfigure{
-  \includegraphics[scale=0.5]{smeft_plots/SMEFTpdf_sigma_unc.pdf}
+  \includegraphics[scale=0.45]{smeft_plots/SMEFTpdf_sigma_unc.pdf}
   }
         \caption{
     Left: a comparison between the gluon (upper panel)
@@ -6456,7 +6458,7 @@ coherent effect of the linear EFT cross-sections.
 It is worth mentioning that, since we include the SMEFT corrections by applying BSM factors computed bin-by-bin by taking ratios of the SMEFT contributions and the SM cross sections with a specific PDF set, a change of the PDFs can in principle translate into a change of these factors. Our current methodology relies therefore on performing this check a posteriori and in the case of modified  BSM factors, the fit is reiterated with the new ones. However, in the present case, we find that the BSM factors are substantially unaffected and we do not reiterate the fit. The parton luminosities are indeed very similar to the ones of the PDF set \texttt{NNPDF40\_nnlo\_as\_01180} used for the original calculation, with deviations of $2-3\%$ at most. At the current experimental sensitivity, changes of $\mathcal{O}(1\%)$ in the EFT corrections can be safely ignored as they do not impact in a significant way the fits.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.49\textwidth]{smeft_plots/SIMU_lumi_comparison_gg.pdf}
 \includegraphics[width=0.49\textwidth]{smeft_plots/SIMU_lumi_comparison_gq.pdf}
@@ -6533,9 +6535,9 @@ of fits to a subset of the data and/or to a subset of the coefficients.
 We find that in general the impact of the SMEFT-PDF interplay
 translates to a broadening of the uncertainties
 in the EFT coefficients, which at most reaches $30\%$, and
-alongside which the best-fit values remain stable\footnote{All results
+alongside which the best-fit values remain stable.\footnote{All results
   obtained with various subsets of the data and of the
-  coefficients can be found at \url{https://www.pbsp.org.uk/research/topproject}}.
+  coefficients can be found at \url{https://www.pbsp.org.uk/research/topproject}}
 %
 
 All in all, within  the global fit based on the best available theory predictions,
@@ -6551,7 +6553,7 @@ PDFs, see Fig.~\ref{fig:simu_luminosities}).
 Nevertheless, this statement applies only to the dataset currently available,
 and it is likely that the SMEFT-PDF interplay will become more significant in the future
 once HL-LHC measurements become available~\cite{AbdulKhalek:2018rok,Azzi:2019yne},
-as demonstrated in the case of high-mass Drell-Yan~\cite{Greljo:2021kvv}.
+as demonstrated in the case of high-mass Drell-Yan~\cite{Greljo:2021kvv} in Chapter~\ref{chap:smeftdy}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[t!]
@@ -6559,11 +6561,11 @@ as demonstrated in the case of high-mass Drell-Yan~\cite{Greljo:2021kvv}.
 \includegraphics[width=0.99\textwidth]{smeft_plots/smeft-pdf-95cl-bounds.pdf}
 \caption{
   Comparison of the $95 \%$ CL intervals on the 20 Wilson coefficients
-  considered in this work (in the linear EFT case) between the outcome of the joint SMEFT-PDF determination
+  considered in this chapter (in the linear EFT case) between the outcome of the joint SMEFT-PDF determination
   and that of the fixed-PDF EFT analysis.
   %
   The latter is based on SM and EFT calculations performed with
- no-top as input, see also  Sect.~\ref{sec:res_smeft}.
+ no-top as input, see also Sect.~\ref{sec:res_smeft}.
   %
   In both cases, results are based on the full 
   top quark dataset being considered and EFT cross-sections
@@ -6747,7 +6749,7 @@ To this end, the capabilities of the \simunet{} framework were extended, as disc
 all necessary SMEFT $K$-factors needed for the quadratic predictions were produced.
 %
 However, whilst benchmarking our code, we noticed significant disagreement between quadratic SMEFT-only fits
-produced using the \simunet{} methodology and the \smefit Nested Sampling option;\footnote{This disagreement is not present at the linear level; in this case, \simunet{} using the fixed-PDF option and \smefit using either the Nested Sampling or MCfit options perfectly coincide. See App.~C of Ref.~\cite{Kassabov:2023hbm} for more details.} on the other hand, we note perfect agreement
+produced using the \simunet{} methodology and the \smefit{} Nested Sampling option;\footnote{This disagreement is not present at the linear level; in this case, \simunet{} using the fixed-PDF option and \smefit using either the Nested Sampling or MCfit options perfectly coincide. See App.~C of Ref.~\cite{Kassabov:2023hbm} for more details.} on the other hand, we note perfect agreement
 between our \simunet{} quadratic SMEFT-only fits and the \smefit{}~MCfit option.
 
 This disagreement can be traced back to 
@@ -6857,12 +6859,12 @@ P_{c^{(i)}}(c) &\propto \int\limits_{-\infty}^{t_{\text{min}}} dx\ \delta\left( 
 Simplifying the delta functions in the second and third integrals, we find:
 \begin{equation}
 \label{eq:mc_posterior}
-P_{c^{(i)}}(c) \propto \delta\left( c + \frac{t^{\text{lin}}}{2t^{\text{quad}}} \right) \int\limits_{-\infty}^{t_{\text{min}}} dx\ \exp\left( -\frac{1}{2\sigma^2} (x - d)^2 \right) + \frac{2}{|2ct^{\text{quad}}  + t^{\text{lin}}|} \exp\left( -\frac{1}{2\sigma^2} (d - t(c))^2 \right) \, .
+P_{c^{(i)}}(c) \propto \delta\left( c + \frac{t^{\text{lin}}}{2t^{\text{quad}}} \right) \int\limits_{-\infty}^{t_{\text{min}}} dx\ \exp\left( -\frac{1}{2\sigma^2} (x - d)^2 \right) + |2ct^{\text{quad}}  + t^{\text{lin}}| \exp\left( -\frac{1}{2\sigma^2} (d - t(c))^2 \right) \, .
 \end{equation}
 This result is different from the posterior distribution obtained by the Bayesian method in Eq.~(\ref{eq:bayesian_posterior}). Notable features of the posterior distribution $P_{c^{(i)}}(c)$ are: (i) the distribution has a Dirac-delta peak at $c = -t^{\text{lin}}/2t^{\text{quad}}$; (ii) elsewhere, the distribution is given by the Bayesian posterior distribution rescaled by a prefactor dependent on $c$.
 %
 Therefore, the Monte Carlo
-replica optimisation method will not in general reproduce the Bayesian posterior.
+replica method will not in general reproduce the Bayesian posterior.
 
 However, one can note that in an appropriate limit, the Bayesian posterior \textit{is} indeed recovered.
 In particular, suppose that the quadratic EFT cross-section is subdominant
@@ -6893,7 +6895,7 @@ are sufficiently subdominant in comparison with the linear ones.
 For this reason, in this work we restrict the SMEFT-PDF fits based on \simunet{} (which rely
 on the use of the Monte-Carlo replica method) to linear EFT calculations;
 we defer the further investigation of the use of the Monte-Carlo replica method, and how
-it might be modified for use in \simunet{}, to future works. 
+it might be modified for use in \simunet{}, to future works. Some preliminary results are presented in Chapter~\ref{chap:montecarlo}.
 
 %n the case where quadratic theory is used, the  cannot be expected to reliably reproduce the  distributions that one would obtain, say, from a nested sampling approach. It is for this reason that we choose to neglect quadratic contributions in our \simunet{} fits in this work; like \nnpdf and \smefit, \simunet{} assumes that the use of the Monte-Carlo method will produce a reliable posterior, but this is in fact not the case, and - as far as we are aware - has never been justified rigorously in the literature. In Section~\ref{subsec:mc_examples}, we give explicit examples of the failure of the Monte-Carlo method relative to the Bayesian method.
 
@@ -6962,7 +6964,7 @@ posterior will be enhanced for $c_{dt}^8 \in (-0.3,-0.2)$ as compared
 to the Bayesian posterior.
 
 %-----------------------------------------
-\begin{figure}[htb]
+\begin{figure}[H]
         \centering
         \includegraphics[width=0.49\linewidth]{smeft_plots/linear_O8dt.png}
         \includegraphics[width=0.49\linewidth]{smeft_plots/quadratic_O8dt.png}
@@ -6985,7 +6987,7 @@ of the four-fermion coefficient $c_{dt}^8$ with the sole experimental
 input being the CMS $m_{t\bar{t}}$ distribution
 displayed in Fig.~\ref{fig:data-theory-CMS}.
 %
-Results are obtained with \smefit and we compare the outcome of Nested Sampling (in blue) with
+Results are obtained with \smefit{} and we compare the outcome of Nested Sampling (in blue) with
 that of MCfit (in red)
 for linear and quadratic  EFT fits.
 %
@@ -7205,47 +7207,65 @@ There are two possible outcomes of such a fit. The contamination of the PDFs may
 
 
 \newpage
-\chapter{The Monte-Carlo replica method in global fits}
+\chapter{The Monte Carlo replica method in global fits}
 \label{chap:montecarlo}
 
 \epigraph{Yesterday, \\ All my troubles seemed so far away, \\ Now it looks as if they're here to stay.}{\textit{\\ from Yesterday, \\ by The Beatles}}
 
-Throughout this thesis, particularly in Chapters ... and ..., the Monte-Carlo replica method has played an important role. However, it was ...
+\noindent \textit{[This chapter is based on an upcoming publication, worked on in collaboration with Maeve Madigan and Luca Mantani. The calculation presented in Sect.~\ref{sec:careful_mc} is my own original work.]}\\
+
+\noindent Throughout this thesis, particularly in Chapters~\ref{chap:smeftdy} and~\ref{chap:top}, we have used the Monte Carlo replica method for propagation of experimental errors onto the PDFs and theory parameters in our fits. However, as described in Sect.~\ref{sec:quad}, it is possible to demonstrate that this method does not faithfully propagate errors in the case where non-linear terms dominate in our theory predictions.
+
+In this chapter, we present a more complete description of the phenomenon compared to Sect.~\ref{sec:quad}, generalising fully to an arbitrary number of (possibly correlated) data points, theory parameters and an arbitrary (smooth) theory function $\vec{t}$. We begin by stating the expected Bayesian results in the multivariable case in Sect.~\ref{sec:interval_estimation}. Subsequently, in Sect.~\ref{sec:careful_mc}, we present a detailed calculation of the posterior distribution that results from an application of the Monte Carlo replica method, and compare with the Bayesian result of Sect.~\ref{sec:interval_estimation}. Finally, in Sect.~\ref{sec:mc_future}, we discuss the implications this result could have for various global fits, including recent PDF fits. 
 
 
-\section{Interval estimation with Bayesian, frequentist and Monte-Carlo methods}
+\section{Bayesian interval estimation in the multivariable case}
 \label{sec:interval_estimation}
 
-In this section, we begin by introducing the idea of placing \textit{interval estimates} on theory parameters using Bayesian, frequentist and Monte-Carlo replica methods. We shall see that all three methods are inequivalent beyond linear theories, and we shall argue that the most robust interval estimates are in fact given by Bayesian methods.
+In Sect.~\ref{sec:quad}, we introduced error propagation using Bayesian methods for a single data point and a single theory parameter, with a quadratic theory prediction. In this brief section, we state the results in the more general context of multiple (possibly correlated) data points and multiple theory parameters, with a general smooth theory prediction.
 
-\paragraph{Bayesian method.} 
+Let us assume that we are fitting a vector of theory parameters $\vec{c} \in \mathbb{R}^{N_{\text{param}}}$ (which now may comprise PDF parameters alongside EFT parameters, for example - in Sect.~\ref{sec:quad} we worked exclusively with EFT coefficients), given data $\vec{d} \in \mathbb{R}^{N_{\text{dat}}}$. The theory predictions are a general (smooth\footnote{Technically we only require once-differentiable.}) function $\vec{t} : \mathbb{R}^{N_{\text{param}}} \rightarrow \mathbb{R}^{N_{\text{dat}}}$, and we assume that the data is normally distributed according to:
+\begin{equation}
+\vec{d} \sim \mathcal{N}(\vec{t}(\vec{c}), \Sigma),
+\end{equation}
+where $\Sigma$ is the experimental covariance matrix.
+
+Given the observed data $\vec{d}$, the Bayesian posterior density function of the parameters $\vec{c}$ is given by:
+\begin{equation}
+p(\vec{c} | \vec{d}) \propto \pi(\vec{c}) \exp\left( -\frac{1}{2} (\vec{d} - \vec{t}(\vec{c}))^T \Sigma^{-1} (\vec{d} - \vec{t}(\vec{c})) \right),
+\end{equation}
+where $\pi(\vec{c})$ is our assumed prior distribution of the parameter $\vec{c}$. A $100\alpha$\% \textit{highest density credible region} $R$ is then a region satisfying:
+\begin{equation}
+\label{eq:multicredible}
+N\int\limits_{R} \pi(\vec{c}) \exp\left( -\frac{1}{2} (\vec{d} - \vec{t}(\vec{c}))^T \Sigma^{-1} (\vec{d} - \vec{t}(\vec{c})) \right) = \alpha,
+\end{equation}
+where $N$ is an appropriate normalisation constant for the posterior. The aim of Bayesian interval estimation is to produce such a region; in order to do so, efficient sampling from the Bayesian posterior is required. Again, this is guaranteed by methods such as Nested Sampling.
 
 
-\section{A closer look at the Monte-Carlo replica method}
+\section{The Monte Carlo replica method in the multivariable case}
 \label{sec:careful_mc}
-Given an observed value of the data $\vec{d}$, we construct pseudodata $\vec{d}_p$ by sampling from the distribution:
+Let us now describe the application of the Monte Carlo replica method to the multivariable problem presented in Sect.~\ref{sec:interval_estimation}. Given the observed value of the data $\vec{d}$, as usual we construct pseudodata $\vec{d}_p$ by sampling from the multivariate normal distribution:
 \begin{equation}
 \vec{d}_p \sim \mathcal{N}(\vec{d}, \Sigma).
 \end{equation}
-We then construct the best-fit theory parameters $\vec{c}_p(\vec{d}_p)$ via:
+We then construct the best-fit theory parameters $\vec{c}_p(\vec{d}_p)$ by minimising the $\chi^2$-loss to the pseudodata:
 \begin{equation}
+\label{eq:cp_definition}
 \vec{c}_p(\vec{d}_p) = \argmin_{\vec{c}}\ (\vec{d}_p - \vec{t}(\vec{c}))^T \Sigma^{-1} (\vec{d}_p - \vec{t}(\vec{c})) .
 \end{equation}
-As above, this function is possibly multi-valued; assume that it is only \textit{discretely} multi-valued (i.e. we do not have flat directions), and let $\vec{c}_p^{(i)}$ for $i=1,...,N_{\text{branch}}$ denote the branches of the function. The probability density function of $\vec{c}_p(\vec{d}_p)$ is then given by:
+This function is possibly multi-valued; for simplicity, we shall assume that it is only \textit{discretely} multi-valued (i.e. we do not have flat directions), and let $\vec{c}_p^{(i)}$ for $i=1,...,N_{\text{branch}}$ denote the branches of the function. The probability density function of $\vec{c}_p(\vec{d}_p)$ is then given by:
 \begin{equation}
 f_{\vec{c}_p(\vec{d}_p)}(\vec{c}) = \int\limits_{\mathbb{R}^{N_{\text{dat}}}} d^{N_{\text{dat}}}\vec{d}_p\ \left( \sum_{i=1}^{N_{\text{branch}}(\vec{d}_p)}\delta\left(\vec{c} - \vec{c}_p^{(i)}(\vec{d}_p) \right)\right) \exp\left( -\frac{1}{2} (\vec{d}_p - \vec{d})^T \Sigma^{-1} (\vec{d}_p - \vec{d}) \right).
 \end{equation}
-For now, let us assume that $N_{\text{branch}} = 1$ for simplicity, and then generalise later. We have shown in the note that $\vec{c}_p(\vec{d}_p)$ necessarily satisfies the implicit equation:
-\begin{equation*}
-0 = \frac{\partial \vec{t}^T}{\partial c_i} (\vec{c}_p(\vec{d}_p)) \Sigma^{-1} \left( \vec{d}_p - \vec{t}(\vec{c}_p(\vec{d}_p)) \right).
-\end{equation*}
-For convenience, let us define the Jacobian matrix $\partial \vec{t} / \partial \vec{c}$ via:
-\begin{equation*}
-\left(\frac{\partial \vec{t}}{\partial \vec{c}}\right)_{ij} = \frac{\partial t_i}{\partial c_j},
-\end{equation*}
-so that $\partial \vec{t} / \partial \vec{c}$ is an $N_{\text{dat}} \times N_{\text{op}}$ matrix. The implicit equation defining $\vec{c}_p(\vec{d}_p)$ can then be rewritten as the matrix condition:
+Now, for ease of exposition, we shall assume that $N_{\text{branch}}(\vec{d}_p) \equiv 1$; the generalisation to multiple branches is straightforward. 
+
+The defining equation Eq.~\eqref{eq:cp_definition} implies that $\vec{c}_p(\vec{d}_p)$ satisfies:
 \begin{equation}
-\vec{0} = \left(\frac{\partial \vec{t}}{\partial \vec{c}}\right)^T(\vec{c}_p(\vec{d}_p)) \Sigma^{-1} \left( \vec{d}_p - \vec{t}(\vec{c}_p(\vec{d}_p)) \right).
+\vec{0} = \frac{\partial \vec{t}^T}{\partial \vec{c}} (\vec{c}_p(\vec{d}_p)) \Sigma^{-1} \left( \vec{d}_p - \vec{t}(\vec{c}_p(\vec{d}_p)) \right),
+\end{equation}
+where the $N_{\text{dat}} \times N_{\text{op}}$ Jacobian matrix $\partial \vec{t} / \partial \vec{c}$ is given by:
+\begin{equation}
+\left(\frac{\partial \vec{t}}{\partial \vec{c}}\right)_{ij} = \frac{\partial t_i}{\partial c_j}.
 \end{equation}
 Suppose that we are given a fixed value of the parameters $\vec{c}$, and we wish to determine the posterior distribution function $f_{\vec{c}_p(\vec{d}_p)}(\vec{c})$ at this point. We can centre the pseudodata on the corresponding theory point by making the change of variables:
 \begin{equation}
@@ -7264,7 +7284,9 @@ The delta function condition is satisfied only if:
 \begin{equation}
 \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T (\vec{c}) \Sigma^{-1} \vec{w} = 0 \qquad \Leftrightarrow \qquad \vec{w} \in \textrm{Ker}\left( \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \right).
 \end{equation}
-However, this is not \textit{sufficient} for the delta function to be satisfied (the condition may lead to a maximum rather than a minimum of the $\chi^2$-statistic). Nevertheless, this is all we have to go on. Let's make a change of variables that will allow us to eliminate the delta function. Let $M(\vec{c})$ be a matrix whose columns form a basis of:
+However, this is not \textit{sufficient} for the delta function to be satisfied (the condition may lead to a maximum rather than a minimum of the $\chi^2$-statistic); the integration range must be additionally restricted only to values of $\vec{w}$ which lead to a minimum at the end of the calculation. 
+
+We now proceed to make a change of variables that will allow us to eliminate the delta function. Let $M(\vec{c})$ be a matrix whose columns form a basis of the kernel:
 \begin{equation}
 \textrm{Ker}\left( \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \right),
 \end{equation}
@@ -7272,7 +7294,7 @@ and let $M'(\vec{c})$ be a matrix whose columns form a basis of the orthogonal s
 \begin{equation}
 \textrm{Ker}\left( \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \right)_{\perp}.
 \end{equation}
-Then the matrix $(M|M')$ is invertible. Define a change of variables:
+It follows that the matrix $(M|M')$ is invertible, since its columns are linearly independent. We now make the following definition for our change of variables:
 \begin{equation}
 \vec{w} = (M|M') \begin{pmatrix} \vec{v}_{\perp} \\ \vec{v}_{\parallel} \end{pmatrix} = M\vec{v}_{\perp} + M'\vec{v}_{\parallel}.
 \end{equation}
@@ -7290,13 +7312,14 @@ Completing the square in the exponential, the posterior can be rewritten as:
 \begin{align}
 & |\det(M|M')|\exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T \left( \Sigma^{-1} - \Sigma^{-1} M (M^T\Sigma^{-1}M)^{-1} M^T \Sigma^{-1}\right) (\vec{d} - \vec{t}(\vec{c})) \right) \notag\\[1.5ex]
 & \cdot \int d\vec{v}_{\perp} \int d\vec{v}_{\parallel}\ \delta\left(\vec{c} - \vec{c}_p\left(\vec{t}(\vec{c}) + M\vec{v}_{\perp} + M'\vec{v}_{\parallel}\right) \right)\notag\\[1.5ex]
-& \cdot \exp\left( -\frac{1}{2} \left(\vec{v}_{\perp} - (M^T \Sigma^{-1}M)^{-1} M^T \Sigma^{-1} (\vec{d} - \vec{t}(\vec{c}))\right)^T M^T \Sigma^{-1}M \left(\vec{v}_{\perp} - (M^T \Sigma^{-1}M)^{-1} M^T \Sigma^{-1} (\vec{d} - \vec{t}(\vec{c}))\right) \right).
+& \qquad\cdot \exp\bigg( -\frac{1}{2} \left(\vec{v}_{\perp} - (M^T \Sigma^{-1}M)^{-1} M^T \Sigma^{-1} (\vec{d} - \vec{t}(\vec{c}))\right)^T\notag \\
+& \qquad\qquad\qquad\qquad \cdot M^T \Sigma^{-1}M \left(\vec{v}_{\perp} - (M^T \Sigma^{-1}M)^{-1} M^T \Sigma^{-1} (\vec{d} - \vec{t}(\vec{c}))\right) \bigg).
 \end{align}
-We can simplify lots of the $M$ expressions similarly to the other derivation. Introducing the Cholesky decomposition $\Sigma = AA^T$ of the covariance matrix, where $A$ is an invertible matrix, we have that $\Sigma^{-1} = A^{-T} A^{-1}$ and hence:
+We now attempt to remove the $M$ dependence in this posterior. Introducing the standard \textit{Cholesky decomposition} $\Sigma = AA^T$ of the covariance matrix, where $A$ is an invertible matrix, we have that $\Sigma^{-1} = A^{-T} A^{-1}$ and hence:
 \begin{equation}
 \Sigma^{-1} M (M^T \Sigma^{-1} M)^{-1} M^T \Sigma^{-1} = A^{-T} \left[ (A^{-1}M) ((A^{-1}M)^T(A^{-1}M))^{-1} (A^{-1}M)^T \right] A^{-1}.
 \end{equation}
-Now the matrix $\left[ (A^{-1}M) ((A^{-1}M)^T(A^{-1}M))^{-1} (A^{-1}M)^T \right]$ is the projector onto the subspace spanned by the columns of $A^{-1}M$. Recalling the definition of $M$, we have that the columns of:
+We now recall that the matrix $\left[ (A^{-1}M) ((A^{-1}M)^T(A^{-1}M))^{-1} (A^{-1}M)^T \right]$ is the projector onto the subspace spanned by the columns of $A^{-1}M$. In particular, recalling the definition of $M$, we have that the columns of:
 \begin{equation}
 A^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}}
 \end{equation}
@@ -7309,15 +7332,16 @@ Simplifying, this can be reduced to:
 A^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \left( \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}}  \right)^{-1} \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T A^{-T}.
 \end{equation}
 Hence we have established:
+\begin{framed}
 \begin{equation}
 \Sigma^{-1} - \Sigma^{-1} M (M^T\Sigma^{-1}M)^{-1} M^T \Sigma^{-1} = \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \left( \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}}  \right)^{-1} \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1}.
 \end{equation}
-As in the other derivation, let us define:
- the \textit{tangent inverse covariance matrix} by:
+\end{framed}
+For ease of notation, we shall define the \textit{tangent inverse covariance matrix} by:
 \begin{equation}
 \Sigma^{-1}_t(\vec{c}) := \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \left( \left(\frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \right)^{-1} \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1},
 \end{equation}
-(though note that it is not typically invertible, so care with the notation!) and the \textit{orthogonal inverse covariance matrix} by:
+(though note that it is not typically invertible, so we must take care with the notation!) and the \textit{orthogonal inverse covariance matrix} by:
 \begin{equation}
 \Sigma^{-1}_o(\vec{c}) := \Sigma^{-1} - \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \left( \left(\frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \right)^{-1} \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1}.
 \end{equation}
@@ -7326,7 +7350,7 @@ Then we can simplify the posterior distribution to:
 & |\det(M|M')|\exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T\Sigma_t^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c})) \right) \int d\vec{v}_{\perp} \int d\vec{v}_{\parallel}\ \delta\left(\vec{c} - \vec{c}_p\left(\vec{t}(\vec{c}) + M\vec{v}_{\perp} + M'\vec{v}_{\parallel}\right) \right)\notag\\[1.5ex]
 & \cdot \exp\left( -\frac{1}{2} \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right)^T \Sigma \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right) \right).
 \end{align}
-Depending on the dimension of the space $\textrm{Ker}((\partial \vec{t} / \partial \vec{c})^T \Sigma^{-1})$, there are different sizes of the vector $\vec{v}_{\parallel}$. If $\dim(\textrm{Ker}((\partial \vec{t} / \partial \vec{c})^T \Sigma^{-1})) = N_{\text{dat}} - N_{\text{op}}$, then $\vec{v}_{\parallel}$ has size $N_{\text{op}}$ so can absorb all the delta functions. In particular, we should be able to evaluate:
+Depending on the dimension of the space $\textrm{Ker}((\partial \vec{t} / \partial \vec{c})^T \Sigma^{-1})$, there are different sizes of the vector $\vec{v}_{\parallel}$. If $\dim(\textrm{Ker}((\partial \vec{t} / \partial \vec{c})^T \Sigma^{-1})) = N_{\text{dat}} - N_{\text{op}}$, which is the typical case, then $\vec{v}_{\parallel}$ has size $N_{\text{op}}$ so can absorb all the delta functions. In particular, we should be able to evaluate:
 \begin{equation}
 \int d\vec{v}_{\parallel}\ \delta\left(\vec{c} - \vec{c}_p\left(\vec{t}(\vec{c}) + M\vec{v}_{\perp} + M'\vec{v}_{\parallel}\right) \right).
 \end{equation}
@@ -7338,7 +7362,7 @@ Recalling the definition of $M$, we can rewrite this in the form:
 \begin{equation}
 \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T (\vec{c}') \Sigma^{-1} M' \vec{v}_{\parallel} = \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T (\vec{c}') \Sigma^{-1} \left( \vec{t}(\vec{c}) - \vec{t}(\vec{c}') \right).
 \end{equation}
-The matrix $\left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T (\vec{c}') \Sigma^{-1} M'$ is an $N_{\text{op}} \times N_{\text{op}}$ matrix, so stands a chance of being invertible. \JM{Should really justify this.} Assuming this is the case, we can rewrite this equation as:
+Rearranging, we have:
 \begin{equation}
 \vec{v}_{\parallel} = \left( \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T (\vec{c}') \Sigma^{-1} M' \right)^{-1} \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T (\vec{c}') \Sigma^{-1} \left( \vec{t}(\vec{c}) - \vec{t}(\vec{c}') \right).
 \end{equation}
@@ -7359,33 +7383,33 @@ Hence the posterior distribution reduces to:
 & |\det(M|M')| \left| \det\left( ({M'}^T M')^{-1} {M'}^T \frac{\partial \vec{t}}{\partial \vec{c}} \right) \right| \exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T\Sigma_t^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c})) \right) \int d\vec{v}_{\perp} \notag\\[1.5ex]
 & \cdot \exp\left( -\frac{1}{2} \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right)^T \Sigma \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right) \right).
 \end{align}
-\JM{In fact, we can perform a similar trick without this assumption, but the algebra is a little more complicated.} Assuming we choose $(M | M')$ to have orthonormal columns, then we can further reduce this expression to:
+Now without loss of generality, we can choose $(M | M')$ to have orthonormal columns,\footnote{In fact, the subsequent calculation can be performed without this assumption, but the algebra is significantly trickier.} so that we may further reduce this expression to:
 \begin{align}
 & \left| \det\left({M'}^T \frac{\partial \vec{t}}{\partial \vec{c}} \right) \right| \exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T\Sigma_t^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c})) \right) \int d\vec{v}_{\perp} \notag\\[1.5ex]
 & \cdot \exp\left( -\frac{1}{2} \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right)^T \Sigma \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right) \right).
 \end{align}
-To make this match the previous derivation, note that:
+To simplify things, observe that:
 \begin{equation}
-\begin{pmatrix} M^T \\ {M'}^T \end{pmatrix} \begin{pmatrix} M & \frac{\partial \vec{t}}{\partial \vec{c}} \end{pmatrix} = \begin{pmatrix} M^TM & M^T \frac{\partial \vec{t}}{\partial \vec{c}} \\ 0 & {M'}^T \frac{\partial \vec{t}}{\partial \vec{c}} \end{pmatrix}.
+\begin{pmatrix} M^T \\ {M'}^T \end{pmatrix} \begin{pmatrix} M & \frac{\partial \vec{t}}{\partial \vec{c}} \end{pmatrix} = \begin{pmatrix} M^TM & M^T \frac{\partial \vec{t}}{\partial \vec{c}} \\ 0 & {M'}^T \frac{\partial \vec{t}}{\partial \vec{c}} \end{pmatrix},
 \end{equation}
-So taking determinants we see that:
+so that on taking determinants we have:
 \begin{equation}
 \det\left( {M'}^T \frac{\partial \vec{t}}{\partial \vec{c}}\right) = \det\begin{pmatrix} M^T \\ {M'}^T \end{pmatrix}\det\begin{pmatrix} M & \frac{\partial \vec{t}}{\partial \vec{c}} \end{pmatrix} = \det\left( \frac{\partial \vec{t}}{\partial \vec{c}} \bigg| M \right).
 \end{equation}
 Hence the posterior can be rewritten in the final form:
+\begin{framed}
 \begin{align}
 & \left|\det\left( \frac{\partial \vec{t}}{\partial \vec{c}} \bigg| M \right) \right| \exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T\Sigma_t^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c})) \right)  \notag\\[1.5ex]
 & \cdot \int d\vec{v}_{\perp} \exp\left( -\frac{1}{2} \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right)^T \Sigma \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right) \right).
 \end{align}
-The other condition that the delta function should have enforced is a valid range of $\vec{v}_{\perp}$. The integration range here is only over $\vec{v}_{\perp}$ such that the pseudodata $\vec{t}(\vec{c}) + M\vec{v}_{\perp}$ leads to $\vec{c}$ as a minimum of the $\chi^2$-statistic.
+\end{framed}
+\noindent It is important to note that the delta function also enforces a restricted range of $\vec{v}_{\perp}$; the integration range here is only over $\vec{v}_{\perp}$ such that the pseudodata $\vec{t}(\vec{c}) + M\vec{v}_{\perp}$ leads to $\vec{c}$ as a minimum of the $\chi^2$-statistic.\\
 
-This \textit{can} now be evaluated numerically, though is likely to be extremely inefficient.
-
-\JM{Where does the $M$ derivative dependence disappear to in this derivation? Are both derivations correct and should match up? Or is there a mistake in one?}
-
+\noindent The key features of this posterior, as compared to the Bayesian result in Sect.~\ref{sec:interval_estimation}, are the following: 
 
 
 \section{Future directions}
+\label{sec:mc_future}
 
 It is important to assess the impact this has on PDF fits.
 
