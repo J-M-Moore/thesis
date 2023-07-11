@@ -7216,15 +7216,15 @@ There are two possible outcomes of such a fit. The contamination of the PDFs may
 
 \noindent Throughout this thesis, particularly in Chapters~\ref{chap:smeftdy} and~\ref{chap:top}, we have used the Monte Carlo replica method for propagation of experimental errors onto the PDFs and theory parameters in our fits. However, as described in Sect.~\ref{sec:quad}, it is possible to demonstrate that this method does not faithfully propagate errors in the case where non-linear terms dominate in our theory predictions.
 
-In this chapter, we present a more complete description of the phenomenon compared to Sect.~\ref{sec:quad}, generalising fully to an arbitrary number of (possibly correlated) data points, theory parameters and an arbitrary (smooth) theory function $\vec{t}$. We begin by stating the expected Bayesian results in the multivariable case in Sect.~\ref{sec:interval_estimation}. Subsequently, in Sect.~\ref{sec:careful_mc}, we present a detailed calculation of the posterior distribution that results from an application of the Monte Carlo replica method, and compare with the Bayesian result of Sect.~\ref{sec:interval_estimation}. Finally, in Sect.~\ref{sec:mc_future}, we discuss the implications this result could have for various global fits, including recent PDF fits. 
+In this chapter, we present a more complete description of the phenomenon compared to Sect.~\ref{sec:quad}, generalising fully to an arbitrary number of (possibly correlated) data points, theory parameters and an arbitrary (smooth) theory function $\vec{t}$. We begin by stating the expected Bayesian results in the multivariable case in Sect.~\ref{sec:interval_estimation}. Subsequently, in Sect.~\ref{sec:careful_mc}, we present a detailed calculation of the posterior distribution that results from an application of the Monte Carlo replica method, and compare with the Bayesian result of Sect.~\ref{sec:interval_estimation}. Finally, in Sect.~\ref{sec:mc_future}, we discuss the implications this result could have for various global fits, including recent PDF fits, and we propose a course of action for the future.
 
 
 \section{Bayesian interval estimation in the multivariable case}
 \label{sec:interval_estimation}
 
-In Sect.~\ref{sec:quad}, we introduced error propagation using Bayesian methods for a single data point and a single theory parameter, with a quadratic theory prediction. In this brief section, we state the results in the more general context of multiple (possibly correlated) data points and multiple theory parameters, with a general smooth theory prediction.
+In Sect.~\ref{sec:quad}, we introduced error propagation using Bayesian methods for a single data point and a single theory parameter, with a quadratic theory prediction. In this brief section, we state the results in the more general context of multiple (possibly correlated) data points and multiple theory parameters, with a general (smooth) theory prediction.
 
-Let us assume that we are fitting a vector of theory parameters $\vec{c} \in \mathbb{R}^{N_{\text{param}}}$ (which now may comprise PDF parameters alongside EFT parameters, for example - in Sect.~\ref{sec:quad} we worked exclusively with EFT coefficients), given data $\vec{d} \in \mathbb{R}^{N_{\text{dat}}}$. The theory predictions are a general (smooth\footnote{Technically we only require once-differentiable.}) function $\vec{t} : \mathbb{R}^{N_{\text{param}}} \rightarrow \mathbb{R}^{N_{\text{dat}}}$, and we assume that the data is normally distributed according to:
+Let us assume that we are fitting a vector of theory parameters $\vec{c} \in \mathbb{R}^{N_{\text{param}}}$ (which now may comprise PDF parameters alongside EFT parameters, for example - in Sect.~\ref{sec:quad} we worked exclusively with EFT coefficients), given data $\vec{d} \in \mathbb{R}^{N_{\text{dat}}}$. The theory predictions are a general (smooth\footnote{Technically we only require once continuously-differentiable.}) function $\vec{t} : \mathbb{R}^{N_{\text{param}}} \rightarrow \mathbb{R}^{N_{\text{dat}}}$, and we assume that the data is normally distributed according to:
 \begin{equation}
 \vec{d} \sim \mathcal{N}(\vec{t}(\vec{c}), \Sigma),
 \end{equation}
@@ -7263,7 +7263,7 @@ The defining equation Eq.~\eqref{eq:cp_definition} implies that $\vec{c}_p(\vec{
 \begin{equation}
 \vec{0} = \frac{\partial \vec{t}^T}{\partial \vec{c}} (\vec{c}_p(\vec{d}_p)) \Sigma^{-1} \left( \vec{d}_p - \vec{t}(\vec{c}_p(\vec{d}_p)) \right),
 \end{equation}
-where the $N_{\text{dat}} \times N_{\text{op}}$ Jacobian matrix $\partial \vec{t} / \partial \vec{c}$ is given by:
+where the $N_{\text{dat}} \times N_{\text{param}}$ Jacobian matrix $\partial \vec{t} / \partial \vec{c}$ is given by:
 \begin{equation}
 \left(\frac{\partial \vec{t}}{\partial \vec{c}}\right)_{ij} = \frac{\partial t_i}{\partial c_j}.
 \end{equation}
@@ -7315,7 +7315,7 @@ Completing the square in the exponential, the posterior can be rewritten as:
 & \qquad\cdot \exp\bigg( -\frac{1}{2} \left(\vec{v}_{\perp} - (M^T \Sigma^{-1}M)^{-1} M^T \Sigma^{-1} (\vec{d} - \vec{t}(\vec{c}))\right)^T\notag \\
 & \qquad\qquad\qquad\qquad \cdot M^T \Sigma^{-1}M \left(\vec{v}_{\perp} - (M^T \Sigma^{-1}M)^{-1} M^T \Sigma^{-1} (\vec{d} - \vec{t}(\vec{c}))\right) \bigg).
 \end{align}
-We now attempt to remove the $M$ dependence in this posterior. Introducing the standard \textit{Cholesky decomposition} $\Sigma = AA^T$ of the covariance matrix, where $A$ is an invertible matrix, we have that $\Sigma^{-1} = A^{-T} A^{-1}$ and hence:
+We now attempt to remove as much explicit $M$ dependence as possible in this posterior (since of course the final posterior should not depend upon the choice of $M$). Introducing the standard \textit{Cholesky decomposition} $\Sigma = AA^T$ of the covariance matrix, where $A$ is an invertible matrix, we have that $\Sigma^{-1} = A^{-T} A^{-1}$ and hence:
 \begin{equation}
 \Sigma^{-1} M (M^T \Sigma^{-1} M)^{-1} M^T \Sigma^{-1} = A^{-T} \left[ (A^{-1}M) ((A^{-1}M)^T(A^{-1}M))^{-1} (A^{-1}M)^T \right] A^{-1}.
 \end{equation}
@@ -7337,7 +7337,7 @@ Hence we have established:
 \Sigma^{-1} - \Sigma^{-1} M (M^T\Sigma^{-1}M)^{-1} M^T \Sigma^{-1} = \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \left( \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}}  \right)^{-1} \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1}.
 \end{equation}
 \end{framed}
-For ease of notation, we shall define the \textit{tangent inverse covariance matrix} by:
+\noindent For ease of notation, we shall define the \textit{tangent inverse covariance matrix} by:
 \begin{equation}
 \Sigma^{-1}_t(\vec{c}) := \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \left( \left(\frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \frac{\partial \vec{t}}{\partial \vec{c}} \right)^{-1} \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1},
 \end{equation}
@@ -7350,7 +7350,7 @@ Then we can simplify the posterior distribution to:
 & |\det(M|M')|\exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T\Sigma_t^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c})) \right) \int d\vec{v}_{\perp} \int d\vec{v}_{\parallel}\ \delta\left(\vec{c} - \vec{c}_p\left(\vec{t}(\vec{c}) + M\vec{v}_{\perp} + M'\vec{v}_{\parallel}\right) \right)\notag\\[1.5ex]
 & \cdot \exp\left( -\frac{1}{2} \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right)^T \Sigma \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right) \right).
 \end{align}
-Depending on the dimension of the space $\textrm{Ker}((\partial \vec{t} / \partial \vec{c})^T \Sigma^{-1})$, there are different sizes of the vector $\vec{v}_{\parallel}$. If $\dim(\textrm{Ker}((\partial \vec{t} / \partial \vec{c})^T \Sigma^{-1})) = N_{\text{dat}} - N_{\text{op}}$, which is the typical case, then $\vec{v}_{\parallel}$ has size $N_{\text{op}}$ so can absorb all the delta functions. In particular, we should be able to evaluate:
+Depending on the dimension of the space $\textrm{Ker}((\partial \vec{t} / \partial \vec{c})^T \Sigma^{-1})$, there are different sizes of the vector $\vec{v}_{\parallel}$. If $\dim(\textrm{Ker}((\partial \vec{t} / \partial \vec{c})^T \Sigma^{-1})) = N_{\text{dat}} - N_{\text{param}}$, which is the typical case, then $\vec{v}_{\parallel}$ has size $N_{\text{param}}$ so can absorb all the delta functions. In particular, we should be able to evaluate:
 \begin{equation}
 \int d\vec{v}_{\parallel}\ \delta\left(\vec{c} - \vec{c}_p\left(\vec{t}(\vec{c}) + M\vec{v}_{\perp} + M'\vec{v}_{\parallel}\right) \right).
 \end{equation}
@@ -7390,28 +7390,89 @@ Now without loss of generality, we can choose $(M | M')$ to have orthonormal col
 \end{align}
 To simplify things, observe that:
 \begin{equation}
-\begin{pmatrix} M^T \\ {M'}^T \end{pmatrix} \begin{pmatrix} M & \frac{\partial \vec{t}}{\partial \vec{c}} \end{pmatrix} = \begin{pmatrix} M^TM & M^T \frac{\partial \vec{t}}{\partial \vec{c}} \\ 0 & {M'}^T \frac{\partial \vec{t}}{\partial \vec{c}} \end{pmatrix},
+\begin{pmatrix} M^T \\ {M'}^T \end{pmatrix} \begin{pmatrix} M & \displaystyle \frac{\partial \vec{t}}{\partial \vec{c}} \end{pmatrix} = \begin{pmatrix} M^TM & \displaystyle M^T \frac{\partial \vec{t}}{\partial \vec{c}} \\[1.5ex] 0 & \displaystyle {M'}^T \frac{\partial \vec{t}}{\partial \vec{c}} \end{pmatrix},
 \end{equation}
 so that on taking determinants we have:
 \begin{equation}
-\det\left( {M'}^T \frac{\partial \vec{t}}{\partial \vec{c}}\right) = \det\begin{pmatrix} M^T \\ {M'}^T \end{pmatrix}\det\begin{pmatrix} M & \frac{\partial \vec{t}}{\partial \vec{c}} \end{pmatrix} = \det\left( \frac{\partial \vec{t}}{\partial \vec{c}} \bigg| M \right).
+\det\left( {M'}^T \frac{\partial \vec{t}}{\partial \vec{c}}\right) = \det\begin{pmatrix} M^T \\ {M'}^T \end{pmatrix}\det\begin{pmatrix} M & \displaystyle \frac{\partial \vec{t}}{\partial \vec{c}} \end{pmatrix} = \det\left( \frac{\partial \vec{t}}{\partial \vec{c}} \bigg| M \right).
 \end{equation}
-Hence the posterior can be rewritten in the final form:
-\begin{framed}
+Hence the Monte Carlo posterior can be rewritten in the form:
 \begin{align}
 & \left|\det\left( \frac{\partial \vec{t}}{\partial \vec{c}} \bigg| M \right) \right| \exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T\Sigma_t^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c})) \right)  \notag\\[1.5ex]
 & \cdot \int d\vec{v}_{\perp} \exp\left( -\frac{1}{2} \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right)^T \Sigma \left(\Sigma^{-1} M \vec{v}_{\perp} - \Sigma_o^{-1}(\vec{c}) (\vec{d} - \vec{t}(\vec{c}))\right) \right).
 \end{align}
+Some final tidying shows that this scales like the Bayesian posterior, up to a $\vec{c}$-dependent factor. Expanding the argument of the exponential inside the orthogonal integral, and removing the $\vec{v}_{\perp}$-independent part, this is equivalent to:
+\begin{align}
+& \left|\det\left( \frac{\partial \vec{t}}{\partial \vec{c}} \bigg| M \right) \right| \exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T \left( \Sigma_t^{-1} + \Sigma_o^{-1} \Sigma \Sigma_o^{-1} \right) (\vec{d} - \vec{t}(\vec{c})) \right)  \notag\\[1.5ex]
+& \qquad\cdot \int d\vec{v}_{\perp} \exp\left( -\frac{1}{2} \vec{v}_{\perp}^TM^T \Sigma^{-1} M \vec{v}_{\perp} + \vec{v}_{\perp}^T M^T \Sigma^{-1}\Sigma_o^{-1}  (\vec{d} - \vec{t}(\vec{c}))   \right).
+\end{align}
+\noindent A quick calculation reveals that $\Sigma_t^{-1} + \Sigma_o^{-1} \Sigma \Sigma_o^{-1} = \Sigma^{-1}$, which yields the final form of the Monte Carlo posterior:
+\begin{framed}
+\begin{align}
+&\left|\det\left( \frac{\partial \vec{t}}{\partial \vec{c}} \bigg| M \right) \right| \int d\vec{v}_{\perp} \exp\left( -\frac{1}{2} \vec{v}_{\perp}^TM^T \Sigma^{-1} M \vec{v}_{\perp} + \vec{v}_{\perp}^T M^T \Sigma^{-1}\Sigma_o^{-1}  (\vec{d} - \vec{t}(\vec{c}))   \right) \notag \\[1.5ex]
+& \qquad\qquad \cdot \exp\left( -\frac{1}{2}(\vec{d} - \vec{t}(\vec{c}))^T \Sigma^{-1} (\vec{d} - \vec{t}(\vec{c})) \right)
+\label{eq:final_mc}
+\end{align}
 \end{framed}
 \noindent It is important to note that the delta function also enforces a restricted range of $\vec{v}_{\perp}$; the integration range here is only over $\vec{v}_{\perp}$ such that the pseudodata $\vec{t}(\vec{c}) + M\vec{v}_{\perp}$ leads to $\vec{c}$ as a minimum of the $\chi^2$-statistic.\\
 
-\noindent The key features of this posterior, as compared to the Bayesian result in Sect.~\ref{sec:interval_estimation}, are the following: 
+\noindent We make the key observation that the final distribution is proportional to the Bayesian posterior, except for a $\vec{c}$-dependent overall scaling factor. The determinant factor in this scaling factor is easy to compute, if the theory is easily computable (and indeed this must be the case for any Bayesian method anyway). On the other hand, the integral is extremely hard to calculate without numerics, given the complicated integration range.
 
 
-\section{Future directions}
+\paragraph{Special cases.} It is also useful to note some special cases where the integral in Eq.~\eqref{eq:final_mc} is analytically tractable. Simple examples include the following:
+\begin{itemize}
+\item \textbf{One datapoint, one parameter, quadratic theory.} Consider a single datapoint $d$ with variance $\sigma^2$, described by a quadratic theory of one variable, $t(c) = t^{\text{SM}} + t^{\text{lin}}c + t^{\text{quad}}c^2$, as considered in Sect.~\ref{sec:quad}. In this case, we have:
+\begin{equation}
+\frac{\partial t}{\partial c} = t^{\text{lin}} + 2c t^{\text{quad}} \qquad \Rightarrow \qquad \textrm{Ker}\left(\frac{1}{\sigma^2}\frac{\partial t}{\partial c} \right) = \begin{cases} 0, & \text{if $c \neq -t^{\text{lin}}/2t^{\text{quad}}$;} \\ \mathbb{R}, & \text{if $c = -t^{\text{lin}} /2 t^{\text{quad}}$.} \end{cases}
+\end{equation}
+So provided $c \neq -t^{\text{lin}} / 2 t^{\text{quad}}$, we are in the happy case where the dimension of the kernel is zero, and we can apply the above results. The matrix $M(c)$ is empty in this case and the integral over $\vec{v}_{\perp}$ is vacuous; hence the posterior distribution for $c \neq -t^{\text{lin}} / 2t^{\text{quad}}$ reduces simply to:
+\begin{equation}
+\left| t^{\text{lin}} + 2c t^{\text{quad}} \right| \exp\left( -\frac{1}{2\sigma^2} (d - t(c))^2\right),
+\end{equation}
+which agrees exactly with the result presented in Sect.~\ref{sec:quad}.
+
+\item \textbf{Linear theory.} Consider multiple datapoints $\vec{d}$ with covariance $\Sigma$, described by a purely linear theory of multiple parameters, $\vec{t}(\vec{c}) = \vec{t}^{\text{SM}} + \vec{t}^{\text{lin}} \vec{c}$, with $\vec{t}^{\text{lin}}$ a $N_{\text{dat}} \times N_{\text{param}}$ matrix. In this case, we have:
+\begin{equation}
+\frac{\partial \vec{t}}{\partial \vec{c}} = \vec{t}^{\text{lin}} \qquad \Rightarrow \qquad \textrm{Ker}\left( \left( \frac{\partial \vec{t}}{\partial \vec{c}} \right)^T \Sigma^{-1} \right) = \{ \vec{v} : (\vec{t}^{\text{lin}})^T \Sigma^{-1} \vec{v} = \vec{0}\}.
+\end{equation}
+We note that the relevant kernel here is always independent of $\vec{c}$, and hence we may take $M(\vec{c})$ independent of $\vec{c}$ too. We also note that the tangential covariance matrix is given by:
+\begin{equation}
+\Sigma_t^{-1} = \Sigma^{-1} \vec{t}^{\text{lin}} (\vec{t}^{\text{lin}T} \Sigma^{-1} \vec{t}^{\text{lin}})^{-1} \vec{t}^{\text{lin}T} \Sigma^{-1},
+\end{equation}
+so that $\Sigma_t^{-1} \vec{t}^{\text{lin}}\vec{c} = \Sigma^{-1} \vec{t}^{\text{lin}} \vec{c}$ and $\Sigma_o^{-1}\vec{t}^{\text{lin}}\vec{c} = (\Sigma^{-1} - \Sigma_t^{-1})\vec{t}^{\text{lin}}\vec{c} = \vec{0}$. In particular, it follows that the orthogonal integral in Eq.~\eqref{eq:final_mc} is independent of $\vec{c}$,\footnote{Technically, one must additionally confirm that the integration range is independent of $\vec{c}$. It is indeed possible to show that the pseudodata $\vec{t}^{\text{SM}} + \vec{t}^{\text{lin}}\vec{c} + M\vec{v}_{\perp}$ leads to $\vec{c}$ as a minimiser of the $\chi^2$ for all $\vec{c}$, hence it follows that in fact the integration range is the full space.} and the determinant factor is also independent of $\vec{c}$. This leaves just the expected Bayesian posterior:
+\begin{equation}
+\exp\left( -\frac{1}{2} (\vec{d} - \vec{t}^{\text{SM}} - \vec{t}^{\text{lin}} \vec{c})^T \Sigma^{-1} (\vec{d} - \vec{t}^{\text{SM}} - \vec{t}^{\text{lin}} \vec{c}) \right).
+\end{equation}
+Hence we have demonstrated that in the purely linear case, the Monte Carlo replica method and the Bayesian method coincide. It should be noted that this is because of a particularly fortuitous cancellation, however, and that the general behaviour of the Monte Carlo replica method is \textit{not} Bayesian.
+
+\item \textbf{Pure quadratic theory.} Consider multiple datapoints $\vec{d}$ with covariance $\Sigma$, described by a purely quadratic theory of one variable, $\vec{t}(c) = \vec{t}^{\text{SM}} + \vec{t}^{\text{quad}}c^2$, with $\vec{t}^{\text{quad}} \neq \vec{0}$. In this case, we have:
+\begin{equation}
+\frac{\partial \vec{t}}{\partial c} = 2c \vec{t}^{\text{quad}} \qquad \Rightarrow \qquad \textrm{Ker}\left( \left(\frac{\partial \vec{t}}{\partial c}\right)^T \Sigma^{-1} \right) = \begin{cases} \mathbb{R}^{N_{\text{dat}}}, & \text{if $c = 0$;} \\ \{ \vec{v} : (\vec{t}^{\text{quad}})^T \Sigma^{-1} \vec{v} = 0\}, & \text{otherwise.}\end{cases}
+\end{equation}
+So provided $c \neq 0$, we are in the happy case where the dimension of the kernel is $N_{\text{dat}} - 1$. Furthermore, we can choose the matrix $M(\vec{c})$ independent of $\vec{c}$, as in the linear case. Once again, we note that the tangential covariance matrix is $c$-independent and is given by:
+\begin{equation}
+\Sigma_t^{-1} = \Sigma^{-1} \vec{t}^{\text{quad}} ( \vec{t}^{\text{quad}T} \Sigma^{-1} \vec{t}^{\text{quad}} )^{-1} \vec{t}^{\text{quad}T} \Sigma^{-1}.
+\end{equation}
+Hence, it follows that $\Sigma^{-1}_t \vec{t}^{\text{quad}} c^2 = \Sigma^{-1} \vec{t}^{\text{quad}}c^2$, and so $\Sigma_o^{-1} \vec{t}^{\text{quad}} c^2 = \vec{0}$. In particular, this implies that again the orthogonal integral in Eq.~\eqref{eq:final_mc} is $c$-independent, and can be simply considered a constant of proportionality.\footnote{Again, technically, one must additionally confirm that the integration range is independent of $c$. Once again, it is possible to show that $\vec{t}^{\text{SM}} + \vec{t}^{\text{quad}}c^2 + M\vec{v}_{\perp}$ leads to $c$ as a minimiser of the $\chi^2$ for all $c$, and thus for all $c$ the integration range is the full space.} On the other hand, the determinant factor in Eq.~\eqref{eq:final_mc} is \textit{not} $c$-independent, but is in fact proportional to $|c|$. Overall then, we obtain the posterior:
+\begin{equation}
+|c| \exp\left( -\frac{1}{2} \left(\vec{d} - \vec{t}^{\text{SM}} - \vec{t}^{\text{quad}} c^2 \right)^T \Sigma^{-1} \left( \vec{d} - \vec{t}^{\text{SM}} - \vec{t}^{\text{quad}} c^2 \right) \right).
+\end{equation}
+This is equivalent to the Bayesian posterior, up to an overall scale factor.
+\end{itemize}
+
+\section{Conclusions and future directions}
 \label{sec:mc_future}
 
-It is important to assess the impact this has on PDF fits.
+The discussion in the previous section reveals that the Monte Carlo replica method may result in unfaithful error estimates when applied to multivariable problems, particularly when they deviate from the linear case. We already showed in Sect.~\ref{sec:quad} that this can cause serious problems when quadratic corrections dominate in the EFT, but the problem is also present in PDF fitting.
+
+Whilst a considerable amount of the data in modern PDF fits is deep inelastic scattering data, which is linear in the PDFs (we proved factorisation for DIS in the introductory chapter, producing a factorisation theorem of the form $F_2 = \hat{F}_2 \otimes f$ for the structure functions), there is a considerable amount of data in which the PDFs enter non-linearly. Both the Drell-Yan data from Chapter~\ref{chap:smeftdy} and the top production data from Chapter~\ref{chap:top} are described by factorisation theorems of the form $\sigma = \hat{\sigma} \otimes f \otimes f$ where the leading contribution is \textit{quadratic} in the PDFs; indeed, the quadratic terms in the PDFs \textit{must} dominate for these datasets because there is no linear contribution. Therefore, it is interesting to ask what effect the use of the Monte Carlo replica method has on global PDF sets which include an increasing amount of hadronic data, involving two protons in the initial state.
+
+Overall, this suggests the need for a new PDF fitting framework beyond the methodology of \textsc{SIMUnet} presented in Chapter~\ref{chap:top}. In particular, such a framework should be capable of:
+\begin{itemize}
+\item Simultaneously fitting PDFs and theory parameters, in the manner that this thesis has described. This will become increasingly important as we enter the high-luminosity phase of the LHC, as demonstrated in Chapter~\ref{chap:smeftdy}.
+\item Performing \textit{Bayesian} fits with faithful error estimation for both the PDFs and the theory parameters. The underestimation of errors by the Monte Carlo replica method may lead to false conclusions as increasingly large amounts of data are included in the fits for which the leading contributions are quadratic. This is particularly damaging in the EFT where we may wrongly conclude the existence of New Physics, but it also potentially very damaging in precision SM calculations with PDFs - however, the impact there is yet to be assessed.
+\end{itemize}
+We defer the ambitious project of conceiving of, designing and implementing such a global fitting framework to future work.
 
 
 
