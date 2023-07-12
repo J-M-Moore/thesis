@@ -119,6 +119,9 @@
 \def\lra#1{\overset{\text{\scriptsize$\leftrightarrow$}}{#1}}
 
 
+\newcommand{\madgraph}{\texttt{MadGraph5\_aMC@NLO}{}}
+
+
 
 % Angled brackets
 \newcommand{\la}{\left\langle}
@@ -7081,7 +7084,9 @@ data which include quadratic corrections. We will revisit this more carefully in
 \chapter{Disentangling New Physics effects and parton distributions}
 \label{chap:contamination}
 
-So far, this thesis has exclusively focussed on the simultaneous determination of PDFs
+\textit{[This chapter is based on an upcoming publication, worked on in collaboration with Elie Hammou, Zahari Kassabov, Maeve Madigan, Michelangelo Mangano, Luca Mantani, Manuel Morales Alvarado and Maeve Madigan. My contribution to this work comprised: writing the additions to the }\texttt{validphys}\textit{ code which produces the contaminated fits; running various contaminated fits and testing the random seed dependence of the contaminated fits; writing the analysis code which produces BSM bounds based on the contaminated fits; running the $pp \rightarrow ZH$ analysis, which is one of those used in Sect.~\ref{}; running the weighted fits mentioned in Sect.~\ref{} as an attempt to disentangle PDFs and New Physics.]}\\
+
+\noindent So far, this thesis has exclusively focussed on the simultaneous determination of PDFs
 and BSM couplings in a selection of models (namely a dark matter model, and two SMEFT scenarios). 
 In this chapter, we ask a more general question: what kind of errors are committed if we do \textit{not} 
 perform a simultaneous extraction, instead fitting the PDFs \textit{assuming} the SM,
@@ -7095,46 +7100,64 @@ on two possible UV-complete extensions of the SM (which we treat using an EFT ap
 convenience), described in Sec.~\ref{sec:scenarios}. Finally, in Sec.~\ref{}, we give recommendations
 for how to guard against accidental `absorption' of NP into a SM PDF fit.
 
-
 \section{Methodology}
 \label{sec:methodology}
 
-The methodology we use throughout this study is based on the NNPDF \textit{closure test} model,
+In order to systematically study contamination effects from new physics (NP) in PDF fits, we work in a setting in which we pretend
+we know the underlying law of Nature. In our case the law of Nature consists of the `true'
+PDFs, which are low-energy quantities that have nothing to do with new physics, and the `true'
+Lagrangian of Nature, which at low energy is well approximated by the Standard Model (SM) 
+Lagrangian but to which we add some heavy new particles.
+We use these assumptions to generate the artificial data that enter our analysis.
+We inject the effect of the new particles that we introduce in the Lagrangian in the articifial MC data, and their effect 
+will be visible in some high-energy distributions depending on the underlying model. 
+
+The methodology we use throughout this study is based on the NNPDF \textit{closure test} framework,
 first introduced in Ref.~\cite{NNPDF:2014otw}, and explained in more detail in Ref.~\cite{DelDebbio:2021whr}.
 This method was developed
-in order to assess the quality of the NNPDF fitting methodology; in brief it follows three basic steps: (i) assume that Nature's PDFs
-are given by some fixed reference set; (ii) generate expected experimental data based on this assumption, which we term \textit{pseudodata}; (iii) fit PDFs to the pseudodata using the NNPDF methodology. Various statistical estimators, described in Ref.~\cite{DelDebbio:2021whr}, can then be applied to 
+in order to assess the quality and the robustness of the NNPDF fitting methodology; in brief it follows three basic steps: (i) assume that Nature's PDFs
+are given by some fixed reference set; (ii) generate artificial MC data based on this assumption, which we term \textit{pseudodata}; 
+(iii) fit PDFs to the pseudodata using the NNPDF methodology. Various statistical estimators, described in Ref.~\cite{DelDebbio:2021whr}, can then be applied to 
 check the quality of the fit (in broad terms, assessing its difference from the true PDFs), hence verifying the accuracy of the fitting methodology.
 
 In this study, the closure test methodology is adapted to account for the fact that the true theory of Nature may \textit{not} be the 
-Standard Model. In the first step of the closure test methodology, we now assume the existence of some New Physics which modifies
-the pseudodata generated from the fixed reference PDF set. We investigate the danger posed by subsequently fitting this `contaminated' pseudodata assuming that the Standard Model is the true theory of Nature.
+SM. In the first step of the closure test methodology, we now assume the existence of some NP models which modifies
+the MC data generated from the fixed reference PDF set. We investigate the danger posed by subsequently fitting this `contaminated' 
+pseudodata assuming that the SM is the true theory of Nature.
 
-In this Section, we describe this adapted closure test methodology in more detail. In Sect.~\ref{subsec:contamination_definition}, we carefully define the terms \textit{baseline fit} and \textit{contaminated fit}, which shall be used throughout this paper. We then briefly remind the reader of the NNPDF fitting methodology, in particular discussing Monte-Carlo error propagation. In Sect.~\ref{subsec:pseudodata_generation}, we provide more details on how pseudodata is generated in this work. Finally, in Sect~\ref{subsec:postfit} we give an overview of the types of analysis we perform on the fits we obtain.
+In this Section, we describe this adapted closure test methodology in more detail. 
+In Sect.~\ref{subsec:contamination_definition}, we carefully define the terms \textit{baseline fit} and \textit{contaminated fit}, 
+which shall be used throughout this paper. We then briefly remind the reader of the NNPDF fitting methodology, in particular discussing 
+Monte-Carlo error propagation. In Sect.~\ref{subsec:pseudodata_generation}, we provide more details on how the MC data is generated in this work. 
+Finally, in Sect~\ref{subsec:postfit} we give an overview of the types of analysis we perform on the fits we obtain.
 
 \subsection{Basic definitions and fitting methodology}
 \label{subsec:contamination_definition}
-Let us suppose that the true theory of Nature is given by the Standard Model (SM), plus some New Physics (NP) contributions. Under this assumption, observables $T \equiv T(\theta_{\text{SM}}, \theta_{\text{NP}})$ have a dependence on both the SM parameters $\theta_{\text{SM}}$ (in our work, exclusively the PDFs), and the NP parameters $\theta_{\text{NP}}$ (for example, masses and couplings of new particles). Let us further fix notation by writing the true values of the parameters $\theta_{\text{SM}}, \theta_{\text{NP}}$ as $\theta_{\text{SM}}^*, \theta_{\text{NP}}^*$ respectively; for convenience, we shall also write the true value of the observable $T$ as $T^* \equiv T(\theta_{\text{SM}}^*, \theta_{\text{NP}}^*)$.
+Let us suppose that the true theory of Nature is given by the SM, plus some NP contributions. 
+Under this assumption, observables $T \equiv T(\theta_{\text{SM}}, \theta_{\text{NP}})$ have a dependence on both the SM 
+parameters $\theta_{\text{SM}}$ (in our work, exclusively the PDFs), and the NP parameters $\theta_{\text{NP}}$ 
+(for example, masses and couplings of new particles). Let us further fix notation by writing the true values of the 
+parameters $\theta_{\text{SM}}, \theta_{\text{NP}}$ as $\theta_{\text{SM}}^*, \theta_{\text{NP}}^*$ respectively; 
+for convenience, we shall also write the true value of the observable $T$ as $T^* \equiv T(\theta_{\text{SM}}^*, \theta_{\text{NP}}^*)$.
 
 Suppose that we wish to perform a fit of some of the theory parameters using experimental measurements of $N_{\rm obs}$ observables, which we package as a single vector $T = (T_1, T_2,..., T_{N_{\rm obs}})$. All measurements are subject to random observational noise; we assume that this results in the observed data being distributed according to:
 \begin{equation}
 \label{eq:observed_data}
 D_0 = T^* + \eta,
 \end{equation}
-where $\eta$ is drawn from the multivariate Gaussian distribution $\mathcal{N}(0,\Sigma)$, with $\Sigma$ the experimental covariance matrix describing the correlations between measurements. In the context of the NNPDF closure test methodology~\cite{NNPDF:2014otw}, the true values of the observables $T^*$ are referred to as \textit{level 0 pseudodata} (L0), whilst the fluctuated values $D_0$ are referred to as \textit{level 1 pseudodata} (L1).\footnote{Note that, by construction, there are no inconsistent
-datasets amongst the pseudodata $D_0$. In the original closure test of Ref.~\cite{NNPDF:2014otw}, there was also no modelisation uncertainty; the true observable values were assumed to be obtained by generating pseudodata according to the same functional form with which we subsequently fit. It is worth noting that the assumption of zero modelisation uncertainties
-is quite strong and likely unjustified.}  
+where $\eta$ is drawn from the multivariate Gaussian distribution $\mathcal{N}(0,\Sigma)$, with $\Sigma$ the experimental covariance matrix describing the correlations between measurements. In the context of the NNPDF closure test methodology~\cite{NNPDF:2014otw}, the true values of the observables $T^*$ are referred to as \textit{level 0 pseudodata} (L0), whilst the fluctuated values $D_0$ are referred to as \textit{level 1 pseudodata} (L1).
+%\footnote{Note that, by construction, there are no inconsistent
+%datasets amongst the pseudodata $D_0$. In the original closure test of Ref.~\cite{NNPDF:2014otw}, there was also no modelisation uncertainty; the true observable values were assumed to be obtained by generating pseudodata according to the same functional form with which we subsequently fit. It is worth noting that the assumption of zero modelisation uncertainties
+%is quite strong and likely unjustified.}  
 
-\paragraph{Fit definitions.} 
+%\paragraph{Fit definitions.} 
 Once we have generated a sample $D_0$ of L1 pseudodata, we may perform a fit of some of the theory parameters to this pseudodata. In this work, we shall perform various types of fits with different choices of $\theta_{\text{SM}}^*, \theta_{\text{NP}}^*$, and different choices of which parameters we are fitting. We define the types of fits as follows:
 \begin{enumerate}[label = (\arabic*)]
-\item \textbf{Baseline fit.} If there is no New Physics, $\theta_{\text{NP}}^* \equiv 0$, then the SM is the true theory of Nature. We generate L1 pseudodata $D_0$ according to the SM. If we subsequently fit the parameters $\theta_{\text{SM}}$, we say that we are performing a \textit{baseline fit}. This is precisely equivalent to performing a standard NNPDF closure test.
-\item \textbf{Contaminated fit.} If New Physics exists, $\theta_{\text{NP}}^* \neq 0$, then the SM is \textit{not} the true theory of Nature. We generate L1 pseudodata $D_0$ according to the SM plus the NP contribution. If we subsequently \textit{only} fit the parameters $\theta_{\text{SM}}$ whilst ignoring the NP parameters $\theta_{\text{NP}}$, we say that we are performing a \textit{contaminated fit}.
-\item \textbf{Simultaneous fit.} If New Physics exists, $\theta_{\text{NP}}^* \neq 0$, we again generate L1 pseudodata $D_0$ according to the SM plus the NP contribution. If we subsequently fit \textit{both} the parameters $\theta_{\text{SM}}$ \textit{and} $\theta_{\text{NP}}$, we say that we are performing a \textit{simultaneous fit}. A closure test of this type is performed in Ref.~\cite{Iranipour:2022iak} in order to benchmark the {\tt SIMUnet} methodology. However, we do not perform such fits in this work, with our main goal being to assess the possible deficiencies associated with performing \textit{contaminated} fits.
+\item \textbf{Baseline fit.} If there is no new physics, $\theta_{\text{NP}}^* \equiv 0$, then the SM is the true theory of Nature. We generate L1 pseudodata $D_0$ according to the SM. If we subsequently fit the parameters $\theta_{\text{SM}}$, we say that we are performing a \textit{baseline fit}. This is precisely equivalent to performing a standard NNPDF closure test.
+\item \textbf{Contaminated fit.} If new physics exists, $\theta_{\text{NP}}^* \neq 0$, then the SM is \textit{not} the true theory of Nature. We generate L1 pseudodata $D_0$ according to the SM plus the NP contribution. If we subsequently \textit{only} fit the parameters $\theta_{\text{SM}}$ whilst ignoring the NP parameters $\theta_{\text{NP}}$, we say that we are performing a \textit{contaminated fit}.
+\item \textbf{Simultaneous fit.} If new physics exists, $\theta_{\text{NP}}^* \neq 0$, we again generate L1 pseudodata $D_0$ according to the SM plus the NP contribution. If we subsequently fit \textit{both} the parameters $\theta_{\text{SM}}$ \textit{and} $\theta_{\text{NP}}$, we say that we are performing a \textit{simultaneous fit}. A closure test of this type is performed in Ref.~\cite{Iranipour:2022iak} in order to benchmark the {\tt SIMUnet} methodology. However, we do not perform such fits in this work, with our main goal being to assess the possible deficiencies associated with performing \textit{contaminated} fits.
 \end{enumerate}
 A summary of the first two definitions is given for convenient reference in Table~\ref{table:definition}.
-
-
 
 \begin{table}
   \centering
@@ -7143,46 +7166,51 @@ A summary of the first two definitions is given for convenient reference in Tabl
     {\bf Fit name} & {\bf Nature}  & {\bf Fitted parameters}\\
     \midrule
     Baseline & Standard Model: $\theta_{\text{NP}}^* \equiv 0$ & Standard Model only: $\theta_{\text{SM}}$ \\
-    Contaminated & Standard Model, plus NP: $\theta_{\text{NP}}^* \neq 0$ & Standard Model only: $\theta_{\text{SM}}$\\
+    Contaminated & new physics: $\theta_{\text{NP}}^* \neq 0$ & Standard Model only: $\theta_{\text{SM}}$\\
     \bottomrule
     \end{tabular}
    \caption{\label{table:definition} A summary of the definitions of \textit{baseline} and \textit{contaminated} fits used throughout this work.}
   \end{table}
+%
+%\paragraph{Fitting methodology.}
+\vspace*{0.2cm}
+\noindent Throughout this work, we shall perform only \textit{baseline} and \textit{contaminated} fits; that is, we shall only fit SM 
+parameters, but we shall fit them to pseudodata generated either assuming the law of Nature is given by the SM only, 
+or that it is given by the SM plus some NP contribution. 
+%The only SM parameters we consider are the PDFs, $\theta_{\text{SM}} = (f_u, f_d, ...)$, 
+%and as such we are able to make use of the NNPDF fitting methodology to perform both the baseline and contaminated fits throughout.
 
-
-\paragraph{Fitting methodology.}
-Throughout this work, we shall perform only \textit{baseline} and \textit{contaminated} fits; that is, we shall only fit Standard Model parameters, but we shall fit them to pseudodata generated either according to the SM itself, or according to the SM plus some NP contribution. The only Standard Model parameters we consider are the parton distributions, $\theta_{\text{SM}} = (f_u, f_d, ...)$, and as such we are able to make use of the NNPDF fitting methodology to perform both the baseline and contaminated fits throughout.
-
-The NNPDF methodology makes us of the Monte-Carlo (MC) replica method to propagate errors to the PDFs. This involves the generation of additional layer of pseudodata, referred to as \textit{level 2 pseudodata} (L2). Given a level 1 pseudodata sample $D_0$, we generate level 2 pseudodata by augmenting $D_0$ with further random noise $\epsilon$:
+The NNPDF methodology makes use of the Monte-Carlo (MC) replica method to propagate errors to the PDFs. 
+This involves the generation of additional layer of pseudodata, referred to as \textit{level 2 pseudodata} (L2). Given a L1 pseudodata sample $D_0$, 
+we generate L2 pseudodata by augmenting $D_0$ with further random noise $\epsilon$:
 \begin{equation}
 \label{eq:mc_pseudodata}
 D = D_0 + \epsilon = T^* + \eta + \epsilon,
 \end{equation}
-where $\epsilon$ is an independent multivariate Gaussian variable, distributed according to $\epsilon \sim \mathcal{N}(0,\Sigma)$, with $\Sigma$ the experimental covariance matrix. Whilst the level 1 pseudodata is sampled only once, the level 2 pseudodata $D$ is sampled $N_{\text{rep}}$ times, and the best-fit PDFs are obtained to each of the level 2 pseudodata samples. This provides an ensemble of PDFs from which statistical estimators, in particular uncertainty bands, can be constructed. 
+where $\epsilon$ is an independent multivariate Gaussian variable, distributed according to $\epsilon \sim \mathcal{N}(0,\Sigma)$, with $\Sigma$ the experimental covariance matrix. Whilst the L1 pseudodata is sampled only once, the L2 pseudodata $D$ is sampled $N_{\text{rep}}$ times, and the best-fit PDFs are obtained to each of the L2 pseudodata samples. This provides an ensemble of PDFs from which statistical estimators, in particular uncertainty bands, can be constructed. 
 
 \subsection{Pseudodata generation}
 \label{subsec:pseudodata_generation}
-As described above, we assume that the true theory of Nature is the Standard Model plus some New Physics. More specifically, in this work we take the `true SM' to mean SM perturbation theory to NNLO QCD accuracy. The true PDF set which shall be used throughout this work is the NNPDF4.0 set~\cite{Ball:2021leu} (in principle, we are of course allowed to choose any PDF set).
+As described above, we assume that the true theory of Nature is the SM plus some new physics. 
+More specifically, in this work we take the `true SM' to mean SM perturbation theory to NNLO QCD accuracy. 
+The true PDF set which shall be used throughout this work is the NNPDF4.0 set~\cite{Ball:2021leu} (in principle, we are of course allowed to choose any PDF set).
 
-On the other hand, we choose different `true New Physics' throughout the paper. In each case, we base our NP scenario on specific UV-complete models. Furthermore, we choose NP scenarios which are characterised by scales much higher than the energy scales probed by the data, which allows us to justify matching the UV-complete models to a SMEFT parametrisation. The advantage of this approach is 
+On the other hand, we inject in the paper two different NP signals throughout the paper. In each case, we base our NP scenario on specific UV-complete models. 
+Furthermore, we choose NP scenarios which are characterised by scales much higher than the energy scales probed by the data, which allows us to justify matching 
+the UV-complete models to a SMEFT parametrisation. The advantage of this approach is 
 that theory predictions become polynomial in the SMEFT Wilson coefficients, which is not necessarily the case in UV-complete models; this allows
-us maximum flexibility to trial many different values for the `true' NP parameters. To justify the SMEFT approximation, we study the validity of the EFT in each case, checking that we only use values of the SMEFT Wilson coefficients which provide good agreement with the UV theory at the linear or quadratic levels, as appropriate.
+us maximum flexibility to trial many different values for the `true' NP parameters. To justify the SMEFT approximation, in Sect.~\ref{sec:scenarios} 
+we study the validity of the EFT in each case, checking that we only use values of the SMEFT Wilson coefficients which provide good agreement with the 
+UV theory at the linear or quadratic levels, as appropriate.
 
-We also make a $K$-factor approximation (the validity of which is explicitly checked in Ref.~\cite{DYpaper} in the case of the $W,Y$ parameter scenarios) to avoid expensive computation of fast interpolation grids for the PDFs. As a result, the formula for the `true' value of an observable takes the schematic form:
+We also make a $K$-factor approximation (the validity of which is explicitly checked in Ref.~\cite{DYpaper} in the case of the $\hat{W},\hat{Y}$ 
+parameter scenarios) to avoid expensive computation of fast interpolation grids for the PDFs. As a result, the formula for the `true' value of 
+an observable takes the schematic form:
 \begin{equation}
 T \equiv \left(1 + cK_{\text{lin}} + c^2K_{\text{quad}}\right) \hat{\sigma}^{\text{SM}} \otimes \mathcal{L},
 \end{equation}
-where $\mathcal{L}$ denotes either the PDFs or PDF luminosities for NNPDF4.0 (depending on whether the observable is a deep inelastic scattering or hadronic observable), $c$ denotes the SMEFT Wilson coefficient(s) under consideration, $\hat{\sigma}^{\text{SM}}$ is the Standard-Model partonic cross-section computed at NNLO in QCD perturbation theory, and $K_{\text{lin}}, K_{\text{quad}}$ are the SMEFT $K$-factors.
+where $\mathcal{L}$ denotes either the PDFs or PDF luminosities for NNPDF4.0 (depending on whether the observable is a deep inelastic scattering or hadronic observable), $c$ denotes the SMEFT Wilson coefficient(s) under consideration, $\hat{\sigma}^{\text{SM}}$ is the SM partonic cross-section computed at NNLO in QCD perturbation theory, and $K_{\text{lin}}, K_{\text{quad}}$ are the SMEFT $K$-factors.
 
-%We explore several models. We start by the simplest UV completions that generates the $W$ and $Y$ parameters, this way we could take advantage of previous studies and previously implemented calculations, although it might be too narrow and not affect observables like jets ot top observables.
-
-%Produce the pseudo-data with the $\tilde{w}$ model.
-%We can do this both in the SMEFT, having previously established the region of validity, or directly using the UV completion. Using the SMEFT  gives us more flexibility if we want to vary the coefficients without having to regenerate all the data from scratch.
-%Once we decide the subset of the NNPDF 4.0 dataset that we want to include, we generate pseudo-data for all the observables. We do this by using the K-factors approximation. The K-factors are equal to one for the 
-%observables that are not modified by NP effects. 
-%
-%The predictions generated with $\tilde{w}$ will be used to determine the central value of the pseudo data, while we will associate to those numbers the experimental uncertainties. 
-%We then fit the MC data by assumming no new-physics (a SM PDF fit).
 
 
 \subsection{Post-fit analysis}
@@ -7192,17 +7220,1293 @@ Once we have produced a contaminated fit, where PDFs have been fitted using SM t
 
 \paragraph{Detection of contamination.} Is it possible to detect contamination of the PDF fit by the NP effects? If there are many datasets entering the fit which are \textit{not} affected by NP, it might be the case that datasets which \textit{are} affected by NP could appear inconsistent, and might be poorly described by the resulting fit.
 
-In order to address this point, we use the NNPDF dataset selection criteria, discussed in detail in Ref.~\cite{Ball:2021leu}. We consider both the $\chi^2$-statistic of the resulting contaminated PDF fit to each dataset entering the fit, and also consider the number of standard deviations $n_{\sigma} = (\chi^2 - n_{\rm dat}) / \sqrt{2n_{\rm dat}}$ of the $\chi^2$-statistic from the expected $\chi^2$ for each dataset. If $\chi^2 > 1.5$ and $n_{\sigma} > 2$ for a particular dataset, the dataset would be flagged by the NNPDF selection criteria, indicating an inconsistency with the other data entering the fit.
+In order to address this point, we use the NNPDF dataset selection criteria, discussed in detail in Ref.~\cite{Ball:2021leu}. We consider both the $\chi^2$-statistic of the resulting contaminated PDF fit to each dataset entering the fit, and also consider the number of standard deviations 
+\begin{equation}
+\label{eq:nsigma}
+n_{\sigma} = (\chi^2 - n_{\rm dat}) / \sqrt{2n_{\rm dat}}
+\end{equation} 
+of the $\chi^2$-statistic from the expected $\chi^2$ for each dataset. 
+If $\chi^2/n_{\rm dat} > 1.5$ and $n_{\sigma} > 2$ for a particular dataset, the dataset would be flagged by the NNPDF selection criteria, indicating an inconsistency with the other data entering the fit.
 
-There are two possible outcomes of performing such a dataset selection analysis on a contaminated fit. In the first instance, the datasets affected by NP are flagged by the dataset selection criterion, demonstrating inconsistency with the remaining datasets, and indicating contamination. In the second instance, the datasets are \textit{not} flagged, and are consistent enough that the contaminated fit would pass undetected as a \textit{bona fide} SM PDF fit. We introduce the following terms to describe each of these cases: in the former case, we say that the PDF was \textit{unable to absorb} the NP; in the latter case, we say that the PDF has \textit{absorbed} the NP.
+There are two possible outcomes of performing such a dataset selection analysis on a contaminated fit. In the first instance, the datasets affected by NP are flagged by the dataset selection criterion. 
+%
+If a dataset is flagged according to this condition, then a weighted fit is performed, 
+{\it i.e.} a fit in which a dataset is given a
+larger weight inversely proportional to the number of datapoints,
+namely
+\begin{equation}
+\chi^2=\frac{1}{n_{\rm dat}}\,\sum_{i=1}^{n_{\rm exp}} \,n_{\rm
+  dat}^{(i)}\,\chi^2_i \qquad \chi^2_w=\frac{1}{n_{\rm dat}-n_{\rm
+    dat}^{(j)}}\,\sum_{i=1,i\neq j}^{n_{\rm exp}} \,n_{\rm
+  dat}^{(i)}\,\chi^2_i \, + \,w^{(j)}\chi^2_j,
+  \end{equation}
+  with
+  \begin{equation}
+    \label{eq:wgts}
+    w^{(j)} = n_{\rm dat}/n_{\rm dat}^{(j)}.
+    \end{equation}
+If the data-theory agreement improves by setting it below thresholds and the
+data-theory agreement of the other datasets does not deteriorate in
+any statistically relevant way, then the dataset is kept, else the dataset is discarded, 
+on the basis of the inconsistency with the remaining datasets.
+%
+In the second instance, the datasets are \textit{not} flagged, and are consistent enough that the contaminated fit 
+would pass undetected as a \textit{bona fide} SM PDF fit. We introduce the following terms to describe each of these cases: 
+in the former case, we say that the PDF was \textit{unable to absorb} the NP; in the latter case, we say that the PDF has \textit{absorbed} the NP.
 
 \paragraph{Distortion of NP bounds.} Can using a contaminated fit in a subsequent fit of NP effects lead to misleading bounds? In more detail, suppose that we construct a contaminated fit which has absorbed NP - that is, the contamination would go undetected by the NNPDF dataset selection criterion. In this case, we would trust that our contaminated fit was a perfectly consistent SM PDF fit, and might try to use it to subsequently fit the underlying parameters in the NP scenario. 
 
 There are two possible outcomes of such a fit. The contamination of the PDFs may be weak enough for the NP bounds that we obtain to be perfectly sensible, containing the true values of the NP parameters. On the other hand, the absorption of the NP may be strong enough for the NP bounds to be distorted, no longer capturing the true underlying values of the NP parameters. The second case is particularly concerning, and if it can occur, points to a clear need to disentangle PDFs and possible NP effects.
 
-\paragraph{Distortion of SM predictions.} Finally, we ask: can using a contaminated fit lead to poor agreement on new datasets which are not affected by NP? In particular, suppose that we are again in the case where NP has been absorbed by a contaminated fit, so that the NP has gone undetected. If we were to use this contaminated fit to make predictions for an observable which is \textit{not} affected by the NP, it is interesting to see whether the data is well-described or not; if the contamination is sufficiently strong, it may appear that the dataset is inconsistent with the SM. This could provide a route for disentangling PDFs and NP.\\
+\paragraph{Distortion of SM predictions.} Finally, we ask: can using a contaminated fit lead to poor agreement on new datasets which are not affected by NP? In particular, suppose that we are again in the case where NP has been absorbed by a contaminated fit, so that the NP signal has gone undetected. If we were to use this contaminated fit to make predictions for an observable which is \textit{not} affected by the NP, it is interesting to see whether the data is well-described or not; if the contamination is sufficiently strong, it may appear that the dataset is inconsistent with the SM. This could provide a route for disentangling PDFs and NP.
 
-\noindent Addressing these questions forms the main results of this study, presented in Sect.~\ref{sec:dy}. In Sect.~\ref{sec:contaminated_pdfs}, we focus on detection of contamination, using the NNPDF dataset selection criteria; indeed, we show that there are scenarios in which NP can be absorbed by PDFs. In Sect.~\ref{sec:projections}, we focus on the distortion of NP bounds and the distortion of SM predictions when using contaminated fits which have absorbed NP. Finally, in Sect.~\ref{sec:disentanglement}, we give recommendations for observables which could disentangle PDFs and NP for the scenarios we consider.
+
+
+\section{New Physics scenarios}
+\label{sec:scenarios}
+As discussed in Sect.~\ref{sec:methodology}, throughout this work we have assumed that the theory of Nature is the SM plus some new physics, 
+and generated pseudodata accordingly. 
+In this Section, following the methodology presented in Sect.~\ref{subsec:pseudodata_generation}, we
+extend the SM by UV-complete models by introducing heavy new fields. 
+%
+%We obtain the tree-level matching SMEFT Lagrangian composed of with operators up to dimension 6 composed of SM fields. We then compare the UV and EFT predictions for high-mass Drell-Yan data in terms of the number of events we would observe with the projected luminosity of the HL-LHC. We observe that for masses sufficiently high both agree well, even taking into account only the EFT corrections. Both for the validation and the rest of the study we only focus the four-fermion operators in the SMEFT, which enter the predictions for high-mass Drell-Yan data in PDF fits.
+%\paragraph*{UV scenarios} 
+We choose simple extensions of the SM which correspond to `universal theories'~\cite{Wells:2015uba},
+the effect of which on our dataset can be well-described in an EFT approximation using the oblique corrections $\hat{Y}$ and $\hat{W}$~\cite{Peskin:1991sw,Altarelli:1991fk,Barbieri:2004qk}.
+We consider the following scenarios:
+
+\begin{itemize}
+	\item {\bf Scenario I:} A flavour universal $Z'$, which could be associated to an additional $U(1)_Y$ gauge symmetry. We give a mass to the field assuming it is generated by some higher energy physics. It corresponds to a new heavy neutral bosonic particle. At the EFT level, the effect of this model on our dataset can be  
+		described by the $\hat{Y}$ parameter.
+	\item {\bf Scenario II:} A flavour universal $W'$ charged under $SU(2)_L$.
+		Once again, we directly add a mass term to the Lagrangian. This corresponds to two new heavy charged bosonic particles ($W'^{+}$ and $W'^{-}$) as well as a new heavy neutral boson, similar to the $Z'$ but which only couples to left-handed particles. At the EFT level, the effect of this model on our dataset can 
+	be described by the $\hat{W}$ parameter.
+\end{itemize}
+
+\noindent The following subsections are devoted to describing each of these NP scenarios.
+In particular, in each case we use tree-level matching to obtain a parametrisation of the model in terms of dim-6 operators of the SMEFT,
+making use of the matching provided in Ref.~\cite{deBlas:2017xtg} to do so.
+We identify the observables in our dataset affected by each NP scenario, and in each case we compare the UV and EFT predictions.  Finally, we identify values of 
+the model parameters for which the EFT description is justified at the projected luminosity of the HL-LHC, and for which existing constraints on the models are avoided.
+
+
+\subsection{Scenario I: A flavour-universal $Z'$ model}
+\label{subsec:model-zprime}
+
+The addition to the SM of a new spin-1 boson $Z'$ associated to a new gauge symmetry $U(1)_Y$, a mass $M_{Z'}$ and a coupling coefficient $g_{Z'}$ yields the following Lagrangian:
+\begin{equation} 
+\label{eq:Zprime}
+	\begin{split}
+		\mathcal{L}^{Z'}_{\text{UV}} &= \mathcal{L}_{\text{SM}} - \frac{1}{4} Z'_{\mu \nu} {Z'}^{\mu \nu} + \frac{1}{2} M_{Z'}^{2} Z'_{\mu} {Z'}^{\mu} \\
+		&\qquad - g_{Z'} Z'_{\mu} \sum_{\substack{f}} Y_{f} \bar{f} \gamma^{\mu} f - Y_{\varphi} g_{Z'} ( Z'_{\mu} \varphi^{\dagger} i  D^{\mu} \varphi + \textrm{h.c.} ) \, .
+	\end{split}
+\end{equation}
+We sum the interactions with the fermions $f \in \{q, u, d, \ell, e \}$, where $Y_f$ is the corresponding hypercharge: $( Y_{q}, Y_{u}, Y_{d}, Y_{l}, Y_{e}, Y_{\varphi} ) = (\frac{1}{6}, \frac{2}{3}, -\frac{1}{3}, -\frac{1}{2}, -1, \frac{1}{2} ) $. The kinetic term is given by $Z'_{\mu \nu} = \partial_{\mu} Z'_{\nu} - \partial_{\nu} Z'_{\mu}$. The covariant derivative is $D_{\mu} = \partial_{\mu} + \frac{1}{2} ig \sigma^{a} W_{\mu}^{a} + i g^{'} Y_{\varphi} B_{\mu} + i g_{Z'} Y_{\varphi} Z'_{\mu}$. We neglect the mixing between the $Z'$ and the SM gauge bosons.  Note that quark and lepton flavour indices are suppressed, and that the couplings to quark and leptons are flavour diagonal.
+The new gauge interaction is anomaly free, as it has the same hypercharge-dependent couplings to fermions as the SM fields~\cite{Allanach:2018vjg}.
+Models of $Z'$ bosons and their impact on LHC data have been widely studied; see for example Refs.~\cite{Salvioni:2009mt,Salvioni:2009jp,Langacker:2008yv,Panico:2021vav}.
+
+
+%
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{ |r|l| }
+ \hline
+	Bosonic & $\mathcal{O}_{\varphi D}$, $\mathcal{O}_{\varphi \Box}$, $\mathcal{O}_{\varphi l}^{(1)}$, $\mathcal{O}_{\varphi q}^{(1)}$, $\mathcal{O}_{\varphi e}$, $\mathcal{O}_{\varphi u}$, $\mathcal{O}_{\varphi d}$ \\
+	4-fermion $(\bar{L} L)(\bar{L} L)$ & $\mathcal{O}_{ll}$, $\mathcal{O}_{qq}^{(1)}$, $\mathcal{O}_{lq}^{(1)}$ \\
+	4-fermion $(\bar{R} R)(\bar{R} R)$ & $\mathcal{O}_{ee}$, $\mathcal{O}_{uu}$, $\mathcal{O}_{dd}$, $\mathcal{O}_{ed}$, $\mathcal{O}_{eu}$, $\mathcal{O}_{ud}^{(1)}$\\
+	4-fermion $(\bar{L} L)(\bar{R} R)$ & $\mathcal{O}_{l e}$, $\mathcal{O}_{l d}$, $\mathcal{O}_{l u}$, $\mathcal{O}_{q u}^{(1)}$, $\mathcal{O}_{q d}^{(1)}$\\
+ \hline
+\end{tabular}
+\end{center}
+	\caption{\label{tab:Zpops} Warsaw basis operators generated by the $Z'$ model of Eq.~\eqref{eq:Zprime}.}
+\end{table}
+%
+Tree-level matching of $\mathcal{L}^{Z'}_{\text{UV}}$ to the dim-6 SMEFT produces the Warsaw basis~\cite{deBlas:2017xtg} operators in Table~\ref{tab:Zpops}. The exhaustive SMEFT Lagrangian is given by:
+\begin{equation} 
+\label{eq:ZprimeEFT}
+	\begin{split}
+		\mathcal{L}^{Z'}_{\text{SMEFT}} &= \mathcal{L}_{\text{SM}} -\frac{g_{Z'}^{2}}{ M_{Z'}^{2}} \Big( { 2 Y_{\varphi}^{2} \mathcal{O}_{\varphi D} + \frac{1}{2} Y_{\varphi}^{2} \mathcal{O}_{\varphi \Box}}\\
+		&\qquad+ Y_{\varphi} Y_{l} \mathcal{O}_{\varphi l}^{(1)} + Y_{\varphi} Y_{q}  \mathcal{O}_{\varphi q}^{(1)}  + Y_{\varphi} Y_{e}  \mathcal{O}_{\varphi e} +  Y_{\varphi} Y_{d}  \mathcal{O}_{\varphi d} + Y_{\varphi} Y_{u}  \mathcal{O}_{\varphi u} \\
+		&\qquad+ \frac{1}{2} Y_{l}^{2} \mathcal{O}_{ll} + \frac{1}{2} Y_{q}^{2} \mathcal{O}_{qq}^{(1)} + Y_{q} Y_{l} \mathcal{O}_{lq}^{(1)}\\
+		&\qquad+  \frac{1}{2} Y_{e}^{2} \mathcal{O}_{ee} + \frac{1}{2} Y_{u}^{2} \mathcal{O}_{uu} + \frac{1}{2} Y_{d}^{2} \mathcal{O}_{dd} + Y_{e} Y_{d} \mathcal{O}_{ed} + Y_{e} Y_{u} \mathcal{O}_{eu}  + Y_{u} Y_{d} \mathcal{O}_{ud}^{(1)}\\
+		&\qquad+ Y_{e} Y_{l} \mathcal{O}_{l e} + Y_{u} Y_{l} \mathcal{O}_{l u} + Y_{d} Y_{l} \mathcal{O}_{l d} + Y_{e} Y_{q} \mathcal{O}_{q e} + Y_{u} Y_{q} \mathcal{O}_{q u}^{(1)} + Y_{d} Y_{q} \mathcal{O}_{q d}^{(1)} \Big) \, .
+	\end{split}
+\end{equation}
+%
+The leading effect of this model on the data entering our analysis is to modify the Drell-Yan and Deep Inelastic Scattering datasets; 
+in particular the high-mass neutral current Drell-Yan 
+tails~\cite{DYpaper} will be affected.  
+The $Z'$ may have an additional impact on top quark and dijet data through four-quark operators such as $\mathcal{O}_{qq}^{(1)}$, however the 
+effect is negligible and we do not consider it here.
+
+The effect of the $Z'$ on high-mass Drell-Yan is dominated by the energy-growing four-fermion operators~\cite{Farina:2016rws,Torre:2020aiz,Panico:2021vav}.
+By neglecting the subdominant operators involving the Higgs doublet $\varphi$,
+%which can only have a quadratic contribution, 
+we can add the operators of the last three lines of Eq.~\eqref{eq:ZprimeEFT} in the following way:
+%
+\begin{equation}
+\label{eq:zprimeL}
+	\mathcal{L}^{Z'}_{\text{SMEFT}} = \mathcal{L}_{\text{SM}} -\frac{g_{Z'}^{2}}{2 M_{Z'}^{2}} J^{\mu}_Y J_{Y, \mu}, \qquad J^{\mu}_Y = \sum_{\substack{f}} Y_{f} \bar{f} \gamma^{\mu} f \, .
+\end{equation}
+%
+We can describe the new physics introduced in this type of scenario with the $\hat{Y}$ parameter:
+%
+\begin{equation}
+	\mathcal{L}^{Z'}_{\text{SMEFT}} = \mathcal{L}_{\text{SM}} -\frac{{g'}^2 \hat{Y}}{2 m^2_W} J^{\mu}_Y J_{Y, \mu}, \qquad \hat{Y} = \frac{g_{Z'}^{2}}{M_{Z'}^{2}} \frac{m^2_W}{{g'}^2} \, .
+\end{equation}
+%
+The $\hat{Y}$ parameters allows us to write the Lagrangian using SM parameters. We can write the relation between $\hat{Y}$ and the $Z'$ parameters $g_{Z'}$, $M_{Z'}$ as follows,
+%
+\begin{equation}
+	\frac{g_{Z'}^{2}}{M_{Z'}^{2}} = 4 \sqrt{2} G_{F} \hat{Y} \left( \frac{m_{Z}^{2} - m_{W}^{2}}{m_{W}^{2}}  \right) \, ,
+\end{equation}
+where we make use of the \{$m_W$, $m_Z$, $G_F$\} electroweak input scheme, and take the following as input parameters:
+%where we have used the following relations and values:
+%
+%\begin{equation}
+%	G_{F} = \frac{1}{4 \sqrt{2}} \frac{g^{2}}{m_{W}^{2}}, \qquad \frac{m^2_Z - m^2_W}{m^2_W} = \frac{g^{' 2}}{g^2} \\
+%\end{equation}
+%
+%
+%As we can see, if we assume $g_{Z'}=1$, we can directly associate the choice of $M_{Z'}$ to a value of $\hat{Y}$. This is what we do from now on. We also choose a set of input parameters:
+%
+\begin{equation}
+	G_{F} = 1.16639 \times 10^{-5} \text{ GeV}, \qquad m_{W} = 80.352 \text{ GeV}, \qquad m_{Z} = 91.1876 \text{ GeV} \, .
+\end{equation}
+%
+%\subsubsection*{Comparing UV and EFT prediction on neutral current Drell-Yan processes}
+
+In Fig.~\ref{fig:Zp_DY_Comp} we compare the predictions of the UV-complete $Z'$ model and the corresponding EFT parametrisation
+for differential cross-sections of the Drell-Yan processes $p p \rightarrow \ell^+ \ell^-$.
+The predictions are computed assuming $\sqrt{s}=14$ TeV, using \madgraph{}. 
+We compare the SM, the full UV-complete model, the linear-only $\mathcal{O}(\Lambda^{-2})$ EFT and linear-plus-quadratic $\mathcal{O}(\Lambda^{-4})$ EFT predictions 
+assuming $g_{Z'} = 1$, for 
+three benchmark values of the $Z'$ mass: $M_{Z'} = 14.5$ TeV, $M_{Z'} = 18.7$ TeV and $M_{Z'} = 32.5$ TeV.
+Such large values of $M_{Z'}$ are clearly well beyond the possible direct reach of direct $Z'$ searches at ATLAS and CMS~\cite{Workman:2022ynf}.
+
+In the top panel we plot the differential cross-section with respect to the dilepton invariant mass, 
+in the middle panel we plot the ratio of the full $Z'$ model to the SM, and in the
+lower panel we plot the ratio of the EFT to the full $Z'$ model predictions. 
+%
+First we observe that the UV model predictions differ from the SM predictions in a way that could be measurable at the HL-LHC. 
+In the lower panels, we observe the point at which the linear EFT corrections fail to describe the UV physics, and the quadratic EFT contributions begin to become non-negligible; in the same way, the quadratic dim-6 EFT description starts failing when the dim-8 SMEFT operators become important~\cite{Boughezal:2021tih}.
+
+As displayed in the top right panel of Fig.~\ref{fig:Zp_DY_Comp}, even if for $M_{Z'}=14.5$ TeV the linear EFT corrections start failing describing the UV models at high energies, from $M_{Z'}=18.7$ TeV onward, the linear EFT describes the UV physics faithfully for dilepton invariant masses up to 4 TeV. The deviations from new physics are over $10\%$ for $M_{Z'}=18.7$ and $M_{Z'}=14.5$ TeV.
+We will implement our PDF `contamination' working in this area of the parameter space,
+and making use of linear EFT corrections only.
+
+Finally, we note that we have compared the SMEFT predictions with 
+those obtained 
+including the SMEFT operators with the Higgs doublet, such as $\mathcal{O}_{\varphi l}^{(1)}$ and $\mathcal{O}_{\varphi e}$. We find that these operators have no visible impact. 
+They are only competitive with the four-fermion corrections at lower energies (around 500 GeV),
+and at this scale the new physics has very little impact on the SM predictions. 
+When the influence of the heavy new physics starts to be noticeable at higher invariant mass, the four-fermion operators, whose impact grows faster with energy, completely dominate the SMEFT corrections. Thus, we have verified that our parametrisation
+in terms of the $\hat{Y}$ parameter reflects the UV physics to a very good degree.
+%
+\begin{figure}[htb]
+    \centering
+%	\includegraphics[width=0.49\linewidth]{Figures/Zp_14.51TeV_Y_0.00025.pdf}
+%	\includegraphics[width=0.49\linewidth]{Figures/Zp_18.73TeV_Y_0.00015.pdf}\\
+%	\includegraphics[width=0.49\linewidth]{Figures/Zp_32.45TeV_Y_0.00005.pdf}
+	\caption{Predictions for neutral current Drell-Yan differential cross sections in dilepton invariant mass.  
+    We show the SM predictions compared to the predictions for a $Z'$ of different masses corresponding to different $\hat{Y}$ values, assuming $g_{Z'}=1$. 
+    Top left: mass of $14.5$ TeV, corresponding to $\hat{Y}=25 \cdot 10^{-5}$. Top right: mass of $18.7$ TeV, corresponding to $\hat{Y}=15 \cdot 10^{-5}$. 
+    Bottom: mass of $32.5$ TeV, corresponding to $\hat{Y}=5 \cdot 10^{-5}$.}
+	\label{fig:Zp_DY_Comp}
+\end{figure}
+
+
+\subsection{Scenario II: A flavour universal $W'$ model}
+\label{subsec:model-wprime}
+%\subsubsection*{Setting up the UV and EFT models}
+
+We now consider a new $SU(2)_L$ triplet field ${W'}^{a, \mu}$, where $a \in \{1,2,3\}$ denotes an $SU(2)_L$ index. We add a mass $M_{W'}$, and denote the $W'$ coupling coefficient by $g_{W'}$. Similarly to what happens with the SM $W$ field, the $W'^1$ and $W'^2$ components mix to form the $W'^+$ and $W'^-$ particles, while the $W'^3$ component gives a neutral boson similar to the $Z'$ but which only couples to left-handed fields. The 
+model is described by the following Lagrangian:
+\begin{equation} \label{eq:Wprime}
+	\begin{split}
+		\mathcal{L}^{W'}_{\text{UV}} &= \mathcal{L}_{\text{SM}} - \frac{1}{4} {W'}^{a}_{\mu \nu} {W'}^{a, \mu \nu} + \frac{1}{2} M_{W'}^{2} {W'}_{\mu}^{a} {W'}^{a, \mu}\\
+		&\qquad - g_{W'} {W'}^{a,\mu} \sum_{\substack{f_L}} \bar{f}_L T^{a} \gamma^{\mu} f_L
+		 - g_{W'} ({W'}^{a, \mu} \varphi^{\dagger} T^{a} i D_{\mu} \varphi + \textrm{h.c.}) \, ,
+	\end{split}
+\end{equation}
+%
+where we sum over the left-handed fermions: $f_L \in \{q, \ell\}$. The $SU(2)_L$ generators are given by $T^a = \frac{1}{2} \sigma ^a$ where $\sigma ^a$ are the Pauli matrices. The kinetic term is given by $W^{'a}_{\mu \nu} = \partial_{\mu} {W'}^{a}_{\nu} - \partial_{\nu} {W'}^{a}_{\mu}- ig_{W'} [{W'}^{a}_{\mu}, {W'}^{a}_{\nu} ]$. The covariant derivative is given by
+$D_{\mu} = \partial_{\mu} + \frac{1}{2} ig \sigma^{a} W_{\mu}^{a} + i g^{'} Y_{\varphi} B_{\mu}$.
+As above, we neglect the mixing with the SM gauge fields.  
+%This model brings three new particles: two charged bosons $W^{' \pm }$ and a neutral one, corresponding to the $Z'$ we already considered.
+
+Tree-level matching of $\mathcal{L}^{W'}_{\text{UV}}$ to the dim-6 SMEFT produces the Warsaw basis operators in Table~\ref{tab:Wpops}, where we
+have distinguished the operators
+$(O_{ll})_{ij} = (l_{i} \gamma^{\mu} l_{i})(l_{j} \gamma^{\mu} l_{j})$ and $(O_{ll}')_{ij} = (l_{i} \gamma^{\mu} l_{j})(l_{j} \gamma^{\mu} l_{i})$~\cite{Brivio:2017vri}. 
+%
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{ |r|l| }
+ \hline
+	Bosonic &  $\mathcal{O}_{\varphi \Box}$, $\mathcal{O}_{\varphi}$, $\mathcal{O}_{\varphi l}^{(3)}$, $\mathcal{O}_{\varphi q}^{(3)}$\\
+	Yukawa & $\mathcal{O}_{e \varphi}$, $\mathcal{O}_{d \varphi}$, $\mathcal{O}_{u \varphi}$ \\
+	4-fermion $(\bar{L} L)(\bar{L} L)$ & $\mathcal{O}_{ll}$,$\mathcal{O}_{ll}^{'}$, $\mathcal{O}_{qq}^{(3)}$, $\mathcal{O}_{lq}^{(3)}$ \\
+ \hline
+\end{tabular}
+\end{center}
+        \caption{\label{tab:Wpops} Warsaw basis operators generated by the $W'$ model of Eq.~\eqref{eq:Wprime}.}
+\end{table}
+%
+The complete SMEFT Lagrangian is given by~\cite{deBlas:2017xtg}:
+\begin{equation} 
+\label{eq:WprimeEFT}
+        \begin{split}
+		\mathcal{L}^{W'}_{\text{SMEFT}} &= \mathcal{L}_{\text{SM}} - \frac{g_{W}^{2}}{M_{W}^{2}} \Big(- \frac{1}{8} \mathcal{O}_{ll} + \frac{1}{4} \mathcal{O}_{ll}^{'} + \frac{1}{8} \mathcal{O}_{qq}^{(3)} + \frac{1}{4} \mathcal{O}_{lq}^{(3)}\\
+		&\qquad+ \lambda_{\varphi} \mathcal{O}_{\varphi} + \frac{3}{8} \mathcal{O}_{\varphi \Box}+ \frac{1}{4} \mathcal{O}_{\varphi q}^{(3)}  + \frac{1}{4} \mathcal{O}_{\varphi l}^{(3)}     \\
+		&\qquad + \frac{1}{4} (y_{e})_{ij} (\mathcal{O}_{e \varphi})_{ij} + \frac{1}{4} (y_{u})_{ij} (\mathcal{O}_{u \varphi})_{ij} + \frac{1}{4} (y_{d})_{ij} (\mathcal{O}_{d \varphi})_{ij} \Big) \, . 
+	\end{split}
+\end{equation}
+%
+As in the case of the $Z'$, 
+the leading effect of this model on our dataset 
+is to modify the Drell-Yan and Deep Inelastic Scattering datasets; however this time both charged current and neutral current Drell-Yan will
+be affected.  
+This impact is dominated by the four-fermion
+interactions in the first line of Eq.~\eqref{eq:WprimeEFT}, which sum to:
+\begin{equation}
+\label{eq:wprimeL}
+	\mathcal{L}^{W'}_{\text{SMEFT}} = \mathcal{L}_{\text{SM}} -\frac{g_{W'}^{2}}{2 M^2_{W'}} J^{a, \mu}_L J^a_{L, \mu}, \qquad J^{a, \mu}_L = \sum_{\substack{f_L}} \bar{f_L} T^a \gamma^{\mu} f_L \, .
+\end{equation}
+%
+We can describe the new physics introduced in this type of scenario with the $\hat{W}$ parameter:
+%
+\begin{equation}
+	\mathcal{L}^{W'}_{\text{SMEFT}} = \mathcal{L}_{\text{SM}} -\frac{g^{2} \hat{W}}{2 m^2_W} J^{a, \mu}_L J^a_{L, \mu}, \qquad \hat{W} = \frac{g_{W'}^{2}}{g^{2}} \frac{m_{W}^{2}}{M_{W'}^{2}} \, .
+\end{equation}
+%
+Using Fermi's constant, we can write the relation between the UV parameters and $\hat{W}$ in the following way:
+%
+\begin{equation}
+	\frac{g_{W'}^{2}}{M_{W'}^{2}} = 4 \sqrt{2} G_{F} \hat{W} \, .
+\end{equation}
+%
+Again, by fixing $g_{W'}=1$, each $M_{W'}$ can be associated to a value of $\hat{W}$.
+
+%\subsubsection*{Comparing UV and EFT prediction on charged current Drell-Yan processes}
+
+In Fig.~\ref{fig:Wp_DY_Comp}
+we perform a comparison of the UV-complete $W'$ model and the EFT predictions.
+We assess the differences between the EFT parametrisation and the UV model description by studying the charged current Drell-Yan process, $p \bar{p} \rightarrow l^- \bar{\nu}$,
+assuming $g_{W'} = 1$, at
+three benchmark values of the $W'$ mass: $M_{W'} = 10$ TeV, $M_{W'} = 13.8$ TeV and $M_{W'} = 22.5$ TeV.
+%As before, these benchmark values are large enough to avoid the limits placed on $W'$ bosons by ATLAS and CMS searches~\cite{Workman:2022ynf}.
+A similar comparison could be made in neutral current Drell-Yan; however we expect the dominant effect of the $W'$ to occur in charged current Drell-Yan,
+and therefore this process will provide the leading sensitivity to differences between the UV model and EFT parametrisation.
+As displayed in the top right panel of Fig.~\ref{fig:Wp_DY_Comp}, even if for $M_{W'}=10$ TeV the linear EFT corrections start failing describing the UV models at high energies, from $M_{W'}=13.8$ TeV onward, the linear EFT describes the UV physics faithfully for dilepton invariant masses up to 4 TeV. The deviations from new physics are over $10\%$ for all three cases here.
+This is the region we will explore for the PDF `contamination' in the next section.
+%
+\begin{figure}[htb]
+    \centering
+%	\includegraphics[width=0.49\linewidth]{Figures/Wp_10TeV_W_0.00015.pdf}
+%	\includegraphics[width=0.49\linewidth]{Figures/Wp_13.76TeV_W_0.00008.pdf}\\
+%	\includegraphics[width=0.49\linewidth]{Figures/Wp_22.48TeV_W_0.00003.pdf}
+	\caption{Predictions for charged current Drell-Yan ($p \bar{p} \rightarrow l^- \bar{\nu}$) differential cross sections in dilepton invariant mass.  We show the SM predictions compared to the predictions for a $W'$ of different masses corresponding to different $\hat{W}$ values, assuming $g_{W'}=1$. Top left: mass of $10$ TeV, corresponding to $\hat{W}=15 \cdot 10^{-5}$. Top right: mass of $13.8$ TeV, corresponding to $\hat{W}=8 \cdot 10^{-5}$. Bottom: mass of $22.5$ TeV, corresponding to 
+    $\hat{W}=3 \cdot 10^{-5}$.}
+ 	\label{fig:Wp_DY_Comp}
+\end{figure}
+%
+Finally, our analysis also reveals that the SMEFT operators involving a Higgs doublet $\varphi$ have no impact on the predictions, for the same reason we presented in the $Z'$ case. This means that this model built with the $\hat{W}$ parameters describes the UV physics faithfully.
+
+%\paragraph{Summary.} To summarise, we have explored two possible UV extensions of the SM model, given by the introduction of a new $Z'$ boson and a new $W'$ boson, respectively. We identified simple, yet faithful, descriptions using respectively the oblique $\hat{Y}$ and $\hat{W}$ parameters. Both scenarios have a visible impact on the Drell-Yan sector, and therefore can be used to create pseudodata `contaminated' with new physics. In the next section, we will include this pseudodata in a PDF fit assuming the SM, and check whether the BSM effects can be absorbed by the PDFs, effectively `contaminating' them.
+
+
+
+
+
+
+\section{Contamination from Drell-Yan large invariant-mass
+  distributions}
+  \label{sec:dy}
+
+In this Section, after presenting the analysis settings in terms of
+theory predictions and data, we explore in detail the effects of new
+heavy vector  bosons in the high-mass Drell-Yan distribution tails and how fitting
+this data assuming the SM would modify the data-theory agreement and
+the PDFs. We will see that in some scenarios the PDFs manage to mimic
+the effects of new physics in the high tails without deteriorating the
+data-theory agreement in any visible way. In this cases PDFs can
+actually ``fit away'' the effects of new physics. In the following
+sections we will explore the phenomenological consequences of using
+such ``contaminated'' PDF sets and we will see that they might
+significantly distort the interpretation of HL-LHC measurements. Finally
+we conclude by devising strategies to spot the contamination by
+including in a PDF fit complementary observables that highlight the
+incompatibility of the high-mass Drell-Yan tails with the bulk of the
+data.
+
+\subsection{Analysis settings}
+
+For this analysis we generate a set of artificial  Monte Carlo data, which comprises 4771 data points,
+spanning a broad range of processes.
+%
+The Monte Carlo data that we generate are either taken from current Run I and
+Run II LHC data or from HL-LHC projections. The uncertainties in the
+former category are more realistic, as they are taken from the
+experimental papers (we remind the reader that the central
+measurement is generated by the underlying law of Nature according to Eq.~\eqref{eq:observed_data}), 
+while the uncertainties on projected HL-LHC data are generated according to specific projections. 
+
+As far as the current data is concerned, we generate MC data that
+cover all the observables included in the NNPDF4.0 analysis~\cite{Ball:2021leu}. 
+In particular, in the category of Drell-Yan, we
+include the NC Drell-Yan that follow the kinematic
+distributions and the errors analysed by ATLAS at \(7\), and \(8\) TeV \cite{ATLAS:2013xny, ATLAS:2016gic} and
+CMS at \(7\), \(8\), and \(13\) TeV \cite{CMS:2013zfg, CMS:2014jea,
+  CMS:2018mdl}. These LHC measurements are not only used to constrain the PDF, but are also
+sufficiently sensitive to the BSM scenarios considered in Sect.~\ref{sec:scenarios}.
+% %
+% \begin{figure}[t]
+%   \centering
+%   \includegraphics[width=\textwidth]{figures/kinematic_coverage.pdf}
+%   \caption{The kinematic coverage of the data points used in this study
+%   grouped according to their process. Points marked with a black edge
+%   are also used to constrain the SMEFT operators. Note that the HL-LHC
+%   projections used in this study are omitted from this figure, as only
+%   actual data are displayed.
+%   \label{fig: kinematic_coverage}}
+% \end{figure}
+
+As far as HL-LHC pseudo-data are concerned, we include the high-mass Drell-Yan projections that we produced in
+Ref.~\cite{DYpaper}, inspired by the HL-LHC projections studied
+in Ref.~\cite{AbdulKhalek:2018rok}. The invariant mass distribution
+projections are generated at \(\sqrt{s} = 14\) TeV, assuming an
+integrated luminosity of \(\mathcal{L} = 6 \text{ ab}^{-1}\) (
+\(3 \text{ ab}^{-1}\) collected by ATLAS and  \(3
+\text{ ab}^{-1}\) by CMS).
+%
+Both in the case of NC and CC Drell-Yan cross sections, the MC data
+were generated using the {\tt MadGraph5\_aMCatNLO} NLO Monte Carlo event
+generator~\cite{Frederix:2018nkq} with additional $K$-factors to include the NNLO QCD and
+NLO EW corrections. The MC data consist of four datasets
+(associated with NC/CC distributions with muons/electrons in the final
+state), each comprising 16 bins in the $m_{ll}$
+invariant mass distribution or transverse mass $m_T$ distributions
+with both $m_{ll}$ and $m_T$ greater than 500 GeV , with the highest energy bins reaching $m_{ll}=4$
+TeV ($m_T=3.5$ TeV) for NC (CC) data.
+The rationale behind the choice of number of bins and the width of each bin was outlined 
+in Ref.~\cite{DYpaper}, and stemmed from the requirement that the expected number of events
+per bin was big enough to ensure the applicability of Gaussian
+statistics. The choice of binning for the $m_{ll}$ ($m_T$) distribution at the
+HL-LHC is displayed in Fig.~5.1 of Ref.~\cite{DYpaper}.
+
+\begin{figure}[t!]
+  \centering
+%  \includegraphics[width=\textwidth]{Figures/xq2.pdf}
+  \caption{Kinematic coverage of data points included in the fit. The EFT corrections
+  for this study have been computed for the points which are highlighted with a black
+  edge. The values of $x$ have been computed using a linear order approximation. \label{fig:xq2}}
+\end{figure}
+
+The kinematic coverage of the data points used in
+this study are shown in Fig.~\ref{fig:xq2}. The points are shown
+in \((x,Q^2)\) space with the data points that are modified by the EFT operators
+highlighted with a border, such points thus also constrain the Wilson
+coefficients as well as the PDFs. We note that, although DIS theory predictions are
+modified by the operators we consider in the two benchmark scenarios,
+the change in the HERA DIS cross sections upon the variation of the Wilson
+coefficients under consideration is minimal, as is explicitly assessed in Ref.~\cite{DYpaper}.
+
+In what follows we will assess the impact of the injection of NP in the data on the 
+fitted PDFs, by looking at the integrated luminosities for the parton pair $i,j$, which is defined as:
+\begin{equation}
+\label{eq:integrated_luminosity}
+  {\cal L}_{ij}(m_X,\sqrt{s}) = \frac{1}{s}\int\limits_{-y}^{y}\,d\tilde{y}\,
+  \left[
+  f_{i}\left(\frac{m_X}{\sqrt{s}}e^{\tilde{y}},m_X\right)\, 
+  f_j\left(\frac{m_X}{\sqrt{s}}e^{-\tilde{y}},m_X\right)
+  +
+  (i \leftrightarrow j)
+  %f_{j}\left(\frac{m_X}{\sqrt{s}}e^{\tilde{y}},m_X\right)\, 
+  %f_i\left(\frac{m_X}{\sqrt{s}}e^{-\tilde{y}},m_X\right)
+  \right]
+  ,
+  \end{equation}
+ where $f_i \equiv f_i(x,Q)$ is the PDF corresponding to the parton flavour $i$ 
+ %$\in \{u,d,s,c,b,\bar{u},\bar{d},\bar{s},\bar{c},\bar{b},g\}$
+ , and the integration limits are defined by:
+ \begin{equation}
+ \label{eq:rapidity}
+  y=\ln\left(\frac{\sqrt{s}}{m_X}\right).
+  \end{equation}
+In particular we will focus on the luminosities that are most constrained by the Neutral Current (NC) and Charged Current (CC) Drell-Yan data respectively, namely   
+  \begin{align}
+  \label{eq:wzlumi}
+    {\cal L}^{\rm NC}(m_X,\sqrt{s}) &= {\cal L}_{u\bar{u}}(m_X,\sqrt{s}) + {\cal L}_{d\bar{d}}(m_X,\sqrt{s}),\\[1.5ex]
+      {\cal L}^{\rm CC}(m_X,\sqrt{s}) &= {\cal L}_{u\bar{d}}(m_X,\sqrt{s}) + {\cal L}_{d\bar{u}}(m_X,\sqrt{s}).
+%    {\cal L}_{qq}(m_X,\sqrt{s}) &= \sum_{\substack{i,j \in \{u,d,s,c,b \\ \bar{u}, \bar{d}, \bar{s}, \bar{c}, \bar{b}\}}} {\cal L}_{ij}(m_X,\sqrt{s}),\\[1.5ex]
+%      {\cal L}_{q\bar{q}}(m_X,\sqrt{s}) &= \sum_{i \in \{u,d,s,c,b\}}   {\cal L}_{i\bar{i}}(m_X,\sqrt{s}).
+    \end{align}
+
+\subsection{Effects of new heavy bosons in PDF fits}
+\label{sec:contaminated_pdfs}
+
+In Fig.~\ref{fig:bps} we display the benchmark points that we
+consider, corresponding to the two scenarios described in
+Sect.~\ref{sec:scenarios}. Namely, the points along the vertical axis
+correspond to the flavour-universal $Z'$ model (Scenario I), while
+those along the horizontal axis correspond to the flavour-universal
+$W'$ model (Scenario II). The benchmark points are compared to projected constraints
+from the HL-LHC.  In particular, we consider the most up-to-date constraints 
+from the analysis of a fully-differential Drell-Yan projection in the HL-LHC regime, as 
+given by Ref.~\cite{Panico:2021vav}.
+%constraints .
+%The lilac contour shows the constraints on $\hat{Y}$, $\hat{W}$
+%as given by Ref.~\cite{DYpaper}, which generalises the analysis of
+%Ref.~\cite{Torre:2020aiz} by allowing the PDFs to vary along with the
+%$\hat{Y}$ and $\hat{W}$ coefficients, thus finding less stringent
+%constraints from the same HL-LHC projections. The green contour is
+%given by the corresponding bounds obtained by keeping the PDF fixed
+%and using a conservative PDF input set that does not include any high-energy
+%Drell-Yan data.  In blue, we show the HL-LHC projections for the 
+%constraints from the analysis of a fully-differential Drell-Yan dataset, as 
+%given by Ref.~\cite{Panico:2021vav}.
+%
+\begin{figure}[b!]
+\centering
+%  \includegraphics[width=0.48\linewidth]{Figures/contamination_fit_points_blue.pdf}
+	\caption{\label{fig:bps} Benchmark $\hat{Y}$ and $\hat{W}$ points explored in this analysis compared to 
+	the constraints at 95\% CL as given by the analysis of fully-differential Drell-Yan
+ projections given in Ref.~\cite{Panico:2021vav}.}
+ %Ref.~\cite{DYpaper}, including both the constraints resulting from the 
+%	simultaneous extraction of $\hat{Y}$, $\hat{W}$ and the PDF parameters (lilac), and the 
+%	constraints obtained by using a fixed conservative PDF set in which high-mass Drell-Yan
+%	data is not included (green).
+%	In blue, the constraints at 95\% CL obtained from the HL-LHC projections
+%	of fully-differential Drell-Yan are shown, as given by }
+      \end{figure}
+%
+%For each scenario, we identify benchmark points that are within
+%the 95\% C.~L. contour and definitively
+%outside the contour and assess whether any contamination occurs.  
+
+
+
+In order to estimate the effect of a heavy $Z'$($W'$) in Nature and the ability of PDFs
+to fit it away, we inject new physics in the artificial Monte Carlo data by setting $\hat{Y}\neq
+0$ ($\hat{W}\neq 0$) to the values that we consider in our benchmark (see
+Fig.~\ref{fig:bps}) and we measure the effect on the fit
+quality and on the PDFs. To assess the fit quality, we generate
+{\it L1 pseudo-data} as in Eq.~\eqref{eq:observed_data} according to
+1000 variations of the random seed and compare the distributions of
+$\chi^{2(k)}/n_{\rm dat}$ and $n^{(k)}_{\rm sigma}$ across the 1000
+random seed $(k)$ variations for the
+baseline and the 3 benchmark values in each of the two
+scenarios.
+If the distributions shift above the critical levels defined in
+Sect.~\ref{sec:methodology}, then the PDFs have {\it not} been able to absorb
+the effects of new physics and the datasets that display a bad
+data-theory agreement would be excluded from a PDF fit. If instead the
+distributions remain statistically equivalent to those of the baseline
+PDF fit, then the PDFs have been able to absorb new physics.
+
+Note that in this exercise the distribution across random seed values is calculated by keeping the PDF fixed
+to the value obtained with a given random seed, while if we were
+refitting them for each random seed, we would obtain slightly
+different PDFs. A comparison at the level of PDFs and parton luminosities is then performed to
+assess whether the absorption of new physics shifts them significantly with
+respect to the baseline PDFs. We have verified that the effect is negligible and
+does not modify the results. A more detailed account of the contaminated PDF's random
+seed dependence is given in App.~\ref{app:random}. 
+The goal of this exercise is to estimate the maximum strength of new physics
+effects beyond which PDFs are no longer able to absorb the effect, and
+subsequently assess whether the effect is significant or not.\\
+
+
+
+\subsubsection*{(i) Scenario I}
+
+\noindent In the flavour-universal $Z'$ model we inject three non-zero
+values of $\hat{Y}=5\cdot 10^{-5},\, 15\cdot 10^{-5},\, 25\cdot
+10^{-5}$. In Fig.~\ref{fig:Y_chi2_nsigma_dist} we display 
+the $\chi^{2(k)}$ and $n_{\sigma}^{(k)}$ distributions
+across the 1000 $k$ random seeds for a selection of the datasets
+included in each of the fits. In particular, we display the datasets in
+which a shift occurs either because of the direct effect of the
+non-zero Wilson coefficients in the partonic cross sections (such as
+the high-mass Drell-Yan in the HL-LHC projections) or
+because of the indirect effect of the change of PDFs, which can alter the behaviour of other datasets
+that probe the large-$x$ light quark and antiquark distributions. Full
+details about the trend in the fit quality for all datasets is
+given in App.~\ref{app:fit}.
+
+\begin{figure}[t!]
+%  \includegraphics[width=0.48\linewidth, page=1]{Figures/chi2_nsigma_Y.pdf}
+%  \includegraphics[width=0.48\linewidth, page=3]{Figures/chi2_nsigma_Y.pdf}\\
+%  \includegraphics[width=0.48\linewidth, page=6]{Figures/chi2_nsigma_Y.pdf}
+%  \includegraphics[width=0.48\linewidth, page=10]{Figures/chi2_nsigma_Y.pdf}\\
+  \caption{Distribution of $\chi^2$ and $n_\sigma$ for selected datasets in the $\hat{Y}$ contamination scenarios.}
+\label{fig:Y_chi2_nsigma_dist}
+\end{figure}
+%
+As far as the quality of the fit is concerned, we observe that for
+$\hat{Y}=5\cdot 10^{-5}$, the global fit is
+    equivalent to the SM baseline, while as $\hat{Y}$ is increased to
+    $15\cdot 10^{-5}$ the quality of the fit deteriorates. This is due
+    mostly to a worse description of the HL-LHC neutral current data (top left panel in Fig.~\ref{fig:Y_chi2_nsigma_dist}) data, while the other datasets remain
+    roughly equivalent. This is an indication that there is a bulk of data points 
+    in the global dataset that constrain the ${\cal L}^{\rm NC}$ luminosity behaviour at high-$x$ and 
+    does not allow the PDF to shift and accommodate the HL-LHC Drell-Yan NC data.
+    According to the selection criteria outlined in
+    Sect.~\ref{subsec:postfit}, the deterioration of both the $\chi^2$ and the $n_{\sigma}$ indicators
+    would single out the high-mass Drell-Yan data and indicate that they
+    are incompatible with the rest of the data included in the PDF fit.
+    As a consequence, they would be excluded from the fit and no contamination would occur. 
+    Hence, in this scenario, $\hat{Y}=5\cdot10^{-5}$ falls in the interval of NP values beyond which the disagreement in
+    the data metrics would flag the incompatibility of the high-mass Drell-Yan
+    tails with the rest of the datasets.  
+% In Fig.~\ref{fig:Ynsigma} we plot the $n_{\sigma}$ distribution of
+% the datasets that are flagged according to the criteria defined in
+% Sect.~\ref{sec:problem}. We see that, by injecting stronger signals of
+% new physics, the HL-LHC data cannot be fitted and the total $\chi^2$
+% deteriorates as a result of the deterioration of the $\chi^2$ for the HL-LHC high-mass Drell-Yan. 
+%
+
+We now want to check whether, for such value, there is any significant
+shift in the relevant NC and CC parton luminosities at the HL-LHC centre-of-mass energy of $\sqrt{s}=14$ TeV. They are displayed in 
+Fig.~\ref{fig:Ylumi}. 
+%      
+\begin{figure}[t!]
+%  \includegraphics[width=0.49\linewidth]{paper/Figures/1dlumis/dataspecs0_Lumi_channels0_plot_lumi1d.pdf}
+%  \includegraphics[width=0.49\linewidth]{paper/Figures/1dlumis/dataspecs0_Lumi_channels1_plot_lumi1d.pdf}
+	\caption{Contaminated versus baseline ${\cal L^{\rm NC}}$ and ${\cal L^{\rm CC}}$ (defined in Eq.~\eqref{eq:wzlumi},
+        at $\sqrt{s}=$ 14 TeV in the central rapidity region. The results are normalised to the baseline SM luminosities and the 68\% C.L. band 
+        is displayed. Contaminated PDFs have been obtained by fitting the MC data in which $\hat{Y}=5\cdot 10^{-5}$ (orange line),
+        $\hat{Y}=15\cdot 10^{-5}$ (blue line) and $\hat{Y}=25\cdot 10^{-5}$ (pink line) has been injected.}
+	\label{fig:Ylumi}
+      \end{figure}
+      %
+We observe that in general the PDFs do not manage to shift much to accommodate the $Z'$ induced contamination. The plots of the individual PDFs are displayed in App.~\ref{app:pdfs}. 
+In general the CC luminosity remains compatible with the baseline SM one up to large values of $\hat{Y}$, while, 
+as soon as the NC luminosity manages to shift beyond the 1$\sigma$ level, the fit quality of the NC high-mass data 
+deteriorates. For the maximum value of new physics contamination that the PDFs can absorb in this scenario, $Y=5\cdot 10^{-5}$ (corresponding to a $Z'$ mass above 30 TeV), 
+the parton luminosity shift is contained within the baseline 1$\sigma$ error bar. 
+Overall, we see that there is a certain sturdiness in the fit, such that even in the presence of big $\hat{Y}$ values, the parton luminosity does not deviate much from the underlying law.
+
+\subsubsection*{(ii) Scenario II}
+\begin{figure}[t!]
+%  \includegraphics[width=0.48\linewidth, page=1]{Figures/chi2_nsigma_W.pdf}
+%  \includegraphics[width=0.48\linewidth, page=3]{Figures/chi2_nsigma_W.pdf}\\
+%  \includegraphics[width=0.48\linewidth, page=6]{Figures/chi2_nsigma_W.pdf}
+%  \includegraphics[width=0.48\linewidth, page=10]{Figures/chi2_nsigma_W.pdf}\\
+  \caption{Distribution of $\chi^2$ and $n_\sigma$ for selected datasets in the $\hat{W}$ contamination scenarios.}
+\label{fig:W_chi2_nsigma_dist}
+\end{figure}
+
+\noindent  In the flavour-universal $W'$ model we inject three non-zero
+value of $\hat{W}=3\cdot 10^{-5},\, 8\cdot 10^{-5},\, 15\cdot
+10^{-5}$. In Fig.~\ref{fig:W_chi2_nsigma_dist} we display 
+the $\chi^{2(k)}$ and $n_{\sigma}^{(k)}$ distributions
+across the 1000 $k$ random seeds for a selection of the datasets
+included in each of the fits. In particular we display the datasets in
+which a shift occurs either because of the direct effect of the
+non-zero Wilson coefficients in the partonic cross sections (such as
+the high-mass Drell-Yan in the HL-LHC projections) or
+because of the indirect effect of the change of PDFs on other datasets
+that probe the large-$x$ light quark and antiquark distributions. Full
+details about the trend in the fit quality for all datasets is
+given in App.~\ref{app:fit}.
+%
+
+As far as the quality of the fit is concerned, we observe that
+up to $\hat{W}=8\cdot 10^{-5}$, the global fit shows
+    equivalent behaviours to the SM baseline, while as $\hat{W}$ is increased to
+    $15\cdot 10^{-5}$, the quality of the fit markedly deteriorates. This is due
+    mostly to a worse description of the HL-LHC charged current
+    $e\nu_{e}$ (top right panel in Fig.~\ref{fig:W_chi2_nsigma_dist}) as
+    well as the $\mu\nu_\mu$ data. It is interesting to observe that
+    also the low-mass fixed-target Drell-Yan data from the E886
+    experiment experiences a deterioration in the fit quality due to
+    the shift that occurs in the large-$x$ quark and antiquark PDFs. 
+    Beyond $\hat{W}=8\cdot 10^{-5}$, according to the selection criteria outlined in
+    Sect.~\ref{subsec:postfit}, the deterioration of both the $\chi^2$ and the $n_{\sigma}$ indicators
+    would point to the high-mass Drell-Yan data and indicate that they
+    are incompatible with the bulk of the data included in the PDF fit
+    and thus would be excluded from the fit and no contamination would occur. 
+    Hence, in this scenario, $\hat{W}=8\cdot10^{-5}$ falls in the NP parameter region 
+    beyond which the disagreement in
+    the data would unveil the presence of incompatibility of the high-mass Drell-Yan
+    tails with the rest of the data.  
+
+\begin{figure}[t!]
+%  \includegraphics[width=0.49\linewidth]{paper/Figures/1dlumis/dataspecs1_Lumi_channels0_plot_lumi1d.pdf}
+%  \includegraphics[width=0.49\linewidth]{paper/Figures/1dlumis/dataspecs1_Lumi_channels1_plot_lumi1d.pdf}
+  \caption{Same as Fig.~\ref{fig:Ylumi} for $\hat{W}=3\cdot 10^{-5}$ (orange line),
+    $\hat{W}=8\cdot 10^{-5}$ (blue line) and $\hat{W}=15\cdot
+    10^{-5}$ (pink line). }
+\label{fig:Wlumi}
+\end{figure}
+%
+We now check whether, for such value, there is any significant
+shift in the PDFs and in the parton luminosities. Individual PDFs are displayed in App.~\ref{app:pdfs}.
+In Fig.~\ref{fig:Wlumi} we observe that in this scenario the
+NC and CC luminosities defined in Eq.~\eqref{eq:wzlumi} can both shift significantly in the high-mass region, even for low values of $\hat{W}$ ($m_{W'}$ above 20 TeV).
+Contrary to the case outlined in the $\hat{Y}$ scenario, the fit does have enough flexibility to absorb significant deviations in the high-mass Drell-Yan without impacting 
+the rest of the dataset. In particular, until deviations become too large, the NC and CC sectors, which are both affected by the $W'$ boson, manage to compensate each other. \\
+%
+      
+
+\subsubsection*{(iii) Summary}
+Overall, we find that in Scenario I the presence of a new
+heavy $Z'$ of about 18 TeV would affect the high-energy tails of the Drell-Yan
+  distributions in such a way that they are no longer compatible with the
+  bulk of the data included in a PDF analysis.
+    On the other hand, in Scenario II, a model of new physics involving a $W'$ of about
+  14 TeV  would affect the high-energy tails of the Drell-Yan
+  distributions in a way that can be compensated by the PDFs. As a result, if there
+  is such a $W'$ in Nature, then this would yield a good $\chi^2$ for
+  the high-mass Drell-Yan tails that one includes in a PDF fit as well
+  as for the bulk of the data included in a PDF fit, but it 
+  would significantly modify PDFs.  Thus, in this case new physics
+  contamination does occur.
+
+
+These results are in agreement with the results of Ref.~\cite{DYpaper}, which generalises the analysis of
+Ref.~\cite{Torre:2020aiz} by allowing the PDFs to vary along with the
+$\hat{Y}$ and $\hat{W}$ coefficients, finding less stringent
+constraints from the same HL-LHC projections.  In particular, it was found that $\hat{W}=8\cdot 10^{-5}$ would have been excluded by the HL-LHC under the assumption of SM PDFs, but that this value of $\hat{W}$ was allowed by the constraints at 95\% CL obtained by varying the PDFs along with the SMEFT.
+Ref.~\cite{DYpaper} also indicated that the impact of varying the PDFs along with the
+$\hat{W}$ coefficient was more significant than the impact in the $\hat{Y}$ direction, indicating 
+a higher possibility to absorb the effects of new physics into the PDFs in the $\hat{W}$ direction.
+
+\iffalse
+
+%
+  These results are somewhat expected from the results of Ref.~\cite{DYpaper}, which generalises the analysis of
+Ref.~\cite{Torre:2020aiz} by allowing the PDFs to vary along with the
+$\hat{Y}$ and $\hat{W}$ coefficients, thus finding less stringent
+constraints from the same HL-LHC projections.
+There it was found that the impact of varying the PDFs along with the
+$\hat{W}$ coefficient was more significant than the impact in the $\hat{Y}$ direction, indicating 
+a higher possibility to absorb the effects of new physics into the PDFs in the $\hat{W}$ direction.
+\fi
+
+
+Comparing the two scenarios considered in this section, one might wonder why 
+the $Z'$ scenario does not yield any contamination, while the $W'$ does. 
+%
+%\begin{figure}[t!]
+%  \includegraphics[width=0.49\linewidth]{Figures/z_lumi_comp.pdf}
+%  \includegraphics[width=0.49\linewidth]{Figures/w_lumi_comp.pdf}
+%  \includegraphics[width=0.49\linewidth]{Figures/uubar_lumi_comp.pdf}
+%  \includegraphics[width=0.49\linewidth]{Figures/ddbar_lumi_comp.pdf}
+%  \caption{Comparison between the $u \bar{u}$ and $d \bar{d}$ luminosities of $\hat{W} = 8\cdot 10^{-5}$ and $\hat{Y}=15\cdot 10^{-5}$ scenarios, showing the different impact both in terms of flavour and energy range.}
+%\label{fig:lumi_comp}
+%\end{figure}
+%
+%In Fig.~\ref{fig:lumi_comp} we compare the contaminated luminosities 
+Looking at the effect of the $Z'$ and $W'$ bosons on the observables included in a PDF fit (see Eqs.~\eqref{eq:zprimeL} and \eqref{eq:wprimeL} respectively), 
+we see that the main difference lies in the fact that the $Z'$ scenario only affects the NC DY high-mass data, while the $W'$ scenario affects both the
+NC and the CC DY high-mass data. Hence, in the former scenario, the shift required in ${\cal L}^{\rm NC}\equiv (u\bar{u}+d\bar{d})$ to accommodate the 
+effect of a $Z'$ in the tail of the $m_{ll}$ distribution would cause a shift in ${\cal L}^{\rm CC}\equiv (u\bar{d}+d\bar{u})$, thus spoiling its agreement with the data, 
+in particular the tails of the $m_T$ distribution -- which is unaffected by the presence of a $Z'$. 
+
+On the other hand, in the $W'$ scenario, the shift in the $(u\bar{u}+d\bar{d})$ parton channel that accommodates the effect of a $W'$ in the tail of the 
+NC DY $m_{ll}$ distribution is compensated by the shift in the $(u\bar{d}+d\bar{u})$ parton channel that accommodates the presence of a $W'$ in the tail of the 
+CC DY $m_T$ distribution (as, in this scenario, they are both affected by new physics). It is as if there is a flat direction in the luminosity versus the 
+matrix element space. This continues until, for sufficiently large $\hat{W}$, a critical 
+point is reached in which the two effects do not manage to compensate each other as they start affecting significantly the luminosities at lower $\tau=M/\sqrt{s}$, 
+hence spoiling the agreement with the other less precise datasets included in a PDF fit which are sensitive to large-$x$ anti-quarks. 
+
+To see this more clearly, we plot in Fig.~\ref{fig:wy_dy_prod} the data-theory comparison for the HL-LHC NC and CC Drell-Yan Monte Carlo data that we include in the fit. 
+%We use the Drell-Yan events in the electron channel shown in Fig.~\ref{fig:dy_prod}.
+%
+\begin{figure}[tb]
+  \begin{center}
+%    \includegraphics[width=0.49\linewidth]{Figures/plot_NC_DY_hllhc_W_Y_L0.pdf}
+%    \includegraphics[width=0.49\linewidth]{Figures/plot_CC_DY_hllhc_W_Y_L0.pdf}
+  \end{center}
+	  \caption{For two of the 
+      representative scenarios that we consider, $\hat{W}=8\cdot 10^{-5}$ and $\hat{Y}=15\cdot 10^{-5}$, we show the comparison between the data expected in presence of new physics (`data' points) and the SM theory predictions obtained with the potentially contaminated PDFs (`Theory' bands). Left panel: NC Drell-Yan $m_{ ll}$ distribution. 
+      Right panel: CC Drell-Yan $m_T$ distribution. 
+    }
+  \label{fig:wy_dy_prod}
+\end{figure}
+%
+The points labelled as `data' correspond to the `truth' in presence of the new physics, namely they are obtained by convoluting the DY prediction with non-zero $\hat{Y},\hat{W}$ parameters with a non-contaminated PDF set.
+%\footnote{The $T^*$ predictions are obviously equivalent to the average of the data obtained over all random observational noise $\eta$.}.  
+The bands labelled as `theory' represent the theoretical predictions for pure SM DY production, but obtained with the 
+PDFs fitted with the inclusion of the DY data modified by the effect of non-zero $\hat{Y},\hat{W}$ parameters. 
+%(which we assume to be independent of the particular observational noise injected in the data).  
+We observe that the SM predictions obtained with the contaminated PDFs do fit well the data in the case of $\hat{W}=8\cdot 10^{-5}$, 
+because the significant depletion of the $(u\bar{u}+d\bar{d})$ and $(u\bar{d}+d\bar{u})$ parton luminosities observed in Fig.~\ref{fig:Wlumi} compensates 
+the enhancement in the partonic cross section observed in Fig.~\ref{fig:Wp_DY_Comp}. This is not the case for $\hat{Y}=15\cdot 10^{-5}$, where instead the 
+much milder modification of the parton luminosities observed in Fig.~\ref{fig:Ylumi} does not manage to compensate the enhancement of the partonic cross 
+section observed in Fig.~\ref{fig:Zp_DY_Comp}. We can also notice that $\hat{W}=8\cdot 10^{-5}$ is within a region in the $\hat{W}$ parameter space 
+beyond which the parton luminosities do not manage to move enough to compensate the shift in the matrix elements of the $m_T$ distribution. 
+To find the exact critical value of $\hat{W}$ one would need a finer scan.
+Analogously, $\hat{Y}=15\cdot 10^{-5}$ is in the region of $\hat{Y}$ such that  contamination in the PDFs does not occur.
+However, these values have been determined assuming a given statistical uncertainty in the distributions;
+the regions in which these values fall clearly depends on the actual statistical 
+uncertainty that the $m_T$ and $m_{ll}$ distributions will reach in the HL-LHC phase. 
+
+%for two values of $\hat{Y}$ and $\hat{W}$ that are both at the boundaries 
+%of the blue contour highlighted in Fig.~\ref{fig:bounds_comparison}. We observe that, at the 
+%level of the $d\bar{d}$ luminosity, the presence of a $\hat{W}\neq 0$ in the data 
+%produces a much larger shift in the fitted PDFs than the presence of a comparable 
+%(in terms of distance from the SM) $\hat{Y}\neq 0$ does. In terms of the $u\bar{u}$ 
+%luminosity, the fitted PDFs in Scenario I yield a luminosity that deviated from the 
+%baseline one at smaller values of $m_X$ by $\approx$ 1-4\% between 400 GeV and 1 TeV 
+%and $\approx$ 5-8\% above it. On the other hands in Scenario II, the fitted PDFs deviate 
+%from the baseline ones only at $m_X\gtrsim$ 1 TeV with a sharp rise in the deviation that
+%reaches $\approx$ 15\% above 3 TeV. 
+%At the level of the HL-LHC NC distribution the different behaviour in the luminosities 
+%is such that the fit quality of the HL-LHC NC Monte Carlo data is much better in 
+%Scenario II than in Scenario I. How comes? Possibly the $\hat{Y}$ contamination does 
+%not manage to modify enough the PDFs (in particular the $d\bar{d}$ luminosity) so that 
+%the shift in the PDFs can compensate the shift in the partonic cross section. 
+%This causes the much worse $\chi^2$ distribution associated with the orange 
+%histogram in the top left Panel of Fig.~\ref{fig:W_chi2_nsigma_dist} compared to the 
+%same histogram on the top left Panel of Fig.~\ref{fig:Y_chi2_nsigma_dist}. 
+%The next question is: why the new physics of Scenario I gives such a harder time to 
+%the PDFs to shift? What other datasets are affected by it that do not allow PDFs to move? 
+%{\bf MU: to be answered}.
+
+%In what follows we explore two follow-up questions: (i) If we use the unknowingly contaminated PDF sets that we obtain in Scenario II with $\hat{W}=8\cdot 10^{-5}$, 
+%what happens to the theory predictions obtained by using these contaminated PDFs? 
+%We will see that the effect on observables that are not affected by new physics is significant, especially in diboson production. (ii) How to spot the contamination? 
+%What if we complement the dataset with observables that could potentially disentangle the two effects at the level of the fit? Is there any other diagnostic tool that would 
+%allow us to spot this subtle contamination from high energy physics in the 
+%high-mass Drell-Yan tails?
+%%In this direction, we generate LHCb on-shell rapidity distributions for $W$
+%%and $Z$ bosons, which are on-shell measurements not affected by new physics as they do not probe high invariant mass.
+%%The hope is that they would show that the high-mass Drell Yan data is inconsistent with the rest, in a similar fashion to the $\hat{Y}$ scenario. We anticipate however that the kinematic coverage of %these observables is not ideal to solve the problem.
+
+\subsection{Consequence of new physics contamination in PDF fits}
+\label{sec:projections}
+In the previous section, we showed that in the presence of heavy new physics effects in 
+DY observables, the flexible PDF parametrisation is able to accommodate the deviations
+and absorb the effects coming from the new interactions. In particular, we observe that when
+data are contaminated with the presence of a $W^\prime$, we generally find good fits and are able to accommodate
+even large deviations from the SM. It is however worth reminding that
+the leading source of contaminated data are the HL-LHC projection, as present data would not be as susceptible to the $W^\prime$ effects.
+Hence, from now on we will focus on the scenario in which data include the presence of a heavy $W^\prime$ which induces 
+a modified interaction parametrised by the $\hat{W}$ parameter with value $\hat{W}=8\cdot 10^{-5}$.
+
+In this section we examine the consequences of
+using unknowingly contaminated PDFs, and the implications of this for possible new physics searches.
+%Specifically, we look at the predictions for a range
+%of observables ranging from associated Higgs and vector boson
+%production and two vector boson production, which are all possibly affected by the contaminated PDFs,
+%but that, in our simplified scenario, would have no relevant influence from new physics.
+%
+The first interesting consequence is that, if we use the contaminated PDF as an input set in a SMEFT study 
+of HL-LHC projected data to gather knowledge on the $\hat{W}$ parameter, we find that the analysis excludes 
+the ``true'' value of the SMEFT coefficients that the data should reveal.
+%
+Indeed, in Fig.~\ref{fig:bounds_comparison} we observe that, in both scenarios under consideration, and in particular for the one
+corresponding to $\hat{W}=8\cdot10^{-5}$, the 95\% C.L. bounds on the Wilson coefficients that one would extract from the precise
+HL-LHC data discussed in Sect.~\ref{sec:contaminated_pdfs} would agree with the SM and would not contain the true 
+``values'' of the underlying law of Nature that the data should reveal.
+In fact, the measured value would exclude the true value with a significance that ranges from  $\sim 1.5 \, \sigma$ to $\sim 4.5 \, \sigma$. A comparison of whether the bounds generated by the different contaminated PDFs considered in this study contain the true value is shown in Fig.~\ref{fig:bounds_comparison}.
+%
+\begin{figure}[htb!]
+\centering
+%\includegraphics[width=0.9\textwidth]{Figures/wy_bounds.pdf}
+\caption{A comparison of the 68\% bounds obtained using different contaminated PDFs to fit the $\hat{W}$, $\hat{Y}$ parameters to HL-LHC high-mass Drell-Yan projected data, relative to the true values of $\hat{W}, \hat{Y}$. In some cases, the true value is not contained in the 95\% confidence level bounds.}
+\label{fig:bounds_comparison}
+\end{figure}
+%
+This is all very expected, as the quark-antiquark luminosity for this specific scenario does exhibit signs of
+new physics absorption in a significant amount, as it can be seen in Fig.~\ref{fig:Wlumi}. 
+As a matter of fact, we expect all data that entered in the PDF fit to be well described by the combination of the PDF set and the SM theory.
+This simple fact is once again reminding us that it might be dangerous to perform SMEFT studies on overlapping datasets and that simultaneous studies should be preferred or, at least, a conservative approach with disjoint datasets should be undertaken. 
+This was for instance discussed in Ref.~\cite{Iranipour:2022iak}, 
+where it was shown that by means of a simultaneous study, one is able to recover 
+both the underlying true PDFs and the presence of a new interaction. It is worth 
+mentioning that the use of conservative PDF sets, while appealing given the simplicity, 
+might also come with its own shortcomings, see Ref.~\cite{DYpaper} and Ref.~\cite{Kassabov:2023hbm} for detailed studies on the matter in the 
+Drell-Yan sector and the top quark sector respectively. In particular, 
+the extrapolated PDFs might both underestimate the error band and
+have a significant bias.
+
+We now turn to study what would be the effects of the contaminated PDFs in observables and processes that did not enter the PDF fit.
+We focus in particular in the EW sector, given its relevance for NP searches and the fact that the contaminated PDFs show deviations from 
+the true PDFs mostly in the quark-antiquark luminosities, which are particularly relevant for theoretical predictions involving EW interactions.
+%
+The study is performed by producing simulated data according to the true laws of Nature, i.e. the true PDFs of choice and 
+the SM + $\hat{W}=8\cdot 10^{-5}$ in the matrix elements. 
+
+In particular, we 
+produce MC data for several diboson processes, including $H$ production in association with EW bosons. 
+Given that the $\hat{W}$ operator 
+induces only four-fermion interactions, $\hat{W}$ does not have an effect on these observables, and the hard scattering 
+amplitudes are given by the SM ones. For each observable we build HL-LHC projections and devise bins with the objective 
+of probing the high-energy tails of the distributions, scouting for new physics effects that we although know do not exist in the ``true'' law of Nature.  
+%
+We then produce predictions by convoluting the contaminated PDF set obtained with a value of $\hat{W}=8\cdot 10^{-5}$ and the SM matrix elements. 
+Given our knowledge of the ``true'' law of Nature, the possible deviations between theory and data are therefore
+only a consequence of the shift in the PDFs coming from the contaminated Drell-Yan data.
+Whenever in the presence of $W$ bosons, we decided to split the contributions of $W^+ X$ and $W^- X$ as they probe different luminosities and in particular, 
+from the contaminated fits, we know that the luminosity $u \bar{d}$ is deviating more severely than $d \bar{u}$ from the true luminosity.
+
+Both SM theory and data have been produced at NLO in QCD making use of the Monte Carlo generator \madgraph{}.
+In the case of $ZH$ production, the gluon fusion channel has also been taken into account.
+%
+Data are obtained by fluctuating around the central value, assuming a Gaussian distribution with total 
+covariance matrix given by the sum of the statistical, luminosity and systematic covariance matrices. 
+Regarding the theory predictions, we also provide an estimate 
+of the PDF uncertainty.
+%
+We assume a luminosity of $3$ ab$^{-1}$ and we estimate the systematic uncertainties on each observable 
+by referring to the experimental papers~\cite{ATLAS:2020osn, ATLAS:2019bsc, CMS:2019efc} .
+%
+These systematic uncertainties can be experimental or come from other additional sources such as background and signal theoretical calculations.
+%
+We also include estimates of the luminosity uncertainty by taking as a reference the CMS measurement at 13 TeV~\cite{CMS:2018mdl}. 
+%{\bf MU:check!} 
+%
+Statistical uncertainties are given by $\sqrt{N}$, where $N$ is the number of expected events in each bin. Performing a fully realistic simulation, with acceptance cuts and detector effects, is beyond the scope of the current study, and we simply simulate events at parton level and apply the branching ratios into relevant decay channels. 
+%
+Specifically, in the case of $W$ bosons we apply a $Br(W \to l \nu) = 0.213$ with $l=e, \, \mu$, for the $H$ boson we consider $Br(H \to b \bar{b})=0.582$ and for the $Z$ boson we have $Br(Z \to l^+ l^-) = 0.066$ with $l=e, \, \mu$~\cite{Workman:2022ynf}.
+%
+To combine multiple sources of uncertainty we add them in quadrature.
+%
+
+%
+\begin{table}[t!]
+        \small
+        \centering
+        \begin{tabular}{l|c|c|c|c|c|}
+                \toprule
+       & \multicolumn{2}{c}{HL-LHC} & \multicolumn{2}{c}{Stat. improved}\\
+          \midrule
+       Dataset  & $\chi^2/n_{\rm dat}$ &  $n_\sigma$ & $\chi^2/n_{\rm dat}$ & $n_\sigma$ \\
+          \midrule
+ $W^+ H$         & 1.17 & 0.41 & 1.77 & 1.97 \\
+ $W^- H$         & 1.08 & 0.19 & 1.08 & 0.19 \\
+ $W^+ Z$         & 1.08 & 0.19 & 1.49 & 1.20\\
+ $W^- Z$         & 0.99 & -0.03 & 1.02 & 0.05\\
+ $Z H$           & 1.19 & 0.44 & 1.67 & 1.58\\
+ $W^+ W^-$       & 2.19 & 3.04 & 2.69 & 4.31\\
+ VBF $\to$ H        & 0.70 & -0.74 & 0.62 & -0.90\\
+                \bottomrule
+        \end{tabular}
+        \caption{Values of the \(\chi^2\) and $n_\sigma$ for the projected observables at HL-LHC in the EW sector. In the left column we report the values from a realistic estimate of the statistical uncertainties, while in the right columns we show what would be obtained if statistics were to improve by a factor $10$. \label{tab:chi2_hllhc}}
+\end{table}
+%
+In Table~\ref{tab:chi2_hllhc}, for each process considered, we collect the computed $\chi^2$ and the corresponding value of $n_\sigma$. These numbers are obtained by performing several fluctuations of the data and then taking the average $\chi^2$ from all the replicas. As a consequence, the quoted $\chi^2$ are considered the expected $\chi^2$ and are not associated to a specific random fluctuation. The numbers are provided both in a realistic scenario, with a reasonable estimate of the statistical uncertainties, and in a scenario in which the statistics is improved by a factor $10$. 
+The latter could be both the result of an increased luminosity and/or additional decay channels of the EW bosons, e.g. decays into jets. 
+As it can be seen by inspection of the table, the processes which would lead to the most notable deviations between data and theory are $W^+ H$ and $W^+ W^-$, with the latter being in significant tension already in the scenario of a realistic uncertainty estimation. With improved statistics, slight tensions start to appear in $Z H$ and $W^+ Z$, both exhibiting a deviation just above 1$\sigma$.
+Interestingly, the clear smoking gun process here seems to be $W^+ W^-$, which just by 
+itself would point towards a significant tension with the SM, which could potentially and erroneously be interpreted in terms of new interactions.
+%
+\begin{figure}[t!]
+%  \includegraphics[scale=0.45]{Figures/plot_wph_hllhc_with_fluct.pdf}
+%  \includegraphics[scale=0.45]{Figures/plot_wph_hllhc_with_fluct_opt_unc.pdf}
+  \caption{Predictions (with contaminated PDF) for $W^+ H$ at the HL-LHC compared with the projected data. Left: HL-LHC projection. Right: statistics improved by a factor 10 (futuristic scenario). In the latter, an additional bin is added at high energy to take advantage of the additional expected events.}
+  \label{fig:wph_hllhc}
+      \end{figure}
+
+% \begin{figure}[h!]
+%   \includegraphics[width=0.32\linewidth]{Figures/plot_wmh_hllhc.pdf}
+%   \includegraphics[width=0.32\linewidth]{Figures/plot_wmh_hllhc_with_fluct.pdf}
+%   \includegraphics[width=0.32\linewidth]{Figures/plot_wmh_hllhc_with_fluct_opt_unc.pdf}
+%   \caption{Predictions (with contaminated PDF) for $W^- H$ at the HL-LHC compared with the projected data. Left: central data not fluctuated. Centre: central data fluctuated. Right: statistics improved by a factor 10 (futuristic scenario).}
+%   \label{fig:wmh_hllhc}
+%       \end{figure}
+%
+%\begin{figure}[t!]
+%  \includegraphics[scale=0.45]{Figures/plot_wpz_hllhc_with_fluct.pdf}
+%  \includegraphics[scale=0.45]{Figures/plot_wpz_hllhc_with_fluct_opt_unc.pdf}
+%  \caption{Predictions (with contaminated PDF) for $W^+ Z$ at the HL-LHC compared with the projected data. Left: HL-LHC projection. Right: statistics improved by a factor 10 (futuristic scenario).}
+%  \label{fig:wpz_hllhc}
+%      \end{figure}
+%
+% \begin{figure}[h!]
+%   \includegraphics[width=0.32\linewidth]{Figures/plot_wmz_hllhc.pdf}
+%   \includegraphics[width=0.32\linewidth]{Figures/plot_wmz_hllhc_with_fluct.pdf}
+%   \includegraphics[width=0.32\linewidth]{Figures/plot_wmz_hllhc_with_fluct_opt_unc.pdf}
+%   \caption{Predictions (with contaminated PDF) for $W^- Z$ at the HL-LHC compared with the projected data. Left: central data not fluctuated. Centre: central data fluctuated. Right: statistics improved by a factor 10 (futuristic scenario).}
+%   \label{fig:wpz_hllhc}
+%       \end{figure}
+%
+% \begin{figure}[h!]
+%   \includegraphics[width=0.32\linewidth]{Figures/plot_zh_hllhc.pdf}
+%   \includegraphics[width=0.32\linewidth]{Figures/plot_zh_hllhc_with_fluct.pdf}
+%   \includegraphics[width=0.32\linewidth]{Figures/plot_zh_hllhc_with_fluct_opt_unc.pdf}
+%   \caption{Predictions (with contaminated PDF) for $Z H$ at the HL-LHC compared with the projected data. Left: central data not fluctuated. Centre: central data fluctuated. Right: statistics improved by a factor 10 (futuristic scenario).}
+%   \label{fig:zh_hllhc}
+%       \end{figure}
+
+\begin{figure}[t!]
+%  \includegraphics[scale=0.45]{Figures/plot_ww_hllhc_with_fluct.pdf}
+%  \includegraphics[scale=0.45]{Figures/plot_ww_hllhc_with_fluct_opt_unc.pdf}
+  \caption{Predictions (with contaminated PDF) for $W^+ W^-$ at the HL-LHC compared with the projected data. Left: HL-LHC projection. Right: statistics improved by a factor 10 (futuristic scenario).}
+  \label{fig:ww_hllhc}
+      \end{figure}
+
+% \begin{figure}[h!]
+%   \includegraphics[width=0.32\linewidth]{Figures/plot_vbf_hllhc.pdf}
+%   \includegraphics[width=0.32\linewidth]{Figures/plot_vbf_hllhc_with_fluct.pdf}
+%   \includegraphics[width=0.32\linewidth]{Figures/plot_vbf_hllhc_with_fluct_opt_unc.pdf}
+%   \caption{Predictions (with contaminated PDF) for VBF $\to H$ at the HL-LHC compared with the projected data. Left: central data not fluctuated. Centre: central data fluctuated. Right: statistics improved by a factor 10 (futuristic scenario).}
+%   \label{fig:vbf_hllhc}
+%       \end{figure}
+
+% \begin{figure}[h!]
+%   \centering
+%   \includegraphics[width=0.32\linewidth]{Figures/plot_ttbar_hllhc.pdf}
+%   \includegraphics[width=0.32\linewidth]{Figures/plot_ttbar_hllhc_with_fluct.pdf}
+%   \caption{Predictions (with contaminated PDF) for $t \bar{t}$ at the HL-LHC compared with the projected data. Left: central data not fluctuated. Centre: central data fluctuated. Right: statistics improved by a factor 10 (futuristic scenario).}
+%   \label{fig:ttbar_hllhc}
+%       \end{figure}
+
+In Fig.~\ref{fig:wph_hllhc}%,~\ref{fig:wpz_hllhc}
+and ~\ref{fig:ww_hllhc} we show plots of the two most affected observables considered in 
+this section, namely $W^+ H$ and $W^+ W^-$ respectively.
+While in all other processes the deviations between the true central values and the theoretical predictions obtained with the contaminated PDFs are limited, in the case of $W^+ H$ and $W^+ W^-$, they are substantial. 
+It is clear that the true limiting factor is that as soon as we are in the high energy tails of the distributions and potentially sensitive to the PDF contamination, the pseudo data become statistically dominated and therefore we lose resolution. This is particularly true in the case of $W^+ H$, while $W^+ W^-$ is predicted to have an higher number of events and could potentially probe higher energies.
+%
+
+We also assess the ratios $W^+ Z / W^- Z$ and $W^+ H / W^- H$, and observe that in 
+this case the deviations resulting from contaminated PDFs are 
+no longer visible when taking these ratios. In general the ratios cancel the effect of 
+any possible contamination in the parton luminosities if they are correlated. The fact 
+that the effect disappears is a proof that the $u\bar{d}$ and $d\bar{u}$ luminosities are highly correlated and 
+the contamination effects are compatible.
+%
+%\begin{figure}[t!]
+%  \includegraphics[width=0.49\linewidth]{Figures/plot_wz_ratio_hllhc.pdf}
+%  \includegraphics[width=0.49\linewidth]{Figures/plot_wh_ratio_hllhc.pdf}
+%  \caption{Ratios between processes with a final $W^+$ and $W^-$ bosons of the contaminated PDF results and the projected data. Left: results for $WZ$. Right: results for WH.}
+%  \label{fig:wz_wh_ratios}
+%\end{figure}
+%
+%In the upper plots of Fig.~\ref{fig:wz_wh_ratios}, we define $R_{events}$ as the ratio 
+%between the number of events of the $W^+$ process and the number of events of the $W^-$ process in each case.
+%
+%We show the ratios for the projected data and for the predictions with contaminated PDFs.
+%
+%The middle plots show the ratio between $R_{events}$ of the contaminated PDFs and $R_{truth}$, the ratio obtained using the projected data.
+%
+%The main advantage of taking these ratios is that the systematic and luminosity uncertainties are reduced, as it can be seen in the lower plots of Fig.~\ref{fig:wz_wh_ratios}.
+%
+%This is not the case, however, for the statistical uncertainties which are enhanced by error propagation.
+%
+%The deviations we see from the contaminated processes from the data are reduced when taking these ratios.
+%
+%This, convolved with the higher statistical uncertainty that dominates the tail of the distributions, effectively washes away any potential deviations from the data one might detect.
+%
+
+In summary, the PDF contamination has the potential to generate substantial deviations in observables and processes generally considered to be good portals to new physics, which could nonetheless be unaffected by the presence of heavy states at the current probed energies, as in the scenarios considered in this work.
+
+
+
+
+
+\section{How to disentangle New Physics effects}
+\label{sec:solution}
+
+In this section we discuss several strategies that can be devised in order to disentangle 
+New Physics effects in a global fit of PDFs. In Sect.~\ref{subsec:forward} we start by 
+assessing the potential of precise on-shell forward vector boson production 
+data in the HL-LHC phase and check whether their inclusion in a PDF fit helps disentangling 
+New Physics effects in the high-mass Drell-Yan tails. 
+In Sect.~\ref{subsec:cut} we scrutinise whether the data-theory agreement displays a deterioration 
+that scales with the maximum energy probed by the data included in the fit. We will see that 
+neither of them helps disentangling the contamination that arises in the scenario that we have 
+highlighted in our study and we outline the reason for this.  
+We then turn to analyse the behaviour of suitable observable ratios in Sect.~\ref{subsec:ratio} and we will see that such ratios will indicate the 
+presence of New Physics in the observables that are affected by it, although they would not be able to distinguish between the two observables that 
+enter the ratio. Finally in Sect.~\ref{subsec:lowE} we will determine the  observables in current PDF fits that are correlated to the 
+large-$x$ antiquarks and we will highlight the signs of tension with the ``contaminated'' high-mass Drell-Yan data via suitably devised weighted fits. 
+The result of these tests points to the need for the includion of independent low-energy/large-$x$ constraints in future PDF analyses, 
+if one wants to safely exploit the constraining power of high-energy data without inadvertently absorbing signs of New Physics 
+in the high-energy tails. 
+
+
+\subsection{On-shell forward boson production}
+\label{subsec:forward}
+The most obvious way to disentangle any possible contamination effects in the PDF is the inclusion 
+of observables that probe the large-$x$ region in the PDFs at low energies, where NP-induced energy growing effects are not present.  
+In this section we assess whether the inclusion of precise forward LHCb distributions measured at the $W$ and $Z$ on-shell energy 
+at HL-LHC might help spotting NP-induced inconsistencies in the high-mass distributions measured by ATLAS and CMS. 
+
+In order to test this, we compute HL-LHC projections for LHCb, taking 0.3 ab$^{-1}$ as benchmark luminosity~\cite{Azzi:2019yne} 
+and focusing on the forward production of $W/Z$. The $Z$ boson is produced on-shell 
+($60 \text{ GeV} < m_{ll} < 120 \text{ GeV}$), while no explicit cuts are applied on  the transverse mass $m_T$ in 
+the case of $W$ boson production decaying into a muon and a muonic neutrino, which is dominated by the mass-shell region. 
+We impose the LHCb forward cuts on the lepton transverse momentum ($p^l_T > 20 \text{ GeV}$) 
+and on both the $Z$ rapidity and pseudo-rapidity of the $\mu$ originated by $W$ ($2.0 < |y_{Z,\mu}| < 4.5$).
+Fig.~\ref{fig:forwardZ_hllhc} shows a comparison between the pseudo-data generated with the ``true'' PDFs and NP-corrected matrix elements,\footnote{Note that at the energy probed by the 
+forward $W/Z$ production the NP contribution associated to the presence of a $W'$ boson is negligible} and the theory predictions 
+obtained with the $\hat{W}=8\cdot 10^{-5}$ contaminated fit and the SM matrix element, for each of the two processes.
+We observe that there are no significant deviations between the theory predictions obtained from a 
+contaminated PDF set and the true underlying law. 
+%
+\begin{figure}[htb]
+  \centering
+%  \includegraphics[width=0.49\linewidth]{Figures/LHCb_NC_DY_HL_fluc.pdf}
+%  \includegraphics[width=0.49\linewidth]{Figures/LHCb_CCp_DY_HL_fluc.pdf}
+  \caption{Predictions (with $\hat{W}=8\cdot 10^{-5}$ contaminated PDF) for forward vector bosons production 
+  in the HL-LHC phase at LHCb compared with the projected data. Left panel: on-shell $Z$ production cross section as a 
+  function of the $Z$ boson rapidity $y_Z$. Right panel: $W$ production cross section as a function of the final-state muon
+  pseudo-rapidity $y_\mu$.}
+  \label{fig:forwardZ_hllhc}
+\end{figure}
+%
+Intuitively this can be understood, as the produced leptons are in the forward region measured at LHCb, and one of the initial 
+partons must have more longitudinal momentum than the other. 
+
+To visualise more precisely the regions in $x$ that are constrained by a measurement of a given final state at 
+the energy $E\sim m_X$ and at a given rapidity $y$, we display the scatter plot for $x_{1,2} = m_X/\sqrt{s}\,\exp(\pm y)$ in the
+large-$m_X$ and central region, namely $|y|<2.0$ and $1\,{\rm TeV}<m_X<4\,{\rm TeV}$, and compare it to the low-to-intermediate-$m_X$ 
+and forward rapidity region, namely $2.0<|y|<4.5$ and $10\,{\rm GeV} < m_X < 1\,{\rm TeV}$.
+%
+\begin{figure}[htb]
+  \begin{center}
+%    \includegraphics[width=0.8\linewidth]{Figures/kin_plot.pdf}
+    \end{center}
+	\caption{Leading order kinematic plot of $x_{1,2} = m_X/\sqrt{s}\,\exp(\pm y)$ in the
+large-$M$ and central region, $|y|<2.0,\quad 1\,{\rm TeV}<m_X<4\,{\rm TeV}$, (blue bots and in the low-intermediate-$m_X$ and forward region, $2.0<|y|<4.5\quad 10\,{\rm GeV} < m_X < 1\,{\rm TeV}$ (red dots) . Here $\sqrt{s}=14$~TeV.}
+        \label{fig:kinplot}
+\end{figure}
+%
+We can see that, while the measurements of large-invariant mass objects in the central rapidity region constrain solely the large-$x$ region, and
+where both partons carry a fraction $x$ of proton's momentum in the $0.01\lesssim x \lesssim 0.8$, the low-to-intermediate invariant
+mass region in the forward rapidity region constrains both the small and the large $x$ region, given that at $|y|\approx 4.0$ the $x$-region
+probed is around $0.1\lesssim x \lesssim 0.8$ for one parton and around $10^{-5}\lesssim x \lesssim 10^{-4}$ for the other parton. 
+Given that the valence quarks are much more abundant 
+at large $x$ than the sea quarks, in most collisions the up or down quark will be the partons carrying a large fraction $x$ of the proton's momentum, 
+while the antiquarks will carry a small fraction $x$. Hence, this observable will not be sensitive to the shift in the large-$x$ anti-up and 
+anti-down that the global PDF fit yields in order to compensate the effect of NP in the tails. 
+
+\subsection{Sliding $m_{\ell\ell}$ cut}
+\label{subsec:cut}
+Another way to potentially disentangle EFT effects in PDF fits was explored in Ref.~\cite{DYpaper} where, in the context of the $\hat{W}$ and $\hat{Y}$ parameters, the authors exploited the energy-growing effects of the EFT operators at high invariant dilepton mass. 
+They introduced a ratio evaluation metric $R_{\chi^2}$ (in the notation of the original reference) which described how much the PDF fit quality deteriorated when datapoints at high dilepton invariant mass were included in the computation of the $\chi^2$, with respect to a fit that only used low invariant mass bins.
+%
+In this way, $R_{\chi^2} \sim 1 $ indicated a fit quality similar to a purely SM scenario, as the sensitivity to energy-growing EFT effects is suppressed. 
+
+%
+They found that, when including higher dilepton invariant mass measurements (where the effect of EFT operators is enhanced) in the computation of the $\chi^2$, the fit quality deteriorated and $R_{\chi^2}$ growth almost monotonically away from $1$. With this metric other sources of PDF deterioration are minimised and the tension arises fundamentally because of the EFT effects.
+
+%
+For our study, we show in Fig. ~\ref{fig:sliding_chi2} the $\chi^2$ values for the NC and CC HL-LHC datasets, combining the two lepton channels, in the SM and $\hat{W} = 8 \cdot 10^{-5}$ contaminated cases. $M_{max}$ is the maximum value of the dilepton invariant mass that we include in the computation of the $\chi^2$.
+%
+We see that after $M_{max} \sim 2$ TeV, the $\chi^2$ values in both the SM and contaminated scenario stagnate and no persistent deterioration is observed. This means that it is not possible to isolate the EFT effects, which are enhanced at higher masses, in the worsening of the fit quality. In this way, it is not possible to disentangle the EFT effects on the PDF fit and other options have to be explored.
+%
+\begin{figure}[htb]
+  \centering
+%  \includegraphics[width=0.49\linewidth]{Figures/sliding_Mcut_chi2_baseline.pdf}
+%  \includegraphics[width=0.49\linewidth]{Figures/sliding_Mcut_chi2_W0p00008.pdf}
+  \caption{Value of the $\chi^2$ per HL-LHC dataset as function of the maximum value of the invariant mass allowed in the kinematics $M_{max}$. This parameter is analogous to $m_{ll}^{(max)}$ of Sect. 4 of~\cite{DYpaper} . Left: baseline SM fit. Right: contaminated $\hat{W}=8\cdot 10^{-5}$.}
+  \label{fig:sliding_chi2}
+\end{figure}
+
+\subsection{Observable ratio}
+\label{subsec:ratio}
+In order to disentangle PDF contamination, another quantity worth studying is the ratio between observables whose processes have similar parton channels. Indeed, in this case the impact of the PDF is much reduced and any discrepancy between theory an data predictions can be more confidently attributed to new physics in the partonic cross-section. Practically, a deviation would mean that one of the two datasets involved in the ratio is ``contaminated'' by new physics and should therefore be excluded from the PDF fit. 
+
+%
+We have studied the ratio between the number of events in $WW$ production and Neutral Current Drell-Yan (NC DY), as well as between $WH$ production and Charged Current Drell-Yan (CC DY). In each pair both processes are initiated from the same parton channels. 
+%
+
+The Drell-Yan events we use are displayed in Fig. ~\ref{fig:wy_dy_prod}. The diboson events can be seen in Fig.~\ref{fig:ww_hllhc} for $WW$ and in Fig.~\ref{fig:wph_hllhc} for $W^{+}H$. However, note that we also include the $W^{-}H$ channel to measure the ratio of $WH$ and CC DY here. We plot the ratio of those quantities in Fig.~\ref{fig:diboson_dy_ratio}. We compare theory and data predictions where, as in Fig.~\ref{fig:wy_dy_prod}, data corresponds to a baseline PDF and a BSM partonic cross-section ($f_{\rm Baseline} \otimes \hat{\sigma} _{BSM}$) and theory is computed from a contaminated PDF and a SM partonic cross-section ($f_{\rm Cont} \otimes \hat{\sigma}_{SM}$). We also compare those results to K-factors which are obtained by taking the ratio of Drell-Yan BSM predictions over the SM ones. Practically the K-factors are a ratio of their respective partonic cross-section ($K = \hat{\sigma}^{DY} _{BSM} / \hat{\sigma}^{DY} _{SM}$).
+
+%
+\begin{figure}[!h]
+  \begin{center}
+%    \includegraphics[width=0.49\linewidth]{Figures/plot_wwdy_ratio_hllhc.pdf}
+%    \includegraphics[width=0.49\linewidth]{Figures/plot_WHDY_ratio_hllhc.pdf}
+  \end{center}
+	\caption{
+    Ratio between diboson production and Drell-Yan processes for the HL-LHC predictions. On the left, ratio of $W^+ W^-$ to NC DY binned in invariant mass and on the right, ratio of $WH$ to CC DY binned in transverse mass.
+    In the top panel we plot the ratios of number of events for data and theory predictions.
+    In the middle panel, we plot the ratio of those ratios (theory over data) alongside the K-factors. The lower panel displays the uncertainties.
+  }
+  \label{fig:diboson_dy_ratio}
+\end{figure}
+%
+
+
+We see in both cases a deviation between theory and data predictions growing with the energy. The uncertainties are smaller in the ratio $\text{WW} / \text{NC DY}$ which allows the discrepancy to be over $1 \sigma$ in the last bin. Furthermore, we also witness that the deviation follows the K-factors which reinforces our initial assumption that using ratio greatly diminishes the impact of the PDFs.
+
+%
+As we mentioned earlier, the lesson we can get from this plot is that there is some new physics in either the DY or the diboson datasets. Unfortunately, without further information it is not possible to identify in which of those datasets the new physics is. Therefore, with just this plot in hand, the only reasonable decision would be to exclude both the datasets involved in the ratio where the deviation is observed from the fit. The downside of this disentangling method is that it might worsen the overall quality of the fit and increase the PDF uncertainties in certain regions of the parameter space. However, it proves to be an efficient solution against the sort of contamination we studied. Indeed, by excluding the DY datasets in this case, one would exclude the contamination we manually introduced there from the PDF fit.
+
+
+
+\subsection{Alternative constraints on large-$x$ anti-quarks}
+\label{subsec:lowE}
+
+In Sect.~\ref{subsec:forward}, it was shown that the inclusion of precise on-shell forward $W$ and $Z$ 
+production measurements does not disentangle the contamination that New Physics in the high-energy tails 
+might yield. In this section, we ask ourselves whether there are any other future low-energy observable that 
+might constrain large-$x$ antiquarks and show tension with the high-energy data in case the latter are 
+affected by NP-induced incompatibilities.
+
+We start by looking at the correlation between the data that are currently included in our baseline PDF fit 
+and the various PDF flavours. To assess the level of correlation, we plot the correlation defined in Ref.~\cite{Carrazza:2016htc}. 
+The correlation function is defined as
+\begin{equation}
+\label{eq:correlations}
+    \rho(j,x,{\cal O})\equiv\frac{N_{\rm rep}}{N_{\rm rep}-1}
+    \left(\frac{\langle f_j(x,Q)\,{\cal O}\rangle_{\rm reps}-\langle f_j(x,Q)\rangle_{\rm reps}\langle {\cal O}\rangle_{\rm reps}}{\Delta_{\rm PDF}f(x,Q)\,\Delta_{\rm PDF}{\cal O}}\right),
+\end{equation}
+where the PDFs are evaluated at a given scale $Q$ and the observable ${\cal O}$ is computed with the set of PDFs $f$, $j$ is the PDF 
+flavour, $N_{\rm rep}$ is the number of replicas in the baseline PDF set and $\Delta_{\rm PDF}$ are the PDF uncertainties. 
+In Figs.~\ref{fig:smpdfplots_hl} and~\ref{fig:smpdfplots} we show the correlation between the PDFs in the flavour basis 
+and the observables which are strongly correlated with the anti-quark distributions. 
+The region highlighted in blue is the region in $x$ such that the correlation 
+coefficient defined in Eq.~\eqref{eq:correlations} is larger than $0.9 \, \rho_{\rm max}$, where $\rho_{\rm max}$ is 
+the maximum value that the correlation coefficient takes over the grid of points in $x$ and over the flavours $j$.
+From Fig.~\ref{fig:smpdfplots_hl} we observe that while the largest invariant mass bins of 
+the HL-LHC NC are most strongly correlated with the up anti-quark distribution in the $10^{-2}\lesssim x \lesssim 3\cdot 10^{-1}$ region, 
+the HL-LHC CC, particularly the lowest invariant mass bins, are most strongly correlated with the down anti-quark distribution in 
+the $ 7\cdot 10^{-3}\lesssim x \lesssim 5\cdot 10^{-2}$ region. This observation is quite interesting as it gives us a further insight on the 
+difference between the $Z'$ and the $W'$ scenarios discussed at the end of Sect.~4.2. Indeed the $W'$ scenario affecting both the 
+NC and CC distributions manages to compensate the $\bar{u}$ shift with the $\bar{d}$ shift in a slightly smaller region, hence the 
+successful contamination. 
+\begin{figure}[t!]
+  \begin{center}
+%    \includegraphics[width=0.49\linewidth]{paper/Figures/HLLHCNC_correlation_ubar.pdf}
+%    \includegraphics[width=0.49\linewidth]{paper/Figures/HLLHCCC_correlation_ubar.pdf}
+    \end{center}
+	\caption{\label{fig:smpdfplots_hl}Correlation coefficient $\rho$ defined in Eq.~\eqref{eq:correlations} between the flavour PDFs of the baseline  
+        set and the HL-LHC neutral current Drell-Yan data (left panel); the HL-LHC charged current Drell-Yan data (right panel). The highlighted 
+        region corresponds to $\rho>0.9\,\rho_{\rm max}$.}
+\end{figure}
+
+We now ask ourselves whether there are other observables that display a similar correlation pattern with the light anti-quark distributions. 
+In Fig.~\ref{fig:smpdfplots} we show the three most interesting showcases. In the left panel, we see that that the FNAL E866/NuSea measurements 
+of the Drell-Yan muon pair production cross section from an 800 \rm{GeV} proton beam incident on proton and deuterium targets~\cite{NuSea:2001idv} 
+yields constraints on the 
+the ratio of anti-down to anti-up quark distributions in the proton in the large Bjorken-$x$ region and the correlation is 
+particularly strong with the anti-up in the $5\cdot 10^{-2}\lesssim x \lesssim 3\cdot 10^{-1}$ region.
+On the central panel we see that the Tevatron D0 muon charge asymmetry~\cite{D0:2013xqc} exhibits a strong correlation with the 
+up anti-quark around $x\approx 0.3$ and the down quark around $x\approx 0.1$. This is understood, as by charge conjugation the 
+anti-up distribution of the proton corresponds to the up distribution of the anti-proton. Finally, on the right 
+panel we see that the precise ATLAS measurements of the $W$ and $Z$ differential cross-section at $\sqrt{s}=7$ TeV~\cite{ATLAS:2016nqi} 
+have a strong constraining power on the up anti-quark in a slightly lower $x$ region around $3\cdot 10^{-3}\lesssim x \lesssim 2\cdot 10^{-2}$.
+%
+\begin{figure}[htb]
+  \begin{center}
+%    \includegraphics[width=0.3\linewidth]{paper/Figures/DYE886R_correlation_ubar.pdf}
+%    \includegraphics[width=0.3\linewidth]{paper/Figures/D0WMASY_correlation_ubar.pdf}
+%    \includegraphics[width=0.3\linewidth]{paper/Figures/ATLASWZRAP11CFC_correlation_ubar.pdf}
+    \end{center}
+	\caption{\label{fig:smpdfplots} Same as Fig.~\ref{fig:smpdfplots_hl} for the FNAL E866 data measuring the ratio between low energy Drell-Yan muon pair production on 
+ proton and deuteron targets~\cite{NuSea:2001idv} (left panel), the Tevatron D0 muon charge asymmetry~\cite{D0:2013xqc} (central panel) and the ATLAS 
+      measurements of the $W$ and $Z$ differential cross-section at $\sqrt{s}=7$ TeV in the central rapidity region\cite{ATLAS:2016nqi} (right panel).}
+\end{figure}
+
+
+%\subsection{A new selection criterion}
+%As we mentioned in Sect.~\ref{subsec:postfit}, 
+%global PDF  analyses have a way to determine a {\it maximally consistent} set of data to include in PDF fits, and indeed
+%various choices on the datasets to be included are made by each PDF fitting collaboration on whether to 
+%include or not a given dataset, on the basis of the compatibility with the bulk of the dataset included in a
+%global fit of PDFs. For example in the {\tt CT18} analysis~\cite{Hou:2019efy}, three
+%alternative fits are delivered on top of the nominal one, the {\tt CT18A},
+%{\tt CT18X}, and {\tt CT18Z}, the former being the product of adding
+%the precise ATLAS 7 TeV W/Z data into the {\tt CT18} fit at the cost of
+%deteriorating the data-theory agreement with other datasets that are
+%sensitive to the proton's strangeness, the second being a variation
+%of {\tt CT18} with a different QCD scale for the low-$x$ DIS data;
+%the latter containing all the above variations.
+%The differences between the CT18 and CT18Z data sets are
+%non-negligible in many applications and reflects either a genuine issue with
+%dealing with data that pull different directions or a lack of 
+%flexibility in a fitting methodology that is not able to accommodate
+%many data at the same time.  
+
+%The \nnpdf analysis, on the other hand, starts from an extended dataset out of which a maximally
+%consistent baseline dataset is determined. The latter is determined through a two-step procedure.
+%First, datasets that are problematic either in terms of fit quality, or because of the
+%stability properties of their covariance matrix, are flagged.
+%This is done by comparing for
+%ach measurement respectively the value of the $\chi^2/n_{\rm dat}$, the number of standard deviations $n_\sigma$
+%by which the value of the $\chi^2$ per data point differs from the expected unit value and finally 
+%the value of a  covariance matrix stability indicator. 
+%%The latter is important because, given the high precision of the LHC data, many
+%%datasets are now limited by systematic, rather than statistical,
+%%uncertainties. In these situations, the $\chi^2$ of a given
+%%dataset is extremely sensitive to small differences in the correlation model assumed for the experimental %systematic errors.
+%%This implies that small inaccuracies in the estimate of the experimental
+%%correlated systematic uncertainties can potentially induce spurious
+%%disagreements between theory predictions and experimental data and a poor $\chi^2$ may be caused solely by %an instability
+%%of the experimental covariance matrix upon its inversion, rather than by
+%%a genuine tension with the rest of the data in the fit, or by an inaccuracy in
+%%the theory. 
+%The procedure does not yield a full understanding of the nature of the inconsistencies, but rather helps singling out and excluding from the baseline dataset inconsistent data based on objective criteria determined by the given thresholds. 
+%
+%Measurements for which thresholds are exceeded are then subject to a
+%dedicated weighted fit. The measurement is then retained or discarded
+%based on the results of this weighted fit, as detailed in Sect.~\ref{subsec:postfit}.
+%
+
+
+The results presented in Sect.~\ref{sec:dy} show that the tension with the low-energy datasets that 
+constrain the same region in $x$ as the high-mass Drell-Yan HL-LHC data is not strong enough to flag the 
+HL-LHC datasets. Hence, the conditions highlighted in Sect.~\ref{subsec:postfit} are necessary in order to determine a bulk of maximally
+consistent datasets, but they are not sufficient, as they still allow
+New Physics contamination to go undetected. 
+%As a result, we propose a
+%further criterion to be added to the list above, that prevents this from happening. 
+A way to emphasise the tension is to produce {\it weighted fits} which give a larger weight to the high-energy data that are affected by 
+New Physics effects. The rationale behind this is that, if some energy-growing
+effect associated to the presence of New Physics in the data shows up in the tails
+of the distributions, PDFs might accommodate this effect without deteriorating the agreement with the other datasets 
+only up to a point. If the datasets that are affected by New
+Physics are given a large weight in the fit, the tension with the datasets constraining the large-$x$ region 
+that are perfectly described by the SM could in principle get worse. Hence by giving a
+larger weight to a specific NP-affected dataset, the disagreement with the datasets highlighted 
+above should become more apparent. 
+%
+Depending on the kind of New Physics model that Nature might display in the data, 
+the effect might affect either of the three
+classes of the high energy processes entering PDF fits, namely: (i)
+jets and dijets, (ii) top and (iii) Drell-Yan. In our example, in order to emphasise the tension with the 
+low-energy Drell-Yan data and the Tevatron data, we would have to give more weight to the HL-LHC high-mass 
+Drell Yan data. However we observe that, although the $\chi^2$ of the HL-LHC Drell-Yan further improves and the 
+ones of the highlighted data deteriorates, the level of deterioration is never strong enough to flag the tension. 
+The result of this test points to the fact that one should include independent and more precise 
+low-energy/large-$x$ constraints in future PDF analyses, 
+if one wants to safely exploit the constraining power of high-energy 
+data without inadvertently absorbing signs of New Physics 
+in the high-energy tails. In this sense the low-energy EIC programme, as well as 
+other low-energy data which are not exploited in the standard PDF global fits, such 
+as JLAB or SeaQuest data, will be a precious input in future PDF analyses, alongside the 
+constraints from lattice measurements. 
+
+%In Table~\ref{tab:chi2weighted} we display the $\chi^2$... eliminate
+%\input{paper/tables/tab_chi2_weighted}
+
+
+%Our proposed strategy
+%is highlighted as follows:
+%\begin{itemize}
+%\item Perform three weighted fits by giving larger weights (set
+%  according to Eq.~\eqref{eq:wgts}) to all the
+%  datasets belonging to each of the process categories highlighted above
+%  that span an energy range above a given $Q_{\rm max}$ scale. One
+%  might want to give a larger weight only to the subset of datapoints
+%  that probe a scale $Q>Q_{\rm max}$, however this would neglect the
+%  correlations among datapoints that belong to the same dataset. 
+%\item If any of the three weighted fits displays incompatibility, as
+%  with a larger weight its $\chi^2$ improves while deteriorating the $\chi^2$ of other
+%  datasets, then one should exclude the datasets from the baseline fits.
+%  \item Rerun the test with a larger and lower values of $Q_{\rm
+%      max}$, say $Q_{\rm max}/2$ and $2\,Q_{\rm max}$, to assess the stability of the result upon the somewhat arbitrary
+%    choice of the scale at which New Physics effects are showing. 
+%  \end{itemize}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
