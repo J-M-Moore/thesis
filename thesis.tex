@@ -210,7 +210,13 @@
 %% Abstract:
 %%
 \abstract{%
-  Parton distributions are a key ingredient of precise predictions for collider experiments. They are usually determined from fits to experimental data under the assumption that the Standard Model of particle physics is complete. 
+\noindent Parton distributions are a key ingredient of precise predictions for collider experiments. They are usually determined from fits to experimental data under the assumption that the Standard Model (SM) of particle physics is complete; however, this can bias studies of beyond the Standard Model (BSM) physics if these SM-like PDFs are used in these analyses. It is important to quantify the extent to which this occurs, in order to avoid making incorrect conclusions about BSM physics.
+
+We begin in Chapter~\ref{chap:intro} with a review of perturbative quantum chromodynamics (QCD) and parton distribution functions (PDFs), providing a definition of the PDFs at next-to-leading order in QCD perturbation theory. At the end of the Chapter, in Sect.~\ref{sec:globalfits}, we introduce the main problem that this thesis aims to address in a variety of special cases, namely the simultaneous extraction of PDFs together with other theory parameters (specifically BSM theories).
+
+In Chapters~\ref{chap:darkphoton},~\ref{chap:smeftdy} and~\ref{chap:top}, we describe the interplay between PDFs and the parameters of various BSM models. In more detail, in Chapter~\ref{chap:darkphoton}, we perform an approximate simultaneous extraction of PDFs together with the parameters of a \textit{dark photon} model; in particular, we use projected high-luminosity LHC (HL-LHC) data to investigate the sensitivity of the HL-LHC to our particular class of light, leptophobic dark photons. Subsequently, in Chapter~\ref{chap:smeftdy}, we introduce the Standard Model Effective Field Theory (SMEFT), and carry out a simultaneous determination of PDFs together with two parameters drawn from the SMEFT; we show that at the HL-LHC, there will be significant interplay between extraction of PDFs and SMEFT parameters. In Chapter~\ref{chap:top}, we perform a much more comprehensive analysis of the PDF-SMEFT interplay in the top sector, using a new efficient methodology, \textsc{SIMUnet}. Importantly in Sect.~\ref{sec:quad}, we also comment on the efficacy of the Monte Carlo replica method for error propagation, which forms the heart of the uncertainty calculation in both the NNPDF and \textsc{SIMUnet} methodologies.
+
+In the second half of this thesis, we focus on future issues in PDF fitting, related to the work presented in the previous chapters. In Chapter~\ref{chap:contamination}, we explore how New Physics in the data might be inadvertently `fitted away' into the PDFs, if the data is treated as SM-like. We also recommend strategies for disentangling PDFs and BSM effects. Finally, in Chapter~\ref{chap:montecarlo}, we discuss the Monte Carlo replica method used in many of the previous chapters, and discuss the need for its replacement in future PDF and BSM fits. 
   
 %  This thesis is based on four published works in this direction, together with work for an upcoming publication. In summary, Chapter 2 is based on Ref.~\cite{McCullough:2022hzr}. This work was produced in collaboration with Maria Ubiali and Matthew McCullough. The work contained in the project is my own, except for 
 %  
@@ -229,39 +235,33 @@
 %% Acknowledgements:
 %%
 %\acknowledgements{%
-% A special thanks also goes out to my excellent PhD supervisor, Maria. Not only is she an extremely accomplished researcher, with outstanding, creative ideas for novel work, she is also an absolute pleasure to work with. Her dedication to her students and postdocs is unmatched. Thank you for giving me the opportunity to work with you in such an amazing group. \\
+%First and foremost, a special thanks goes out to my excellent PhD supervisor, Maria. Not only is she an extremely accomplished researcher, with outstanding, creative ideas for novel work, she is also an absolute pleasure to work with. Her dedication to her students and postdocs is unmatched. Thank you for giving me the opportunity to work with you in such an amazing group. \\
 %
-%I am forever indebted to my parents, Estelle and Garry, grandparents, Catherine and Michael, and siblings, Catherine and Oliver.\\
+%I am forever indebted to my parents, Estelle and Garry, grandparents, Catherine and Michael, and siblings, Catherine and Oliver. Your support, ... and financial, is always appreciated.\\
 %
 %Thanks go out to Alastair for all of his love and support; I am extremely glad to still have you as a close friend. \\
 %
-%My longstanding friends Yanbo and Sam have provided an excellent distraction from work during my PhD; I look forward to future spontaneous trips to ..., or further `death marches'. \\
+%My longstanding friends Yanbo and Sam have provided an excellent distraction from work during my PhD; I look forward to future spontaneous trips to ..., or further `death marches' along English dykes. 
 %
 %To my amazing friends from Downing, Evie, Mick, Stephen and Luke, I would like to thank you for all our time spent together (I know that the only reason you suffer my company is because I am the one with a copy of Agricola, but I'm willing to overlook this). To Beth and Dan, whose hospitality and company is always extremely appreciated.\\
 %
 %Thank you to Shayan, Cameron and Zahari for all the help you gave me during the start of my PhD.\\
 %
-%Thanks also to the fantastic members of my research group, both former and current. Manu: sharing an office with you has been tremendous fun, you are...\\
-%
-%Maeve: not only are you an outstanding collaborator, an absolute pleasure to work with, but you are one of the kindest people I have had the privilege to know. \\
-%
-%Luca: ... \\
+%Thanks also to the fantastic members of my research group, without whom any of the work in this thesis would have been impossible. Manu: sharing an office with you has been tremendous fun, you are a constant source of . Maeve: not only are you an outstanding collaborator, an absolute pleasure to work with, but you are one of the kindest people I have had the privilege to know. Luca: ... \\
 %
 %To the quantum information theorists: Mitchell. Campbell: it was a great privilege to participate in your podcast, \textit{Question Field}; I hope that the ratings have not gone down as a result. \\
 %
 %Wilfred: thank you for being so consistently warm, friendly and up for hanging out; when I started supervising, I didn't envisage becoming such good friends with one of my students, but I am extremely glad of it. I will miss you very much when you leave Cambridge.\\
 %
-%To my PhD cousin Hannah: you are an incredible, inspiring physicist. \\
+%My PhD cousin, Hannah: you are an incredible physicist, and a constant source of inspiration - don't ever doubt it.\\
 %
 %To Ben Allanach and Matt Wingate: it was a pleasure teaching your respective Symmetries courses, thank you for the opportunity to do so. And a special thanks to Ben for letting me give a one-off substitute lecture, it was a lot of fun!\\
 %
-%Thanks to the wonderful members of the department, who became extensions of the pheno group in my last year: Melo and Owain.  Miren: thank you for being such an outstanding dinner guest, and for being such a patient squash instructor.\\
+%Thanks to the wonderful members of the department, who became extensions of the pheno group in my final year. Miren: thank you for being such an outstanding dinner guest, and more recently a patient squash instructor!\\
 %
 %To Manda, the HEP group secretary, who is always a pleasure to talk to.\\
 %
-%A special thanks to Philip for the lovely, if brief, time we spent together; it was a high point of my PhD years. You will always mean a lot to me.\\
-%
-%Thanks to Will and Elena for your company, it's always a pleasure seeing you both. And Elena, thank you for the beautiful chocolate birthday cake you made me for my 26th birthday; it was such a wonderfully kind gesture.\\
+%Finally, to all the friends around Cambridge who are not members of the maths department... Philip: thank you so much for the lovely, if brief, time we spent together - it was a highlight of my PhD years, and really meant a lot to me. Will and Elena: your company is always very much appreciated, it's always an absolute pleasure seeing you both; and Elena, thank you for the beautiful chocolate birthday cake you made me for my 26th birthday, it was such a wonderfully kind gesture! Victoria: ...\\
 %
 %I love all of you dearly; the positive impact you have had on my life is immeasurable. 
 %}
@@ -296,6 +296,7 @@
 %% Thesis body:
 %%
 \chapter{Introduction: perturbative QCD and parton distributions}
+\label{chap:intro}
 
 \epigraph{To learn which questions are unanswerable, and not to answer them: this skill is most needful in times of stress and darkness.}{\textit{\\ from The Left Hand of Darkness, \\ by Ursula K. Le Guin}}
 
