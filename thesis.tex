@@ -8768,12 +8768,53 @@ We defer the ambitious project of conceiving of, designing and implementing such
 
 \chapter{Proofs of plus prescription identities}
 \label{app:plus_prescription}
-In this Appendix, we give a proof of the identity given in Eq.~\eqref{eq:plus_identity}:
+In this Appendix, we give a proof of the plus prescription identities used in the introductory chapter.
+
+\paragraph{Theorem 1.} The following distributional identity holds:
 \begin{equation}
 \label{eq:plus_identity_2}
 \frac{u^{\epsilon}}{(1-u)^{\epsilon+1}} = -\frac{1}{\epsilon} \delta(1-u) + \left( \frac{1}{1-u} \right)_+ - \epsilon \left( \frac{\log(1-u)}{1-u} \right)_+ + \epsilon \frac{\log(u)}{1-u} + O(\epsilon^2).
 \end{equation}
 
+\noindent \textit{Proof:} Let $f$ be an arbitrary smooth function. Then:
+\begin{align}
+\int\limits_{0}^{1} \frac{f(u)}{(1-u)^{\epsilon + 1}}\ du &= \int\limits_{0}^{1} \frac{(f(u) - f(1))}{1-u} \cdot (1-u)^{-\epsilon}\ du + f(1) \int\limits_{0}^{1} \frac{1}{(1-u)^{\epsilon + 1}}\ du\\[1.5ex]
+&= \int\limits_{0}^{1} \frac{(f(u) - f(1))}{1-u} (1 - \epsilon \log(1-u))\ du + f(1) \left[ \frac{(1-u)^{\epsilon}}{\epsilon} \right]^{1}_{0} + O(\epsilon^2)\\[1.5ex]
+&= \int\limits_{0}^{1} \left[ \left( \frac{1}{1-u} \right)_+ f(u) - \epsilon \left( \frac{\log(1-u)}{1-u} \right)_+ f(u) \right]\ du - \frac{f(1)}{\epsilon} + O(\epsilon^2)\\[1.5ex]
+&= \int\limits_{0}^{1} \left[ \left( \frac{1}{1-u} \right)_+ f(u) - \epsilon \left( \frac{\log(1-u)}{1-u} \right)_+ f(u) - \frac{\delta(1-u)}{\epsilon} f(u) \right]\ du + O(\epsilon^2).
+\end{align}
+Hence, as distributions, we have:
+\begin{equation}
+\frac{1}{(1-u)^{\epsilon+1}} = -\frac{1}{\epsilon} \delta(1-u) + \left( \frac{1}{1-u} \right)_+ - \epsilon \left( \frac{\log(1-u)}{1-u} \right)_+ + O(\epsilon^2).
+\end{equation}
+Multiplying both sides by $u^{\epsilon} = 1 + \epsilon \log(u) + O(\epsilon^2)$, we find that:
+\begin{equation}
+\frac{u^{\epsilon}}{(1-u)^{\epsilon+1}} = -\frac{1}{\epsilon} \delta(1-u) + \left( \frac{1}{1-u} \right)_+ + \epsilon \left( \frac{1}{1-u} \right)_+ \log(u) - \epsilon \left( \frac{\log(1-u)}{1-u} \right)_+ + O(\epsilon^2).
+\end{equation}
+But the plus prescription multiplied by $\log(u)$ has no effect, so we can just remove the plus. Therefore, we're done. \qedsymbol\\
+
+\paragraph{Theorem 2.} The following distributional identity holds:
+\begin{align}
+& \left( -\frac{9}{2} - \frac{\pi^2}{3} \right) \delta(1-u) + 3 + 2u - \frac{3}{2(1-u)_+} + (1 + u^2) \left( \frac{\log(1-u)}{1-u} \right)_+ - \left( \frac{1+u^2}{1-u} \right) \log(u)\notag \\[1.5ex]
+&\qquad = \left[ \frac{1+u^2}{1-u} \left( \log\left( \frac{1-u}{u} \right) - \frac{3}{4} \right) + \frac{5u + 9}{4} \right]_+.
+\end{align}
+\noindent \textit{Proof:} We work from the right hand side to the left hand side. Let $f$ be an arbitrary smooth function. Then:
+\begin{align}
+&\int\limits_{0}^{1} du\ \left[ \frac{1+u^2}{1-u} \left( \log\left( \frac{1-u}{u} \right) - \frac{3}{4} \right) + \frac{5u+9}{4} \right]_+ f(u)\notag \\[1.5ex]
+& \qquad = \int\limits_{0}^{1} du\ \left[ \frac{1+u^2}{1-u} \left( \log(1-u) - \log(u) - \frac{3}{4} \right) + \frac{5u+9}{4} \right] \left( f(u) - f(1) \right)\\[1.5ex]
+& \qquad = \int\limits_{0}^{1} du\ \bigg[ \frac{\log(1-u)}{1-u}((1+u^2) f(u) - 2 f(1)) + (1+u) \log(1-u) f(1)\notag \\
+& \qquad \qquad - \frac{1+u^2}{1-u} \log(u) f(u) + \frac{1+u^2}{1-u} \log(u) f(1) \bigg] + \left[ -\frac{3}{4} \left(\frac{1+u^2}{1-u}\right) + \frac{5u+9}{4} \right] \left( f(u) - f(1) \right)
+\end{align}
+Now observe that we can perform some of the integrals:
+\begin{equation}
+\int\limits_{0}^{1} du\ (1+u) \log(1-u) = -\frac{7}{4}, \qquad \int\limits_{0}^{1} du\ \frac{1+u^2}{1-u} \log(u) = \frac{5}{4} - \frac{\pi^2}{3}.
+\end{equation}
+We can also perform some manipulation of the non-logarithmic terms:
+\begin{align}
+&\left[ -\frac{3}{4} \left(\frac{1+u^2}{1-u}\right) + \frac{5u+9}{4} \right] \left( f(u) - f(1) \right) \notag\\[1.5ex]
+&\qquad = (3+2u) f(u) - \frac{3}{2(1-u)} (f(u) - f(1)) - \left( \frac{3}{4}(1+u) + \frac{5u+9}{4} \right) f(1).
+\end{align}
+Performing all the integrals adjacent to $f(1)$, we obtain the required left hand side. \qedsymbol
 
 \chapter{Random seed dependence}
 \label{app:random}
