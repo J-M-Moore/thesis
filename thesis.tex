@@ -318,14 +318,14 @@ in analogy with the definition of the fine structure constant of QED.
 From the Lagrangian density~(\ref{eq:qcdlagrangian}), one should in principle be able to directly predict all observable QCD phenomena; however, in practice, this is not (yet) theoretically possible. This can be attributed to two major barriers:
 
 \begin{enumerate}[label = (\arabic*)]
-\item QCD is a \textit{strongly-coupled} theory. At the time of writing, the global best-fit value of the coupling $\alpha_S$ is given (at a renormalisation scale equal to the mass of the $Z$-boson; see below) by $\alpha_S = 0.1179 \pm 0.0009$, compared with the fine structure constant of electromagnetism $\alpha_e$ which is approximately $10^2$ times smaller, and the electroweak coupling $\alpha_{\text{EW}}$ which is approximately $10^6$ times smaller (see Sections 1 and 9.4 of Ref.~\cite{ParticleDataGroup:2022pth}). Thus, the application of perturbation theory in QCD is in question; the series expansions which form the backbone of all order-by-order calculations in QFT predictions are on the borderline of convergence.\footnote{Technically, since we expect these series expansions to be \textit{asymptotic}, we do not expect them to converge - for an asymptotic series, we can merely hope to have a number of terms which give a good approximation before we must truncate. For QCD, the fact that the coupling is large means that the number of terms before we must truncate is likely to be smaller than those of electromagnetism or the electroweak theory.} 
+\item QCD is a \textit{strongly-coupled} theory. At the time of writing, the global best-fit value of the coupling $\alpha_S$ is given (at a renormalisation scale equal to the mass of the $Z$-boson; see below) by $\alpha_S = 0.1179 \pm 0.0009$, compared with the fine structure constant of electromagnetism $\alpha_e$ which is more than ten times smaller, and the electroweak coupling $\alpha_{\text{EW}}$ which is approximately $10^6$ times smaller (see Sections 1 and 9.4 of Ref.~\cite{ParticleDataGroup:2022pth}). Thus, the application of perturbation theory in QCD is in question; the series expansions which form the backbone of all order-by-order calculations in QFT predictions are on the borderline of convergence.\footnote{Technically, since we expect these series expansions to be \textit{asymptotic}, we do not expect them to converge - for an asymptotic series, we can merely hope to have a number of terms which give a good approximation before we must truncate. For QCD, the fact that the coupling is large means that the number of terms before we must truncate is likely to be smaller than those of electromagnetism or the electroweak theory.} 
   
 \item The asymptotic states in QCD are \textit{bound states} called \textit{hadrons}, instead of free quarks and gluons.  To obtain predictions in standard quantum field-theoretic perturbation theory, one perturbs around the \textit{free} theory; in particular, working perturbatively one must assume that incoming and outgoing states are free quark and gluon states. Naturally, this is a poor approximation in the case of observable QCD processes, and we must come up with something more robust.
 \end{enumerate}
 
 Overcoming these difficulties in order to make predictions for collider experiments is the industry of \textit{perturbative QCD}. The primary pillars of the field are:
 \begin{enumerate}[label = (\arabic*)]
-\item \textbf{Asymptotic freedom.} As for most\footnote{With the notable exceptions of the masses of the Higgs, heavy bosons, and heavy quarks, where typically an on-shell mass renormalisation is used.} of the parameters of the SM, the strong coupling $\alpha_S(\mu_R)$ is defined to be a \textit{running coupling}, using the modified minimal subtraction renormalisation scheme ($\overline{\text{MS}}$). The coupling depends on an arbitrary scale $\mu_R$ called the \textit{renormalisation scale}; this scale is arbitrary in the sense that if we were to perform calculations to all orders, observables would carry no dependence on this scale. \textit{However}, truncating the perturbation series early can result in a superficial dependence on the scale. 
+\item \textbf{Asymptotic freedom.} As for most\footnote{With the notable exceptions of the masses of the Higgs, and heavy bosons, where typically an on-shell mass renormalisation is used.} of the parameters of the SM, the strong coupling $\alpha_S(\mu_R)$ is defined to be a \textit{running coupling}, using the modified minimal subtraction renormalisation scheme ($\overline{\text{MS}}$). The coupling depends on an arbitrary scale $\mu_R$ called the \textit{renormalisation scale}; this scale is arbitrary in the sense that if we were to perform calculations to all orders, observables would carry no dependence on this scale. \textit{However}, truncating the perturbation series early can result in a superficial dependence on the scale. 
 
 In many cases,\footnote{Indeed, it can be shown that this behaviour is generic; see the discussion preceding and following Eq. (31) in \cite{Delamotte:2002vw}, for example.} dimensional analysis dictates that the arbitrary scale $\mu_R$ will appear in logarithms of the form $\log(\mu_R / Q)$ at any given order in perturbation theory, where $Q$ is a characteristic energy scale of the process. Therefore, to avoid the presence of large logarithms in perturbation theory the renormalisation scale is usually taken as $\mu_R = Q$. This can cause problems for the convergence of perturbation theory if the value of $Q$ is such that $\alpha_S(Q)$ is large (so we can be faced with the problem of choosing $\mu_R$ to either cancel large logarithms, or keep $\alpha_S$ sufficiently small).
 
@@ -476,32 +476,12 @@ y = \frac{E_{\ell} - E_{\ell'}}{E_{\ell}} = 1 - \frac{E_{\ell'}}{E_{\ell}},
 \end{equation}
 where $E_{\ell}$ is the energy of the initial electron, and $E_{\ell'}$ is the energy of the final electron.
 
-Working in four dimensions, $d=4$, we can change variables from $\vec{p}_{\ell'}$ in Eq.~\eqref{eq:almost_final_dis} via:
-\begin{align}
-d^{3} \vec{p}_{\ell'} &= |\vec{p}_{\ell'}|^{2} d|\vec{p}_{\ell'}| d\cos(\theta) d\phi = |\vec{p}_{\ell'}|^{2}\left|\det\left(\frac{\partial (|\vec{p}_{\ell'}|, \cos(\theta))}{\partial(x, y)}\right) \right| dx dy d\phi,
-\label{eq:change_of_variables}
-\end{align}
-where $\theta$ is the angle defined by $\cos(\theta) := \vec{p}_{\ell} \cdot \vec{p}_{\ell'} / |\vec{p}_{\ell}| |\vec{p}_{\ell'}|$, and $d\phi$ is the remaining angular integral. To calculate the Jacobian matrix in Eq.~\eqref{eq:change_of_variables}, consider working in the rest frame of the proton, so that $\vec{p}_H = \vec{0}$. Then, assuming the masslessness of the electrons so that $E_{\ell} = |\vec{p}_{\ell}|$, $E_{\ell'} = |\vec{p}_{\ell'}|$, we can rewrite the variables in Eq.~\eqref{eq:dis_kinematics} through:
-\begin{equation}
-\label{eq:change_of_variables}
-x = \frac{|\vec{p}_{\ell}| |\vec{p}_{\ell'}| \left(1 - \cos(\theta)\right)}{M_H (|\vec{p}_{\ell}| - |\vec{p}_{\ell'}|)}, \qquad y = 1 - \frac{|\vec{p}_{\ell'}|}{|\vec{p}_{\ell}|},
-\end{equation}
-where $M_H$ is the rest mass of the proton. Solving these equations simultaneously for $|\vec{p}_{\ell'}|$ and $\cos(\theta)$, we have:
-\begin{equation}
-|\vec{p}_{\ell'}| = |\vec{p}_{\ell}|(1-y), \qquad \cos(\theta) = 1 - \frac{M_H xy}{|\vec{p}_{\ell}|(1-y)}.
-\end{equation}
-This allows us to compute the Jacobian factor:
-\begin{equation}
-\left|\det\left(\frac{\partial (|\vec{p}_{\ell'}|, \cos(\theta))}{\partial(x, y)}\right) \right| = \frac{M_H y}{1-y}.
-\end{equation}
-Hence the measure in Eq.~\eqref{eq:change_of_variables} may be rewritten as:
-\begin{equation}
-d^{3} \vec{p}_{\ell'} =  |\vec{p}_{\ell}|^2 (1-y) M_H y \ dx dy d\phi.
-\end{equation}
-Putting everything together, the differential cross-section Eq.~\eqref{eq:almost_final_dis} may be written in the simple form:
+Specialising to the case where $d=4$, we can change variables from $\vec{p}_{\ell'}$ in Eq.~\eqref{eq:almost_final_dis} to the variables $x,y,\phi$ yielding the simplified form:
 \begin{equation}
 \frac{d^3\sigma}{dx dy d\phi} = \frac{y}{32 \pi^2 Q^4} L^{\mu\nu} H_{\mu\nu}.
 \end{equation}
+The details of this transformation are given in App.~\ref{app:jacobian}.
+
 To make further progress, we study the Lorentz structure of the hadronic tensor. As can be observed from the definition in Eq.~\eqref{eq:hadronic_tensor}, the only momenta on which the hadronic tensor can depend are the momentum of the initial hadron, $p_H$, and the difference in momentum between the outgoing and ingoing electron, $q$; that is, $H_{\mu\nu} \equiv H_{\mu\nu}(p_H, q)$. The only Lorentz scalars which can be constructed from $p_H$ and $q$ are $p_H^2 = M_H^2$, which is a fixed constant, $q^2 = -Q^2$ and $p_H \cdot q = Q^2/2x$. It can then be shown (see e.g. Ref.~\cite{Halzen:1984mc}) that current conservation at the hadronic vertex implies that the most general Lorentz-covariant structure for the hadronic tensor is given by:
 \begin{equation}
 H_{\mu\nu}(p_H, q) \equiv \left( -\eta_{\mu\nu} + \frac{q_{\mu} q_{\nu}}{q^2} \right) F_1(x,Q^2) + \left( p_{H\mu} - \frac{p_H \cdot q}{q^2} q_{\mu} \right) \left( p_{H\nu} - \frac{p_H \cdot q}{q^2} q_{\nu} \right) \frac{F_2(x,Q^2)}{p_H \cdot q},
@@ -566,7 +546,7 @@ We can now straightforwardly compute the matrix elements to yield:
 &\qquad= \frac{1}{2} e_q^2 \textrm{Tr}(x \slashed{p}_H \gamma_{\nu} (\slashed{q} + x \slashed{p}_H) \gamma_{\mu}) \\[1.5ex]
 &\qquad = 2x e_q^2 \left( p_{H\nu} (q + x p_H)_{\mu} + p_{H\mu} (q + x p_H)_{\nu} - \eta_{\mu\nu} p_H \cdot (q + x p_H) \right),\notag
 \end{align}
-where $e_q$ is the charge on the quark $q$ in units of the electric charge $e$. Note the factor of $1/2$ coming from averaging the ejected quark spin states.
+where $e_q$ is the charge on the quark $q$ in units of the electric charge $e$. Note the factor of $1/2$ coming from averaging the emitted quark spin states.
 
 In the ultra-relativistic limit, it becomes appropriate to neglect the mass of the target proton, $M_H^2 \approx 0$; in this case, we can project the structure functions out of the hadronic tensor via the following contractions:
 \begin{align}
@@ -1008,7 +988,7 @@ for all $x \in [0,1], \mu_F^2 \in [0,\infty)$.\footnote{It is worth noting, howe
 
 \subsection{Large-$x$ and small-$x$ behaviour}
 \label{sec:pdf_scaling}
-Since a constituent of the proton cannot be ejected with momentum fraction $x > 1$, we must have:
+Since a constituent of the proton cannot carry a momentum fraction $x > 1$, we must have:
 \begin{equation}
 \lim_{x \rightarrow 1} f^{\overline{\text{MS}}}(x, \mu_F^2) = 0
 \end{equation}
@@ -1020,7 +1000,7 @@ for each flavour of PDF (though $\alpha$ will depend on the flavour). The upshot
 \begin{equation}
 f^{\overline{\text{MS}}}(x,\mu_F^2) = x^{\alpha} (1-x)^{\beta} \tilde{f}(x,\mu_F^2),
 \end{equation}
-with $\beta > 0$, for some unknown function $\tilde{f}$; this suggests the functional form that most PDF fitting collaborations build upon, as we shall discuss in the subsequent section, Sec.~\ref{sec:pdffitting}.
+with $\beta > 0$, for some unknown function $\tilde{f}$; this suggests the functional form that most PDF fitting collaborations build upon, as we shall discuss in the subsequent section, Sect.~\ref{sec:pdffitting}.
 
 
 \section{Fitting parton distribution functions}
@@ -1049,7 +1029,7 @@ More recently, the \textit{Neural Network Parton Distribution Function} (NNPDF) 
 \begin{equation}
 xf(x,Q_0^2) = x^{\alpha}(1-x)^{\beta} \text{NN}(x; \vec{w}),
 \end{equation}
-where $\text{NN}(x; \vec{w})$ is the output of a neural network parametrised by $\vec{w}$ (the details of the architecture, and how it is extended appropriately for this thesis, are given in Sec.~\ref{sec:simunet}), and $\alpha, \beta$ are fixed prior to the fit;\footnote{Technically fixed for each \textit{replica} in the fit individually; see the below discussion of the Monte Carlo replica method of error propagation used by the NNPDF collaboration. On a separate note, it has recently been shown in Ref.~\cite{Carrazza:2021yrg} that the scaling prefactor is not in fact necessary, and the network can learn this behaviour.} the fit is then iterated to check stability of $\alpha, \beta$. The main advantage claimed by NNPDF in using a neural network parametrisation is that it allows the exploration of an extremely large space of functions, removing the bias inherent in fixed functional form approaches. This is supported by so-called `universal approximation theorems' (see Ref.~\cite{HORNIK1989359}, for example), which tell us that any given function can be well-approximated by a sufficiently deep neural network.
+where $\text{NN}(x; \vec{w})$ is the output of a neural network parametrised by $\vec{w}$ (the details of the architecture, and how it is extended appropriately for this thesis, are given in Sect.~\ref{sec:simunet}), and $\alpha, \beta$ are fixed prior to the fit;\footnote{Technically fixed for each \textit{replica} in the fit individually; see the below discussion of the Monte Carlo replica method of error propagation used by the NNPDF collaboration. On a separate note, it has recently been shown in Ref.~\cite{Carrazza:2021yrg} that the scaling prefactor is not in fact necessary, and the network can learn this behaviour.} the fit is then iterated to check stability of $\alpha, \beta$. The main advantage claimed by NNPDF in using a neural network parametrisation is that it allows the exploration of an extremely large space of functions, removing the bias inherent in fixed functional form approaches. This is supported by so-called `universal approximation theorems' (see Ref.~\cite{HORNIK1989359}, for example), which tell us that any given function can be well-approximated by a sufficiently deep neural network.
 
 \subsection{The loss function}
 \label{sec:the_loss_function}
@@ -1077,11 +1057,11 @@ The function $\textrm{ELU}_{\alpha}$ is the \textit{exponential linear unit}, de
 \begin{equation}
 \textrm{ELU}_{\alpha}(t) = \begin{cases} t, & \text{if $t \geq 0$;} \\ \alpha (e^t - 1), & \text{if $t < 0$,} \end{cases}
 \end{equation}
-which is intended to penalise negative PDFs but pass positive PDFs (of course other choices of functions would work for this purpose too). The parameters $\Lambda_q$ and $\alpha$ are hyperparameters, which are chosen to maximise fit quality (indeed, in the NNPDF framework, they are chosen by a hyperoptimisation procedure, described in detail in Sec. 3.3 of Ref.~\cite{NNPDF:2021njg} - additionally, the parameters $\Lambda_q$ are increased at each step of the minimisation to improve convergence).
+which is intended to penalise negative PDFs but pass positive PDFs (of course other choices of functions would work for this purpose too). The parameters $\Lambda_q$ and $\alpha$ are hyperparameters, which are chosen to maximise fit quality (indeed, in the NNPDF framework, they are chosen by a hyperoptimisation procedure, described in detail in Sect. 3.3 of Ref.~\cite{NNPDF:2021njg} - additionally, the parameters $\Lambda_q$ are increased at each step of the minimisation to improve convergence).
 
 \paragraph{The $t_0$ prescription.} The second modification to the loss function comes from a slightly unexpected place: we must modify the loss function when we have datasets that include multiplicative normalisation uncertainties. A full discussion of why this is the case is given in Ref.~\cite{Ball:2009qv}, but here we give some brief intuition. 
 
-Consider a fit which includes two measurements of the same observable, say $d_1, d_2$ with $d_1 < d_2$. Suppose further that each of these measurements carries an equal multiplicative normalisation uncertainty, $s$; in particular, this implies that the absolute error on $d_1$ is $s d_1$ and the absolute error on $d_2$ is $s d_2$. Now, despite the experimentalists reporting the same error for both datapoints, when minimising the na\"{i}ve $\chi^2$, there will be a bias towards the value $d_1$ since it carries the smaller uncertainty. This bias is called the \textit{d'Agostini bias}, after the author who first introduced it in Ref.~\cite{DAgostini:1993arp}; minimal examples with far greater mathematical detail are presented in Sec. 3.1 of Ref.~\cite{Ball:2009qv}.
+Consider a fit which includes two measurements of the same observable, say $d_1, d_2$ with $d_1 < d_2$. Suppose further that each of these measurements carries an equal multiplicative normalisation uncertainty, $s$; in particular, this implies that the absolute error on $d_1$ is $s d_1$ and the absolute error on $d_2$ is $s d_2$. Now, despite the experimentalists reporting the same error for both datapoints, when minimising the na\"{i}ve $\chi^2$, there will be a bias towards the value $d_1$ since it carries the smaller uncertainty. This bias is called the \textit{d'Agostini bias}, after the author who first introduced it in Ref.~\cite{DAgostini:1993arp}; minimal examples with far greater mathematical detail are presented in Sect. 3.1 of Ref.~\cite{Ball:2009qv}.
 
 The bias can be countered using the so-called \textit{$t_0$ prescription} for the $\chi^2$-statistic, as described in Ref.~\cite{Ball:2009qv}. In brief, this involves the addition of a covariance matrix of theory predictions being added to the usual experimental covariance matrix, modifying it to the so-called $t_0$ covariance matrix, $\Sigma_{t_0}$. The matrix of theory predictions that we add to the covariance matrix depends on a PDF set, called the \textit{$t_0$ PDF set}; however, the dependence on this set is usually weak, and in the NNPDF methodology, fits are \textit{iterated} (that is, a new fit is run using the output of the initial fit as the $t_0$ PDF set) to check stability.
 
@@ -1101,7 +1081,7 @@ The \textit{learning rate} $\gamma$ determines the speed with which we approach 
 
 \paragraph{Stochastic gradient descent.} Stochastic gradient descent is a slightly more efficient version of gradient descent, since it avoids computing the gradient $\nabla \chi^2_{t_0+\text{pos}}$ in its entirety, which can be costly in a global fit with many datasets. Instead, the dataset is split into a number of smaller \textit{batches}, and at each step (2) of the gradient descent algorithm presented above, the gradient is computed for the loss \textit{only} on one of the smaller batches, chosen at random. This can significantly increase the speed of the fits, and can be shown not to compromise the accuracy. 
 
-\paragraph{Cross-validation.} Na\"{i}ve minimisation of the loss function via stochastic gradient descent may lead to overfitting. To combat this, one can use standard cross-validation techniques. In particular, we can split the dataset into a `training' set and `validation' set; we then only include the training data in the loss, and monitor the validation statistic whilst training is performed using stochastic gradient descent. At the point at which the loss computed on the validation increases, we know we have reached a point of overfitting. This is the method currently used by NNPDF in their most recent analysis \cite{NNPDF:2021njg}.\footnote{Technically, the training-validation split is performed on a replica by replica basis; see Sec.~\ref{sec:pdf_error_propagation} below.}
+\paragraph{Cross-validation.} Na\"{i}ve minimisation of the loss function via stochastic gradient descent may lead to overfitting. To combat this, one can use standard cross-validation techniques. In particular, we can split the dataset into a `training' set and `validation' set; we then only include the training data in the loss, and monitor the validation statistic whilst training is performed using stochastic gradient descent. At the point at which the loss computed on the validation increases, we know we have reached a point of overfitting. This is the method currently used by NNPDF in their most recent analysis \cite{NNPDF:2021njg}.\footnote{Technically, the training-validation split is performed on a replica by replica basis; see Sect.~\ref{sec:pdf_error_propagation} below.}
 
 \subsection{Error propagation}
 \label{sec:pdf_error_propagation}
@@ -1129,11 +1109,13 @@ and the \textit{variance} on the PDF:
 \begin{equation}
 (\Delta f)^2 := \frac{1}{N_{\text{rep}}} \sum_{i=1}^{N_{\text{rep}}} f_i^2 - \braket{f}^2.
 \end{equation}
+Confidence intervals can also be calculated, based either on taking appropriate quantiles of the Monte Carlo replicas, or by computing standard deviations from the central PDF (the latter assumes a Gaussian distribution of the PDFs at each point in $x$-space).
 
 Before proceeding, it is worth noting that despite the very intuitive nature of the Monte Carlo replica method, the method has significant shortcomings that can sometimes result in unfaithful errors (see in particular App. E of~\cite{Kassabov:2023hbm}). These issues will be discussed in detail in Chapters~\ref{chap:top} and~\ref{chap:montecarlo}; indeed, the problems with Monte Carlo error propagation may prove consequential in future PDF fits.
 
 
 
+\newpage
 \section{Global fits of PDFs and theory parameters}
 \label{sec:globalfits}
 
@@ -1148,7 +1130,9 @@ In particular, it carries a dependence on \textit{both} the PDFs \textit{and} th
 
 This can become problematic when we wish to \textit{fit} the strong coupling. For suppose that we wish to extract the value of $\alpha_S$ from some new experimental process, which involves initial-state hadrons. If we make predictions for this fit using PDFs that have been produced under the assumption $\alpha_S = \alpha_{S0}$, for some fixed value $\alpha_{S0}$, then we risk introducing a bias towards this value in the subsequent determination of $\alpha_S$ from the new data. This is described in significantly more detail, for the specific problem of $\alpha_S$ extractions, in Ref.~\cite{Forte:2020pyp}. \\
 
-\noindent Importantly, the above argument applies equally well to \textit{any} theory parameters, not just the strong coupling. In this thesis, we shall concern ourselves with theory parameters drawn from \textit{beyond the Standard Model} (BSM) theories (namely \textit{dark matter models} and the \textit{Standard Model Effective Field Theory}). In particular, PDFs are usually fitted under the assumption that the SM is true, which implicitly assumes the additional parameters in any BSM theory are all zero; therefore, before we perform an analysis allowing for BSM physics, using processes with hadrons in the initial state, we should ask ourselves:
+\noindent Importantly, the above argument applies equally well to \textit{any} theory parameters, not just the strong coupling. Previous work has studied the simultaneous extraction of PDFs and SM parameters; for example, see Ref.~\cite{Ball:2018iqk} for a simultaneous determination of PDFs and $\alpha_S$, using the `correlated replica' method.
+
+On the other hand, in this thesis, we shall concern ourselves with theory parameters drawn from \textit{beyond the Standard Model} (BSM) theories (namely \textit{dark matter models} and the \textit{Standard Model Effective Field Theory}). In particular, PDFs are usually fitted under the assumption that the SM is true, which implicitly assumes the additional parameters in any BSM theory are all zero; therefore, before we perform an analysis allowing for BSM physics, using processes with hadrons in the initial state, we should ask ourselves:
 \begin{itemize}
 \item How do the PDFs change between a fit assuming the SM, and a fit where the PDFs are determined simultaneously with the parameters of the BSM theory?
 \item How do the bounds on the parameters of a BSM theory change between a fit using SM PDFs, compared with a simultaneous fit of the BSM parameters alongside PDFs?
@@ -1169,11 +1153,11 @@ In the second part of this text, \textit{Future considerations for fitting parto
 
 \epigraph{Stars, everywhere. So many stars that I could not for the life me understand how the sky could contain them all yet be so black.}{\textit{\\ from Blindsight, \\ by Peter Watts}}
 
-\noindent \textit{[This chapter is based on Ref.~\cite{McCullough:2022hzr}, produced in collaboration with Matthew McCullough and Maria Ubiali. The original idea for the study was Matthew's. The results were produced by myself. Section~\ref{sec:existingconstraints} was written by Matthew, but is included for context; the remaining sections were written collaboratively.]}\\
+\noindent \textit{[This chapter is based on Ref.~\cite{McCullough:2022hzr}, produced in collaboration with Matthew McCullough and Maria Ubiali. The original idea for the study was Matthew's. The results were produced by myself.]}\\
 
-\noindent In Section~\ref{sec:globalfits}, it was argued that when performing a fit of parameters in a BSM theory using data which involves initial-state hadrons, one should consider the impact of simultaneously extracting both PDFs and the parameters of the BSM model. In this chapter, we discuss how this issue might be handled in the context of a `toy' dark matter model, where the New Physics is \textit{light} and \textit{weakly-coupled}.
+\noindent In Sect.~\ref{sec:globalfits}, it was argued that when performing a fit of parameters in a BSM theory using data which involves initial-state hadrons, one should consider the impact of simultaneously extracting both PDFs and the parameters of the BSM model. In this chapter, we discuss how this issue might be handled in the context of a `toy' dark matter model, where the New Physics is \textit{light} and \textit{weakly-coupled}.
 
-We begin in Section~\ref{sec:darkphoton} with a brief review of dark matter and dark photons, and introduce the `toy' dark matter model which shall be used in the rest of this chapter. In Section~\ref{sec:dark_pdfs}, we describe how PDF evolution is modified in the presence of our proposed dark matter candidate. In Section~\ref{sec:dark_pheno}, we place projected bounds on the mass and coupling of our dark matter candidate by considering the quality of the data-theory agreement on projected high-mass Drell-Yan data. In Section~\ref{sec:dark_future}, we discuss how this work might be improved and extended in the future.
+We begin in Sect.~\ref{sec:darkphoton} with a brief review of dark matter and dark photons, and introduce the `toy' dark matter model which shall be used in the rest of this chapter. In Sect.~\ref{sec:dark_pdfs}, we describe how PDF evolution is modified in the presence of our proposed dark matter candidate. In Sect.~\ref{sec:dark_pheno}, we place projected bounds on the mass and coupling of our dark matter candidate by considering the quality of the data-theory agreement on projected high-mass Drell-Yan data. In Sect.~\ref{sec:dark_future}, we discuss how this work might be improved and extended in the future.
 
 
 \section{Dark matter and dark photons}
@@ -1313,7 +1297,7 @@ We then display and discuss the resulting `dark PDF sets',
 and compare them to baseline PDF sets excluding the dark photon.
 In particular, we analyse the dark luminosities, which show an appreciable deviation
 from their SM counterparts for sufficiently large values of the coupling $\alpha_B$;
-this motivates the phenomenological study that we present in Sec.~\ref{sec:dark_pheno}.
+this motivates the phenomenological study that we present in Sect.~\ref{sec:dark_pheno}.
 
 
 \subsection{The DGLAP equations in the presence of dark photons}
@@ -1322,7 +1306,7 @@ this motivates the phenomenological study that we present in Sec.~\ref{sec:dark_
 %For any given parton flavour $i$, the parton density $f_i(x,\mu^2)$ is a function of two variables: $x$, the momentum fraction, and $\mu^2$, the \textit{factorisation scale}, usually chosen to be about the hard energy scale of the process. The  %latter is introduced to parametrise the absorption of infrared collinear divergences into the PDFs, analogous to the absorption of ultraviolet divergences in standard perturbative renormalisation. Importantly, the 
 %parton densities obey a Callan-Symanzik equation in the variable $\mu^2$, the DGLAP equation. 
 
-As alluded to in Sec.~\ref{sec:pdfproperties}, in order to combine  QCD and electroweak
+As alluded to in Sect.~\ref{sec:pdfproperties}, in order to combine  QCD and electroweak
 calculations at hadron colliders,
 the PDF evolution must be determined using the coupled QCD and QED
 DGLAP
@@ -1364,7 +1348,7 @@ where $\mu_F^2$ is the factorisation scale, $n_f$ the number of active
 flavours, $q_i$ ($\overline{q}_i$) the parton density of the $i$th (anti)quark,\footnote{We now ease notation; in general, instead of writing $f_q$ for the PDF as we did in the introduction, we simply write it as $q$.} $g$ the gluon PDF, $\gamma$ the photon PDF, and
 $B$ the new dark photon PDF.
 
-As described in Sec.~\ref{sec:pdfproperties}, the splitting functions are perturbatively calculable order by order in QCD and QED perturbation theory, hence we can decompose the splitting functions into series of the form:
+As described in Sect.~\ref{sec:pdfproperties}, the splitting functions are perturbatively calculable order by order in QCD and QED perturbation theory, hence we can decompose the splitting functions into series of the form:
 \begin{align}
 \label{eq:splittingexpansion}
 P_{ij} &= \left( \frac{\alpha_s}{2\pi} \right) P_{ij}^{(1,0,0)} + \left( \frac{\alpha_s}{2\pi} \right)^2 P_{ij}^{(2,0,0)} + \left(\frac{\alpha_s}{2\pi}\right)^3 P_{ij}^{(3,0,0)} \notag\\[1.5ex]
@@ -1373,7 +1357,7 @@ P_{ij} &= \left( \frac{\alpha_s}{2\pi} \right) P_{ij}^{(1,0,0)} + \left( \frac{\
 \end{align}
 where we follow the notation of \cite{deFlorian:2015ujt,deFlorian:2016gvk}; the upper indices indicate
 the (QCD,QED,Dark) order of the calculation (where in this work we have added an additional `Dark' index, corresponding
-to the powers of the dark coupling $\alpha_B$). As described above in Sec.~\ref{sec:pdfproperties}, the splitting functions $P_{ij}^{(1,0,0)}$, $P_{ij}^{(2,0,0)}$, $P_{ij}^{(3,0,0)}$, $P_{ij}^{(0,1,0)}$, $P_{ij}^{(1,1,0)}$ and $P_{ij}^{(0,2,0)}$ are all known.
+to the powers of the dark coupling $\alpha_B$). As described above in Sect.~\ref{sec:pdfproperties}, the splitting functions $P_{ij}^{(1,0,0)}$, $P_{ij}^{(2,0,0)}$, $P_{ij}^{(3,0,0)}$, $P_{ij}^{(0,1,0)}$, $P_{ij}^{(1,1,0)}$ and $P_{ij}^{(0,2,0)}$ are all known.
 
 %%
 \begin{figure}[t]
@@ -1459,7 +1443,7 @@ P_{qB}^{(0,0,1)}(x) &= \frac{1}{9} P_{q\gamma}^{(0,1,0)}(x) = \frac{x^2 + (1-x)^
 \subsection{PDF sets with dark photons}
 \label{sec:pdf_sets_with_dark_photons}
 
-We have implemented the modified DGLAP equations described in~Sec. \ref{subsec:dglap} in the
+We have implemented the modified DGLAP equations described in~Sect. \ref{subsec:dglap} in the
 public APFEL PDF evolution code~\cite{Bertone:2013vaa}, which is an accurate and flexible code that can be used to perform PDF evolution up to NNLO
 in QCD and NLO in QED, using a variety of heavy flavour schemes.
 The evolution is performed in $x$-space,\footnote{Rather than Mellin $N$-space, which is an alternative obtained by taking the Mellin transform of the DGLAP equations.} and uses a rotated 
@@ -1743,7 +1727,7 @@ The strongest are from CMS $B+$ISR searches
 Fig.~\ref{fig:limits}. 
 
 \subsection{Effects of the dark photon on parton luminosities}
-In Sec.~\ref{subsec:dglap}, we showed that the presence of a dark photon modifies
+In Sect.~\ref{subsec:dglap}, we showed that the presence of a dark photon modifies
 all other flavours of PDFs via the mixing associated with the
 DGLAP evolution equations, with a modification that is proportional to
 $\alpha_B$ and the logarithm of $m_B$. 
@@ -2121,7 +2105,7 @@ where $\chi^2_0$ is the $\chi^2$-statistic when predictions from the baseline se
 \includegraphics[width=0.95\textwidth]{darkphoton_figures/bounds_plot.pdf}
 \caption{Comparison of the projected HL-LHC sensitivity computed in
   this work in the optimistic (green) and conservative (purple) scenarios with the
-  existing bounds described in Sec.~\ref{sec:existingconstraints}. The solid green and
+  existing bounds described in Sect.~\ref{sec:existingconstraints}. The solid green and
   purple lines correspond to projected bounds obtained \textit{excluding} projected PDF uncertainty, whilst the 
   dashed lines correspond to projected bounds obtained \textit{including} projected PDF uncertainty, as discussed in
   the text.}
@@ -2131,8 +2115,6 @@ where $\chi^2_0$ is the $\chi^2$-statistic when predictions from the baseline se
 We observe that the projected HL-LHC sensitivity to the detection of a dark photon is competitive with existing experimental bounds, across a large range of possible masses, especially $m_B \in [2,6] \cup [25, 50]\ \text{GeV}$. Even in the most conservative scenario including PDF uncertainty (shown as a dashed purple line), the projected sensitivity remains competitive with experiment. Furthermore, one of the useful features of our projected sensitivity is that it is uniformly excluding across a large range (because of the logarithmic dependence on $m_B$); when compared to individual bounds one at a time, for example the $\Upsilon$-decay bounds, or the anomaly bounds, our projected sensitivity is powerful.
 
 
-
-\newpage
 \section{Future directions}
 \label{sec:dark_future}
 
@@ -2152,13 +2134,11 @@ Finally, it would be interesting to ask whether similar analyses could be perfor
 \chapter{Parton distributions in the SMEFT from high-energy Drell-Yan tails}
 \label{chap:smeftdy}
 
-\epigraph{...}{\textit{\\ from ..., \\ by ...}}
-
-\noindent \textit{[This chapter is based on Ref.~\cite{Greljo:2021kvv}, produced in collaboration with Admir Greljo, Shayan Iranipour, Zahari Kassabov, Maeve Madigan, Juan Rojo, Maria Ubiali and Cameron Voisey, and additionally on Ref.~\cite{Madigan:2021uho}, produced in collaboration with Maeve Madigan. My main contributions to the work comprised: the calculation and production of SMEFT $K$-factors for all of the DIS processes entering the study, accurate to next-to-leading order in QCD; benchmarking of the charged current DY $K$-factors against an analytic calculation; running a subset of the fits and analysis, especially in the follow-up study of Ref.~\cite{Madigan:2021uho}, presented in Sect.~\ref{sec:hllhc_extension}.]}\\
+\noindent \textit{[This chapter is based on Ref.~\cite{Greljo:2021kvv}, produced in collaboration with Admir Greljo, Shayan Iranipour, Zahari Kassabov, Maeve Madigan, Juan Rojo, Maria Ubiali and Cameron Voisey, and additionally on Ref.~\cite{Madigan:2021uho}, produced in collaboration with Maeve Madigan. My main contributions to the work comprised: the calculation and production of SMEFT $K$-factors for all of the DIS processes entering the study, accurate to next-to-leading order in QCD; benchmarking of the charged current DY $K$-factors against an analytic calculation; running a subset of the fits and analysis, especially in the follow-up study of Ref.~\cite{Madigan:2021uho}, presented in Sect.~\ref{sec:hllhc_extension}; collaborative writing of the paper.]}\\
 
 \noindent In Chapter~\ref{chap:darkphoton}, we focussed on simultaneous extraction of PDFs and BSM parameters in the case of a dark photon model, where the only BSM particle was \textit{light}. Whilst this model was motivated by the desire to provide a possible dark matter candidate, it is only one of plethora of models which we could have investigated. This suggests the need for a more general framework in which to search for BSM physics.
 
-In the case of \textit{heavy} New Physics, this can be facilitated through the language of \textit{effective field theories} (EFTs). In this chapter, we shall introduce the idea of treating the Standard Model within the effective field theory approach. We shall subsequently present a study wherein we simultaneously extract PDFs and two couplings drawn from the Standard Model EFT, using both DIS and DY data; we shall find that the interplay between PDFs and the Standard Model EFT is mild with the current data, but when we move to using projected HL-LHC data (just as in Sect.~\ref{subsec:dark_constraints}), the interplay becomes significant. This study motivates a more comprehensive extraction of PDFs alongside Standard Model EFT couplings in the top sector, which we present in Chapter~\ref{chap:top}. Further, we present a first glimpse of extraction of PDFs from projected data \textit{which contains New Physics} in Sect.~\ref{sec:hllhc_extension}, an idea which will be investigated in much greater detail in Chapter~\ref{chap:contamination}.
+In the case of \textit{heavy} New Physics, this can be facilitated through the language of \textit{effective field theories} (EFTs). In this chapter, we shall introduce the idea of treating the Standard Model within the effective field theory approach. We shall subsequently present a study wherein we simultaneously extract PDFs and two couplings drawn from the Standard Model EFT, using both DIS and DY data; we shall find that the interplay between PDFs and the Standard Model EFT is mild with the current data, but when we move to using projected HL-LHC data (just as in Sect.~\ref{subsec:dark_constraints}), the interplay becomes significant. This study motivates a more comprehensive extraction of PDFs alongside Standard Model EFT couplings in the top sector, which we present in Chapter~\ref{chap:top}; further, the methodology presented in this chapter is based on a relatively crude \textit{scan} method, whereas the method used in Chapter~\ref{chap:top} is much more powerful and flexible. Finally, we present a first glimpse of extraction of PDFs from projected data \textit{which contains New Physics} in Sect.~\ref{sec:hllhc_extension}, an idea which will be investigated in much greater detail in Chapter~\ref{chap:contamination}.
 
 \section{Effective field theories and the SMEFT}
 \label{sec:eft_intro}
@@ -2312,7 +2292,7 @@ inadvertedly reabsorbed into the PDFs, entailing the need for a simultaneous
 extraction of PDFs and SMEFT couplings.
 
 A first take on this challenge was presented in a proof-of-concept study~\cite{Carrazza:2019sec} where
-the simultaneous determination of PDFs and SMEFT coefficients from deep inelastic scattering (DIS)
+the simultaneous determination of PDFs and four SMEFT coefficients from deep inelastic scattering (DIS)
 structure functions was demonstrated.
 %
 There, it was found that the SMEFT corrections can indeed be partially reabsorbed into the PDFs
@@ -4414,7 +4394,7 @@ the double-differential measurement) and monitor in each case the following two 
     n_\sigma\equiv
     \frac{|\chi^2-1|}{\sigma_{\chi^2}}=\frac{|\chi^2-1|}{\sqrt{2/n_{\rm dat}}} \, ,
   \end{equation}
-  where the $\chi^2$ in this case (and in the rest of the paper unless
+  where the $\chi^2$ in this case (and in the rest of the chapter unless
   specified) is the experimental $\chi^2$ per
   data point, which is defined as
   \begin{equation}\label{eq:chi2exp}
@@ -4570,7 +4550,7 @@ the ratio of fixed order NNLO predictions to the NNLO+NNLL ones is minimised,
 allowing us to neglect theory uncertainties associated to missing higher orders beyond NNLO. 
 %
 To obtain the corresponding
-NNLO $K$-factors, we use the {\sc\small HighTEA} public software~\cite{hightea}, 
+NNLO $K$-factors, we use the {\sc\small HighTEA} public software~\cite{Czakon:2023hls}, 
 an event database for distributing and analysing the results of fixed order NNLO
 calculations for LHC processes.
 %
@@ -7078,7 +7058,7 @@ data which include quadratic corrections. We will revisit this more carefully in
 \chapter{Disentangling New Physics effects and parton distributions}
 \label{chap:contamination}
 
-\textit{[This chapter is based on an upcoming publication, worked on in collaboration with Elie Hammou, Zahari Kassabov, Maeve Madigan, Michelangelo Mangano, Luca Mantani, Manuel Morales Alvarado and Maria Ubiali. My contribution to this work comprised: writing the additions to the }\texttt{validphys}\textit{ code which produces the contaminated fits; running various contaminated fits and testing the random seed dependence of the contaminated fits; writing the analysis code which produces BSM bounds based on the contaminated fits; running the $pp \rightarrow ZH$ analysis, which is one of those used in Sect.~\ref{sec:dy}; running the weighted fits mentioned in Sect.~\ref{sec:solution} as an attempt to disentangle PDFs and New Physics.]}\\
+\textit{[This chapter is based on Ref.~\cite{Hammou:2023heg}, worked on in collaboration with Elie Hammou, Zahari Kassabov, Maeve Madigan, Michelangelo Mangano, Luca Mantani, Manuel Morales Alvarado and Maria Ubiali. My contribution to this work comprised: writing the additions to the code which produces the contaminated fits; running various contaminated fits and testing the random seed dependence of the contaminated fits; writing the analysis code which produces BSM bounds based on the contaminated fits; running the $pp \rightarrow ZH$ analysis, which is one of those used in Sect.~\ref{sec:dy}; running the weighted fits mentioned in Sect.~\ref{sec:solution} as an attempt to disentangle PDFs and New Physics.]}\\
 
 \noindent So far, this thesis has exclusively focussed on the simultaneous determination of PDFs
 and BSM couplings in a selection of models (namely a dark matter model, and two SMEFT scenarios). 
@@ -7118,7 +7098,7 @@ are given by some fixed reference set; (ii) generate artificial MC data based on
 (iii) fit PDFs to the pseudodata using the NNPDF methodology. Various statistical estimators, described in Ref.~\cite{DelDebbio:2021whr}, can then be applied to 
 check the quality of the fit (in broad terms, assessing its difference from the true PDFs), hence verifying the accuracy of the fitting methodology.
 
-In this study, the closure test methodology is adapted to account for the fact that the true theory of Nature may \textit{not} be the 
+In our study, the closure test methodology is adapted to account for the fact that the true theory of Nature may \textit{not} be the 
 SM. In the first step of the closure test methodology, we now assume the existence of some NP model which modifies
 the MC data generated from the fixed reference PDF set. We investigate the danger posed by subsequently fitting this `contaminated' 
 pseudodata assuming that the SM is the true theory of Nature.
@@ -8760,6 +8740,31 @@ We defer the ambitious project of conceiving of, designing and implementing such
 
 \appendix
 
+\chapter{Transformation to standard DIS variables}
+\label{app:jacobian}
+In Chapter~\ref{chap:intro}, we changed variables from the three-momentum of the outgoing electron $\vec{p}_{\ell'}$ to the standard DIS variables $(x,y,\phi)$. To make this transformation, we note that in $d=4$, we have:
+\begin{align}
+d^{3} \vec{p}_{\ell'} &= |\vec{p}_{\ell'}|^{2} d|\vec{p}_{\ell'}| d\cos(\theta) d\phi = |\vec{p}_{\ell'}|^{2}\left|\det\left(\frac{\partial (|\vec{p}_{\ell'}|, \cos(\theta))}{\partial(x, y)}\right) \right| dx dy d\phi,
+\label{eq:change_of_variables}
+\end{align}
+where $\theta$ is the angle defined by $\cos(\theta) := \vec{p}_{\ell} \cdot \vec{p}_{\ell'} / |\vec{p}_{\ell}| |\vec{p}_{\ell'}|$, and $d\phi$ is the remaining angular integral. To calculate the Jacobian matrix in Eq.~\eqref{eq:change_of_variables}, consider working in the rest frame of the proton, so that $\vec{p}_H = \vec{0}$. Then, assuming the masslessness of the electrons so that $E_{\ell} = |\vec{p}_{\ell}|$, $E_{\ell'} = |\vec{p}_{\ell'}|$, we can rewrite the variables in Eq.~\eqref{eq:dis_kinematics} through:
+\begin{equation}
+\label{eq:change_of_variables}
+x = \frac{|\vec{p}_{\ell}| |\vec{p}_{\ell'}| \left(1 - \cos(\theta)\right)}{M_H (|\vec{p}_{\ell}| - |\vec{p}_{\ell'}|)}, \qquad y = 1 - \frac{|\vec{p}_{\ell'}|}{|\vec{p}_{\ell}|},
+\end{equation}
+where $M_H$ is the rest mass of the proton. Solving these equations simultaneously for $|\vec{p}_{\ell'}|$ and $\cos(\theta)$, we have:
+\begin{equation}
+|\vec{p}_{\ell'}| = |\vec{p}_{\ell}|(1-y), \qquad \cos(\theta) = 1 - \frac{M_H xy}{|\vec{p}_{\ell}|(1-y)}.
+\end{equation}
+This allows us to compute the Jacobian factor:
+\begin{equation}
+\left|\det\left(\frac{\partial (|\vec{p}_{\ell'}|, \cos(\theta))}{\partial(x, y)}\right) \right| = \frac{M_H y}{1-y}.
+\end{equation}
+Hence the measure in Eq.~\eqref{eq:change_of_variables} may be rewritten as:
+\begin{equation}
+d^{3} \vec{p}_{\ell'} =  |\vec{p}_{\ell}|^2 (1-y) M_H y \ dx dy d\phi.
+\end{equation}
+
 \chapter{Proofs of plus prescription identities}
 \label{app:plus_prescription}
 In this Appendix, we give a proof of the plus prescription identities used in the introductory chapter.
@@ -8821,8 +8826,8 @@ We justify this approximation in this brief appendix by comparing the PDF lumino
 In Fig.~\ref{fig:lumi_random}, we plot the luminosities obtained
 from contaminated fits resulting from setting the $\hat{W}$ parameter to the benchmark values $\hat{W} = 3 \times 10^{-5}$, $\hat{W} = 8 \times 10^{-5}$ and $\hat{W} = 15 \times 10^{-5}$. We display the results for two separate contaminated fits for each of the benchmark values; in each case, one of the fits results from the use of a particular random seed (called \textit{seed $1$} in the plots), whilst the other results from the use of another random seed (called \textit{seed $2$} in the plots). 
  \begin{figure}[h!]
-%  \includegraphics[width=0.49\linewidth]{Figures/lumi_cont_qqb_2seeds.pdf}
-%  \includegraphics[width=0.49\linewidth]{Figures/lumi_cont_udb_2seeds.pdf}
+  \includegraphics[width=0.49\linewidth]{Figures/lumi_cont_qqb_2seeds.pdf}
+  \includegraphics[width=0.49\linewidth]{Figures/lumi_cont_udb_2seeds.pdf}
   \caption{Comparison between luminosities obtained in contaminated fits using two different random seeds in the generation of pseudodata. In each case, we display six contaminated fits: two fits for each of the benchmark values $\hat{W} = 3 \times 10^{-5}, 8 \times 10^{-5}, 15 \times 10^{-5}$, trained on pseudodata generated with random seed $1$ and random seed $2$ respectively.}
 \label{fig:lumi_random}
 \end{figure}
