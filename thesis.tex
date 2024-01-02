@@ -492,7 +492,7 @@ Contracting with the expression for the leptonic tensor, Eq.~\eqref{eq:leptonic_
 \begin{equation}
 \frac{d^3\sigma}{dx dy d\phi} = \frac{2y \alpha^2}{Q^4} \left( 2(p_{\ell} \cdot p_{\ell'}) F_1 + \frac{1}{p_H \cdot q} [2 (p_H \cdot p_{\ell}) (p_H \cdot p_{\ell'}) - M_H^2 (p_{\ell} \cdot p_{\ell'})] F_2 \right),
 \end{equation}
-where $\alpha = e^2 / 4\pi$ is the fine structure constant of QED. To finish, we note that Eq.~\eqref{eq:dis_kinematics} allow us to write:
+where $\alpha = e^2 / 4\pi$ is the fine structure constant of QED. To finish, we note that Eq.~\eqref{eq:dis_kinematics} allows us to write:
 \begin{equation}
 p_{\ell} \cdot p_{\ell'} = \frac{Q^2}{2}, \qquad p_H \cdot p_{\ell} = \frac{Q^2}{2xy}, \qquad p_H \cdot p_{\ell'} = \frac{Q^2}{2x} \left( \frac{1}{y} - 1 \right). 
 \end{equation}
@@ -700,7 +700,7 @@ which yields:
 \begin{equation}
 v = \frac{1 - \cos(\theta)}{2}.
 \end{equation}
-Hence $v$ is a measure of the \textit{collinearity} of the outgoing quark and the radiated gluon; in particular, as $v \rightarrow 0$, we have the outgoing quark and the radiated gluon are collinear.
+Hence $v$ is a measure of the \textit{collinearity} of the outgoing quark and the radiated gluon; in particular, as $v \rightarrow 0$, we have that the outgoing quark and the radiated gluon are collinear.
 
 Computing the Jacobian factor, we can now make the change of variables to $u,v$. We note that:
 \begin{equation}
@@ -984,7 +984,7 @@ However, a proof has recently become available that this is indeed the case \cit
 \begin{equation}
 f^{\overline{\text{MS}}}(x,\mu_F^2) \geq 0
 \end{equation}
-for all $x \in [0,1], \mu_F^2 \in [0,\infty)$.\footnote{It is worth noting, however, that the rigour of the proof is somewhat in question; in particular, Ref.~\cite{Collins:2021vke} shows that in fact `bare' PDFs need not be positive in $d = 4 - 2\epsilon$ dimensions, which is a major assumption of the proof in Ref.~\cite{Candido:2020yat}. Nonetheless, the NNPDF fitting collaboration assume positivity of the PDFs, and given that this thesis works closely with their methodology, we shall do the same.}
+for all $x \in [0,1], \mu_F^2 \in [0,\infty)$.\footnote{It is worth noting, however, that the rigour of the proof is somewhat in question; in particular, Ref.~\cite{Collins:2021vke} shows that in fact `bare' PDFs need not be positive in $d = 4 - 2\epsilon$ dimensions, which is a major assumption of the proof in Ref.~\cite{Candido:2020yat}. A response was given by the NNPDF collaboration in \cite{Candido:2023ujx}, and it is on this basis that the NNPDF fitting collaboration assume positivity of the PDFs; given that this thesis works closely with their methodology, we shall do the same.}
 
 \subsection{Large-$x$ and small-$x$ behaviour}
 \label{sec:pdf_scaling}
@@ -1063,7 +1063,7 @@ which is intended to penalise negative PDFs but pass positive PDFs (of course ot
 
 Consider a fit which includes two measurements of the same observable, say $d_1, d_2$ with $d_1 < d_2$. Suppose further that each of these measurements carries an equal multiplicative normalisation uncertainty, $s$; in particular, this implies that the absolute error on $d_1$ is $s d_1$ and the absolute error on $d_2$ is $s d_2$. Now, despite the experimentalists reporting the same error for both datapoints, when minimising the na\"{i}ve $\chi^2$, there will be a bias towards the value $d_1$ since it carries the smaller uncertainty. This bias is called the \textit{d'Agostini bias}, after the author who first introduced it in Ref.~\cite{DAgostini:1993arp}; minimal examples with far greater mathematical detail are presented in Sect. 3.1 of Ref.~\cite{Ball:2009qv}.
 
-The bias can be countered using the so-called \textit{$t_0$ prescription} for the $\chi^2$-statistic, as described in Ref.~\cite{Ball:2009qv}. In brief, this involves the addition of a covariance matrix of theory predictions being added to the usual experimental covariance matrix, modifying it to the so-called $t_0$ covariance matrix, $\Sigma_{t_0}$. The matrix of theory predictions that we add to the covariance matrix depends on a PDF set, called the \textit{$t_0$ PDF set}; however, the dependence on this set is usually weak, and in the NNPDF methodology, fits are \textit{iterated} (that is, a new fit is run using the output of the initial fit as the $t_0$ PDF set) to check stability.
+The bias can be countered using the so-called \textit{$t_0$ prescription} for the $\chi^2$-statistic, as described in Ref.~\cite{Ball:2009qv}. In brief, this involves the replacement of the usual experimental covariance matrix by a covariance matrix of theory predictions, modifying it to the so-called $t_0$ covariance matrix, $\Sigma_{t_0}$. The matrix of theory predictions that we compute depends on a PDF set, called the \textit{$t_0$ PDF set}; however, the dependence on this set is usually weak, and in the NNPDF methodology, fits are \textit{iterated} (that is, a new fit is run using the output of the initial fit as the $t_0$ PDF set) to check stability.
 
 \subsection{Minimisation of the loss function}
 To actually perform a PDF fit, we must minimise the chosen loss function through some optimisation method. This is a highly non-trivial task, since the loss function as a function of $\vec{w}$ is typically extremely complicated, with multiple local (possibly degenerate) minima. Various algorithms exist to perform the minimisation; here we shall describe only the standard method used by the NNPDF collaboration, namely \textit{stochastic gradient descent}.\footnote{Although previously NNPDF minimised the loss function by use of a \textit{genetic algorithm}, see Ref.~\cite{NNPDF:2014otw}.} See Ref.~\cite{Carrazza:2019mzf} for the first discussion of the use of gradient descent methods in the NNPDF framework.
@@ -1132,7 +1132,7 @@ This can become problematic when we wish to \textit{fit} the strong coupling. Fo
 
 \noindent Importantly, the above argument applies equally well to \textit{any} theory parameters, not just the strong coupling. Previous work has studied the simultaneous extraction of PDFs and SM parameters; for example, see Ref.~\cite{Ball:2018iqk} for a simultaneous determination of PDFs and $\alpha_S$, using the `correlated replica' method.
 
-On the other hand, in this thesis, we shall concern ourselves with theory parameters drawn from \textit{beyond the Standard Model} (BSM) theories (namely \textit{dark matter models} and the \textit{Standard Model Effective Field Theory}). In particular, PDFs are usually fitted under the assumption that the SM is true, which implicitly assumes the additional parameters in any BSM theory are all zero; therefore, before we perform an analysis allowing for BSM physics, using processes with hadrons in the initial state, we should ask ourselves:
+On the other hand, in this thesis, we shall concern ourselves with theory parameters drawn from \textit{beyond the Standard Model} (BSM) theories (namely \textit{dark matter models} and the \textit{Standard Model Effective Field Theory}). In particular, PDFs are usually fitted under the assumption that the SM is true, which implicitly assumes the additional interaction strengths in any BSM theory are all zero; therefore, before we perform an analysis allowing for BSM physics, using processes with hadrons in the initial state, we should ask ourselves:
 \begin{itemize}
 \item How do the PDFs change between a fit assuming the SM, and a fit where the PDFs are determined simultaneously with the parameters of the BSM theory?
 \item How do the bounds on the parameters of a BSM theory change between a fit using SM PDFs, compared with a simultaneous fit of the BSM parameters alongside PDFs?
@@ -1193,7 +1193,7 @@ distribution functions (PDFs) and dark photon parameters;
 here, the interplay is a mild second-order effect, yielding a small relaxation of the constraints derived in~\cite{Kribs:2020vyk} (however, as we shall see in Chapter~\ref{chap:smeftdy}, at the reach and precision of the high-luminosity phase of the Large Hadron Collider, simultaneous 
 analysis of PDFs and BSM effects will be significantly more impactful). \\
 
-\noindent What if a dark photon was baryonic, being primarily coupled to quarks over leptons? In this case, PDF effects take centre-stage, and 
+\noindent What if a dark photon was baryonic, being primarily coupled to quarks in preference to leptons? In this case, PDF effects take centre-stage, and 
 it becomes reasonable to consider the dark photon not simply as a mediator of DIS, but as a \textit{constituent} of the proton in its own right. 
 
 This is not without precedent; whilst the vast majority of New Physics (NP) searches at the LHC
@@ -2144,7 +2144,7 @@ In the case of \textit{heavy} New Physics, this can be facilitated through the l
 \label{sec:eft_intro}
 The language of \textit{effective field theory} (EFT) provides a twofold advantage when discussing QFTs: the method of \textit{top-down} EFT can simplify calculations by removing degrees of freedom from a theory which are not relevant at low energy scales, whilst the method of \textit{bottom-up} EFT allows us to parametrise deviations from a good low-energy theory due to unknown high-energy physics. 
 
-In this section, shall provide a brief review of both of these techniques, especially bottom-up EFT as applied to the SM. We begin in Sect.~\ref{subsec:eft_background} with a basic demonstration of the key ideas involved in EFT, using a toy model that comprises a single light fermion and a single heavy scalar. In Sect.~\ref{subsec:the_smeft}, we then apply these ideas to the SM, describing how it can be treated in the bottom-up EFT approach resulting in an effective field theory called the \textit{Standard Model Effective Field Theory} (SMEFT). The remainder of the chapter is dedicated to fitting PDFs and two parameters drawn from the SMEFT.
+In this section, we shall provide a brief review of both of these techniques, especially bottom-up EFT as applied to the SM. We begin in Sect.~\ref{subsec:eft_background} with a basic demonstration of the key ideas involved in EFT, using a toy model that comprises a single light fermion and a single heavy scalar. In Sect.~\ref{subsec:the_smeft}, we then apply these ideas to the SM, describing how it can be treated in the bottom-up EFT approach resulting in an effective field theory called the \textit{Standard Model Effective Field Theory} (SMEFT). The remainder of the chapter is dedicated to fitting PDFs and two parameters drawn from the SMEFT.
 
 \subsection{Introduction to effective field theories}
 \label{subsec:eft_background}
@@ -2680,6 +2680,7 @@ interpolation tables which are then supplemented by bin-by-bin $K$-factors to
 account for the NNLO QCD and NLO EW corrections.
 These $K$-factors are defined as
 \begin{equation}
+\label{eq:kfactors_dy_paper}
  d\sigma_{pp}= \left(d\widehat\sigma_{ij}\big|_{\rm NLO\, QCD}\otimes {\cal L}^{\rm NNLO}_{ij}\right)\times K_{\rm QCD} \times   K_{\rm EW} \, ,
 \end{equation}
 where $\otimes$ represents the standard convolution product, $d\sigma_{pp}$ ($d\widehat\sigma_{ij}$) is the short-hand
@@ -2898,8 +2899,8 @@ yields the sought-for EFT corrections for DIS observables.
 This calculation has been implemented in {\tt APFEL}~\cite{Bertone_2014} following the strategy 
 presented in~\cite{Carrazza:2019sec}. FK tables are produced from {\tt
   APFEL}~\cite{Bertone:2016lga} and then used to evaluate the DIS $K$-factors
-defined in Eq.~\eqref{eq:theory_k_fac_app3}. Furthermore, we have used {\tt APFEL} to
-include the higher-order QCD corrections in the SMEFT sector, so that in fact Eq.~(\ref{eq:theory_k_fac_app3})
+defined in Eq.~\eqref{eq:kfactors_dy_paper}. Furthermore, we have used {\tt APFEL} to
+include the higher-order QCD corrections in the SMEFT sector, so that in fact Eq.~(\ref{eq:kfactors_dy_paper})
 holds exactly for the DIS $K$-factors in our study.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -2981,7 +2982,7 @@ In terms of  Eqns.~(\ref{eq:mult_k_fac_app1}) and~(\ref{eq:mult_k_fac_app2}), we
   K_{\rm EFT}= 1+\sum_{n=1}^{n_{\rm op}} c_n R_{\rm SMEFT}^{(n)}
   +\sum_{n,m=1}^{n_{\rm op}} c_n c_m R_{\rm SMEFT}^{(n,m)} \, ,
 \end{equation}
-  which allow us to express a general Drell-Yan or DIS cross sections accounting for
+  which allow us to express general Drell-Yan or DIS cross sections accounting for
   the dimension-six operators in Eq.~(\ref{eq:lagrangian}) as:
 \begin{equation}
   \label{eq:theory_k_fac_app3}
@@ -4616,7 +4617,7 @@ operators modifying the interactions of the third-generation
 quarks.
 %
 We also indicate the notation used for the associated Wilson coefficients; those
-in brackets are not degrees of freedom entering the fit,
+in brackets are not degrees of freedom (DoF) entering the fit,
 and instead the two additional DoF defined in the middle table are used.
 %
 The bottom table defines the four-fermion DoF entering the fit,
@@ -4762,7 +4763,7 @@ SMEFT operators can be evaluated as
  n,m=1, \ldots, N  ,
 \end{equation}
 with the bin-by-bin partonic cross section
-$d\widehat{\sigma}_{ij,{\rm SMEFT}}^{(n,m)}$ now being evaluated from the squared amplitude $\mathcal{A}_n\mathcal{A}_m$
+$d\widehat{\sigma}_{ij,{\rm SMEFT}}^{(n,m)}$ now being evaluated from the squared amplitude $\Re(\mathcal{A}_n\mathcal{A}_m^* + \mathcal{A}_n^* \mathcal{A}_m)$
 associated to the operators $\mathcal{O}_n$ and $\mathcal{O}_m$ when $c_n = c_m = 1$.
 
 The computation of the SMEFT contributions is
@@ -5037,15 +5038,14 @@ coefficients and the PDF parameters:
 \end{equation}
 from which one can evaluate statistical properties such as averages,
 variances, higher moments, or confidence level intervals.
-For example, the preferred value of the EFT coefficients
-could be evaluated as the mean over the replica sample,
+For example, we could compute the mean of the sample via:
 \begin{equation}
   c_\ell^* = \left\langle c_\ell^{(k)} \right\rangle_{\rm rep} =
   \frac{1}{N_{\rm rep}}\sum_{k=1}^{N_{\rm rep}}  c_\ell^{(k)}
   \ ,
 \end{equation}
-though one could also define the preferred value as the median or mode
-of the distribution. Note that, in this methodology, the Monte Carlo
+though it is worth noting that it can be more informative to compute the mode
+or median of the distribution, depending on its shape. Note that, in this methodology, the Monte Carlo
 error propagation automatically propagates the PDF uncertainty to the
 distribution of the best-fit values of the EFT
 coefficients.\footnote{At least, it has been traditionally thought to do so. 
@@ -5760,7 +5760,7 @@ Our analysis is sensitive to the $N=25$ Wilson coefficients defined
 in Table~\ref{tab:ops}, except at the linear level where the four-heavy
 coefficients $c_{Qt}^{8}$, $c_{QQ}^{1}$, $c_{QQ}^{8}$, $c_{Qt}^{1}$ and $c_{tt}^{1}$ (which are 
 constrained only by $t\bar{t}t\bar{t}$ and $t\bar{t}b\bar{b}$ data)
-exhibit three flat directions~\cite{Ethier:2021bye}. In order to tackle this, we remove the five four-heavy coefficients from the linear fit\footnote{In principle one could instead rotate to the principal component analysis (PCA) basis
+exhibit three flat directions~\cite{Ethier:2021bye}. In order to tackle this, we remove the five four-heavy coefficients from the linear fit.\footnote{In principle one could instead rotate to the principal component analysis (PCA) basis
   and constrain the two non-flat directions in the four-heavy subspace,
   but even so, the obtained constraints
   remain much looser in comparison with those obtained in the quadratic EFT fit~\cite{Ethier:2021bye}. 
@@ -5813,7 +5813,7 @@ experimental covariance matrix. In particular, the Fisher information
 is an $N \times N$ matrix, where $N$ is the number of EFT
 coefficients, and it depends on the dataset. 
 %For quadratic fits, the Fisher information acquires a dependence on the Wilson coefficients $c_i$; see Eq. (3.4) of \cite{Ethier:2021bye} for details. 
-An important property of the Fisher information is that it is related the covariance matrix $C_{ij}$ of the maximum likelihood estimators by the \textit{Cramer-Rao bound}:
+An important property of the Fisher information is that it is related to the covariance matrix $C_{ij}$ of the maximum likelihood estimators by the \textit{Cramer-Rao bound}:
 \begin{equation}
 \label{eq:cramerrao}
 C_{ij} \geq (F^{-1})_{ij},
@@ -6115,7 +6115,7 @@ Even by increasing the weight of this dataset in a weighted fit (see Sect.~\ref{
 detailed explanation), the $\chi^2_{\rm exp}$ per data point improves
 only moderately to 4.56 and the  $\chi^2$-statistic of the other datasets deteriorates significantly, hinting
 to both an internal incompatibility of the CMS 2D distribution and to an incompatibility with the rest of the data. 
-For this reason, the dataset was excluded from our analysis, and replaced by the the single-differential
+For this reason, the dataset was excluded from our analysis, and replaced by the single-differential
 distribution in $m_{t\bar{t}}$ -- presented in the same publication~\cite{CMS:2021vhb}. The latter is well 
 described by the SM theoretical predictions. 
 
@@ -6230,7 +6230,7 @@ theoretical incompatibilities that affect the results.
   PDFs and SMEFT at the linear level, the improvement in the fit quality that is obtained
   in a SMEFT linear fit is reverted. Indeed, the SMEFT PDF resulting
   from the simultaneous fit including the CMS double differential
-distribution (instaed of the CMS single differential one) are
+distribution (instead of the CMS single differential one) are
 basically unchanged with respect to the ones that will be presented in
 Sect.~6, and the bounds on the SMEFT coefficients are quite similar. However, 
 the fit quality of the CMS double differential distribution is rather poor,
@@ -7382,7 +7382,7 @@ in terms of the $\hat{Y}$ parameter reflects the UV physics to a very good degre
 	\includegraphics[width=0.49\linewidth]{Figures/Zp_18.73TeV_Y_0.00015.pdf}\\
 	\includegraphics[width=0.49\linewidth]{Figures/Zp_32.45TeV_Y_0.00005.pdf}
 	\caption{Predictions for neutral current Drell-Yan differential cross sections in dilepton invariant mass.  
-    We show the SM predictions compared to the predictions for a $Z'$ of different masses corresponding to different $\hat{Y}$ values, assuming $g_{Z'}=1$. 
+    We show the SM predictions compared to the predictions for a $Z'$ of different masses corresponding to different $\hat{Y}$ values, assuming $g_{Z'}=1$. The dashed lines indicate a deviation of 10\%, a rough indication of a visible effect.
     Top left: mass of $14.5$ TeV, corresponding to $\hat{Y}=25 \cdot 10^{-5}$. Top right: mass of $18.7$ TeV, corresponding to $\hat{Y}=15 \cdot 10^{-5}$. 
     Bottom: mass of $32.5$ TeV, corresponding to $\hat{Y}=5 \cdot 10^{-5}$.}
 	\label{fig:Zp_DY_Comp}
@@ -7975,7 +7975,7 @@ In fact, the measured value would exclude the true value with a significance tha
 \end{figure}
 %
 This is all very expected, as the quark-antiquark luminosity for this specific scenario does exhibit signs of
-new physics absorption in a significant amount, as it can be seen in Fig.~\ref{fig:Wlumi}. 
+new physics absorption in a significant amount, as can be seen in Fig.~\ref{fig:Wlumi}. 
 As a matter of fact, we expect all data that entered in the PDF fit to be well described by the combination of the PDF set and the SM theory.
 This simple fact is once again reminding us that it might be dangerous to perform SMEFT studies on overlapping datasets and that simultaneous studies should be preferred or, at least, a conservative approach with disjoint datasets should be undertaken. 
 This was for instance discussed in Ref.~\cite{Iranipour:2022iak}, 
@@ -8174,7 +8174,7 @@ We then turn to analyse the behaviour of suitable observable ratios in Sect.~\re
 presence of New Physics in the observables that are affected by it, although they would not be able to distinguish between the two observables that 
 enter the ratio. Finally in Sect.~\ref{subsec:lowE} we will determine the  observables in current PDF fits that are correlated to the 
 large-$x$ antiquarks and we will highlight the signs of tension with the `contaminated' high-mass Drell-Yan data via suitably devised weighted fits. 
-The result of these tests points to the need for the includion of independent low-energy/large-$x$ constraints in future PDF analyses, 
+The result of these tests points to the need for the inclusion of independent low-energy/large-$x$ constraints in future PDF analyses, 
 if one wants to safely exploit the constraining power of high-energy data without inadvertently absorbing signs of New Physics 
 in the high-energy tails. 
 
@@ -8237,7 +8237,7 @@ anti-down that the global PDF fit yields in order to compensate the effect of NP
 
 \subsection{Observable ratio}
 \label{subsec:ratio}
-In order to disentangle PDF contamination, another quantity worth studying is the ratio between observables whose processes have similar parton channels. Indeed, in this case the impact of the PDF is much reduced and any discrepancy between theory an data predictions can be more confidently attributed to new physics in the partonic cross-section. Practically, a deviation would mean that one of the two datasets involved in the ratio is `contaminated' by new physics and should therefore be excluded from the PDF fit. 
+In order to disentangle PDF contamination, another quantity worth studying is the ratio between observables whose processes have similar parton channels. Indeed, in this case the impact of the PDF is much reduced and any discrepancy between theory and data predictions can be more confidently attributed to new physics in the partonic cross-section. Practically, a deviation would mean that one of the two datasets involved in the ratio is `contaminated' by new physics and should therefore be excluded from the PDF fit. 
 
 %
 We have studied the ratio between the number of events in $WW$ production and Neutral Current Drell-Yan (NC DY), as well as between $WH$ production and Charged Current Drell-Yan (CC DY). In each pair both processes are initiated from the same parton channels. 
